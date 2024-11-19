@@ -1,79 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" type="text/css" href="./style.css">
-    <title>Portfolio | Kevin Bolander</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio - [Your Name]</title>
+  <style>
+    /* General Styles */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #1a1a1a;
+      color: #f0f0f0;
+    }
+    a {
+      text-decoration: none;
+      color: #4caf50;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    h1, h2, h3 {
+      margin: 0;
+    }
+
+    /* Header */
+    header {
+      position: sticky;
+      top: 0;
+      background-color: #111;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    nav a {
+      margin: 0 15px;
+    }
+
+    /* Hero Section */
+    .hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+    }
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+    }
+    .hero button {
+      padding: 10px 20px;
+      font-size: 1rem;
+      border: none;
+      background-color: #4caf50;
+      color: #fff;
+      cursor: pointer;
+    }
+    .hero button:hover {
+      background-color: #3e8e41;
+    }
+
+    /* Project Section */
+    .projects {
+      padding: 50px 20px;
+    }
+    .project {
+      display: flex;
+      margin-bottom: 50px;
+    }
+    .project:nth-child(even) {
+      flex-direction: row-reverse;
+    }
+    .project img {
+      width: 50%;
+      height: auto;
+      border-radius: 8px;
+    }
+    .project-text {
+      width: 50%;
+      padding: 0 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .project-text h2 {
+      margin-bottom: 15px;
+      font-size: 2rem;
+    }
+    .project-text p {
+      margin-bottom: 10px;
+    }
+  </style>
 </head>
-
 <body>
-    <header>
-        
-        <h1>Lorem Ipsum is simply dummy text</h1>
-    </header>
 
-    <card>
-        <div class="row">
-            <img src="./me.jpg" />
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-                standard dummy text ever since the 1500s.
-            </p>
-        </div>
+  <!-- Header -->
+  <header>
+    <div class="logo">[Your Name]</div>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#work">Work</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
 
-    </card>
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Hi, I'm [Your Name]</h1>
+    <p>Crafting tools, systems, and experiences that delight.</p>
+    <button>Explore My Work</button>
+  </section>
 
-    <section>
-        <div class="row">
-            <img src="http://via.placeholder.com/300x400" />
-            <div>
-                <h2>It has Survived Not Only</h2>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled
-                    it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic
-                    typesetting, remaining essentially unchanged.
-                </p>
-            </div>
+  <!-- Projects Section -->
+  <section class="projects" id="work">
+    <!-- Project 1 -->
+    <div class="project">
+      <img src="creative-tools-screenshot.jpg" alt="Creative Tools Screenshot">
+      <div class="project-text">
+        <h2>Creative Tools for Ad Personalization</h2>
+        <p>Built intuitive tools for cropping, layout, animations, and ad personalization.</p>
+        <p>Challenges included handling complex ad sizes and ensuring scalability.</p>
+        <a href="#">Learn More</a>
+      </div>
+    </div>
 
-        </div>
-    </section>
-
-    <section>
-        <div class="row">
-            <img src="http://via.placeholder.com/300x400" />
-            <div>
-                <h2>It has Survived Not Only</h2>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled
-                    it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic
-                    typesetting, remaining essentially unchanged.
-                </p>
-            </div>
-
-        </div>
-    </section>
-
-    <section>
-        <div class="row">
-            <img src="http://via.placeholder.com/300x400" />
-            <div>
-                <h2>It has Survived Not Only</h2>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled
-                    it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic
-                    typesetting, remaining essentially unchanged.
-                </p>
-            </div>
-
-        </div>
-    </section>
-
-    <card>
-
-    </card>
+    <!-- Project 2 -->
+    <div class="project">
+      <img src="design-systems-screenshot.jpg" alt="Design Systems Screenshot">
+      <div class="project-text">
+        <h2>Scalable Design Systems</h2>
+        <p>Developed a robust design system adopted by multiple teams.</p>
+        <p>Contributed to documentation, office hours, and component development.</p>
+        <a href="#">Learn More</a>
+      </div>
+    </div>
+  </section>
 
 </body>
-
 </html>
