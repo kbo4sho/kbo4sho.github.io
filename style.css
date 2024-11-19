@@ -135,3 +135,25 @@ footer a {
 footer a:hover {
   color: #e0e0e0;
 }
+
+/* Header Profile Image */
+/* Profile Container */
+.profile-container {
+  width: 150px; /* Adjust size as needed */
+  height: 150px;
+  margin-bottom: 20px; /* Adds spacing below the image */
+  border-radius: 50%; /* Makes the image circular */
+  overflow: hidden; /* Ensures the image fits inside the circle */
+  border: 5px solid #00bcd4; /* Accent border */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional shadow for depth */
+}
+
+/* Profile Image */
+.profile-image {
+  width: 100%; /* Ensures the image fills the container */
+  height: 100%;
+  object-fit: cover; /* Keeps the image proportionate and zoomed if necessary */
+}
