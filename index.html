@@ -7,7 +7,53 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <script type="module">
+  
+
+  <!-- Header -->
+  <header>
+    <div class="logo">Kevin Bolander</div>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#work">Work</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <canvas id="forsythiaCanvas"></canvas>
+    <div class="profile-container">
+      <img src="me.jpg" alt="Kevin Bolander" class="profile-image">
+    </div>
+    <h1>Hi, I'm Kevin</h1>
+    <p>Crafting tools, systems, and experiences that delight.</p>
+  </section>
+
+  <!-- Projects Section -->
+  <section class="projects" id="work">
+    <!-- Project 1 -->
+    <div class="project">
+      <img src="creative-tools-screenshot.jpg" alt="Creative Tools Screenshot">
+      <div class="project-text">
+        <h2>Creative Tools for Ad Personalization</h2>
+        <p>Built intuitive tools for cropping, layout, animations, and ad personalization.</p>
+        <p>Challenges included handling complex ad sizes and ensuring scalability.</p>
+        <a href="#">Learn More</a>
+      </div>
+    </div>
+
+    <!-- Project 2 -->
+    <div class="project">
+      <img src="design-systems-screenshot.jpg" alt="Design Systems Screenshot">
+      <div class="project-text">
+        <h2>Scalable Design Systems</h2>
+        <p>Developed a robust design system adopted by multiple teams.</p>
+        <p>Contributed to documentation, office hours, and component development.</p>
+        <a href="#">Learn More</a>
+      </div>
+    </div>
+  </section>
+<script type="module">
   import { createProgramFromScripts, resizeCanvasToDisplaySize } from "./webgl-utils.js";
 
   const canvas = document.getElementById("forsythiaCanvas");
@@ -97,51 +143,5 @@
   }
   requestAnimationFrame(render);
 </script>
-
-  <!-- Header -->
-  <header>
-    <div class="logo">Kevin Bolander</div>
-    <nav>
-      <a href="#about">About</a>
-      <a href="#work">Work</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </header>
-
-  <!-- Hero Section -->
-  <section class="hero">
-    <canvas id="forsythiaCanvas"></canvas>
-    <div class="profile-container">
-      <img src="me.jpg" alt="Kevin Bolander" class="profile-image">
-    </div>
-    <h1>Hi, I'm Kevin</h1>
-    <p>Crafting tools, systems, and experiences that delight.</p>
-  </section>
-
-  <!-- Projects Section -->
-  <section class="projects" id="work">
-    <!-- Project 1 -->
-    <div class="project">
-      <img src="creative-tools-screenshot.jpg" alt="Creative Tools Screenshot">
-      <div class="project-text">
-        <h2>Creative Tools for Ad Personalization</h2>
-        <p>Built intuitive tools for cropping, layout, animations, and ad personalization.</p>
-        <p>Challenges included handling complex ad sizes and ensuring scalability.</p>
-        <a href="#">Learn More</a>
-      </div>
-    </div>
-
-    <!-- Project 2 -->
-    <div class="project">
-      <img src="design-systems-screenshot.jpg" alt="Design Systems Screenshot">
-      <div class="project-text">
-        <h2>Scalable Design Systems</h2>
-        <p>Developed a robust design system adopted by multiple teams.</p>
-        <p>Contributed to documentation, office hours, and component development.</p>
-        <a href="#">Learn More</a>
-      </div>
-    </div>
-  </section>
-
 </body>
 </html>
