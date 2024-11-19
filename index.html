@@ -7,6 +7,96 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <script type="module">
+  import { createProgramFromScripts, resizeCanvasToDisplaySize } from "./webgl-utils.js";
+
+  const canvas = document.getElementById("forsythiaCanvas");
+  const gl = canvas.getContext("webgl");
+
+  const vertexShaderSource = `
+    attribute vec4 position;
+    void main() {
+      gl_Position = position;
+    }
+  `;
+
+  const fragmentShaderSource = `
+    precision mediump float;
+    uniform vec2 resolution;
+    uniform float time;
+
+    // Simple noise function
+    float noise(vec2 uv) {
+      return fract(sin(dot(uv.xy, vec2(12.9898, 78.233))) * 43758.5453);
+    }
+
+    // Main function to create the forsythia effect
+    void main() {
+      vec2 uv = gl_FragCoord.xy / resolution.xy; // Normalize coordinates
+      vec2 center = vec2(0.5, 0.5);
+      float distance = length(uv - center);
+      
+      // Yellow and green gradient for plant color
+      vec3 yellow = vec3(1.0, 0.9, 0.3);
+      vec3 green = vec3(0.2, 0.6, 0.1);
+      
+      // Add noise and movement
+      float flower = smoothstep(0.3, 0.0, distance + 0.1 * noise(uv + time));
+      vec3 color = mix(yellow, green, flower) + noise(uv + time * 0.1) * 0.2;
+      
+      gl_FragColor = vec4(color, 1.0);
+    }
+  `;
+
+  // Compile shaders
+  const program = createProgramFromScripts(gl, vertexShaderSource, fragmentShaderSource);
+
+  const positionAttributeLocation = gl.getAttribLocation(program, "position");
+  const resolutionUniformLocation = gl.getUniformLocation(program, "resolution");
+  const timeUniformLocation = gl.getUniformLocation(program, "time");
+
+  // Create a buffer for positions
+  const positionBuffer = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+
+  // Provide geometry positions for two triangles
+  const positions = new Float32Array([
+    -1, -1,
+    1, -1,
+    -1, 1,
+    -1, 1,
+    1, -1,
+    1, 1,
+  ]);
+  gl.bufferData(gl.ARRAY_BUFFER, positions, gl.STATIC_DRAW);
+
+  function render(time) {
+    time *= 0.001; // Convert to seconds
+
+    resizeCanvasToDisplaySize(gl.canvas);
+
+    gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
+    gl.clearColor(0, 0, 0, 0);
+    gl.clear(gl.COLOR_BUFFER_BIT);
+
+    gl.useProgram(program);
+
+    // Set up geometry
+    gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+    gl.enableVertexAttribArray(positionAttributeLocation);
+    gl.vertexAttribPointer(positionAttributeLocation, 2, gl.FLOAT, false, 0, 0);
+
+    // Pass uniforms
+    gl.uniform2f(resolutionUniformLocation, gl.canvas.width, gl.canvas.height);
+    gl.uniform1f(timeUniformLocation, time);
+
+    // Draw
+    gl.drawArrays(gl.TRIANGLES, 0, 6);
+
+    requestAnimationFrame(render);
+  }
+  requestAnimationFrame(render);
+</script>
 
   <!-- Header -->
   <header>
