@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  https://cdnjs.cloudflare.com/ajax/libs/three.js/0.170.0/three.module.js
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Portfolio - Kevin Bolander</title>
   <link rel="stylesheet" href="style.css">
-  <script href="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.170.0/three.module.js"/>
 </head>
 <body>
   
@@ -55,95 +53,98 @@
       </div>
     </div>
   </section>
-<script type="module">
-  import { createProgramFromScripts, resizeCanvasToDisplaySize } from "./webgl-utils.js";
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r155/three.min.js"></script>
+<script>
+  // Scene, Camera, and Renderer
+  const scene = new THREE.Scene();
+  const camera = new THREE.OrthographicCamera(
+    -1, 1, 1, -1, 
+    0.1, 10
+  );
+  camera.position.z = 1;
 
-  const canvas = document.getElementById("forsythiaCanvas");
-  const gl = canvas.getContext("webgl");
+  const renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  document.body.appendChild(renderer.domElement);
 
-  const vertexShaderSource = `
-    attribute vec4 position;
-    void main() {
-      gl_Position = position;
-    }
-  `;
-
-  const fragmentShaderSource = `
+  // Shader Material
+  const fragmentShader = `
     precision mediump float;
-    uniform vec2 resolution;
-    uniform float time;
+    uniform vec2 u_resolution;
+    uniform float u_time;
 
     // Simple noise function
-    float noise(vec2 uv) {
-      return fract(sin(dot(uv.xy, vec2(12.9898, 78.233))) * 43758.5453);
+    float random(vec2 p) {
+      return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
     }
 
-    // Main function to create the forsythia effect
+    float noise(vec2 p) {
+      vec2 i = floor(p);
+      vec2 f = fract(p);
+      float a = random(i);
+      float b = random(i + vec2(1.0, 0.0));
+      float c = random(i + vec2(0.0, 1.0));
+      float d = random(i + vec2(1.0, 1.0));
+      vec2 u = f * f * (3.0 - 2.0 * f);
+      return mix(a, b, u.x) + (c - a) * u.y * (1.0 - u.x) + (d - b) * u.x * u.y;
+    }
+
     void main() {
-      vec2 uv = gl_FragCoord.xy / resolution.xy; // Normalize coordinates
-      vec2 center = vec2(0.5, 0.5);
-      float distance = length(uv - center);
-      
-      // Yellow and green gradient for plant color
+      vec2 uv = gl_FragCoord.xy / u_resolution.xy;
+      vec2 p = uv * 4.0 - vec2(2.0, 1.5);
+
+      // Time-based movement
+      float t = u_time * 0.1;
+      float n = noise(p + t) * 0.5 + 0.5;
+
+      // Yellow gradient for forsythia
       vec3 yellow = vec3(1.0, 0.9, 0.3);
       vec3 green = vec3(0.2, 0.6, 0.1);
-      
-      // Add noise and movement
-      float flower = smoothstep(0.3, 0.0, distance + 0.1 * noise(uv + time));
-      vec3 color = mix(yellow, green, flower) + noise(uv + time * 0.1) * 0.2;
-      
+      vec3 color = mix(green, yellow, n);
+
+      // Output final color
       gl_FragColor = vec4(color, 1.0);
     }
   `;
 
-  // Compile shaders
-  const program = createProgramFromScripts(gl, vertexShaderSource, fragmentShaderSource);
+  const vertexShader = `
+    void main() {
+      gl_Position = vec4(position, 1.0);
+    }
+  `;
 
-  const positionAttributeLocation = gl.getAttribLocation(program, "position");
-  const resolutionUniformLocation = gl.getUniformLocation(program, "resolution");
-  const timeUniformLocation = gl.getUniformLocation(program, "time");
+  const uniforms = {
+    u_time: { value: 0.0 },
+    u_resolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) }
+  };
 
-  // Create a buffer for positions
-  const positionBuffer = gl.createBuffer();
-  gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+  const material = new THREE.ShaderMaterial({
+    vertexShader,
+    fragmentShader,
+    uniforms
+  });
 
-  // Provide geometry positions for two triangles
-  const positions = new Float32Array([
-    -1, -1,
-    1, -1,
-    -1, 1,
-    -1, 1,
-    1, -1,
-    1, 1,
-  ]);
-  gl.bufferData(gl.ARRAY_BUFFER, positions, gl.STATIC_DRAW);
+  const geometry = new THREE.PlaneGeometry(2, 2);
+  const mesh = new THREE.Mesh(geometry, material);
+  scene.add(mesh);
 
-  function render(time) {
-    time *= 0.001; // Convert to seconds
+  // Animation Loop
+  function animate(time) {
+    uniforms.u_time.value = time * 0.001;
+    uniforms.u_resolution.value.set(window.innerWidth, window.innerHeight);
 
-    resizeCanvasToDisplaySize(gl.canvas);
-
-    gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
-    gl.clearColor(0, 0, 0, 0);
-    gl.clear(gl.COLOR_BUFFER_BIT);
-
-    gl.useProgram(program);
-
-    // Set up geometry
-    gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
-    gl.enableVertexAttribArray(positionAttributeLocation);
-    gl.vertexAttribPointer(positionAttributeLocation, 2, gl.FLOAT, false, 0, 0);
-
-    // Pass uniforms
-    gl.uniform2f(resolutionUniformLocation, gl.canvas.width, gl.canvas.height);
-    gl.uniform1f(timeUniformLocation, time);
-
-    // Draw
-    gl.drawArrays(gl.TRIANGLES, 0, 6);
-
-    requestAnimationFrame(render);
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.render(scene, camera);
+    requestAnimationFrame(animate);
   }
-  requestAnimationFrame(render);
+
+  animate();
+
+  // Handle Window Resizing
+  window.addEventListener("resize", () => {
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    uniforms.u_resolution.value.set(window.innerWidth, window.innerHeight);
+  });
 </script>
 </body>
 </html>
