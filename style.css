@@ -1,125 +1,310 @@
+:root {
+  --accent-color: #acacac;
+  ; /* Replace with your desired accent color */
+  --margin-sm: 8px;
+  --margin-md: 16px;
+  --margin-lrg: 32px;
+  --max-width: 900px;
+  --padding: 20px;
+  --space-lrg: 40px;
+}
+html{
+  background-color: var(--accent-color);
+}
+
 /* General Styles */
 body {
   margin: 0;
   font-family: 'Helvetica Neue', Arial, sans-serif;
-  background-color: #121212; /* Dark mode background */
+  background: linear-gradient(135deg, #2e2e2e, #121212);
   color: #e0e0e0; /* Light text for contrast */
-  line-height: 1.6;
+  font-weight: 200;
 }
 a {
   text-decoration: none;
-  color: #00bcd4; /* Accent color */
+  color: var(--accent-color); 
 }
 a:hover {
   text-decoration: underline;
 }
 h1, h2, h3 {
   margin: 0;
+  color: var(--accent-color);   
+  transition: color 1s ease;
+  font-size:1.8em;
+}
+
+h3 span{
+  font-weight: 400;
+  color: var(--accent-color);
+  opacity: 0.4;;
+  
 }
 
 /* Header */
 header {
-  position: sticky;
-  top: 0;
-  background-color: #1f1f1f; /* Slightly darker for distinction */
-  padding: 15px 30px;
+  padding: var(--padding) var(--padding) 40px var(--padding);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
   z-index: 1000;
+  max-width: var(--max-width);
+  margin: 0 auto;
 }
 header .logo {
   font-size: 1.5rem;
-  font-weight: bold;
-  color: #00bcd4; /* Matches accent color */
+  font-weight: 100;
+  color: var(--accent-color);
+  transition: color 1s ease;
 }
 nav a {
   margin: 0 15px;
   font-size: 1rem;
-  font-weight: 500;
-}
-nav a:hover {
-  color: #e0e0e0; /* Highlight on hover */
+  font-weight: 300;
 }
 
-/* Hero Section */
-.hero {
-  height: 100vh;
+nav a:first-of-type {
+  margin-left: 0;
+}
+nav a:hover {
+  color: #b7b7b7; /* Highlight on hover */
+}
+section{
+  max-width: var(--max-width);
+  margin: 0 auto;
+  margin-bottom: 80px;
+}
+
+section span{
+color: #7d7d7d
+}
+
+.about {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   text-align: center;
-  background: linear-gradient(135deg, #2e2e2e, #121212); /* Subtle gradient */
-  padding: 20px;
+  padding: var(--padding) var(--padding) 1rem 0;
+  gap: 8px;
 }
-.hero h1 {
-  font-size: 3rem;
-  font-weight: bold;
-  margin-bottom: 10px;
-  color: #00bcd4;
+
+/* Header Profile Image */
+.about-profile-content {
+  display: block;
+  max-width: 100%;
 }
-.hero p {
-  font-size: 1.2rem;
-  margin-bottom: 20px;
-  max-width: 600px;
+
+.about-profile-image-container {
+  float: left;
+  shape-outside: circle(50% at 40% 36%);
+  clip-path: circle(50% at 50% 50%);
+  margin-right: 2rem;
+  margin-bottom: 1rem;
+  width: 120px; /* Increased size for better visibility */
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
 }
-.hero button {
-  padding: 12px 24px;
+
+.about-profile-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Quadrant Styles */
+.about-profile-image-quadrant {
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  pointer-events: auto;
+  z-index: 1;
+}
+
+.top-left {
+  top: 0;
+  left: 0;
+}
+
+.top-right {
+  top: 0;
+  right: 0;
+}
+
+.bottom-left {
+  bottom: 0;
+  left: 0;
+}
+
+.bottom-right {
+  bottom: 0;
+  right: 0;
+}
+
+.about-profile-text-container{
+  text-align: left;
+  max-width: 500px;
+}
+
+.about-profile-text-container p{
+  font-weight: 200;
+  margin-top: 2px;
+}
+
+.about-profile-text-container h1 {
+  font-size: 5rem;
+  font-weight: 200;
+  color: var(--accent-color);
+  transition: color 1s ease;
+  margin-bottom: 1rem;
+  font-weight: 200;
+  line-height: .78;
+  transition: filter .75s ease;
+}
+.about-profile-text-container h1:hover {
+  filter: brightness(1.25); /* Makes the color 50% brighter */
+}
+
+.about-profile-text-container h2 {
   font-size: 1rem;
-  border: none;
-  border-radius: 25px;
-  background-color: #00bcd4;
-  color: #fff;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-.hero button:hover {
-  background-color: #0097a7;
+  font-weight: 200;
+  color: var(--accent-color);
+  transition: color 1s ease;
+  padding-top: 34px;
+  padding-bottom: 0px;
 }
 
 /* Projects Section */
-.projects {
-  padding: 80px 20px;
-  background-color: #1f1f1f;
+.work {
+  padding: var(--padding) var(--padding) 80px 0;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  transition: color 1s ease;
 }
-.projects h2 {
-  text-align: center;
+.work-sample h2 {
   font-size: 2.5rem;
-  margin-bottom: 40px;
-  color: #00bcd4;
+  color: var(--accent-color);
+  transition: color 1s ease;
 }
-.project {
+.work-sample {
   display: flex;
   gap: 30px;
   margin-bottom: 60px;
-  align-items: center;
+  position: relative;
 }
-.project:nth-child(even) {
-  flex-direction: row-reverse;
-}
-.project img {
-  width: 50%;
+
+.work-sample img {
+  width: 100%;
   height: auto;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+  transition: all .6s ease, filter .6s ease; 
+  filter: sepia(0) saturate(1) hue-rotate(0deg);
+  /* filter: sepia(0) saturate(0) hue-rotate(0deg); */
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+  transform: scale(1);
+  position: relative;
 }
-.project-text {
-  width: 50%;
+
+.work-sample img:hover {
+  /* filter: sepia(0) saturate(1) hue-rotate(0deg); */
+  /* box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.4); */
+  transform: translate(0 , 0);
+}
+
+.work-sample .image-wrapper.canvas {
+  grid-area: canvas;
+}
+.work-sample .image-wrapper.tools {
+  grid-area: tools;
+}
+.work-sample .image-wrapper.animation {
+  grid-area: layers;
+}
+.work-sample .image-wrapper.sizes {
+  grid-area: sizes;
+}
+
+.work-sample-tiles {
+  position: relative;
+  width: 100%;
+}
+
+.image-stack {
+  position: relative;
+  width: 100%;
+}
+
+.image-stack img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+.image-stack .base-image {
+  position: relative;
+  z-index: 1;
+  
+  transform: translate(20px, 20px);
+}
+
+.image-stack .overlay-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  /* transform: translate(20px, 20px); */
+  
+  opacity: 0.8;
+  transition: all 0.3s ease;
+  mask-image: linear-gradient(135deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 50%);
+  -webkit-mask-image: linear-gradient(135deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 60%);
+}
+
+.image-stack:hover img {
+  /* opacity: 1; */
+  transform: translate(10px, 10px);
+
+  /* filter: sepia(0) saturate(1) hue-rotate(0deg); */
+    filter: sepia(0) saturate(0) hue-rotate(0deg);
+  /* box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4); */
+
+  transform: translate(20px, 20px);
+
+  /* /* mask-image: none; */
+  /* mask-image: linear-gradient(135deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 90%); */
+  
+}
+
+.image-stack:hover .overlay-image {
+  opacity: 0;
+  transform: translate(18px, 18px);
+}
+
+.work-sample-text {
+  width: 40%;
   padding: 0 20px;
 }
-.project-text h3 {
-  font-size: 2rem;
-  margin-bottom: 15px;
+.work-sample-text h3 {
+  font-size: 1.6rem;
+  font-weight: 200;
+  line-height: .65;
+  transition: filter .75s ease;
 }
-.project-text p {
-  margin-bottom: 15px;
-  font-size: 1rem;
+.work-sample-text h3:hover {
+  filter: brightness(1.25); /* Makes the color 50% brighter */
 }
-.project-text a {
-  font-weight: bold;
-  text-decoration: underline;
+
+.contact{
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--padding) var(--padding) var(--padding) 0;
+}
+
+.contact p{
+  margin-left: 24px;
+}
+
+.contact h3{
+  margin-bottom: var(--space-lrg);
 }
 
 /* Footer */
@@ -136,24 +321,41 @@ footer a:hover {
   color: #e0e0e0;
 }
 
-/* Header Profile Image */
-/* Profile Container */
-.profile-container {
-  width: 150px; /* Adjust size as needed */
-  height: 150px;
-  margin-bottom: 20px; /* Adds spacing below the image */
-  border-radius: 50%; /* Makes the image circular */
-  overflow: hidden; /* Ensures the image fits inside the circle */
-  border: 5px solid #00bcd4; /* Accent border */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional shadow for depth */
+.image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
 
-/* Profile Image */
-.profile-image {
-  width: 100%; /* Ensures the image fills the container */
+.image-wrapper img {
+  width: 100%;
   height: 100%;
-  object-fit: cover; /* Keeps the image proportionate and zoomed if necessary */
+  object-fit: cover;
+}
+
+.descriptions-container {
+  margin-top: 24px;
+  border-top: 1px solid rgba(125, 125, 125, 0.2);
+  padding-top: 16px;
+}
+
+.description {
+  color: #7d7d7d;
+  font-size: 0.9em;
+  font-weight: 300;
+  padding: 8px 0;
+  transition: color 0.6s ease 0.6s;
+}
+
+.work-content {
+  width: 60%;
+  position: relative;
+}
+
+/* Now these selectors should work because the elements are siblings */
+.image-wrapper.sizes:hover ~ .descriptions-container .description.sizes,
+.image-wrapper.canvas:hover ~ .descriptions-container .description.canvas,
+.image-wrapper.tools:hover ~ .descriptions-container .description.tools,
+.image-wrapper.animation:hover ~ .descriptions-container .description.animation {
+  color: var(--accent-color);
 }
