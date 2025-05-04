@@ -344,7 +344,7 @@ footer a:hover {
 .ds-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: 60px 60px 220px 120px 60px;
+  grid-template-rows: 60px 60px 100px 10px 60px;
   grid-template-areas:
     "button button search tooltip"
     "input typography modal modal"
@@ -353,13 +353,12 @@ footer a:hover {
     "hamburger table table switch";
   gap: 0;
   padding: 0;
-  width: 100%;
-  max-width: 500px;
 }
 
 .ds-tile {
   background: transparent;
   color: #e0e0e0;
+  padding: 6px;
   display: flex;
   flex-direction: column;
   justify-content: center;
