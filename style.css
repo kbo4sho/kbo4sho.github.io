@@ -108,9 +108,7 @@ color: #7d7d7d
   transition: all 0.3s ease;
 }
 
-.about-profile-image-container:hover {
-  border-color: yellow;
-}
+
 
 .about-profile-image {
   width: 100%;
