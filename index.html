@@ -155,7 +155,7 @@
   <section id="contact">
     <span>Contact</span>
     <div class="contact">
-      <h3><span> lets make something great together</span></h3>
+      <h3><span>only if you want to make something great together</span></h3>
       <p>Email: <a href="mailto:kevinbolander@gmail.com">kevinbolander@gmail.com</a></p>
       <p>LinkedIn: <a href="https://linkedin.com/in/kevin-bolander-45659322" target="_blank" rel="noopener noreferrer">linkedin.com/in/kevin-bolander-45659322</a></p>
     </div>
@@ -188,6 +188,15 @@
           description.style.color = '#7d7d7d';
         }
       });
+    });
+
+    // Add hover effect for profile image
+    const profileImage = document.querySelector('.about-profile-image-container');
+    profileImage.addEventListener('mouseenter', () => {
+      document.documentElement.style.setProperty('--accent-color', 'yellow');
+    });
+    profileImage.addEventListener('mouseleave', () => {
+      document.documentElement.style.setProperty('--accent-color', '#acacac');
     });
   </script>
 </body>

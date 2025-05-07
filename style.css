@@ -1,6 +1,6 @@
 :root {
   --accent-color: #acacac;
-  ; /* Replace with your desired accent color */
+  --hover-accent-color: yellow;
   --margin-sm: 8px;
   --margin-md: 16px;
   --margin-lrg: 32px;
@@ -100,8 +100,16 @@ color: #7d7d7d
   margin-bottom: 1rem;
   width: 120px; /* Increased size for better visibility */
   height: 120px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
   overflow: hidden;
+  border: 8px solid #2a2a2a;
+  transition: all 0.3s ease;
+}
+
+.about-profile-image-container:hover {
+  border-color: yellow;
 }
 
 .about-profile-image {
@@ -154,7 +162,7 @@ color: #7d7d7d
   font-weight: 200;
   color: var(--accent-color);
   transition: color 1s ease;
-  margin-bottom: 1rem;
+  margin-bottom: -1rem;
   font-weight: 200;
   line-height: .78;
   transition: filter .75s ease;
@@ -187,7 +195,7 @@ color: #7d7d7d
 .work-sample {
   display: flex;
   gap: 30px;
-  margin-bottom: 60px;
+  margin-bottom: 120px;
   position: relative;
 }
 
@@ -307,6 +315,10 @@ color: #7d7d7d
 
 .contact h3{
   margin-bottom: var(--space-lrg);
+}
+.contact h3 span{
+  width: 330px;
+  display: block;
 }
 
 /* Footer */
@@ -600,4 +612,18 @@ footer a:hover {
   background: var(--accent-color);
   border-radius: 0.1em;
   width: 100%;
+}
+
+.about-profile-image-container:hover ~ * {
+  color: var(--hover-accent-color);
+}
+
+.about-profile-image-container:hover ~ * a {
+  color: var(--hover-accent-color);
+}
+
+.about-profile-image-container:hover ~ * h1,
+.about-profile-image-container:hover ~ * h2,
+.about-profile-image-container:hover ~ * h3 {
+  color: var(--hover-accent-color);
 }
