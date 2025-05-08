@@ -29,7 +29,7 @@
 
           
             <h2>Kevin Bolander - Software Engineer</h2>
-            <p>I combine deep technical expertise, a user first mindset, and collaborative leadership to deliver software solutions that are really good.</p>
+            <p>I combine deep technical know how, a user first mindset, and collaborative leadership to deliver software solutions that are really great.</p>
           
           
         </div>
@@ -107,12 +107,12 @@
               <fieldset class="ds-fieldset">
                 <legend class="ds-label sr-only">Radio Options</legend>
                 <label class="ds-radio-label">
-                  <input type="radio" name="radio" checked />
-                  Radio
+                  <input type="radio" name="radio" id="grid-size-large" checked />
+                  Large
                 </label>
                 <label class="ds-radio-label">
-                  <input type="radio" name="radio" />
-                  Radio
+                  <input type="radio" name="radio" id="grid-size-small" />
+                  Small
                 </label>
               </fieldset>
             </div>
@@ -198,6 +198,22 @@
     profileImage.addEventListener('mouseleave', () => {
       document.documentElement.style.setProperty('--accent-color', '#acacac');
     });
+
+    // Add grid layout change functionality
+    const smallRadio = document.getElementById('grid-size-small');
+    const largeRadio = document.getElementById('grid-size-large');
+    const dsGrid = document.querySelector('.ds-grid');
+    
+    const handleGridSizeChange = (e) => {
+      if (e.target.id === 'grid-size-small') {
+        dsGrid.classList.add('compact');
+      } else {
+        dsGrid.classList.remove('compact');
+      }
+    };
+
+    smallRadio.addEventListener('change', handleGridSizeChange);
+    largeRadio.addEventListener('change', handleGridSizeChange);
   </script>
 </body>
 </html>

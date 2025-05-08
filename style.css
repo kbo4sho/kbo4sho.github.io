@@ -353,6 +353,7 @@ footer a:hover {
 
 .ds-grid {
   display: grid;
+  transition: all 0.2s ease;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: 60px 60px 100px 10px 60px;
   grid-template-areas:
@@ -365,6 +366,25 @@ footer a:hover {
   padding: 0;
 }
 
+.ds-grid.compact {
+  grid-template-columns: repeat(2, 180px);
+  grid-template-rows:  repeat(11, 40px);
+
+  grid-template-areas:
+  "button button"
+  "search tooltip"
+  "input table"
+  "input table"
+  "radio typography"
+  "radio typography"
+  "modal modal"
+  "modal modal"
+  "modal modal"
+  "modal modal"
+  "hamburger switch"
+  "hamburger switch";
+}
+
 .ds-tile {
   background: transparent;
   color: #e0e0e0;
@@ -375,6 +395,7 @@ footer a:hover {
   align-items: flex-start;
   transition: all 0.2s ease;
   outline: none;
+  /* align-items: center; */
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
