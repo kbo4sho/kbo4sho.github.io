@@ -1,0 +1,2 @@
+-  fix charlotte name in images
+- fix copy in creative tools section
