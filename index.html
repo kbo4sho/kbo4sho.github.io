@@ -17,7 +17,6 @@
   </header>
   
   <section id="about">
-    <span>About</span>  
     <div class="about">
       <div class="about-profile-text-container">
         <h1>Engineering Creativity</h1>
@@ -25,7 +24,7 @@
           <div class="about-profile-image-container">
             <img src="me.jpg" alt="shapes" class="about-profile-image">
           </div>
-            <h2>Kevin Bolander</h2>
+            <h2>Kevin Bolander - <span>Staff Software Engineer</span></h2>
             <p>I blend technical expertise in software development with human-centered design principles and collaborative leadership to create impactful, elegant solutions that solve real problems.</p>
         </div>
       </div>
@@ -33,7 +32,6 @@
   </section>
 
   <section id="work">
-    <span>Work</span>
     <div class="work">
       <div class="work-sample">
         <div class="work-content">
@@ -46,7 +44,7 @@
         </div>
         <div class="work-sample-text">
           <h3>Tools for Creative Teams</h3>
-          <p>To scale ad production across hundreds of formats and personalization rules, I led the architecture and development of several custom no-code tools for designers and producers. Collaborating closely with product, UX, and creative leads, we built innovative features like dynamic cropping, smart layout rules, and inline previews for responsive, animated templates. What once took hours now takes minutes—this tool is used daily to generate thousands of ad variations from a few flexible templates, powering campaigns for major brands.</p>
+          <p>To scale ad production across hundreds of formats and personalization rules, I led the architecture and development of several custom no-code tools for designers and digital producers. Collaborating closely with product, UX, and creative leads, we built innovative features like dynamic cropping, smart layout rules, and inline previews for responsive, animated templates. What once took hours now takes minutes—our tools are used daily to generate thousands of ad variations from a few flexible templates, powering campaigns for major brands.</p>
         </div>
       </div>
       <div class="work-sample">
@@ -145,67 +143,13 @@
   </section>
 
   <section id="contact">
-    <span>Contact</span>
     <div class="contact">
-      <h3><span>to make something great</span></h3>
+      <h3><span>let's make something great</span></h3>
       <div>Email: <a href="mailto:kevinbolander@gmail.com">kevinbolander@gmail.com</a></div>
       <div>LinkedIn: <a href="https://linkedin.com/in/kevin-bolander-45659322" target="_blank" rel="noopener noreferrer">linkedin.com/in/kevin-bolander-45659322</a></div>
     </div>
   </section>
 
-  <script>
-    const imageWrappers = document.querySelectorAll('.work-sample .image-wrapper');
-    
-    imageWrappers.forEach(wrapper => {
-      wrapper.addEventListener('mouseenter', () => {
-        // Get the type (sizes, canvas, tools, animation)
-        const type = Array.from(wrapper.classList).find(cls => 
-          ['sizes', 'canvas', 'tools', 'animation'].includes(cls)
-        );
-        
-        // Find and highlight the corresponding description
-        const description = document.querySelector(`.description.${type}`);
-        if (description) {
-          description.style.color = 'var(--accent-color)';
-        }
-      });
-      
-      wrapper.addEventListener('mouseleave', () => {
-        const type = Array.from(wrapper.classList).find(cls => 
-          ['sizes', 'canvas', 'tools', 'animation'].includes(cls)
-        );
-        
-        const description = document.querySelector(`.description.${type}`);
-        if (description) {
-          description.style.color = '#7d7d7d';
-        }
-      });
-    });
-
-    // Add hover effect for profile image
-    const profileImage = document.querySelector('.about-profile-image-container');
-    profileImage.addEventListener('mouseenter', () => {
-      document.documentElement.style.setProperty('--accent-color', 'yellow');
-    });
-    profileImage.addEventListener('mouseleave', () => {
-      document.documentElement.style.setProperty('--accent-color', '#acacac');
-    });
-
-    // Add grid layout change functionality
-    const smallRadio = document.getElementById('grid-size-small');
-    const largeRadio = document.getElementById('grid-size-large');
-    const dsGrid = document.querySelector('.ds-grid');
-    
-    const handleGridSizeChange = (e) => {
-      if (e.target.id === 'grid-size-small') {
-        dsGrid.classList.add('compact');
-      } else {
-        dsGrid.classList.remove('compact');
-      }
-    };
-
-    smallRadio.addEventListener('change', handleGridSizeChange);
-    largeRadio.addEventListener('change', handleGridSizeChange);
-  </script>
+  
 </body>
 </html>
