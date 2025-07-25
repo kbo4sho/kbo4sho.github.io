@@ -7,9 +7,29 @@
   --max-width: 900px;
   --padding: 20px;
   --space-lrg: 40px;
+  --focus-outline: 2px solid #ffffff;
+  --focus-offset: 2px;
 }
 html{
   background-color: var(--accent-color);
+}
+
+/* Accessibility - Skip Link */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: #000;
+  color: white;
+  padding: 8px;
+  text-decoration: none;
+  border-radius: 4px;
+  z-index: 10000;
+  transition: top 0.3s;
+}
+
+.skip-link:focus {
+  top: 6px;
 }
 
 /* General Styles */
@@ -20,12 +40,28 @@ body {
   color: #e0e0e0; /* Light text for contrast */
   font-weight: 200;
 }
+
+/* Focus styles for better accessibility */
+*:focus {
+  outline: var(--focus-outline);
+  outline-offset: var(--focus-offset);
+}
+
+/* Remove focus outline for mouse users, keep for keyboard */
+*:focus:not(:focus-visible) {
+  outline: none;
+}
+
 a {
   text-decoration: none;
   color: var(--accent-color); 
 }
 a:hover {
   text-decoration: underline;
+}
+a:focus {
+  text-decoration: underline;
+  color: #ffffff;
 }
 h1, h2, h3 {
   margin: 0;
@@ -369,6 +405,11 @@ footer a {
   color: #232323;
 }
 
+.ds-btn:focus {
+  outline: var(--focus-outline);
+  outline-offset: var(--focus-offset);
+}
+
 .ds-btn-secondary {
   background: transparent;
   color: var(--accent-color);
@@ -393,7 +434,8 @@ footer a {
 
 .ds-input:focus { 
   border-color: var(--accent-color);
-  outline: none;
+  outline: var(--focus-outline);
+  outline-offset: var(--focus-offset);
 }
 
 .ds-label {
@@ -422,6 +464,11 @@ footer a {
 .ds-tooltip:focus, .ds-tooltip:hover { 
   background: var(--accent-color);
   color: #232323;
+}
+
+.ds-tooltip:focus {
+  outline: var(--focus-outline);
+  outline-offset: var(--focus-offset);
 }
 
 .ds-heading {
@@ -465,6 +512,11 @@ footer a {
 
 .ds-modal-close:hover, .ds-modal-close:focus { 
   color: #e0e0e0;
+}
+
+.ds-modal-close:focus {
+  outline: var(--focus-outline);
+  outline-offset: var(--focus-offset);
 }
 
 .ds-modal-body { margin-top: 0.7em; }
@@ -539,6 +591,12 @@ footer a {
   background: #232323;
 }
 
+/* Improve switch accessibility */
+.ds-switch input:focus + .ds-slider {
+  outline: var(--focus-outline);
+  outline-offset: var(--focus-offset);
+}
+
 .ds-table {
   width: 100%;
   border-collapse: collapse;
@@ -568,4 +626,163 @@ footer a {
   background: var(--accent-color);
   border-radius: 0.1em;
   width: 100%;
+}
+
+/* Improve hamburger menu accessibility */
+.ds-hamburger:focus {
+  outline: var(--focus-outline);
+  outline-offset: var(--focus-offset);
+}
+
+/* Mobile Responsive Design */
+@media (max-width: 768px) {
+  /* Adjust section padding for mobile */
+  section {
+    padding: 0 16px;
+    margin-bottom: 60px;
+  }
+  
+  /* Adjust header padding */
+  header {
+    padding: 16px 16px 30px 16px;
+  }
+  
+  /* Make work samples stack vertically on mobile */
+  .work-sample {
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 80px;
+  }
+  
+  /* Full width for work content and text on mobile */
+  .work-content {
+    width: 100%;
+  }
+  
+  .work-sample-text {
+    width: 100%;
+  }
+  
+  /* Adjust about section layout */
+  .about {
+    flex-direction: column;
+    text-align: left;
+    gap: 20px;
+  }
+  
+  .about-profile-image-container {
+    float: none;
+    margin: 0 auto 20px auto;
+    width: 120px;
+    height: 120px;
+  }
+  
+  .about-profile-text-container {
+    text-align: center;
+    max-width: 100%;
+  }
+  
+  .about-profile-text-container h1 {
+    font-size: 3.5rem;
+    line-height: 0.85;
+  }
+  
+  /* Adjust contact section */
+  .contact {
+    padding: 16px 16px 16px 0;
+  }
+  
+  .contact h3 span {
+    width: 100%;
+    display: block;
+  }
+  
+  /* Adjust work section padding */
+  .work {
+    padding: 16px 16px 0 0;
+  }
+  
+  /* Make design system grid more mobile-friendly */
+  .ds-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(4, 60px);
+    grid-template-areas:
+      "button search"
+      "tooltip input"
+      "typography typography"
+      "radio switch"
+      "table hamburger";
+    gap: 8px;
+  }
+  
+  /* Hide modal on mobile */
+  .ds-tile:nth-child(6) {
+    display: none;
+  }
+  
+  /* Stack typography horizontally on mobile */
+  .ds-tile:nth-child(5) {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  }
+  
+  .ds-tile:nth-child(5) .ds-heading {
+    margin: 0;
+    font-size: 1em;
+  }
+  
+  .ds-tile:nth-child(5) .ds-body {
+    margin: 0;
+    font-size: 0.7em;
+  }
+}
+
+/* Extra small mobile devices */
+@media (max-width: 480px) {
+  section {
+    padding: 0 12px;
+  }
+  
+  header {
+    padding: 12px 12px 20px 12px;
+  }
+  
+  .about-profile-text-container h1 {
+    font-size: 3rem;
+  }
+  
+  .work-sample h2 {
+    font-size: 2rem;
+  }
+  
+  .work-sample-text h3 {
+    font-size: 1.4rem;
+  }
+  
+  /* Single column grid for very small screens */
+  .ds-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(9, 60px);
+    grid-template-areas:
+      "button"
+      "search"
+      "tooltip"
+      "input"
+      "typography"
+      "radio"
+      "switch"
+      "table"
+      "hamburger";
+  }
+  
+  /* Adjust typography for very small screens */
+  .ds-tile:nth-child(5) .ds-heading {
+    font-size: 0.9em;
+  }
+  
+  .ds-tile:nth-child(5) .ds-body {
+    font-size: 0.65em;
+  }
 }

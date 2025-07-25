@@ -3,152 +3,165 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title> Kevin Bolander </title>
+  <title>Kevin Bolander - Staff Software Engineer</title>
+  <meta name="description" content="Kevin Bolander is a Staff Software Engineer specializing in design systems, creative tools, and human-centered design principles.">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   
-  <header>
-    <nav>
+  <!-- Skip to main content link for screen readers -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  
+  <header role="banner">
+    <nav role="navigation" aria-label="Main navigation">
       <a href="#about">About</a>
       <a href="#work">Work</a>
       <a href="#contact">Contact</a>
     </nav>  
   </header>
   
-  <section id="about">
-    <div class="about">
-      <div class="about-profile-text-container">
-        <h1>Engineering Creativity</h1>
-        <div class="about-profile-content">
-          <div class="about-profile-image-container">
-            <img src="me.jpg" alt="shapes" class="about-profile-image">
-          </div>
-            <h2>Kevin Bolander - <span>Staff Software Engineer</span></h2>
-            <p>I blend technical expertise in software development with human-centered design principles and collaborative leadership to create impactful, elegant solutions that solve real problems.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="work">
-    <div class="work">
-      <div class="work-sample">
-        <div class="work-content">
-          <div class="work-sample-tiles"> 
-              <div class="image-stack">
-                <img src="reptile_sample.png" class="base-image" alt="Creative Tools Screenshot"/>
-                <img src="reptile_concept_sample.png" class="overlay-image" alt="Creative Tools Concept"/>
-              </div>
-          </div>  
-        </div>
-        <div class="work-sample-text">
-          <h3>Tools for Creative Teams</h3>
-          <p>To scale ad production across hundreds of formats and personalization rules, I led the architecture and development of several custom no-code tools for designers and digital producers. Collaborating closely with product, UX, and creative leads, we built innovative features like dynamic cropping, smart layout rules, and inline previews for responsive, animated templates. What once took hours now takes minutes—our tools are used daily to generate thousands of ad variations from a few flexible templates, powering campaigns for major brands.</p>
-        </div>
-      </div>
-      <div class="work-sample">
-        <div class="work-sample-text">
-          <h3>Scalable Design Systems</h3>
-          <p>From 2017 to 2021, I helped grow our internal design system from a side library into the core part of the product workflow that it is today. As a UX engineer, I built flexible, accessible components, led frontend implementation, and partnered with designers to evolve the system’s visual language. We hosted office hours, maintained the docs site, and supported adoption across teams. During this time, I honed deep expertise in web technology through focused work on native browser features and performance.</p>
-          <p>I wrote about this work and the role of UX engineering in scaling systems at Epsilon. <a target="_blank" rel="noopener noreferrer" href="https://www.epsilon.com/us/about-us/epic-blog/ux-engineering-at-epsilon">Read the post →</a></p>
-          
-        </div>
-        <div class="work-content">
-          <div class="ds-grid" aria-label="Design System Component Showcase">
-            <!-- Button -->
-            <div class="ds-tile" tabindex="0">
-              <button class="ds-btn">Primary</button>
+  <main id="main-content" role="main">
+    <section id="about" aria-labelledby="about-heading">
+      <div class="about">
+        <div class="about-profile-text-container">
+          <h1 id="about-heading">Engineering Creativity</h1>
+          <div class="about-profile-content">
+            <div class="about-profile-image-container">
+              <img src="me.jpg" alt="Kevin Bolander, Staff Software Engineer" class="about-profile-image">
             </div>
-            <!-- Search Input -->
-            <div class="ds-tile" tabindex="0">
-              <label for="search" class="ds-label sr-only">Search</label>
-              <input id="search" class="ds-input" placeholder="Search..." />
-            </div>
-            <!-- Tooltip -->
-            <div class="ds-tile" tabindex="0">
-              <span class="ds-tooltip" tabindex="0" aria-label="Tooltip info">Tooltip</span>
-            </div>
-            <!-- Input Field -->
-            <div class="ds-tile" tabindex="0">
-              <label for="input" class="ds-label">Label</label>
-              <input id="input" class="ds-input" placeholder="Input field" />
-            </div>
-            <!-- Typography -->
-            <div class="ds-tile" tabindex="0">
-              <h2 class="ds-heading">Heading</h2>
-              <p class="ds-body">Body text</p>
-            </div>
-            <!-- Modal Preview -->
-            <div class="ds-tile" tabindex="0">
-              <div class="ds-modal-preview">
-                <div class="ds-modal-header">
-                  <span>Modal Title</span>
-                  <button class="ds-modal-close" aria-label="Close" tabindex="0">×</button>
-                </div>
-                <div class="ds-modal-body">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                  <button class="ds-btn ds-btn-secondary">Close</button>
-                </div>
-              </div>
-            </div>
-            <!-- Radios -->
-            <div class="ds-tile" tabindex="0">
-              <fieldset class="ds-fieldset">
-                <legend class="ds-label sr-only">Radio Options</legend>
-                <label class="ds-radio-label">
-                  <input type="radio" name="radio" id="grid-size-large" checked />
-                  Large
-                </label>
-                <label class="ds-radio-label">
-                  <input type="radio" name="radio" id="grid-size-small" />
-                  Small
-                </label>
-              </fieldset>
-            </div>
-            <!-- Switches -->
-            <div class="ds-tile" tabindex="0">
-              <label class="ds-switch">
-                <input type="checkbox" />
-                <span class="ds-slider"></span>
-              </label>
-              <label class="ds-switch">
-                <input type="checkbox" checked />
-                <span class="ds-slider"></span>
-              </label>
-            </div>
-            <!-- Table -->
-            <div class="ds-tile" tabindex="0">
-              <table class="ds-table" aria-label="Component Table Preview">
-                <tbody>
-                  <tr>
-                    <td></td><td></td><td></td>
-                  </tr>
-                  <tr>
-                    <td></td><td></td><td></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <!-- Hamburger/Menu -->
-            <div class="ds-tile" tabindex="0">
-              <div class="ds-hamburger" aria-label="Menu" tabindex="0">
-                <span></span><span></span><span></span>
-              </div>
-            </div>
+              <h2>Kevin Bolander - <span>Staff Software Engineer</span></h2>
+              <p>I blend technical expertise in software development with human-centered design principles and collaborative leadership to create impactful, elegant solutions that solve real problems.</p>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="contact">
-    <div class="contact">
-      <h3><span>let's make something great</span></h3>
-      <div>Email: <a href="mailto:kevinbolander@gmail.com">kevinbolander@gmail.com</a></div>
-      <div>LinkedIn: <a href="https://linkedin.com/in/kevin-bolander-45659322" target="_blank" rel="noopener noreferrer">linkedin.com/in/kevin-bolander-45659322</a></div>
-    </div>
-  </section>
+    <section id="work" aria-labelledby="work-heading">
+      <div class="work">
+        <h2 id="work-heading" class="sr-only">Work Examples</h2>
+        <div class="work-sample">
+          <div class="work-content">
+            <div class="work-sample-tiles"> 
+                <div class="image-stack">
+                  <img src="reptile_sample.png" class="base-image" alt="Screenshot of creative tools interface showing ad production workflow"/>
+                  <img src="reptile_concept_sample.png" class="overlay-image" alt="Concept design overlay showing creative tools development process"/>
+                </div>
+            </div>  
+          </div>
+          <div class="work-sample-text">
+            <h3>Tools for Creative Teams</h3>
+            <p>In order to scale ad production across hundreds of formats and personalization rules, I led the architecture and development of several custom no-code tools for designers and digital producers. Collaborating closely with product, UX, and creative leads, we built innovative features like dynamic cropping, smart layout rules, and inline previews for responsive, animated templates. What once took hours now takes minutes—our tools are used daily to generate thousands of ad variations from a few flexible templates, powering campaigns for major brands.</p>
+          </div>
+        </div>
+        <div class="work-sample">
+          <div class="work-sample-text">
+            <h3>Scalable Design Systems</h3>
+            <p>From 2017 to 2021, I helped to grow our internal design system component library from a side project into the core part of the product workflow that it is today. As a UX engineer focused on our design system, I built flexible, accessible components, led frontend implementation, and partnered with designers to evolve the system's visual language. We hosted office hours, maintained the docs site, and supported adoption across teams. During this time, I honed deep expertise in web technology through focused work on native browser features and performance, and worked through the challenges of scaling a design system across multiple teams and products.</p>
+            <p>I wrote about this work and the role of UX engineering in scaling systems at Epsilon. <a target="_blank" rel="noopener noreferrer" href="https://www.epsilon.com/us/about-us/epic-blog/ux-engineering-at-epsilon" aria-label="Read the blog post about UX engineering at Epsilon (opens in new tab)">Read the post →</a></p>
+            
+          </div>
+          <div class="work-content">
+            <div class="ds-grid" aria-label="Design System Component Showcase">
+              <!-- Button -->
+              <div class="ds-tile" tabindex="0" role="button" aria-label="Primary button example">
+                <button class="ds-btn">Primary</button>
+              </div>
+              <!-- Search Input -->
+              <div class="ds-tile" tabindex="0" role="textbox" aria-label="Search input example">
+                <label for="search" class="ds-label sr-only">Search</label>
+                <input id="search" class="ds-input" placeholder="Search..." aria-describedby="search-description" />
+                <span id="search-description" class="sr-only">Example search input field</span>
+              </div>
+              <!-- Tooltip -->
+              <div class="ds-tile" tabindex="0" role="button" aria-label="Tooltip example">
+                <span class="ds-tooltip" tabindex="0" aria-label="Tooltip info">Tooltip</span>
+              </div>
+              <!-- Input Field -->
+              <div class="ds-tile" tabindex="0" role="textbox" aria-label="Input field example">
+                <label for="input" class="ds-label">Label</label>
+                <input id="input" class="ds-input" placeholder="Input field" aria-describedby="input-description" />
+                <span id="input-description" class="sr-only">Example input field with label</span>
+              </div>
+              <!-- Typography -->
+              <div class="ds-tile" tabindex="0" role="textbox" aria-label="Typography example">
+                <h2 class="ds-heading">Heading</h2>
+                <p class="ds-body">Body text</p>
+              </div>
+              <!-- Modal Preview -->
+              <div class="ds-tile" tabindex="0" role="dialog" aria-label="Modal example" aria-modal="true">
+                <div class="ds-modal-preview">
+                  <div class="ds-modal-header">
+                    <span>Modal Title</span>
+                    <button class="ds-modal-close" aria-label="Close modal" tabindex="0">×</button>
+                  </div>
+                  <div class="ds-modal-body">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    <button class="ds-btn ds-btn-secondary">Close</button>
+                  </div>
+                </div>
+              </div>
+              <!-- Radios -->
+              <div class="ds-tile" tabindex="0" role="radiogroup" aria-label="Radio button examples">
+                <fieldset class="ds-fieldset">
+                  <legend class="ds-label sr-only">Radio Options</legend>
+                  <label class="ds-radio-label">
+                    <input type="radio" name="radio" id="grid-size-large" checked aria-describedby="radio-description" />
+                    Large
+                  </label>
+                  <label class="ds-radio-label">
+                    <input type="radio" name="radio" id="grid-size-small" aria-describedby="radio-description" />
+                    Small
+                  </label>
+                  <span id="radio-description" class="sr-only">Example radio button group for size selection</span>
+                </fieldset>
+              </div>
+              <!-- Switches -->
+              <div class="ds-tile" tabindex="0" role="group" aria-label="Toggle switch examples">
+                <label class="ds-switch">
+                  <input type="checkbox" aria-describedby="switch-description" />
+                  <span class="ds-slider" aria-hidden="true"></span>
+                  <span class="sr-only">Toggle switch off</span>
+                </label>
+                <label class="ds-switch">
+                  <input type="checkbox" checked aria-describedby="switch-description" />
+                  <span class="ds-slider" aria-hidden="true"></span>
+                  <span class="sr-only">Toggle switch on</span>
+                </label>
+                <span id="switch-description" class="sr-only">Example toggle switches</span>
+              </div>
+              <!-- Table -->
+              <div class="ds-tile" tabindex="0" role="table" aria-label="Table example">
+                <table class="ds-table" aria-label="Component Table Preview">
+                  <tbody>
+                    <tr>
+                      <td></td><td></td><td></td>
+                    </tr>
+                    <tr>
+                      <td></td><td></td><td></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <!-- Hamburger/Menu -->
+              <div class="ds-tile" tabindex="0" role="button" aria-label="Hamburger menu example">
+                <div class="ds-hamburger" aria-label="Menu" tabindex="0">
+                  <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" aria-labelledby="contact-heading">
+      <div class="contact">
+        <h3 id="contact-heading"><span>great, let's make something together</span></h3>
+        <div>Email: <a href="mailto:kevinbolander@gmail.com" aria-label="Send email to kevinbolander@gmail.com">kevinbolander@gmail.com</a></div>
+        <div>LinkedIn: <a href="https://linkedin.com/in/kevin-bolander-45659322" target="_blank" rel="noopener noreferrer" aria-label="Visit Kevin Bolander's LinkedIn profile (opens in new tab)">linkedin.com/in/kevin-bolander-45659322</a></div>
+      </div>
+    </section>
+  </main>
 
   
 </body>
