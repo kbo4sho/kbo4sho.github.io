@@ -14,9 +14,11 @@
   
   <header role="banner">
     <nav role="navigation" aria-label="Main navigation">
-      <a href="#about">About</a>
-      <a href="#work">Work</a>
-      <a href="#contact">Contact</a>
+      <ul class="nav-list">
+        <li><a href="#about">About</a></li>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
     </nav>  
   </header>
   
@@ -63,32 +65,32 @@
           <div class="work-content">
             <div class="ds-grid" aria-label="Design System Component Showcase">
               <!-- Button -->
-              <div class="ds-tile" tabindex="0" role="button" aria-label="Primary button example">
+              <div class="ds-tile" aria-label="Primary button example">
                 <button class="ds-btn">Primary</button>
               </div>
               <!-- Search Input -->
-              <div class="ds-tile" tabindex="0" role="textbox" aria-label="Search input example">
+              <div class="ds-tile" aria-label="Search input example">
                 <label for="search" class="ds-label sr-only">Search</label>
                 <input id="search" class="ds-input" placeholder="Search..." aria-describedby="search-description" />
                 <span id="search-description" class="sr-only">Example search input field</span>
               </div>
               <!-- Tooltip -->
-              <div class="ds-tile" tabindex="0" role="button" aria-label="Tooltip example">
-                <span class="ds-tooltip" tabindex="0" aria-label="Tooltip info">Tooltip</span>
+              <div class="ds-tile" aria-label="Tooltip example">
+                <button class="ds-tooltip" type="button" aria-label="Show tooltip example">Tooltip</button>
               </div>
               <!-- Input Field -->
-              <div class="ds-tile" tabindex="0" role="textbox" aria-label="Input field example">
+              <div class="ds-tile" aria-label="Input field example">
                 <label for="input" class="ds-label">Label</label>
                 <input id="input" class="ds-input" placeholder="Input field" aria-describedby="input-description" />
                 <span id="input-description" class="sr-only">Example input field with label</span>
               </div>
               <!-- Typography -->
-              <div class="ds-tile" tabindex="0" role="textbox" aria-label="Typography example">
+              <div class="ds-tile" aria-label="Typography example">
                 <h2 class="ds-heading">Heading</h2>
                 <p class="ds-body">Body text</p>
               </div>
               <!-- Modal Preview -->
-              <div class="ds-tile" tabindex="0" role="dialog" aria-label="Modal example" aria-modal="true">
+              <div class="ds-tile" aria-label="Modal example">
                 <div class="ds-modal-preview">
                   <div class="ds-modal-header">
                     <span>Modal Title</span>
@@ -101,7 +103,7 @@
                 </div>
               </div>
               <!-- Radios -->
-              <div class="ds-tile" tabindex="0" role="radiogroup" aria-label="Radio button examples">
+              <div class="ds-tile" aria-label="Radio button examples">
                 <fieldset class="ds-fieldset">
                   <legend class="ds-label sr-only">Radio Options</legend>
                   <label class="ds-radio-label">
@@ -116,7 +118,7 @@
                 </fieldset>
               </div>
               <!-- Switches -->
-              <div class="ds-tile" tabindex="0" role="group" aria-label="Toggle switch examples">
+              <div class="ds-tile" aria-label="Toggle switch examples">
                 <label class="ds-switch">
                   <input type="checkbox" aria-describedby="switch-description" />
                   <span class="ds-slider" aria-hidden="true"></span>
@@ -130,7 +132,7 @@
                 <span id="switch-description" class="sr-only">Example toggle switches</span>
               </div>
               <!-- Table -->
-              <div class="ds-tile" tabindex="0" role="table" aria-label="Table example">
+              <div class="ds-tile" aria-label="Table example">
                 <table class="ds-table" aria-label="Component Table Preview">
                   <tbody>
                     <tr>
@@ -143,10 +145,10 @@
                 </table>
               </div>
               <!-- Hamburger/Menu -->
-              <div class="ds-tile" tabindex="0" role="button" aria-label="Hamburger menu example">
-                <div class="ds-hamburger" aria-label="Menu" tabindex="0">
+              <div class="ds-tile" aria-label="Hamburger menu example">
+                <button class="ds-hamburger" type="button" aria-label="Menu">
                   <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
-                </div>
+                </button>
               </div>
             </div>
           </div>
