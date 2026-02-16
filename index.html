@@ -3,168 +3,965 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kevin Bolander - Staff Software Engineer</title>
-  <meta name="description" content="Kevin Bolander is a Staff Software Engineer specializing in design systems, creative tools, and human-centered design principles.">
-  <link rel="stylesheet" href="style.css">
+  <title>Kevin Bolander — Engineering Creativity</title>
+  <meta name="description" content="Staff Software Engineer building at the intersection of creative technology and AI. I make tools that make things.">
+  <meta property="og:title" content="Kevin Bolander — Engineering Creativity">
+  <meta property="og:description" content="Staff Software Engineer building at the intersection of creative technology and AI.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #0a0e27;
+      --bg-panel: #0d1b3e;
+      --bg-panel-alt: #101d42;
+      --accent-cyan: #00d4ff;
+      --accent-teal: #14f0c4;
+      --accent-dim: #0a6b80;
+      --grid-color: rgba(0, 212, 255, 0.06);
+      --border-color: rgba(0, 212, 255, 0.4);
+      --border-bright: rgba(0, 212, 255, 0.8);
+      --text-primary: #e0f4ff;
+      --text-dim: #6b8fa8;
+      --font-mono: 'Share Tech Mono', monospace;
+      --font-display: 'Orbitron', sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      font-size: 16px;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-mono);
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Grid overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: 
+        linear-gradient(var(--grid-color) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Content sits above grid */
+    .app {
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ========== TOP FREQUENCY BAR ========== */
+    .freq-bar {
+      background: linear-gradient(180deg, var(--bg-panel) 0%, var(--bg-dark) 100%);
+      border-bottom: 2px solid var(--border-color);
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .freq-display {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .freq-label {
+      font-family: var(--font-display);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      color: var(--text-dim);
+      text-transform: uppercase;
+    }
+
+    .freq-numbers {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--accent-cyan);
+      letter-spacing: 0.1em;
+    }
+
+    .freq-numbers .dot {
+      color: var(--accent-teal);
+      animation: pulse-dot 1.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    /* Waveform display */
+    .waveform-container {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .waveform {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      height: 24px;
+    }
+
+    .wave-bar {
+      width: 3px;
+      background: var(--accent-cyan);
+      border-radius: 1px;
+      animation: wave 1.2s ease-in-out infinite;
+    }
+
+    .wave-bar:nth-child(1) { height: 8px; animation-delay: 0s; }
+    .wave-bar:nth-child(2) { height: 16px; animation-delay: 0.1s; }
+    .wave-bar:nth-child(3) { height: 12px; animation-delay: 0.2s; }
+    .wave-bar:nth-child(4) { height: 20px; animation-delay: 0.3s; }
+    .wave-bar:nth-child(5) { height: 14px; animation-delay: 0.4s; }
+    .wave-bar:nth-child(6) { height: 18px; animation-delay: 0.5s; }
+    .wave-bar:nth-child(7) { height: 10px; animation-delay: 0.6s; }
+    .wave-bar:nth-child(8) { height: 16px; animation-delay: 0.7s; }
+    .wave-bar:nth-child(9) { height: 6px; animation-delay: 0.8s; }
+    .wave-bar:nth-child(10) { height: 14px; animation-delay: 0.9s; }
+
+    @keyframes wave {
+      0%, 100% { transform: scaleY(1); }
+      50% { transform: scaleY(0.4); }
+    }
+
+    .status-indicator {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      color: var(--accent-teal);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--accent-teal);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--accent-teal);
+      animation: pulse-glow 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 8px var(--accent-teal); }
+      50% { box-shadow: 0 0 16px var(--accent-teal), 0 0 24px var(--accent-teal); }
+    }
+
+    /* ========== MAIN CONTAINER ========== */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
+
+    /* ========== PROFILE HEADER ========== */
+    .profile-header {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 2rem;
+      margin-bottom: 3rem;
+      padding: 1.5rem;
+      background: var(--bg-panel);
+      border: 2px solid var(--border-color);
+      position: relative;
+    }
+
+    .profile-header::before,
+    .profile-header::after {
+      content: '';
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border: 2px solid var(--accent-cyan);
+    }
+
+    .profile-header::before {
+      top: -2px;
+      left: -2px;
+      border-right: none;
+      border-bottom: none;
+    }
+
+    .profile-header::after {
+      bottom: -2px;
+      right: -2px;
+      border-left: none;
+      border-top: none;
+    }
+
+    .portrait-frame {
+      width: 140px;
+      height: 180px;
+      border: 2px solid var(--border-bright);
+      background: var(--bg-panel-alt);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .portrait-frame::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        linear-gradient(45deg, transparent 48%, var(--border-color) 49%, var(--border-color) 51%, transparent 52%),
+        linear-gradient(-45deg, transparent 48%, var(--border-color) 49%, var(--border-color) 51%, transparent 52%);
+      background-size: 20px 20px;
+      opacity: 0.3;
+    }
+
+    .portrait-placeholder {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      color: var(--accent-dim);
+      position: relative;
+      z-index: 1;
+    }
+
+    .profile-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .profile-name {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent-cyan);
+      letter-spacing: 0.1em;
+      margin-bottom: 0.25rem;
+      text-transform: uppercase;
+    }
+
+    .profile-tagline {
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      color: var(--accent-teal);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .profile-role {
+      font-size: 1rem;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .profile-location {
+      font-size: 0.875rem;
+      color: var(--text-dim);
+    }
+
+    /* ========== SECTION PANELS ========== */
+    .section-panel {
+      background: var(--bg-panel);
+      border: 2px solid var(--border-color);
+      margin-bottom: 2rem;
+      position: relative;
+    }
+
+    .section-header {
+      background: linear-gradient(90deg, var(--bg-panel-alt) 0%, transparent 100%);
+      border-bottom: 1px solid var(--border-color);
+      padding: 0.75rem 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .section-icon {
+      width: 8px;
+      height: 8px;
+      background: var(--accent-cyan);
+      clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--accent-cyan);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, var(--border-color) 0%, transparent 100%);
+    }
+
+    .section-content {
+      padding: 1.5rem;
+    }
+
+    /* ========== ABOUT ========== */
+    .about-text {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--text-primary);
+    }
+
+    .about-text p {
+      margin-bottom: 1rem;
+    }
+
+    .about-text p:last-child {
+      margin-bottom: 0;
+    }
+
+    .highlight {
+      color: var(--accent-cyan);
+    }
+
+    .highlight-teal {
+      color: var(--accent-teal);
+    }
+
+    /* ========== PROJECTS GRID ========== */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .project-card {
+      background: var(--bg-panel-alt);
+      border: 1px solid var(--border-color);
+      padding: 1.25rem;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    .project-card:hover {
+      border-color: var(--border-bright);
+      transform: translateY(-2px);
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 3px;
+      height: 100%;
+      background: var(--accent-cyan);
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .project-card:hover::before {
+      opacity: 1;
+    }
+
+    .project-name {
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--accent-cyan);
+      letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+    }
+
+    .project-divider {
+      border: none;
+      border-top: 1px solid var(--border-color);
+      margin: 0.75rem 0;
+    }
+
+    .project-desc {
+      font-size: 0.875rem;
+      color: var(--text-primary);
+      margin-bottom: 0.75rem;
+      line-height: 1.6;
+    }
+
+    .project-meta {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .project-links {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      text-decoration: none;
+      border: 1px solid var(--border-color);
+      color: var(--accent-cyan);
+      background: transparent;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn:hover {
+      background: var(--accent-cyan);
+      color: var(--bg-dark);
+      border-color: var(--accent-cyan);
+    }
+
+    .btn-disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      color: var(--text-dim);
+    }
+
+    .btn-disabled:hover {
+      background: transparent;
+      color: var(--text-dim);
+      border-color: var(--border-color);
+    }
+
+    /* ========== SKILLS ========== */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .skill-category h3 {
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--accent-teal);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.75rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .skill-list {
+      list-style: none;
+      font-size: 0.875rem;
+    }
+
+    .skill-list li {
+      color: var(--text-primary);
+      margin-bottom: 0.35rem;
+      padding-left: 1rem;
+      position: relative;
+    }
+
+    .skill-list li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--accent-dim);
+    }
+
+    /* ========== ROOTS ========== */
+    .roots-list {
+      list-style: none;
+    }
+
+    .roots-list li {
+      padding: 0.75rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+      border-bottom: 1px solid var(--border-color);
+      font-size: 0.9rem;
+    }
+
+    .roots-list li:last-child {
+      border-bottom: none;
+    }
+
+    .roots-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 1rem;
+      width: 6px;
+      height: 6px;
+      background: var(--accent-cyan);
+      clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+    }
+
+    /* ========== CONNECT ========== */
+    .connect-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+    }
+
+    .connect-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.75rem 1rem;
+      background: var(--bg-panel-alt);
+      border: 1px solid var(--border-color);
+      transition: all 0.2s ease;
+    }
+
+    .connect-item:hover {
+      border-color: var(--border-bright);
+    }
+
+    .connect-label {
+      font-family: var(--font-display);
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      min-width: 70px;
+    }
+
+    .connect-item a {
+      color: var(--accent-cyan);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s ease;
+    }
+
+    .connect-item a:hover {
+      color: var(--accent-teal);
+    }
+
+    /* ========== FOOTER ========== */
+    .footer {
+      text-align: center;
+      padding: 2rem;
+      border-top: 2px solid var(--border-color);
+      margin-top: 2rem;
+    }
+
+    .footer-text {
+      font-family: var(--font-display);
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+    }
+
+    .footer-line {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .footer-line span {
+      width: 60px;
+      height: 1px;
+      background: var(--border-color);
+    }
+
+    .footer-diamond {
+      width: 8px;
+      height: 8px;
+      background: var(--accent-dim);
+      clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 768px) {
+      .freq-bar {
+        padding: 0.5rem 1rem;
+      }
+
+      .freq-numbers {
+        font-size: 1.2rem;
+      }
+
+      .waveform {
+        display: none;
+      }
+
+      .profile-header {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .portrait-frame {
+        margin: 0 auto;
+        width: 120px;
+        height: 150px;
+      }
+
+      .profile-name {
+        font-size: 1.5rem;
+      }
+
+      .container {
+        padding: 1.5rem 1rem;
+      }
+
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .freq-display {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.25rem;
+      }
+
+      .profile-name {
+        font-size: 1.25rem;
+        letter-spacing: 0.05em;
+      }
+
+      .section-title {
+        font-size: 0.75rem;
+      }
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      .wave-bar,
+      .status-dot,
+      .freq-numbers .dot {
+        animation: none;
+      }
+
+      .project-card {
+        transition: none;
+      }
+    }
+
+    /* Selection */
+    ::selection {
+      background: var(--accent-cyan);
+      color: var(--bg-dark);
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--bg-dark);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--accent-dim);
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--accent-cyan);
+    }
+
+    /* Screen reader only */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+  </style>
 </head>
 <body>
-  
-  <!-- Skip to main content link for screen readers -->
-  <a href="#main-content" class="skip-link">Skip to main content</a>
-  
-  <header role="banner">
-    <nav role="navigation" aria-label="Main navigation">
-      <ul class="nav-list">
-        <li><a href="#about">About</a></li>
-        <li><a href="#work">Work</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>  
-  </header>
-  
-  <main id="main-content" role="main">
-    <section id="about" aria-labelledby="about-heading">
-      <div class="about">
-        <div class="about-profile-text-container">
-          <h1 id="about-heading">Engineering Creativity</h1>
-          <div class="about-profile-content">
-            <div class="about-profile-image-container">
-              <img src="me.jpg" alt="Kevin Bolander, Staff Software Engineer" class="about-profile-image">
-            </div>
-              <h2>Kevin Bolander - <span>Staff Software Engineer</span></h2>
-              <p>I blend technical expertise in software development with human-centered design principles and collaborative leadership to create impactful, elegant solutions that solve real problems.</p>
-          </div>
+  <div class="app">
+    
+    <!-- Frequency Bar -->
+    <header class="freq-bar">
+      <div class="freq-display">
+        <span class="freq-label">Channel</span>
+        <span class="freq-numbers">140<span class="dot">.</span>85</span>
+      </div>
+      <div class="waveform-container">
+        <div class="waveform">
+          <div class="wave-bar"></div>
+          <div class="wave-bar"></div>
+          <div class="wave-bar"></div>
+          <div class="wave-bar"></div>
+          <div class="wave-bar"></div>
+          <div class="wave-bar"></div>
+          <div class="wave-bar"></div>
+          <div class="wave-bar"></div>
+          <div class="wave-bar"></div>
+          <div class="wave-bar"></div>
         </div>
       </div>
-    </section>
+      <div class="status-indicator">
+        <span class="status-dot"></span>
+        <span>Signal Active</span>
+      </div>
+    </header>
 
-    <section id="work" aria-labelledby="work-heading">
-      <div class="work">
-        <h2 id="work-heading" class="sr-only">Work Examples</h2>
-        <div class="work-sample">
-          <div class="work-content">
-            <div class="work-sample-tiles"> 
-                <div class="image-stack">
-                  <img src="reptile_sample.png" class="base-image" alt="Screenshot of creative tools interface showing ad production workflow"/>
-                  <img src="reptile_concept_sample.png" class="overlay-image" alt="Concept design overlay showing creative tools development process"/>
-                </div>
-            </div>  
-          </div>
-          <div class="work-sample-text">
-            <h3>Tools for Creative Teams</h3>
-            <p>In order to scale ad production across hundreds of formats and personalization rules, I led the architecture and development of several custom no-code tools for designers and digital producers. Collaborating closely with product, UX, and creative leads, we built innovative features like dynamic cropping, smart layout rules, and inline previews for responsive, animated templates. What once took hours now takes minutes—our tools are used daily to generate thousands of ad variations from a few flexible templates, powering campaigns for major brands.</p>
+    <main class="container">
+      
+      <!-- Profile Header -->
+      <section class="profile-header">
+        <div class="portrait-frame">
+          <span class="portrait-placeholder">KB</span>
+        </div>
+        <div class="profile-info">
+          <h1 class="profile-name">Kevin Bolander</h1>
+          <p class="profile-tagline">Engineering Creativity</p>
+          <p class="profile-role">Staff Software Engineer · Creative Technology & AI</p>
+          <p class="profile-location">Illinois, USA · Epsilon</p>
+        </div>
+      </section>
+
+      <!-- About -->
+      <section class="section-panel" id="about">
+        <div class="section-header">
+          <span class="section-icon"></span>
+          <span class="section-title">Mission Brief</span>
+          <span class="section-line"></span>
+        </div>
+        <div class="section-content">
+          <div class="about-text">
+            <p>
+              <span class="highlight">Staff Software Engineer</span> building at the intersection of 
+              creative technology and AI. I make tools that make things.
+            </p>
+            <p>
+              15+ years engineering creative experiences — started with <span class="highlight">interactive installations</span> 
+              and real-time graphics, now deep in <span class="highlight-teal">AI systems</span>. 
+              Turning photos into trading cards, generating personalized stories, building tools that used to be impossible.
+            </p>
+            <p>
+              <span class="highlight">Primary objective:</span> Leading creative tooling at Epsilon.<br>
+              <span class="highlight">Side operations:</span> Whatever sounds fun.
+            </p>
           </div>
         </div>
-        <div class="work-sample">
-          <div class="work-sample-text">
-            <h3>Scalable Design Systems</h3>
-            <p>From 2017 to 2021, I helped to grow our internal design system component library from a side project into the core part of the product workflow that it is today. As a UX engineer focused on our design system, I built flexible, accessible components, led frontend implementation, and partnered with designers to evolve the system's visual language. We hosted office hours, maintained the docs site, and supported adoption across teams. During this time, I honed deep expertise in web technology through focused work on native browser features and performance, and worked through the challenges of scaling a design system across multiple teams and products.</p>
-            <p>I wrote about this work and the role of UX engineering in scaling systems at Epsilon. <a target="_blank" rel="noopener noreferrer" href="https://www.epsilon.com/us/about-us/epic-blog/ux-engineering-at-epsilon" aria-label="Read the blog post about UX engineering at Epsilon (opens in new tab)">Read the post →</a></p>
+      </section>
+
+      <!-- Projects -->
+      <section class="section-panel" id="projects">
+        <div class="section-header">
+          <span class="section-icon"></span>
+          <span class="section-title">Active Operations</span>
+          <span class="section-line"></span>
+        </div>
+        <div class="section-content">
+          <div class="projects-grid">
             
+            <article class="project-card">
+              <h3 class="project-name">MakeMeA</h3>
+              <hr class="project-divider">
+              <p class="project-desc">Upload a photo. Pick a style. AI does the rest. Caricatures, trading cards, action figures, anime — 27 styles and counting.</p>
+              <p class="project-meta">AI Image Transforms • Live</p>
+              <div class="project-links">
+                <a href="https://makemea.ai" target="_blank" rel="noopener" class="btn">Launch</a>
+              </div>
+            </article>
+
+            <article class="project-card">
+              <h3 class="project-name">Atlas Learn</h3>
+              <hr class="project-divider">
+              <p class="project-desc">Personalized educational content powered by AI. Adapts to the learner, generates custom materials on demand.</p>
+              <p class="project-meta">EdTech • In Development</p>
+              <div class="project-links">
+                <span class="btn btn-disabled">Coming Soon</span>
+              </div>
+            </article>
+
+            <article class="project-card">
+              <h3 class="project-name">PathForge</h3>
+              <hr class="project-divider">
+              <p class="project-desc">Career pathing and skills gap analysis. Map where you are, discover where you could go, and chart the path between.</p>
+              <p class="project-meta">Career Dev Tool • In Development</p>
+              <div class="project-links">
+                <span class="btn btn-disabled">Coming Soon</span>
+              </div>
+            </article>
+
+            <article class="project-card">
+              <h3 class="project-name">Creative Tools</h3>
+              <hr class="project-divider">
+              <p class="project-desc">No-code tools for ad production at scale. Dynamic cropping, smart layouts, animated templates. Thousands of variations from flexible templates.</p>
+              <p class="project-meta">Enterprise • Epsilon</p>
+              <div class="project-links">
+                <span class="btn btn-disabled">Internal</span>
+              </div>
+            </article>
+
+            <article class="project-card">
+              <h3 class="project-name">Design Systems</h3>
+              <hr class="project-divider">
+              <p class="project-desc">Grew Epsilon's internal component library from side project to core product. Deep accessibility focus, bridging design and development.</p>
+              <p class="project-meta">UX Engineering • 2017-2021</p>
+              <div class="project-links">
+                <a href="https://www.epsilon.com/us/insights/blog?author=Kevin%20Bolander" target="_blank" rel="noopener" class="btn">Articles</a>
+              </div>
+            </article>
+
+            <article class="project-card">
+              <h3 class="project-name">AI Story Engine</h3>
+              <hr class="project-divider">
+              <p class="project-desc">Full multimedia story generation pipeline. Text, images, audio — complete narratives from simple prompts.</p>
+              <p class="project-meta">Creative AI • Experimental</p>
+              <div class="project-links">
+                <span class="btn btn-disabled">Prototype</span>
+              </div>
+            </article>
+
           </div>
-          <div class="work-content">
-            <div class="ds-grid" aria-label="Design System Component Showcase">
-              <!-- Button -->
-              <div class="ds-tile" aria-label="Primary button example">
-                <button class="ds-btn">Primary</button>
-              </div>
-              <!-- Search Input -->
-              <div class="ds-tile" aria-label="Search input example">
-                <label for="search" class="ds-label sr-only">Search</label>
-                <input id="search" class="ds-input" placeholder="Search..." aria-describedby="search-description" />
-                <span id="search-description" class="sr-only">Example search input field</span>
-              </div>
-              <!-- Tooltip -->
-              <div class="ds-tile" aria-label="Tooltip example">
-                <button class="ds-tooltip" type="button" aria-label="Show tooltip example">Tooltip</button>
-              </div>
-              <!-- Input Field -->
-              <div class="ds-tile" aria-label="Input field example">
-                <label for="input" class="ds-label">Label</label>
-                <input id="input" class="ds-input" placeholder="Input field" aria-describedby="input-description" />
-                <span id="input-description" class="sr-only">Example input field with label</span>
-              </div>
-              <!-- Typography -->
-              <div class="ds-tile" aria-label="Typography example">
-                <h2 class="ds-heading">Heading</h2>
-                <p class="ds-body">Body text</p>
-              </div>
-              <!-- Modal Preview -->
-              <div class="ds-tile" aria-label="Modal example">
-                <div class="ds-modal-preview">
-                  <div class="ds-modal-header">
-                    <span>Modal Title</span>
-                    <button class="ds-modal-close" aria-label="Close modal" tabindex="0">×</button>
-                  </div>
-                  <div class="ds-modal-body">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    <button class="ds-btn ds-btn-secondary">Close</button>
-                  </div>
-                </div>
-              </div>
-              <!-- Radios -->
-              <div class="ds-tile" aria-label="Radio button examples">
-                <fieldset class="ds-fieldset">
-                  <legend class="ds-label sr-only">Radio Options</legend>
-                  <label class="ds-radio-label">
-                    <input type="radio" name="radio" id="grid-size-large" checked aria-describedby="radio-description" />
-                    Large
-                  </label>
-                  <label class="ds-radio-label">
-                    <input type="radio" name="radio" id="grid-size-small" aria-describedby="radio-description" />
-                    Small
-                  </label>
-                  <span id="radio-description" class="sr-only">Example radio button group for size selection</span>
-                </fieldset>
-              </div>
-              <!-- Switches -->
-              <div class="ds-tile" aria-label="Toggle switch examples">
-                <label class="ds-switch">
-                  <input type="checkbox" aria-describedby="switch-description" />
-                  <span class="ds-slider" aria-hidden="true"></span>
-                  <span class="sr-only">Toggle switch off</span>
-                </label>
-                <label class="ds-switch">
-                  <input type="checkbox" checked aria-describedby="switch-description" />
-                  <span class="ds-slider" aria-hidden="true"></span>
-                  <span class="sr-only">Toggle switch on</span>
-                </label>
-                <span id="switch-description" class="sr-only">Example toggle switches</span>
-              </div>
-              <!-- Table -->
-              <div class="ds-tile" aria-label="Table example">
-                <table class="ds-table" aria-label="Component Table Preview">
-                  <tbody>
-                    <tr>
-                      <td></td><td></td><td></td>
-                    </tr>
-                    <tr>
-                      <td></td><td></td><td></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <!-- Hamburger/Menu -->
-              <div class="ds-tile" aria-label="Hamburger menu example">
-                <button class="ds-hamburger" type="button" aria-label="Menu">
-                  <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
-                </button>
-              </div>
+        </div>
+      </section>
+
+      <!-- Creative Roots -->
+      <section class="section-panel" id="roots">
+        <div class="section-header">
+          <span class="section-icon"></span>
+          <span class="section-title">Field Experience</span>
+          <span class="section-line"></span>
+        </div>
+        <div class="section-content">
+          <p style="margin-bottom: 1rem; color: var(--text-dim);">Before the AI work, I was building:</p>
+          <ul class="roots-list">
+            <li><span class="highlight">Interactive Kinect installations</span> — analytics dashboards, experiential games, real-time people tracking</li>
+            <li><span class="highlight">Real-time applications</span> with C# / SignalR / Unity3D — multiplayer experiences and live data visualization</li>
+            <li><span class="highlight">WebGL & Canvas rendering</span> — Pixi.js engines, 3D asset viewers, animated ad systems</li>
+            <li><span class="highlight">Full-stack web platforms</span> — Angular + Node.js, enterprise-scale applications</li>
+            <li>Anything that made technology <span class="highlight-teal">feel alive and interactive</span></li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Skills -->
+      <section class="section-panel" id="skills">
+        <div class="section-header">
+          <span class="section-icon"></span>
+          <span class="section-title">Arsenal</span>
+          <span class="section-line"></span>
+        </div>
+        <div class="section-content">
+          <div class="skills-grid">
+            <div class="skill-category">
+              <h3>Frontend</h3>
+              <ul class="skill-list">
+                <li>TypeScript / JavaScript</li>
+                <li>Angular, React</li>
+                <li>Canvas, WebGL, Pixi.js</li>
+                <li>CSS Animation & Design Systems</li>
+              </ul>
+            </div>
+            <div class="skill-category">
+              <h3>Backend</h3>
+              <ul class="skill-list">
+                <li>Node.js, Python</li>
+                <li>C# / .NET</li>
+                <li>REST APIs, GraphQL</li>
+                <li>AWS, Cloud Architecture</li>
+              </ul>
+            </div>
+            <div class="skill-category">
+              <h3>AI / ML</h3>
+              <ul class="skill-list">
+                <li>OpenAI, Anthropic, Replicate</li>
+                <li>Image Generation & Transforms</li>
+                <li>LLM Integration & Prompt Eng.</li>
+                <li>AI Application Architecture</li>
+              </ul>
+            </div>
+            <div class="skill-category">
+              <h3>Creative Tech</h3>
+              <ul class="skill-list">
+                <li>Unity3D, Kinect SDK</li>
+                <li>Real-time Systems</li>
+                <li>Interactive Installations</li>
+                <li>UX Engineering</li>
+              </ul>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section id="contact" aria-labelledby="contact-heading">
-      <div class="contact">
-        <h3 id="contact-heading"><span>great, let's make something together</span></h3>
-        <div>Email: <a href="mailto:kevinbolander@gmail.com" aria-label="Send email to kevinbolander@gmail.com">kevinbolander@gmail.com</a></div>
-        <div>LinkedIn: <a href="https://linkedin.com/in/kevin-bolander-45659322" target="_blank" rel="noopener noreferrer" aria-label="Visit Kevin Bolander's LinkedIn profile (opens in new tab)">linkedin.com/in/kevin-bolander-45659322</a></div>
-      </div>
-    </section>
-  </main>
+      <!-- Connect -->
+      <section class="section-panel" id="contact">
+        <div class="section-header">
+          <span class="section-icon"></span>
+          <span class="section-title">Open Channel</span>
+          <span class="section-line"></span>
+        </div>
+        <div class="section-content">
+          <div class="connect-grid">
+            <div class="connect-item">
+              <span class="connect-label">Email</span>
+              <a href="mailto:kevinbolander@gmail.com">kevinbolander@gmail.com</a>
+            </div>
+            <div class="connect-item">
+              <span class="connect-label">GitHub</span>
+              <a href="https://github.com/kbo4sho" target="_blank" rel="noopener">github.com/kbo4sho</a>
+            </div>
+            <div class="connect-item">
+              <span class="connect-label">LinkedIn</span>
+              <a href="https://linkedin.com/in/kevin-bolander-45659322" target="_blank" rel="noopener">kevin-bolander</a>
+            </div>
+            <div class="connect-item">
+              <span class="connect-label">X</span>
+              <a href="https://x.com/kevinbolander" target="_blank" rel="noopener">@kevinbolander</a>
+            </div>
+          </div>
+        </div>
+      </section>
 
-  
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p class="footer-text">Transmission Complete</p>
+      <div class="footer-line">
+        <span></span>
+        <div class="footer-diamond"></div>
+        <span></span>
+      </div>
+    </footer>
+
+  </div>
 </body>
 </html>
