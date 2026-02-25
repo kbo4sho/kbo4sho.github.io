@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kevin Bolander — Engineering Creativity</title>
-  <meta name="description" content="Staff Software Engineer building at the intersection of creative technology and AI. I make tools that make things.">
-  <meta property="og:title" content="Kevin Bolander — Engineering Creativity">
-  <meta property="og:description" content="Staff Software Engineer building at the intersection of creative technology and AI.">
+  <title>Kevin Bolander — Design Engineer</title>
+  <meta name="description" content="Design Engineer building design systems, creative tools, and production UI at the intersection of design and engineering.">
+  <meta property="og:title" content="Kevin Bolander — Design Engineer">
+  <meta property="og:description" content="Design Engineer building design systems, creative tools, and production UI.">
   <meta property="og:type" content="website">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -69,6 +69,23 @@
     .app {
       position: relative;
       z-index: 2;
+    }
+
+    /* Skip link for accessibility */
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: var(--accent-cyan);
+      color: var(--bg-dark);
+      padding: 0.5rem 1rem;
+      text-decoration: none;
+      z-index: 100;
+      font-weight: bold;
+    }
+
+    .skip-link:focus {
+      top: 0;
     }
 
     /* ========== TOP FREQUENCY BAR ========== */
@@ -230,6 +247,12 @@
       overflow: hidden;
     }
 
+    .portrait-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
     .portrait-frame::before {
       content: '';
       position: absolute;
@@ -242,6 +265,7 @@
         linear-gradient(-45deg, transparent 48%, var(--border-color) 49%, var(--border-color) 51%, transparent 52%);
       background-size: 20px 20px;
       opacity: 0.3;
+      pointer-events: none;
     }
 
     .portrait-placeholder {
@@ -280,12 +304,33 @@
     .profile-role {
       font-size: 1rem;
       color: var(--text-primary);
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.75rem;
+      line-height: 1.6;
     }
 
-    .profile-location {
+    .profile-links {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .profile-link {
       font-size: 0.875rem;
-      color: var(--text-dim);
+      color: var(--accent-cyan);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .profile-link:hover,
+    .profile-link:focus {
+      color: var(--accent-teal);
+      outline: 2px solid var(--accent-teal);
+      outline-offset: 2px;
+    }
+
+    .profile-link::before {
+      content: '▸ ';
+      color: var(--accent-dim);
     }
 
     /* ========== SECTION PANELS ========== */
@@ -354,27 +399,27 @@
       color: var(--accent-teal);
     }
 
-    /* ========== PROJECTS GRID ========== */
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.25rem;
+    /* ========== CASE STUDIES ========== */
+    .case-studies {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
     }
 
-    .project-card {
+    .case-study {
       background: var(--bg-panel-alt);
       border: 1px solid var(--border-color);
-      padding: 1.25rem;
+      padding: 1.5rem;
       transition: all 0.2s ease;
       position: relative;
     }
 
-    .project-card:hover {
+    .case-study:hover,
+    .case-study:focus-within {
       border-color: var(--border-bright);
-      transform: translateY(-2px);
     }
 
-    .project-card::before {
+    .case-study::before {
       content: '';
       position: absolute;
       top: 0;
@@ -386,48 +431,63 @@
       transition: opacity 0.2s ease;
     }
 
-    .project-card:hover::before {
+    .case-study:hover::before,
+    .case-study:focus-within::before {
       opacity: 1;
     }
 
-    .project-name {
+    .case-study-header {
+      margin-bottom: 0.75rem;
+    }
+
+    .case-study-title {
       font-family: var(--font-display);
-      font-size: 0.9rem;
+      font-size: 1.1rem;
       font-weight: 600;
       color: var(--accent-cyan);
       letter-spacing: 0.1em;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.25rem;
       text-transform: uppercase;
     }
 
-    .project-divider {
+    .case-study-meta {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .case-study-divider {
       border: none;
       border-top: 1px solid var(--border-color);
       margin: 0.75rem 0;
     }
 
-    .project-desc {
-      font-size: 0.875rem;
+    .case-study-desc {
+      font-size: 0.95rem;
       color: var(--text-primary);
-      margin-bottom: 0.75rem;
-      line-height: 1.6;
+      margin-bottom: 1rem;
+      line-height: 1.7;
     }
 
-    .project-meta {
-      font-size: 0.75rem;
-      color: var(--text-dim);
+    .case-study-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
       margin-bottom: 1rem;
+    }
+
+    .tag {
+      font-size: 0.7rem;
+      padding: 0.25rem 0.6rem;
+      background: var(--bg-dark);
+      border: 1px solid var(--border-color);
+      color: var(--accent-teal);
       text-transform: uppercase;
       letter-spacing: 0.05em;
     }
 
-    .project-links {
-      display: flex;
-      gap: 0.75rem;
-      flex-wrap: wrap;
-    }
-
-    .btn {
+    .case-study-link {
       display: inline-block;
       padding: 0.5rem 1rem;
       font-family: var(--font-mono);
@@ -442,28 +502,48 @@
       transition: all 0.2s ease;
     }
 
-    .btn:hover {
+    .case-study-link:hover,
+    .case-study-link:focus {
       background: var(--accent-cyan);
       color: var(--bg-dark);
       border-color: var(--accent-cyan);
+      outline: 2px solid var(--accent-cyan);
+      outline-offset: 2px;
     }
 
-    .btn-disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-      color: var(--text-dim);
+    /* ========== APPROACH ========== */
+    .approach-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
     }
 
-    .btn-disabled:hover {
-      background: transparent;
-      color: var(--text-dim);
-      border-color: var(--border-color);
+    .approach-item {
+      padding-left: 1.5rem;
+      position: relative;
+    }
+
+    .approach-item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.4rem;
+      width: 6px;
+      height: 6px;
+      background: var(--accent-cyan);
+      clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+    }
+
+    .approach-item strong {
+      color: var(--accent-teal);
+      font-weight: 600;
     }
 
     /* ========== SKILLS ========== */
     .skills-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 1.5rem;
     }
 
@@ -496,75 +576,6 @@
       position: absolute;
       left: 0;
       color: var(--accent-dim);
-    }
-
-    /* ========== ROOTS ========== */
-    .roots-list {
-      list-style: none;
-    }
-
-    .roots-list li {
-      padding: 0.75rem 0;
-      padding-left: 1.5rem;
-      position: relative;
-      border-bottom: 1px solid var(--border-color);
-      font-size: 0.9rem;
-    }
-
-    .roots-list li:last-child {
-      border-bottom: none;
-    }
-
-    .roots-list li::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 1rem;
-      width: 6px;
-      height: 6px;
-      background: var(--accent-cyan);
-      clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-    }
-
-    /* ========== CONNECT ========== */
-    .connect-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1rem;
-    }
-
-    .connect-item {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      padding: 0.75rem 1rem;
-      background: var(--bg-panel-alt);
-      border: 1px solid var(--border-color);
-      transition: all 0.2s ease;
-    }
-
-    .connect-item:hover {
-      border-color: var(--border-bright);
-    }
-
-    .connect-label {
-      font-family: var(--font-display);
-      font-size: 0.7rem;
-      color: var(--text-dim);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      min-width: 70px;
-    }
-
-    .connect-item a {
-      color: var(--accent-cyan);
-      text-decoration: none;
-      font-size: 0.9rem;
-      transition: color 0.2s ease;
-    }
-
-    .connect-item a:hover {
-      color: var(--accent-teal);
     }
 
     /* ========== FOOTER ========== */
@@ -633,11 +644,15 @@
         font-size: 1.5rem;
       }
 
+      .profile-links {
+        justify-content: center;
+      }
+
       .container {
         padding: 1.5rem 1rem;
       }
 
-      .projects-grid {
+      .skills-grid {
         grid-template-columns: 1fr;
       }
     }
@@ -657,6 +672,15 @@
       .section-title {
         font-size: 0.75rem;
       }
+
+      .case-study-tags {
+        gap: 0.35rem;
+      }
+
+      .tag {
+        font-size: 0.65rem;
+        padding: 0.2rem 0.5rem;
+      }
     }
 
     /* Reduced motion */
@@ -667,9 +691,17 @@
         animation: none;
       }
 
-      .project-card {
+      .case-study,
+      .profile-link,
+      .case-study-link {
         transition: none;
       }
+    }
+
+    /* Focus styles for accessibility */
+    *:focus {
+      outline: 2px solid var(--accent-teal);
+      outline-offset: 2px;
     }
 
     /* Selection */
@@ -710,6 +742,8 @@
   </style>
 </head>
 <body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  
   <div class="app">
     
     <!-- Frequency Bar -->
@@ -719,7 +753,7 @@
         <span class="freq-numbers">140<span class="dot">.</span>85</span>
       </div>
       <div class="waveform-container">
-        <div class="waveform">
+        <div class="waveform" aria-hidden="true">
           <div class="wave-bar"></div>
           <div class="wave-bar"></div>
           <div class="wave-bar"></div>
@@ -733,119 +767,142 @@
         </div>
       </div>
       <div class="status-indicator">
-        <span class="status-dot"></span>
+        <span class="status-dot" aria-hidden="true"></span>
         <span>Signal Active</span>
       </div>
     </header>
 
-    <main class="container">
+    <main class="container" id="main-content">
       
       <!-- Profile Header -->
       <section class="profile-header">
         <div class="portrait-frame">
-          <span class="portrait-placeholder">KB</span>
+          <img src="me.jpg" alt="Kevin Bolander portrait photo" />
         </div>
         <div class="profile-info">
           <h1 class="profile-name">Kevin Bolander</h1>
-          <p class="profile-tagline">Engineering Creativity</p>
-          <p class="profile-role">Staff Software Engineer · Creative Technology & AI</p>
-          <p class="profile-location">Illinois, USA · Epsilon</p>
+          <p class="profile-tagline">Design Engineer</p>
+          <p class="profile-role">I build design systems, creative tools, and production UI at the intersection of design and engineering.</p>
+          <nav class="profile-links" aria-label="External links">
+            <a href="https://github.com/kbo4sho" target="_blank" rel="noopener noreferrer" class="profile-link">GitHub</a>
+            <a href="https://linkedin.com/in/kevin-bolander-45659322" target="_blank" rel="noopener noreferrer" class="profile-link">LinkedIn</a>
+            <a href="mailto:kevinbolander@gmail.com" class="profile-link">Email</a>
+            <a href="https://www.epsilon.com/us/insights/blog?author=Kevin%20Bolander" target="_blank" rel="noopener noreferrer" class="profile-link">Writing</a>
+          </nav>
         </div>
       </section>
 
-      <!-- About -->
+      <!-- Mission Brief -->
       <section class="section-panel" id="about">
         <div class="section-header">
-          <span class="section-icon"></span>
-          <span class="section-title">Mission Brief</span>
-          <span class="section-line"></span>
+          <span class="section-icon" aria-hidden="true"></span>
+          <h2 class="section-title">Mission Brief</h2>
+          <span class="section-line" aria-hidden="true"></span>
         </div>
         <div class="section-content">
           <div class="about-text">
             <p>
-              <span class="highlight">Staff Software Engineer</span> building at the intersection of 
-              creative technology and AI. I make tools that make things.
+              I'm a <span class="highlight">design engineer</span> with 12+ years shipping production UI that bridges design intent and technical reality. I turn design systems from ideas into code, champion accessibility as a design constraint, and build tools that unlock creative work at scale.
             </p>
             <p>
-              15+ years engineering creative experiences — started with <span class="highlight">interactive installations</span> 
-              and real-time graphics, now deep in <span class="highlight-teal">AI systems</span>. 
-              Turning photos into trading cards, generating personalized stories, building tools that used to be impossible.
+              I founded the UX Engineering discipline at Epsilon and grew our design system from a side project to company-wide adoption — writing components, documenting patterns, and embedding <span class="highlight-teal">WCAG accessibility</span> into the foundation. Now I'm building <span class="highlight-teal">AI-powered creative tools</span> that transform how designers and producers work: image-to-layers pipelines, natural language layout edits, and no-code platforms that generate thousands of ad variations from flexible templates.
             </p>
             <p>
-              <span class="highlight">Primary objective:</span> Leading creative tooling at Epsilon.<br>
-              <span class="highlight">Side operations:</span> Whatever sounds fun.
+              Before the AI work, I built interactive installations with real-time rendering, gesture recognition, and motion design. The through-line has always been the same: <span class="highlight">I write the code that ships, and I care about how it feels.</span>
             </p>
           </div>
         </div>
       </section>
 
-      <!-- Projects -->
-      <section class="section-panel" id="projects">
+      <!-- Case Studies -->
+      <section class="section-panel" id="work">
         <div class="section-header">
-          <span class="section-icon"></span>
-          <span class="section-title">Active Operations</span>
-          <span class="section-line"></span>
+          <span class="section-icon" aria-hidden="true"></span>
+          <h2 class="section-title">Selected Work</h2>
+          <span class="section-line" aria-hidden="true"></span>
         </div>
         <div class="section-content">
-          <div class="projects-grid">
+          <div class="case-studies">
             
-            <article class="project-card">
-              <h3 class="project-name">MakeMeA</h3>
-              <hr class="project-divider">
-              <p class="project-desc">Upload a photo. Pick a style. AI does the rest. Caricatures, trading cards, action figures, anime — 27 styles and counting.</p>
-              <p class="project-meta">AI Image Transforms • Live</p>
-              <div class="project-links">
-                <a href="https://makemea.ai" target="_blank" rel="noopener" class="btn">Launch</a>
+            <!-- Epsilon Design System -->
+            <article class="case-study">
+              <div class="case-study-header">
+                <h3 class="case-study-title">Epsilon Design System</h3>
+                <p class="case-study-meta">Senior UX Engineer → Lead · 2017 – 2021</p>
+              </div>
+              <hr class="case-study-divider">
+              <p class="case-study-desc">
+                Founded and grew a design system from side project to company-wide adoption. Built the component library, wrote documentation, and established contribution patterns that scaled across product teams. Grew the team, drove adoption through evangelism and internal publishing, and championed WCAG accessibility as a core design constraint. This work defined the UX Engineering discipline at Epsilon and became the bridge between design and development across the organization.
+              </p>
+              <div class="case-study-tags">
+                <span class="tag">Design Systems</span>
+                <span class="tag">Accessibility</span>
+                <span class="tag">Documentation</span>
+                <span class="tag">Cross-Team Influence</span>
+                <span class="tag">Angular</span>
+                <span class="tag">Component Architecture</span>
+              </div>
+              <a href="https://www.epsilon.com/us/insights/blog?author=Kevin%20Bolander" target="_blank" rel="noopener noreferrer" class="case-study-link">Read My Writing</a>
+            </article>
+
+            <!-- AI Creative Tools -->
+            <article class="case-study">
+              <div class="case-study-header">
+                <h3 class="case-study-title">AI Creative Tools</h3>
+                <p class="case-study-meta">Staff Software Engineer · 2023 – Present</p>
+              </div>
+              <hr class="case-study-divider">
+              <p class="case-study-desc">
+                Building AI-powered features for creative ad production at scale. Leading a team that ships both headless automated pipelines and user-facing AI — transforming uploaded images into editable layers, converting natural language into layout changes, and enabling no-code workflows that produce thousands of ad variations from flexible templates. This work combines production systems engineering with thoughtful UX for creative tools.
+              </p>
+              <div class="case-study-tags">
+                <span class="tag">AI/ML</span>
+                <span class="tag">Creative Tooling</span>
+                <span class="tag">Production Systems</span>
+                <span class="tag">TypeScript</span>
+                <span class="tag">Angular</span>
+                <span class="tag">Node.js</span>
               </div>
             </article>
 
-            <article class="project-card">
-              <h3 class="project-name">Atlas Learn</h3>
-              <hr class="project-divider">
-              <p class="project-desc">Personalized educational content powered by AI. Adapts to the learner, generates custom materials on demand.</p>
-              <p class="project-meta">EdTech • In Development</p>
-              <div class="project-links">
-                <span class="btn btn-disabled">Coming Soon</span>
+            <!-- MakeMeA -->
+            <article class="case-study">
+              <div class="case-study-header">
+                <h3 class="case-study-title">MakeMeA</h3>
+                <p class="case-study-meta">Creator & Engineer · 2024</p>
               </div>
+              <hr class="case-study-divider">
+              <p class="case-study-desc">
+                AI photo style transfer platform — concept to production. Upload a photo, pick a style, get instant results. Built with Next.js, TypeScript, and OpenAI APIs, deployed on Vercel. 40+ styles, 230+ automated tests, Lighthouse performance scores 95+, and a config-driven architecture that makes adding new styles trivial. Comedy-first positioning with taste-driven curation. A fully shipped product demonstrating end-to-end design engineering: UX, architecture, performance, and brand.
+              </p>
+              <div class="case-study-tags">
+                <span class="tag">React/Next.js</span>
+                <span class="tag">AI</span>
+                <span class="tag">Performance</span>
+                <span class="tag">Testing</span>
+                <span class="tag">Product Design</span>
+                <span class="tag">TypeScript</span>
+              </div>
+              <a href="https://makemea.ai" target="_blank" rel="noopener noreferrer" class="case-study-link">Visit Site</a>
             </article>
 
-            <article class="project-card">
-              <h3 class="project-name">PathForge</h3>
-              <hr class="project-divider">
-              <p class="project-desc">Career pathing and skills gap analysis. Map where you are, discover where you could go, and chart the path between.</p>
-              <p class="project-meta">Career Dev Tool • In Development</p>
-              <div class="project-links">
-                <span class="btn btn-disabled">Coming Soon</span>
+            <!-- Interactive Installations -->
+            <article class="case-study">
+              <div class="case-study-header">
+                <h3 class="case-study-title">Interactive Installations</h3>
+                <p class="case-study-meta">Senior UI Engineer · Civiq Smartscapes · 2013 – 2017</p>
               </div>
-            </article>
-
-            <article class="project-card">
-              <h3 class="project-name">Creative Tools</h3>
-              <hr class="project-divider">
-              <p class="project-desc">No-code tools for ad production at scale. Dynamic cropping, smart layouts, animated templates. Thousands of variations from flexible templates.</p>
-              <p class="project-meta">Enterprise • Epsilon</p>
-              <div class="project-links">
-                <span class="btn btn-disabled">Internal</span>
-              </div>
-            </article>
-
-            <article class="project-card">
-              <h3 class="project-name">Design Systems</h3>
-              <hr class="project-divider">
-              <p class="project-desc">Grew Epsilon's internal component library from side project to core product. Deep accessibility focus, bridging design and development.</p>
-              <p class="project-meta">UX Engineering • 2017-2021</p>
-              <div class="project-links">
-                <a href="https://www.epsilon.com/us/insights/blog?author=Kevin%20Bolander" target="_blank" rel="noopener" class="btn">Articles</a>
-              </div>
-            </article>
-
-            <article class="project-card">
-              <h3 class="project-name">AI Story Engine</h3>
-              <hr class="project-divider">
-              <p class="project-desc">Full multimedia story generation pipeline. Text, images, audio — complete narratives from simple prompts.</p>
-              <p class="project-meta">Creative AI • Experimental</p>
-              <div class="project-links">
-                <span class="btn btn-disabled">Prototype</span>
+              <hr class="case-study-divider">
+              <p class="case-study-desc">
+                Built large-format digital experiences and interactive installations for major brands. Coca-Cola personalized photo experience deployed to malls across the U.S. — real-time image processing with polished motion design. Award-winning PepsiCo Kinect Photo Booth with gesture recognition and real-time rendering. Accenture 3D interactive experience at JFK Airport. Simon Malls CMS and wayfinding system. Each project combined creative technology, real-time systems, and production-quality UI.
+              </p>
+              <div class="case-study-tags">
+                <span class="tag">Kinect</span>
+                <span class="tag">Unity3D</span>
+                <span class="tag">Canvas</span>
+                <span class="tag">Real-time Systems</span>
+                <span class="tag">Creative Technology</span>
+                <span class="tag">C#</span>
               </div>
             </article>
 
@@ -853,98 +910,80 @@
         </div>
       </section>
 
-      <!-- Creative Roots -->
-      <section class="section-panel" id="roots">
+      <!-- Approach -->
+      <section class="section-panel" id="approach">
         <div class="section-header">
-          <span class="section-icon"></span>
-          <span class="section-title">Field Experience</span>
-          <span class="section-line"></span>
+          <span class="section-icon" aria-hidden="true"></span>
+          <h2 class="section-title">Approach</h2>
+          <span class="section-line" aria-hidden="true"></span>
         </div>
         <div class="section-content">
-          <p style="margin-bottom: 1rem; color: var(--text-dim);">Before the AI work, I was building:</p>
-          <ul class="roots-list">
-            <li><span class="highlight">Interactive Kinect installations</span> — analytics dashboards, experiential games, real-time people tracking</li>
-            <li><span class="highlight">Real-time applications</span> with C# / SignalR / Unity3D — multiplayer experiences and live data visualization</li>
-            <li><span class="highlight">WebGL & Canvas rendering</span> — Pixi.js engines, 3D asset viewers, animated ad systems</li>
-            <li><span class="highlight">Full-stack web platforms</span> — Angular + Node.js, enterprise-scale applications</li>
-            <li>Anything that made technology <span class="highlight-teal">feel alive and interactive</span></li>
+          <ul class="approach-list">
+            <li class="approach-item">
+              <strong>Accessibility is a design constraint, not a checklist</strong> — I embed WCAG standards from day one, not as an afterthought. Accessible interfaces are better interfaces for everyone.
+            </li>
+            <li class="approach-item">
+              <strong>Production over prototypes</strong> — I write the code that ships. Designers call me when it needs to work, and engineers call me when the design intent isn't translating.
+            </li>
+            <li class="approach-item">
+              <strong>Systems thinking</strong> — I build reusable components, document design tokens, and create patterns that scale. One-off solutions create technical debt; systems create leverage.
+            </li>
+            <li class="approach-item">
+              <strong>Bridge the gap</strong> — I'm fluent in both design language and engineering constraints. I translate design intent into technical architecture and technical limitations into design opportunities.
+            </li>
           </ul>
         </div>
       </section>
 
-      <!-- Skills -->
+      <!-- Tech Stack -->
       <section class="section-panel" id="skills">
         <div class="section-header">
-          <span class="section-icon"></span>
-          <span class="section-title">Arsenal</span>
-          <span class="section-line"></span>
+          <span class="section-icon" aria-hidden="true"></span>
+          <h2 class="section-title">Tech Stack</h2>
+          <span class="section-line" aria-hidden="true"></span>
         </div>
         <div class="section-content">
           <div class="skills-grid">
             <div class="skill-category">
               <h3>Frontend</h3>
               <ul class="skill-list">
-                <li>TypeScript / JavaScript</li>
-                <li>Angular, React</li>
-                <li>Canvas, WebGL, Pixi.js</li>
-                <li>CSS Animation & Design Systems</li>
+                <li>TypeScript</li>
+                <li>React</li>
+                <li>Angular</li>
+                <li>Next.js</li>
+                <li>CSS</li>
+                <li>Canvas/WebGL</li>
               </ul>
             </div>
             <div class="skill-category">
-              <h3>Backend</h3>
+              <h3>Design Systems</h3>
               <ul class="skill-list">
-                <li>Node.js, Python</li>
-                <li>C# / .NET</li>
-                <li>REST APIs, GraphQL</li>
-                <li>AWS, Cloud Architecture</li>
+                <li>Component Libraries</li>
+                <li>Design Tokens</li>
+                <li>Documentation</li>
+                <li>Accessibility (WCAG)</li>
+                <li>Figma Integration</li>
               </ul>
             </div>
             <div class="skill-category">
-              <h3>AI / ML</h3>
+              <h3>AI</h3>
               <ul class="skill-list">
-                <li>OpenAI, Anthropic, Replicate</li>
-                <li>Image Generation & Transforms</li>
-                <li>LLM Integration & Prompt Eng.</li>
-                <li>AI Application Architecture</li>
+                <li>OpenAI APIs</li>
+                <li>Image Generation</li>
+                <li>LLM Integration</li>
+                <li>Agentic Systems</li>
+                <li>Prompt Engineering</li>
               </ul>
             </div>
             <div class="skill-category">
               <h3>Creative Tech</h3>
               <ul class="skill-list">
-                <li>Unity3D, Kinect SDK</li>
+                <li>Unity3D</li>
+                <li>Kinect</li>
+                <li>Pixi.js</li>
                 <li>Real-time Systems</li>
-                <li>Interactive Installations</li>
-                <li>UX Engineering</li>
+                <li>Animation</li>
               </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Connect -->
-      <section class="section-panel" id="contact">
-        <div class="section-header">
-          <span class="section-icon"></span>
-          <span class="section-title">Open Channel</span>
-          <span class="section-line"></span>
-        </div>
-        <div class="section-content">
-          <div class="connect-grid">
-            <div class="connect-item">
-              <span class="connect-label">Email</span>
-              <a href="mailto:kevinbolander@gmail.com">kevinbolander@gmail.com</a>
-            </div>
-            <div class="connect-item">
-              <span class="connect-label">GitHub</span>
-              <a href="https://github.com/kbo4sho" target="_blank" rel="noopener">github.com/kbo4sho</a>
-            </div>
-            <div class="connect-item">
-              <span class="connect-label">LinkedIn</span>
-              <a href="https://linkedin.com/in/kevin-bolander-45659322" target="_blank" rel="noopener">kevin-bolander</a>
-            </div>
-            <div class="connect-item">
-              <span class="connect-label">X</span>
-              <a href="https://x.com/kevinbolander" target="_blank" rel="noopener">@kevinbolander</a>
             </div>
           </div>
         </div>
@@ -954,12 +993,17 @@
 
     <!-- Footer -->
     <footer class="footer">
-      <p class="footer-text">Transmission Complete</p>
+      <p class="footer-text">Built with HTML, CSS, and opinions.</p>
       <div class="footer-line">
-        <span></span>
-        <div class="footer-diamond"></div>
-        <span></span>
+        <span aria-hidden="true"></span>
+        <div class="footer-diamond" aria-hidden="true"></div>
+        <span aria-hidden="true"></span>
       </div>
+      <nav style="margin-top: 1.5rem; display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+        <a href="https://github.com/kbo4sho" target="_blank" rel="noopener noreferrer" style="color: var(--accent-dim); text-decoration: none; font-size: 0.8rem; transition: color 0.2s ease;" onmouseover="this.style.color='var(--accent-cyan)'" onmouseout="this.style.color='var(--accent-dim)'">GitHub</a>
+        <a href="https://linkedin.com/in/kevin-bolander-45659322" target="_blank" rel="noopener noreferrer" style="color: var(--accent-dim); text-decoration: none; font-size: 0.8rem; transition: color 0.2s ease;" onmouseover="this.style.color='var(--accent-cyan)'" onmouseout="this.style.color='var(--accent-dim)'">LinkedIn</a>
+        <a href="mailto:kevinbolander@gmail.com" style="color: var(--accent-dim); text-decoration: none; font-size: 0.8rem; transition: color 0.2s ease;" onmouseover="this.style.color='var(--accent-cyan)'" onmouseout="this.style.color='var(--accent-dim)'">Email</a>
+      </nav>
     </footer>
 
   </div>
