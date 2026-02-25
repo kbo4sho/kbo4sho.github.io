@@ -4,10 +4,38 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kevin Bolander — Staff Software Engineer</title>
-  <meta name="description" content="Staff Software Engineer building design systems, creative tools, and AI-powered production UI.">
+  <meta name="description" content="Kevin Bolander is a Staff Software Engineer at Epsilon with 12+ years building design systems, creative ad tools, and AI-powered production UI. Expertise in TypeScript, React, Angular, accessibility, and creative technology.">
+  <link rel="canonical" href="https://kbo4sho.github.io/">
+  <meta name="theme-color" content="#0a0a0a">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
   <meta property="og:title" content="Kevin Bolander — Staff Software Engineer">
-  <meta property="og:description" content="Staff Software Engineer building design systems, creative tools, and AI-powered production UI.">
+  <meta property="og:description" content="12+ years building design systems, creative tools, and AI-powered production UI at Epsilon.">
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://kbo4sho.github.io/">
+  <meta property="og:image" content="https://kbo4sho.github.io/me.jpg">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Kevin Bolander — Staff Software Engineer">
+  <meta name="twitter:description" content="12+ years building design systems, creative tools, and AI-powered production UI at Epsilon.">
+  <meta name="twitter:image" content="https://kbo4sho.github.io/me.jpg">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Kevin Bolander",
+    "jobTitle": "Staff Software Engineer",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Epsilon"
+    },
+    "url": "https://kbo4sho.github.io",
+    "sameAs": [
+      "https://github.com/kbo4sho",
+      "https://linkedin.com/in/kevin-bolander-45659322"
+    ],
+    "knowsAbout": ["Design Systems", "Creative Technology", "AI", "TypeScript", "React", "Angular", "Accessibility", "WCAG"],
+    "description": "Staff Software Engineer with 12+ years building design systems, creative tools, and AI-powered production UI."
+  }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
@@ -19,7 +47,7 @@
       --green-dim: #00d4aa60;
       --green-bg: #00d4aa10;
       --text: #e0e0e0;
-      --text-dim: #666;
+      --text-dim: #999;
       --red: #ff4444;
       --font-mono: 'Share Tech Mono', monospace;
       --font-display: 'Orbitron', sans-serif;
@@ -276,6 +304,17 @@
       font-size: 0.8rem;
       color: var(--text-dim);
       line-height: 1.8;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .tech-items li {
+      display: inline;
+    }
+
+    .tech-items li:not(:last-child)::after {
+      content: ' · ';
     }
 
     /* Footer */
@@ -381,11 +420,11 @@
       </div>
       <nav class="header-links" aria-label="External links">
         <a href="https://github.com/kbo4sho" target="_blank" rel="noopener noreferrer" class="header-link">GitHub</a>
-        <span class="header-link" aria-hidden="true">·</span>
+        <span aria-hidden="true" style="color:var(--text-dim)">·</span>
         <a href="https://linkedin.com/in/kevin-bolander-45659322" target="_blank" rel="noopener noreferrer" class="header-link">LinkedIn</a>
-        <span class="header-link" aria-hidden="true">·</span>
+        <span aria-hidden="true" style="color:var(--text-dim)">·</span>
         <a href="mailto:kevinbolander@gmail.com" class="header-link">Email</a>
-        <span class="header-link" aria-hidden="true">·</span>
+        <span aria-hidden="true" style="color:var(--text-dim)">·</span>
         <a href="https://www.epsilon.com/us/insights/blog?author=Kevin%20Bolander" target="_blank" rel="noopener noreferrer" class="header-link">Writing</a>
       </nav>
     </header>
@@ -503,27 +542,27 @@
         <div class="tech-grid">
           <div class="tech-category">
             <h3 class="tech-category-title">Frontend</h3>
-            <div class="tech-items">
-              TypeScript · React · Angular · Next.js · CSS · Canvas/WebGL
-            </div>
+            <ul class="tech-items" role="list">
+              <li>TypeScript</li><li>React</li><li>Angular</li><li>Next.js</li><li>CSS</li><li>Canvas/WebGL</li>
+            </ul>
           </div>
           <div class="tech-category">
             <h3 class="tech-category-title">Design Systems</h3>
-            <div class="tech-items">
-              Component Libraries · Design Tokens · WCAG · Documentation
-            </div>
+            <ul class="tech-items" role="list">
+              <li>Component Libraries</li><li>Design Tokens</li><li>WCAG</li><li>Documentation</li>
+            </ul>
           </div>
           <div class="tech-category">
             <h3 class="tech-category-title">AI</h3>
-            <div class="tech-items">
-              OpenAI APIs · Image Generation · LLM Integration · Agentic Systems
-            </div>
+            <ul class="tech-items" role="list">
+              <li>OpenAI APIs</li><li>Image Generation</li><li>LLM Integration</li><li>Agentic Systems</li>
+            </ul>
           </div>
           <div class="tech-category">
             <h3 class="tech-category-title">Creative Tech</h3>
-            <div class="tech-items">
-              Unity3D · Kinect · Pixi.js · Real-time Systems
-            </div>
+            <ul class="tech-items" role="list">
+              <li>Unity3D</li><li>Kinect</li><li>Pixi.js</li><li>Real-time Systems</li>
+            </ul>
           </div>
         </div>
       </section>
@@ -534,9 +573,9 @@
     <footer class="footer">
       <nav class="footer-links" aria-label="Footer links">
         <a href="https://github.com/kbo4sho" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub</a>
-        <span class="footer-link" aria-hidden="true">·</span>
+        <span aria-hidden="true" style="color:var(--text-dim)">·</span>
         <a href="https://linkedin.com/in/kevin-bolander-45659322" target="_blank" rel="noopener noreferrer" class="footer-link">LinkedIn</a>
-        <span class="footer-link" aria-hidden="true">·</span>
+        <span aria-hidden="true" style="color:var(--text-dim)">·</span>
         <a href="mailto:kevinbolander@gmail.com" class="footer-link">Email</a>
       </nav>
       <p class="footer-text">built with html, css, and opinions.</p>
