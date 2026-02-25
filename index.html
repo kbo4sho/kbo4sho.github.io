@@ -3,27 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kevin Bolander — Design Engineer</title>
-  <meta name="description" content="Design Engineer building design systems, creative tools, and production UI at the intersection of design and engineering.">
-  <meta property="og:title" content="Kevin Bolander — Design Engineer">
-  <meta property="og:description" content="Design Engineer building design systems, creative tools, and production UI.">
+  <title>Kevin Bolander — Staff Software Engineer</title>
+  <meta name="description" content="Staff Software Engineer building design systems, creative tools, and AI-powered production UI.">
+  <meta property="og:title" content="Kevin Bolander — Staff Software Engineer">
+  <meta property="og:description" content="Staff Software Engineer building design systems, creative tools, and AI-powered production UI.">
   <meta property="og:type" content="website">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-dark: #0a0e27;
-      --bg-panel: #0d1b3e;
-      --bg-panel-alt: #101d42;
-      --accent-cyan: #00d4ff;
-      --accent-teal: #14f0c4;
-      --accent-dim: #0a6b80;
-      --grid-color: rgba(0, 212, 255, 0.06);
-      --border-color: rgba(0, 212, 255, 0.4);
-      --border-bright: rgba(0, 212, 255, 0.8);
-      --text-primary: #e0f4ff;
-      --text-dim: #6b8fa8;
+      --bg: #0a0a0a;
+      --surface: #111;
+      --green: #00d4aa;
+      --green-dim: #00d4aa60;
+      --green-bg: #00d4aa10;
+      --text: #e0e0e0;
+      --text-dim: #666;
+      --red: #ff4444;
       --font-mono: 'Share Tech Mono', monospace;
       --font-display: 'Orbitron', sans-serif;
     }
@@ -41,34 +38,10 @@
 
     body {
       font-family: var(--font-mono);
-      background: var(--bg-dark);
-      color: var(--text-primary);
+      background: var(--bg);
+      color: var(--text);
       line-height: 1.6;
       min-height: 100vh;
-      overflow-x: hidden;
-      position: relative;
-    }
-
-    /* Grid overlay */
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-image: 
-        linear-gradient(var(--grid-color) 1px, transparent 1px),
-        linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
-      background-size: 40px 40px;
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    /* Content sits above grid */
-    .app {
-      position: relative;
-      z-index: 2;
     }
 
     /* Skip link for accessibility */
@@ -76,8 +49,8 @@
       position: absolute;
       top: -40px;
       left: 0;
-      background: var(--accent-cyan);
-      color: var(--bg-dark);
+      background: var(--green);
+      color: var(--bg);
       padding: 0.5rem 1rem;
       text-decoration: none;
       z-index: 100;
@@ -86,391 +59,143 @@
 
     .skip-link:focus {
       top: 0;
+      outline: 2px solid var(--green);
+      outline-offset: 2px;
     }
 
-    /* ========== TOP FREQUENCY BAR ========== */
-    .freq-bar {
-      background: linear-gradient(180deg, var(--bg-panel) 0%, var(--bg-dark) 100%);
-      border-bottom: 2px solid var(--border-color);
-      padding: 0.75rem 1.5rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1rem;
+    /* Main Container */
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
     }
 
-    .freq-display {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
+    /* Header */
+    .header {
+      margin-bottom: 3rem;
     }
 
-    .freq-label {
-      font-family: var(--font-display);
-      font-size: 0.7rem;
-      letter-spacing: 0.15em;
-      color: var(--text-dim);
-      text-transform: uppercase;
-    }
-
-    .freq-numbers {
+    .header-name {
       font-family: var(--font-display);
       font-size: 1.5rem;
-      font-weight: 600;
-      color: var(--accent-cyan);
+      font-weight: 700;
+      color: var(--text);
       letter-spacing: 0.1em;
-    }
-
-    .freq-numbers .dot {
-      color: var(--accent-teal);
-      animation: pulse-dot 1.5s ease-in-out infinite;
-    }
-
-    @keyframes pulse-dot {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.4; }
-    }
-
-    /* Waveform display */
-    .waveform-container {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .waveform {
-      display: flex;
-      align-items: center;
-      gap: 2px;
-      height: 24px;
-    }
-
-    .wave-bar {
-      width: 3px;
-      background: var(--accent-cyan);
-      border-radius: 1px;
-      animation: wave 1.2s ease-in-out infinite;
-    }
-
-    .wave-bar:nth-child(1) { height: 8px; animation-delay: 0s; }
-    .wave-bar:nth-child(2) { height: 16px; animation-delay: 0.1s; }
-    .wave-bar:nth-child(3) { height: 12px; animation-delay: 0.2s; }
-    .wave-bar:nth-child(4) { height: 20px; animation-delay: 0.3s; }
-    .wave-bar:nth-child(5) { height: 14px; animation-delay: 0.4s; }
-    .wave-bar:nth-child(6) { height: 18px; animation-delay: 0.5s; }
-    .wave-bar:nth-child(7) { height: 10px; animation-delay: 0.6s; }
-    .wave-bar:nth-child(8) { height: 16px; animation-delay: 0.7s; }
-    .wave-bar:nth-child(9) { height: 6px; animation-delay: 0.8s; }
-    .wave-bar:nth-child(10) { height: 14px; animation-delay: 0.9s; }
-
-    @keyframes wave {
-      0%, 100% { transform: scaleY(1); }
-      50% { transform: scaleY(0.4); }
-    }
-
-    .status-indicator {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.75rem;
-      color: var(--accent-teal);
+      margin-bottom: 0.5rem;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
+    }
+
+    .header-status {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+      color: var(--green);
+      margin-bottom: 1.5rem;
     }
 
     .status-dot {
-      width: 8px;
-      height: 8px;
-      background: var(--accent-teal);
+      width: 6px;
+      height: 6px;
+      background: var(--green);
       border-radius: 50%;
-      box-shadow: 0 0 8px var(--accent-teal);
-      animation: pulse-glow 2s ease-in-out infinite;
     }
 
-    @keyframes pulse-glow {
-      0%, 100% { box-shadow: 0 0 8px var(--accent-teal); }
-      50% { box-shadow: 0 0 16px var(--accent-teal), 0 0 24px var(--accent-teal); }
-    }
-
-    /* ========== MAIN CONTAINER ========== */
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 2rem 1.5rem;
-    }
-
-    /* ========== PROFILE HEADER ========== */
-    .profile-header {
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 2rem;
-      margin-bottom: 3rem;
-      padding: 1.5rem;
-      background: var(--bg-panel);
-      border: 2px solid var(--border-color);
-      position: relative;
-    }
-
-    .profile-header::before,
-    .profile-header::after {
-      content: '';
-      position: absolute;
-      width: 10px;
-      height: 10px;
-      border: 2px solid var(--accent-cyan);
-    }
-
-    .profile-header::before {
-      top: -2px;
-      left: -2px;
-      border-right: none;
-      border-bottom: none;
-    }
-
-    .profile-header::after {
-      bottom: -2px;
-      right: -2px;
-      border-left: none;
-      border-top: none;
-    }
-
-    .portrait-frame {
-      width: 140px;
-      height: 180px;
-      border: 2px solid var(--border-bright);
-      background: var(--bg-panel-alt);
+    .header-links {
       display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .portrait-frame img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .portrait-frame::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: 
-        linear-gradient(45deg, transparent 48%, var(--border-color) 49%, var(--border-color) 51%, transparent 52%),
-        linear-gradient(-45deg, transparent 48%, var(--border-color) 49%, var(--border-color) 51%, transparent 52%);
-      background-size: 20px 20px;
-      opacity: 0.3;
-      pointer-events: none;
-    }
-
-    .portrait-placeholder {
-      font-family: var(--font-display);
-      font-size: 2.5rem;
-      color: var(--accent-dim);
-      position: relative;
-      z-index: 1;
-    }
-
-    .profile-info {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .profile-name {
-      font-family: var(--font-display);
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--accent-cyan);
-      letter-spacing: 0.1em;
-      margin-bottom: 0.25rem;
-      text-transform: uppercase;
-    }
-
-    .profile-tagline {
-      font-family: var(--font-display);
-      font-size: 0.9rem;
-      color: var(--accent-teal);
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      margin-bottom: 1rem;
-    }
-
-    .profile-role {
-      font-size: 1rem;
-      color: var(--text-primary);
-      margin-bottom: 0.75rem;
-      line-height: 1.6;
-    }
-
-    .profile-links {
-      display: flex;
-      gap: 1rem;
+      gap: 1.5rem;
       flex-wrap: wrap;
     }
 
-    .profile-link {
+    .header-link {
       font-size: 0.875rem;
-      color: var(--accent-cyan);
+      color: var(--text-dim);
       text-decoration: none;
       transition: color 0.2s ease;
     }
 
-    .profile-link:hover,
-    .profile-link:focus {
-      color: var(--accent-teal);
-      outline: 2px solid var(--accent-teal);
+    .header-link:hover,
+    .header-link:focus {
+      color: var(--green);
+      outline: none;
+    }
+
+    .header-link:focus-visible {
+      outline: 2px solid var(--green);
       outline-offset: 2px;
     }
 
-    .profile-link::before {
-      content: '▸ ';
-      color: var(--accent-dim);
+    /* About Section */
+    .about {
+      margin-bottom: 4rem;
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: var(--text);
     }
 
-    /* ========== SECTION PANELS ========== */
-    .section-panel {
-      background: var(--bg-panel);
-      border: 2px solid var(--border-color);
-      margin-bottom: 2rem;
-      position: relative;
-    }
-
-    .section-header {
-      background: linear-gradient(90deg, var(--bg-panel-alt) 0%, transparent 100%);
-      border-bottom: 1px solid var(--border-color);
-      padding: 0.75rem 1.25rem;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .section-icon {
-      width: 8px;
-      height: 8px;
-      background: var(--accent-cyan);
-      clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+    /* Section */
+    .section {
+      margin-bottom: 4rem;
     }
 
     .section-title {
       font-family: var(--font-display);
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--accent-cyan);
-      letter-spacing: 0.15em;
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: var(--green);
+      letter-spacing: 0.2em;
       text-transform: uppercase;
+      margin-bottom: 2rem;
     }
 
-    .section-line {
-      flex: 1;
-      height: 1px;
-      background: linear-gradient(90deg, var(--border-color) 0%, transparent 100%);
-    }
-
-    .section-content {
-      padding: 1.5rem;
-    }
-
-    /* ========== ABOUT ========== */
-    .about-text {
-      font-size: 1rem;
-      line-height: 1.8;
-      color: var(--text-primary);
-    }
-
-    .about-text p {
-      margin-bottom: 1rem;
-    }
-
-    .about-text p:last-child {
-      margin-bottom: 0;
-    }
-
-    .highlight {
-      color: var(--accent-cyan);
-    }
-
-    .highlight-teal {
-      color: var(--accent-teal);
-    }
-
-    /* ========== CASE STUDIES ========== */
-    .case-studies {
+    /* Work Cards */
+    .work-grid {
       display: flex;
       flex-direction: column;
       gap: 2rem;
     }
 
-    .case-study {
-      background: var(--bg-panel-alt);
-      border: 1px solid var(--border-color);
+    .work-card {
+      background: var(--surface);
+      border: 1px solid var(--green-dim);
       padding: 1.5rem;
-      transition: all 0.2s ease;
-      position: relative;
+      transition: border-color 0.2s ease;
     }
 
-    .case-study:hover,
-    .case-study:focus-within {
-      border-color: var(--border-bright);
+    .work-card:hover,
+    .work-card:focus-within {
+      border-color: var(--green);
     }
 
-    .case-study::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 3px;
-      height: 100%;
-      background: var(--accent-cyan);
-      opacity: 0;
-      transition: opacity 0.2s ease;
-    }
-
-    .case-study:hover::before,
-    .case-study:focus-within::before {
-      opacity: 1;
-    }
-
-    .case-study-header {
+    .work-header {
       margin-bottom: 0.75rem;
     }
 
-    .case-study-title {
+    .work-title {
       font-family: var(--font-display);
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: var(--accent-cyan);
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: var(--green);
       letter-spacing: 0.1em;
-      margin-bottom: 0.25rem;
       text-transform: uppercase;
+      margin-bottom: 0.25rem;
     }
 
-    .case-study-meta {
-      font-size: 0.8rem;
+    .work-meta {
+      font-size: 0.75rem;
       color: var(--text-dim);
       text-transform: uppercase;
       letter-spacing: 0.05em;
     }
 
-    .case-study-divider {
-      border: none;
-      border-top: 1px solid var(--border-color);
-      margin: 0.75rem 0;
-    }
-
-    .case-study-desc {
-      font-size: 0.95rem;
-      color: var(--text-primary);
-      margin-bottom: 1rem;
+    .work-desc {
+      font-size: 0.875rem;
+      color: var(--text);
       line-height: 1.7;
+      margin-bottom: 1rem;
     }
 
-    .case-study-tags {
+    .work-tags {
       display: flex;
       flex-wrap: wrap;
       gap: 0.5rem;
@@ -479,39 +204,35 @@
 
     .tag {
       font-size: 0.7rem;
-      padding: 0.25rem 0.6rem;
-      background: var(--bg-dark);
-      border: 1px solid var(--border-color);
-      color: var(--accent-teal);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
+      color: var(--text-dim);
     }
 
-    .case-study-link {
+    .tag:not(:last-child)::after {
+      content: ' ·';
+      margin-left: 0.5rem;
+    }
+
+    .work-link {
       display: inline-block;
-      padding: 0.5rem 1rem;
-      font-family: var(--font-mono);
       font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
+      color: var(--green);
       text-decoration: none;
-      border: 1px solid var(--border-color);
-      color: var(--accent-cyan);
-      background: transparent;
-      cursor: pointer;
-      transition: all 0.2s ease;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s ease;
     }
 
-    .case-study-link:hover,
-    .case-study-link:focus {
-      background: var(--accent-cyan);
-      color: var(--bg-dark);
-      border-color: var(--accent-cyan);
-      outline: 2px solid var(--accent-cyan);
+    .work-link:hover,
+    .work-link:focus {
+      border-bottom-color: var(--green);
+      outline: none;
+    }
+
+    .work-link:focus-visible {
+      outline: 2px solid var(--green);
       outline-offset: 2px;
     }
 
-    /* ========== APPROACH ========== */
+    /* Approach List */
     .approach-list {
       list-style: none;
       display: flex;
@@ -520,470 +241,288 @@
     }
 
     .approach-item {
-      padding-left: 1.5rem;
-      position: relative;
-    }
-
-    .approach-item::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0.4rem;
-      width: 6px;
-      height: 6px;
-      background: var(--accent-cyan);
-      clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+      font-size: 0.875rem;
+      color: var(--text-dim);
+      line-height: 1.7;
     }
 
     .approach-item strong {
-      color: var(--accent-teal);
-      font-weight: 600;
+      color: var(--green);
+      font-weight: 400;
     }
 
-    /* ========== SKILLS ========== */
-    .skills-grid {
+    /* Tech Grid */
+    .tech-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.5rem;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
     }
 
-    .skill-category h3 {
+    .tech-category {
+      margin-bottom: 1.5rem;
+    }
+
+    .tech-category-title {
       font-family: var(--font-display);
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: var(--accent-teal);
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--green);
       text-transform: uppercase;
       letter-spacing: 0.1em;
       margin-bottom: 0.75rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 1px solid var(--border-color);
     }
 
-    .skill-list {
-      list-style: none;
-      font-size: 0.875rem;
+    .tech-items {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      line-height: 1.8;
     }
 
-    .skill-list li {
-      color: var(--text-primary);
-      margin-bottom: 0.35rem;
-      padding-left: 1rem;
-      position: relative;
-    }
-
-    .skill-list li::before {
-      content: '▸';
-      position: absolute;
-      left: 0;
-      color: var(--accent-dim);
-    }
-
-    /* ========== FOOTER ========== */
+    /* Footer */
     .footer {
-      text-align: center;
-      padding: 2rem;
-      border-top: 2px solid var(--border-color);
-      margin-top: 2rem;
+      margin-top: 6rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--green-dim);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+
+    .footer-link {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .footer-link:hover,
+    .footer-link:focus {
+      color: var(--green);
+      outline: none;
+    }
+
+    .footer-link:focus-visible {
+      outline: 2px solid var(--green);
+      outline-offset: 2px;
     }
 
     .footer-text {
-      font-family: var(--font-display);
       font-size: 0.7rem;
       color: var(--text-dim);
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
     }
 
-    .footer-line {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-
-    .footer-line span {
-      width: 60px;
-      height: 1px;
-      background: var(--border-color);
-    }
-
-    .footer-diamond {
-      width: 8px;
-      height: 8px;
-      background: var(--accent-dim);
-      clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-    }
-
-    /* ========== RESPONSIVE ========== */
+    /* Responsive */
     @media (max-width: 768px) {
-      .freq-bar {
-        padding: 0.5rem 1rem;
-      }
-
-      .freq-numbers {
-        font-size: 1.2rem;
-      }
-
-      .waveform {
-        display: none;
-      }
-
-      .profile-header {
-        grid-template-columns: 1fr;
-        text-align: center;
-      }
-
-      .portrait-frame {
-        margin: 0 auto;
-        width: 120px;
-        height: 150px;
-      }
-
-      .profile-name {
-        font-size: 1.5rem;
-      }
-
-      .profile-links {
-        justify-content: center;
-      }
-
       .container {
-        padding: 1.5rem 1rem;
+        padding: 2rem 1.5rem;
       }
 
-      .skills-grid {
+      .header-name {
+        font-size: 1.25rem;
+      }
+
+      .tech-grid {
         grid-template-columns: 1fr;
+        gap: 1rem;
       }
     }
 
     @media (max-width: 480px) {
-      .freq-display {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.25rem;
+      .container {
+        padding: 1.5rem 1rem;
       }
 
-      .profile-name {
-        font-size: 1.25rem;
+      .header-name {
+        font-size: 1rem;
         letter-spacing: 0.05em;
       }
 
-      .section-title {
-        font-size: 0.75rem;
-      }
-
-      .case-study-tags {
-        gap: 0.35rem;
-      }
-
-      .tag {
-        font-size: 0.65rem;
-        padding: 0.2rem 0.5rem;
+      .header-links {
+        gap: 1rem;
       }
     }
 
     /* Reduced motion */
     @media (prefers-reduced-motion: reduce) {
-      .wave-bar,
-      .status-dot,
-      .freq-numbers .dot {
-        animation: none;
-      }
-
-      .case-study,
-      .profile-link,
-      .case-study-link {
-        transition: none;
+      * {
+        animation: none !important;
+        transition: none !important;
       }
     }
 
     /* Focus styles for accessibility */
-    *:focus {
-      outline: 2px solid var(--accent-teal);
+    *:focus-visible {
+      outline: 2px solid var(--green);
       outline-offset: 2px;
     }
 
     /* Selection */
     ::selection {
-      background: var(--accent-cyan);
-      color: var(--bg-dark);
-    }
-
-    /* Scrollbar */
-    ::-webkit-scrollbar {
-      width: 8px;
-    }
-
-    ::-webkit-scrollbar-track {
-      background: var(--bg-dark);
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: var(--accent-dim);
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-      background: var(--accent-cyan);
-    }
-
-    /* Screen reader only */
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-      border: 0;
+      background: var(--green);
+      color: var(--bg);
     }
   </style>
 </head>
 <body>
   <a href="#main-content" class="skip-link">Skip to main content</a>
   
-  <div class="app">
+  <div class="container">
     
-    <!-- Frequency Bar -->
-    <header class="freq-bar">
-      <div class="freq-display">
-        <span class="freq-label">Channel</span>
-        <span class="freq-numbers">140<span class="dot">.</span>85</span>
-      </div>
-      <div class="waveform-container">
-        <div class="waveform" aria-hidden="true">
-          <div class="wave-bar"></div>
-          <div class="wave-bar"></div>
-          <div class="wave-bar"></div>
-          <div class="wave-bar"></div>
-          <div class="wave-bar"></div>
-          <div class="wave-bar"></div>
-          <div class="wave-bar"></div>
-          <div class="wave-bar"></div>
-          <div class="wave-bar"></div>
-          <div class="wave-bar"></div>
-        </div>
-      </div>
-      <div class="status-indicator">
+    <!-- Header -->
+    <header class="header">
+      <h1 class="header-name">Kevin Bolander</h1>
+      <div class="header-status">
         <span class="status-dot" aria-hidden="true"></span>
-        <span>Signal Active</span>
+        <span>staff software engineer</span>
       </div>
+      <nav class="header-links" aria-label="External links">
+        <a href="https://github.com/kbo4sho" target="_blank" rel="noopener noreferrer" class="header-link">GitHub</a>
+        <span class="header-link" aria-hidden="true">·</span>
+        <a href="https://linkedin.com/in/kevin-bolander-45659322" target="_blank" rel="noopener noreferrer" class="header-link">LinkedIn</a>
+        <span class="header-link" aria-hidden="true">·</span>
+        <a href="mailto:kevinbolander@gmail.com" class="header-link">Email</a>
+        <span class="header-link" aria-hidden="true">·</span>
+        <a href="https://www.epsilon.com/us/insights/blog?author=Kevin%20Bolander" target="_blank" rel="noopener noreferrer" class="header-link">Writing</a>
+      </nav>
     </header>
 
-    <main class="container" id="main-content">
+    <main id="main-content">
       
-      <!-- Profile Header -->
-      <section class="profile-header">
-        <div class="portrait-frame">
-          <img src="me.jpg" alt="Kevin Bolander portrait photo" />
-        </div>
-        <div class="profile-info">
-          <h1 class="profile-name">Kevin Bolander</h1>
-          <p class="profile-tagline">Design Engineer</p>
-          <p class="profile-role">I build design systems, creative tools, and production UI at the intersection of design and engineering.</p>
-          <nav class="profile-links" aria-label="External links">
-            <a href="https://github.com/kbo4sho" target="_blank" rel="noopener noreferrer" class="profile-link">GitHub</a>
-            <a href="https://linkedin.com/in/kevin-bolander-45659322" target="_blank" rel="noopener noreferrer" class="profile-link">LinkedIn</a>
-            <a href="mailto:kevinbolander@gmail.com" class="profile-link">Email</a>
-            <a href="https://www.epsilon.com/us/insights/blog?author=Kevin%20Bolander" target="_blank" rel="noopener noreferrer" class="profile-link">Writing</a>
-          </nav>
-        </div>
+      <!-- About -->
+      <section class="about">
+        <p>
+          12+ years building at the intersection of design and engineering. I make design systems, creative tools, and production UI. Currently at Epsilon, where I founded the UX engineering practice and now lead AI-powered creative tooling.
+        </p>
       </section>
 
-      <!-- Mission Brief -->
-      <section class="section-panel" id="about">
-        <div class="section-header">
-          <span class="section-icon" aria-hidden="true"></span>
-          <h2 class="section-title">Mission Brief</h2>
-          <span class="section-line" aria-hidden="true"></span>
-        </div>
-        <div class="section-content">
-          <div class="about-text">
-            <p>
-              I'm a <span class="highlight">design engineer</span> with 12+ years shipping production UI that bridges design intent and technical reality. I turn design systems from ideas into code, champion accessibility as a design constraint, and build tools that unlock creative work at scale.
+      <!-- Selected Work -->
+      <section class="section">
+        <h2 class="section-title">Selected Work</h2>
+        <div class="work-grid">
+          
+          <!-- Design Systems -->
+          <article class="work-card">
+            <div class="work-header">
+              <h3 class="work-title">Design Systems</h3>
+              <p class="work-meta">Epsilon · 2017-2021</p>
+            </div>
+            <p class="work-desc">
+              Grew Epsilon's component library from a side project into the core design system adopted across products. Founded the UX engineering discipline, built the team, wrote the documentation, and drove org-wide adoption. Championed WCAG accessibility as a design constraint embedded into every component.
             </p>
-            <p>
-              I founded the UX Engineering discipline at Epsilon and grew our design system from a side project to company-wide adoption — writing components, documenting patterns, and embedding <span class="highlight-teal">WCAG accessibility</span> into the foundation. Now I'm building <span class="highlight-teal">AI-powered creative tools</span> that transform how designers and producers work: image-to-layers pipelines, natural language layout edits, and no-code platforms that generate thousands of ad variations from flexible templates.
+            <div class="work-tags">
+              <span class="tag">Design Systems</span>
+              <span class="tag">Accessibility</span>
+              <span class="tag">Documentation</span>
+              <span class="tag">Cross-Team Influence</span>
+            </div>
+          </article>
+
+          <!-- AI Creative Tools -->
+          <article class="work-card">
+            <div class="work-header">
+              <h3 class="work-title">AI Creative Tools</h3>
+              <p class="work-meta">Epsilon · 2021-Present</p>
+            </div>
+            <p class="work-desc">
+              Leading a team building no-code creative ad production tools. Architecting AI features: headless automated pipelines and user-facing AI that transforms images into layers and converts natural language into layout edits. Thousands of ad variations from flexible templates.
             </p>
-            <p>
-              Before the AI work, I built interactive installations with real-time rendering, gesture recognition, and motion design. The through-line has always been the same: <span class="highlight">I write the code that ships, and I care about how it feels.</span>
+            <div class="work-tags">
+              <span class="tag">AI/ML</span>
+              <span class="tag">Creative Tooling</span>
+              <span class="tag">Production Systems</span>
+              <span class="tag">TypeScript</span>
+            </div>
+          </article>
+
+          <!-- MakeMeA -->
+          <article class="work-card">
+            <div class="work-header">
+              <h3 class="work-title">MakeMeA</h3>
+              <p class="work-meta">Side Project · 2026</p>
+            </div>
+            <p class="work-desc">
+              AI photo style transfer platform. 40+ comedy styles, 230+ tests, config-driven architecture, Lighthouse 95+. Built with Next.js, TypeScript, and OpenAI APIs. Live at makemea.ai
             </p>
-          </div>
-        </div>
-      </section>
+            <div class="work-tags">
+              <span class="tag">React/Next.js</span>
+              <span class="tag">AI</span>
+              <span class="tag">Performance</span>
+              <span class="tag">Testing</span>
+              <span class="tag">Product Design</span>
+            </div>
+            <a href="https://makemea.ai" target="_blank" rel="noopener noreferrer" class="work-link">makemea.ai →</a>
+          </article>
 
-      <!-- Case Studies -->
-      <section class="section-panel" id="work">
-        <div class="section-header">
-          <span class="section-icon" aria-hidden="true"></span>
-          <h2 class="section-title">Selected Work</h2>
-          <span class="section-line" aria-hidden="true"></span>
-        </div>
-        <div class="section-content">
-          <div class="case-studies">
-            
-            <!-- Epsilon Design System -->
-            <article class="case-study">
-              <div class="case-study-header">
-                <h3 class="case-study-title">Epsilon Design System</h3>
-                <p class="case-study-meta">Senior UX Engineer → Lead · 2017 – 2021</p>
-              </div>
-              <hr class="case-study-divider">
-              <p class="case-study-desc">
-                Founded and grew a design system from side project to company-wide adoption. Built the component library, wrote documentation, and established contribution patterns that scaled across product teams. Grew the team, drove adoption through evangelism and internal publishing, and championed WCAG accessibility as a core design constraint. This work defined the UX Engineering discipline at Epsilon and became the bridge between design and development across the organization.
-              </p>
-              <div class="case-study-tags">
-                <span class="tag">Design Systems</span>
-                <span class="tag">Accessibility</span>
-                <span class="tag">Documentation</span>
-                <span class="tag">Cross-Team Influence</span>
-                <span class="tag">Angular</span>
-                <span class="tag">Component Architecture</span>
-              </div>
-              <a href="https://www.epsilon.com/us/insights/blog?author=Kevin%20Bolander" target="_blank" rel="noopener noreferrer" class="case-study-link">Read My Writing</a>
-            </article>
+          <!-- Interactive Installations -->
+          <article class="work-card">
+            <div class="work-header">
+              <h3 class="work-title">Interactive Installations</h3>
+              <p class="work-meta">Civiq Smartscapes · 2013-2017</p>
+            </div>
+            <p class="work-desc">
+              Large-format digital experiences for major brands. Personalized animated photo experience for Coca-Cola (malls across US). Award-winning motion-activated Photo Booth for PepsiCo (Kinect gesture recognition). 3D interactive experience for Accenture at JFK Airport.
+            </p>
+            <div class="work-tags">
+              <span class="tag">Kinect</span>
+              <span class="tag">Unity3D</span>
+              <span class="tag">Canvas</span>
+              <span class="tag">Real-time Systems</span>
+              <span class="tag">Creative Technology</span>
+            </div>
+          </article>
 
-            <!-- AI Creative Tools -->
-            <article class="case-study">
-              <div class="case-study-header">
-                <h3 class="case-study-title">AI Creative Tools</h3>
-                <p class="case-study-meta">Staff Software Engineer · 2023 – Present</p>
-              </div>
-              <hr class="case-study-divider">
-              <p class="case-study-desc">
-                Building AI-powered features for creative ad production at scale. Leading a team that ships both headless automated pipelines and user-facing AI — transforming uploaded images into editable layers, converting natural language into layout changes, and enabling no-code workflows that produce thousands of ad variations from flexible templates. This work combines production systems engineering with thoughtful UX for creative tools.
-              </p>
-              <div class="case-study-tags">
-                <span class="tag">AI/ML</span>
-                <span class="tag">Creative Tooling</span>
-                <span class="tag">Production Systems</span>
-                <span class="tag">TypeScript</span>
-                <span class="tag">Angular</span>
-                <span class="tag">Node.js</span>
-              </div>
-            </article>
-
-            <!-- MakeMeA -->
-            <article class="case-study">
-              <div class="case-study-header">
-                <h3 class="case-study-title">MakeMeA</h3>
-                <p class="case-study-meta">Creator & Engineer · 2024</p>
-              </div>
-              <hr class="case-study-divider">
-              <p class="case-study-desc">
-                AI photo style transfer platform — concept to production. Upload a photo, pick a style, get instant results. Built with Next.js, TypeScript, and OpenAI APIs, deployed on Vercel. 40+ styles, 230+ automated tests, Lighthouse performance scores 95+, and a config-driven architecture that makes adding new styles trivial. Comedy-first positioning with taste-driven curation. A fully shipped product demonstrating end-to-end design engineering: UX, architecture, performance, and brand.
-              </p>
-              <div class="case-study-tags">
-                <span class="tag">React/Next.js</span>
-                <span class="tag">AI</span>
-                <span class="tag">Performance</span>
-                <span class="tag">Testing</span>
-                <span class="tag">Product Design</span>
-                <span class="tag">TypeScript</span>
-              </div>
-              <a href="https://makemea.ai" target="_blank" rel="noopener noreferrer" class="case-study-link">Visit Site</a>
-            </article>
-
-            <!-- Interactive Installations -->
-            <article class="case-study">
-              <div class="case-study-header">
-                <h3 class="case-study-title">Interactive Installations</h3>
-                <p class="case-study-meta">Senior UI Engineer · Civiq Smartscapes · 2013 – 2017</p>
-              </div>
-              <hr class="case-study-divider">
-              <p class="case-study-desc">
-                Built large-format digital experiences and interactive installations for major brands. Coca-Cola personalized photo experience deployed to malls across the U.S. — real-time image processing with polished motion design. Award-winning PepsiCo Kinect Photo Booth with gesture recognition and real-time rendering. Accenture 3D interactive experience at JFK Airport. Simon Malls CMS and wayfinding system. Each project combined creative technology, real-time systems, and production-quality UI.
-              </p>
-              <div class="case-study-tags">
-                <span class="tag">Kinect</span>
-                <span class="tag">Unity3D</span>
-                <span class="tag">Canvas</span>
-                <span class="tag">Real-time Systems</span>
-                <span class="tag">Creative Technology</span>
-                <span class="tag">C#</span>
-              </div>
-            </article>
-
-          </div>
         </div>
       </section>
 
       <!-- Approach -->
-      <section class="section-panel" id="approach">
-        <div class="section-header">
-          <span class="section-icon" aria-hidden="true"></span>
-          <h2 class="section-title">Approach</h2>
-          <span class="section-line" aria-hidden="true"></span>
-        </div>
-        <div class="section-content">
-          <ul class="approach-list">
-            <li class="approach-item">
-              <strong>Accessibility is a design constraint, not a checklist</strong> — I embed WCAG standards from day one, not as an afterthought. Accessible interfaces are better interfaces for everyone.
-            </li>
-            <li class="approach-item">
-              <strong>Production over prototypes</strong> — I write the code that ships. Designers call me when it needs to work, and engineers call me when the design intent isn't translating.
-            </li>
-            <li class="approach-item">
-              <strong>Systems thinking</strong> — I build reusable components, document design tokens, and create patterns that scale. One-off solutions create technical debt; systems create leverage.
-            </li>
-            <li class="approach-item">
-              <strong>Bridge the gap</strong> — I'm fluent in both design language and engineering constraints. I translate design intent into technical architecture and technical limitations into design opportunities.
-            </li>
-          </ul>
-        </div>
+      <section class="section">
+        <h2 class="section-title">How I Work</h2>
+        <ul class="approach-list">
+          <li class="approach-item">
+            <strong>accessibility is a design constraint, not a checklist</strong>
+          </li>
+          <li class="approach-item">
+            <strong>production over prototypes</strong> — I write the code that ships
+          </li>
+          <li class="approach-item">
+            <strong>systems thinking</strong> — reusable components, design tokens, documentation
+          </li>
+          <li class="approach-item">
+            <strong>bridge the gap</strong> — I speak both design and engineering
+          </li>
+        </ul>
       </section>
 
-      <!-- Tech Stack -->
-      <section class="section-panel" id="skills">
-        <div class="section-header">
-          <span class="section-icon" aria-hidden="true"></span>
-          <h2 class="section-title">Tech Stack</h2>
-          <span class="section-line" aria-hidden="true"></span>
-        </div>
-        <div class="section-content">
-          <div class="skills-grid">
-            <div class="skill-category">
-              <h3>Frontend</h3>
-              <ul class="skill-list">
-                <li>TypeScript</li>
-                <li>React</li>
-                <li>Angular</li>
-                <li>Next.js</li>
-                <li>CSS</li>
-                <li>Canvas/WebGL</li>
-              </ul>
+      <!-- Tech -->
+      <section class="section">
+        <h2 class="section-title">Tech</h2>
+        <div class="tech-grid">
+          <div class="tech-category">
+            <h3 class="tech-category-title">Frontend</h3>
+            <div class="tech-items">
+              TypeScript · React · Angular · Next.js · CSS · Canvas/WebGL
             </div>
-            <div class="skill-category">
-              <h3>Design Systems</h3>
-              <ul class="skill-list">
-                <li>Component Libraries</li>
-                <li>Design Tokens</li>
-                <li>Documentation</li>
-                <li>Accessibility (WCAG)</li>
-                <li>Figma Integration</li>
-              </ul>
+          </div>
+          <div class="tech-category">
+            <h3 class="tech-category-title">Design Systems</h3>
+            <div class="tech-items">
+              Component Libraries · Design Tokens · WCAG · Documentation
             </div>
-            <div class="skill-category">
-              <h3>AI</h3>
-              <ul class="skill-list">
-                <li>OpenAI APIs</li>
-                <li>Image Generation</li>
-                <li>LLM Integration</li>
-                <li>Agentic Systems</li>
-                <li>Prompt Engineering</li>
-              </ul>
+          </div>
+          <div class="tech-category">
+            <h3 class="tech-category-title">AI</h3>
+            <div class="tech-items">
+              OpenAI APIs · Image Generation · LLM Integration · Agentic Systems
             </div>
-            <div class="skill-category">
-              <h3>Creative Tech</h3>
-              <ul class="skill-list">
-                <li>Unity3D</li>
-                <li>Kinect</li>
-                <li>Pixi.js</li>
-                <li>Real-time Systems</li>
-                <li>Animation</li>
-              </ul>
+          </div>
+          <div class="tech-category">
+            <h3 class="tech-category-title">Creative Tech</h3>
+            <div class="tech-items">
+              Unity3D · Kinect · Pixi.js · Real-time Systems
             </div>
           </div>
         </div>
@@ -993,17 +532,14 @@
 
     <!-- Footer -->
     <footer class="footer">
-      <p class="footer-text">Built with HTML, CSS, and opinions.</p>
-      <div class="footer-line">
-        <span aria-hidden="true"></span>
-        <div class="footer-diamond" aria-hidden="true"></div>
-        <span aria-hidden="true"></span>
-      </div>
-      <nav style="margin-top: 1.5rem; display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
-        <a href="https://github.com/kbo4sho" target="_blank" rel="noopener noreferrer" style="color: var(--accent-dim); text-decoration: none; font-size: 0.8rem; transition: color 0.2s ease;" onmouseover="this.style.color='var(--accent-cyan)'" onmouseout="this.style.color='var(--accent-dim)'">GitHub</a>
-        <a href="https://linkedin.com/in/kevin-bolander-45659322" target="_blank" rel="noopener noreferrer" style="color: var(--accent-dim); text-decoration: none; font-size: 0.8rem; transition: color 0.2s ease;" onmouseover="this.style.color='var(--accent-cyan)'" onmouseout="this.style.color='var(--accent-dim)'">LinkedIn</a>
-        <a href="mailto:kevinbolander@gmail.com" style="color: var(--accent-dim); text-decoration: none; font-size: 0.8rem; transition: color 0.2s ease;" onmouseover="this.style.color='var(--accent-cyan)'" onmouseout="this.style.color='var(--accent-dim)'">Email</a>
+      <nav class="footer-links" aria-label="Footer links">
+        <a href="https://github.com/kbo4sho" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub</a>
+        <span class="footer-link" aria-hidden="true">·</span>
+        <a href="https://linkedin.com/in/kevin-bolander-45659322" target="_blank" rel="noopener noreferrer" class="footer-link">LinkedIn</a>
+        <span class="footer-link" aria-hidden="true">·</span>
+        <a href="mailto:kevinbolander@gmail.com" class="footer-link">Email</a>
       </nav>
+      <p class="footer-text">built with html, css, and opinions.</p>
     </footer>
 
   </div>
