@@ -260,6 +260,24 @@
       outline-offset: 2px;
     }
 
+    .work-screenshots {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .work-screenshots::-webkit-scrollbar { display: none; }
+
+    .work-screenshots img {
+      height: 140px;
+      border-radius: 8px;
+      border: 1px solid var(--green-dim);
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+
     /* Approach List */
     .approach-list {
       list-style: none;
@@ -416,7 +434,7 @@
       <h1 class="header-name">Kevin Bolander</h1>
       <div class="header-status">
         <span class="status-dot" aria-hidden="true"></span>
-        <span>design engineer</span>
+        <span>design engineer · open to work</span>
       </div>
       <nav class="header-links" aria-label="External links">
         <a href="https://github.com/kbo4sho" target="_blank" rel="noopener noreferrer" class="header-link">GitHub</a>
@@ -426,6 +444,8 @@
         <a href="mailto:kevinbolander@gmail.com" class="header-link">Email</a>
         <span aria-hidden="true" style="color:var(--text-dim)">·</span>
         <a href="https://www.epsilon.com/us/insights/blog?author=Kevin%20Bolander" target="_blank" rel="noopener noreferrer" class="header-link">Writing</a>
+        <span aria-hidden="true" style="color:var(--text-dim)">·</span>
+        <a href="kevin-bolander-resume.pdf" class="header-link">Resume</a>
       </nav>
     </header>
 
@@ -452,6 +472,11 @@
             <p class="work-desc">
               Leading a team building no-code creative ad production tools. Architecting AI features: headless automated pipelines and user-facing AI that transforms images into layers and converts natural language into layout edits. Thousands of ad variations from flexible templates.
             </p>
+            <div class="work-screenshots">
+              <img src="working-portfolio-work-sample.png" alt="Charlotte v1.0 — creative ad production tool" loading="lazy">
+              <img src="design-layout.png" alt="Charlotte v0.17 — canvas and properties panel" loading="lazy">
+              <img src="animation.png" alt="Animation timeline with staggered keyframes" loading="lazy">
+            </div>
             <div class="work-tags">
               <span class="tag">AI/ML</span>
               <span class="tag">Creative Tooling</span>
