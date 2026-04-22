@@ -10,16 +10,23 @@
 _[TBD — one number that lands the impact: e.g., "10k ad variations/week," "90% reduction in production time," "$X revenue influenced"]_
 
 ## One-line pitch
-_[TBD — what the system is and why it matters, in a sentence]_
+Design and production tools for Epsilon's creative team — faster, more accurate, and more expressive ad creation.
 
 ## Problem / before-state
-_[TBD — what creative production looked like before AI was in the loop]_
+Creative teams were working in Adobe Illustrator and Photoshop with v1 in-app tooling. Production was tied to the Adobe ecosystem, slow to iterate, and hard to scale into personalized ad output. We moved the whole flow to the web and built a purpose-built ad builder — only the design features creatives actually needed, nothing more.
 
 ## Architecture
-_[TBD — pipelines, models, agent orchestration, headless vs. user-facing]_
+End-to-end flow:
+- Creatives provide a brief + brand guidelines + asset library
+- AI produces concept options from that input
+- Selected concepts are converted into editable layers inside the web ad builder
+- The builder supports static and motion-based ads, configurable product rotators, and other animated modules
+- Output is personalized content that feeds the downstream ad system
+
+_[TBD — which parts use models/agents vs. deterministic code; orchestration; model families; where headless pipelines live vs. user-facing AI]_
 
 ### Diagram
-_[TBD — ASCII or sketched]_
+_[TBD — ASCII or sketched after Round 1 completes]_
 
 ## Key decisions
 - _[TBD — build vs. buy]_
