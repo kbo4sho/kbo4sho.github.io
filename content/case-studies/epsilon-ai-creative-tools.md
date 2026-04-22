@@ -23,10 +23,22 @@ End-to-end flow:
 - The builder supports static and motion-based ads, configurable product rotators, and other animated modules
 - Output is personalized content that feeds the downstream ad system
 
-_[TBD — which parts use models/agents vs. deterministic code; orchestration; model families; where headless pipelines live vs. user-facing AI]_
+**Where AI is in the loop:**
+- **Brief → concept:** multiple LLM calls chained together
+- **Concept → layers:** multiple AI calls combined with proprietary Epsilon data
+- **Natural-language edits in the editor:** single call to edit or generate new elements
+- Humans are in the loop at every stage today
+- Direction of travel: these are being refactored into **skills / tools for an agent** — the homegrown loop is the substrate an agent will run on top of
+
+**Orchestration & models:**
+- Model family: Gemini (primary), with multiple model tiers exposed as options so calls can trade off cost vs. quality per step
+- Orchestration: homegrown loop (no LangChain / LlamaIndex)
+- State: in-memory, per request
+
+_[TBD — vector store / RAG component? The "our own data" in concept → layers — is that a retrieval step, a lookup, or hardcoded joins?]_
 
 ### Diagram
-_[TBD — ASCII or sketched after Round 1 completes]_
+_[TBD — draft after Round 2]_
 
 ## Key decisions
 - _[TBD — build vs. buy]_
