@@ -35,7 +35,7 @@ End-to-end flow:
 - Orchestration: homegrown loop (no LangChain / LlamaIndex)
 - State: in-memory, per request
 
-_[TBD — vector store / RAG component? The "our own data" in concept → layers — is that a retrieval step, a lookup, or hardcoded joins?]_
+**Bridging AI output to production data:** the concept → layers step does structured lookups against Epsilon's internal data — e.g. font IDs returned by the model get resolved to real, renderable font definitions so the output lands as a valid, production-ready layer set (not just plausible-looking markup).
 
 ### Diagram
 _[TBD — draft after Round 2]_
