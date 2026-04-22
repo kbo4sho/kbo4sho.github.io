@@ -50,7 +50,9 @@ _[TBD — draft after Round 2]_
 _[TBD — throughput, cost, adoption, quality]_
 
 ## What I personally owned
-_[TBD — Kevin's direct scope vs. the team's]_
+- Designed the end-to-end process for every AI feature in the system — brief → concept, concept → layers, natural-language editor edits, and the refactor toward agent-skill composition
+- Implemented most of the features hands-on, using AI-native development workflows (AI-assisted coding) to ship faster
+- Lead the team that owns, extends, and operates the system in production
 
 ## Learnings
 _[TBD — 1–2 sharp takeaways]_
