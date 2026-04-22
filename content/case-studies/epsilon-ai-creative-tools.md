@@ -61,8 +61,10 @@ Built a custom **eval pipeline** that scores generated output on observable, mea
 - **Pixel diff vs. baseline** — structural fidelity against a known-good reference
 - **Recursive self-improvement** — the pipeline feeds its own scores back into the generation loop so the system iterates toward higher-scoring output without manual intervention
 
-This is what turns a demoable prototype into a production system — the ability to *measure* creative AI output, not just generate it.
-_[TBD — clarify the self-improvement mechanism: critique-and-regenerate loop vs. something more structured]_
+**Packaged as a reusable skill.** The eval pipeline isn't wired into one feature — I built it as a **skill that any AI feature in the system can plug into**, so new features get the same scoring + self-improvement loop for free. This is platform thinking: one investment, compounding leverage across every AI surface the team ships.
+
+Scoring creative AI output is the hard problem. Most teams can generate; few can measure. Turning that measurement into reusable infrastructure is what separates a prototype from a production system.
+_[TBD — one-line on the self-improvement mechanism: critique-and-regenerate? rejection sampling? agent tool-use?]_
 
 ## What I personally owned
 - Designed the end-to-end process for every AI feature in the system — brief → concept, concept → layers, natural-language editor edits, and the refactor toward agent-skill composition
