@@ -41,10 +41,12 @@ End-to-end flow:
 _[TBD — draft after Round 2]_
 
 ## Key decisions
-- _[TBD — build vs. buy]_
-- _[TBD — model selection + eval strategy]_
-- _[TBD — failure handling / human-in-the-loop]_
-- _[TBD — cost controls]_
+- **Move off Adobe to web.** Purpose-built ad builder with only the design features creatives actually use — not a general design tool.
+- **Homegrown orchestration.** No LangChain / LlamaIndex; a simple in-memory loop per request keeps the system debuggable and fast to iterate on as AI features evolve.
+- **Model tiering.** Multiple Gemini tiers exposed as options so each call can trade cost vs. quality per step.
+- **Invest in evals before features.** Layout/color/pixel-diff scoring with a self-improvement loop became the foundation everything else builds on — scoring creative output is the hard problem.
+- **Humans in the loop today, agent-composed tomorrow.** Every AI moment is a human-reviewed step; those same moments are being refactored into skills/tools an agent can call.
+- **Failure handling is intentionally lightweight today** — a known area for hardening as usage scales.
 
 ## Metrics & outcomes
 - **Throughput:** thousands of ad variations produced per day across hundreds of active users
@@ -71,4 +73,9 @@ _[TBD — clarify the self-improvement mechanism: critique-and-regenerate loop v
 _[TBD — 1–2 sharp takeaways]_
 
 ## NDA notes
-_[TBD — what can be shown publicly, what must be generic, what's off-limits]_
+- ✅ Epsilon as employer (already public on resume + LinkedIn)
+- ✅ Architecture shape (homegrown loop, eval pipeline, structured lookups against production data)
+- ✅ Model family (Gemini) and the tiering pattern
+- ✅ Metric ranges as stated (hundreds of users, thousands of variations/day, ~5× faster, fully adopted)
+- 🟡 Keep implementation specifics **generic** — describe patterns, not proprietary algorithms
+- ❌ No client names, no named campaigns, no teammate names
