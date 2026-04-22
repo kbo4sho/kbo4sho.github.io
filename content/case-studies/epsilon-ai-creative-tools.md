@@ -7,7 +7,7 @@
 ---
 
 ## Headline metric
-_[TBD — one number that lands the impact: e.g., "10k ad variations/week," "90% reduction in production time," "$X revenue influenced"]_
+Hundreds of creatives producing thousands of ad variations per day — **5× faster than the prior Adobe-based flow, with more capabilities, and fully adopted across the creative org.**
 
 ## One-line pitch
 Design and production tools for Epsilon's creative team — faster, more accurate, and more expressive ad creation.
@@ -47,7 +47,20 @@ _[TBD — draft after Round 2]_
 - _[TBD — cost controls]_
 
 ## Metrics & outcomes
-_[TBD — throughput, cost, adoption, quality]_
+- **Throughput:** thousands of ad variations produced per day across hundreds of active users
+- **Speed:** ~5× faster than the prior Adobe-based creative flow
+- **Capabilities:** expanded beyond what the Adobe-based flow could do
+- **Adoption:** fully adopted across Epsilon's creative org
+
+## Evals (the unlock)
+Built a custom **eval pipeline** that scores generated output on observable, measurable signals:
+- **Layout position accuracy** — are elements where they should be on the canvas?
+- **Color accuracy** — do outputs match brand palettes?
+- **Pixel diff vs. baseline** — structural fidelity against a known-good reference
+- **Recursive self-improvement** — the pipeline feeds its own scores back into the generation loop so the system iterates toward higher-scoring output without manual intervention
+
+This is what turns a demoable prototype into a production system — the ability to *measure* creative AI output, not just generate it.
+_[TBD — clarify the self-improvement mechanism: critique-and-regenerate loop vs. something more structured]_
 
 ## What I personally owned
 - Designed the end-to-end process for every AI feature in the system — brief → concept, concept → layers, natural-language editor edits, and the refactor toward agent-skill composition
