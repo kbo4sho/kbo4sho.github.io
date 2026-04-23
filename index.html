@@ -3,650 +3,810 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kevin Bolander — Engineering Creativity</title>
-  <meta name="description" content="Kevin Bolander is a staff software engineer with 12+ years building design systems, creative tools, AI agent systems, and production UI. Expertise in TypeScript, React, AI orchestration, accessibility, and creative technology.">
+  <title>Kevin Bolander — AI Systems &amp; Agentic Tooling</title>
+  <meta name="description" content="Staff software engineer building production AI systems and agentic tooling. Twelve years of depth, now pointed at agents. Built a self-optimizing eval skill used across Epsilon's creative org.">
   <link rel="canonical" href="https://kbo4sho.github.io/">
   <meta name="theme-color" content="#0a0a0a">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
-  <meta property="og:title" content="Kevin Bolander — Engineering Creativity">
-  <meta property="og:description" content="12+ years building design systems, creative tools, AI agent systems, and production UI.">
+  <meta property="og:title" content="Kevin Bolander — AI Systems &amp; Agentic Tooling">
+  <meta property="og:description" content="Staff software engineer building production AI systems and agentic tooling. Twelve years of production depth, now pointed at agents.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://kbo4sho.github.io/">
   <meta property="og:image" content="https://kbo4sho.github.io/me.jpg">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Kevin Bolander — Engineering Creativity">
-  <meta name="twitter:description" content="12+ years building design systems, creative tools, AI agent systems, and production UI.">
+  <meta name="twitter:title" content="Kevin Bolander — AI Systems &amp; Agentic Tooling">
+  <meta name="twitter:description" content="Staff software engineer building production AI systems and agentic tooling. Twelve years of production depth, now pointed at agents.">
   <meta name="twitter:image" content="https://kbo4sho.github.io/me.jpg">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Kevin Bolander",
-    "jobTitle": "Staff Design Engineer",
-    "worksFor": {
-      "@type": "Organization",
-      "name": "Epsilon"
-    },
+    "jobTitle": "Staff Software Engineer",
+    "worksFor": { "@type": "Organization", "name": "Epsilon" },
     "url": "https://kbo4sho.github.io",
     "sameAs": [
       "https://github.com/kbo4sho",
       "https://linkedin.com/in/kevin-bolander-45659322"
     ],
-    "knowsAbout": ["Design Systems", "Creative Technology", "AI Agent Systems", "AI Orchestration", "TypeScript", "React", "Angular", "Accessibility", "WCAG"],
-    "description": "Staff software engineer with 12+ years building design systems, creative tools, AI agent systems, and production UI."
+    "knowsAbout": ["AI Agent Systems", "AI Orchestration", "Agentic Tooling", "LLM Evaluation", "Creative AI", "TypeScript", "Python", "Gemini", "Design Systems", "Accessibility"],
+    "description": "Staff software engineer building production AI systems and agentic tooling. Twelve years of production depth, now pointed at agents."
   }
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg: #0a0a0a;
       --surface: #111;
-      --green: #00d4aa;
-      --green-dim: #00d4aa60;
-      --green-bg: #00d4aa10;
-      --text: #e0e0e0;
+      --surface-2: #161616;
+      --border: #222;
+      --teal: #00d4aa;
+      --teal-dim: #00d4aa40;
+      --teal-bg: #00d4aa0d;
+      --text: #e8e8e8;
       --text-dim: #999;
-      --red: #ff4444;
-      --font-mono: 'Share Tech Mono', monospace;
+      --text-dimmer: #888;
       --font-display: 'Orbitron', sans-serif;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-mono: 'JetBrains Mono', 'Share Tech Mono', monospace;
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      font-size: 16px;
-      scroll-behavior: smooth;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 2rem; }
 
     body {
-      font-family: var(--font-mono);
+      font-family: var(--font-body);
       background: var(--bg);
       color: var(--text);
       line-height: 1.6;
-      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
     }
 
-    /* Skip link for accessibility */
+    /* Skip link */
     .skip-link {
       position: absolute;
-      top: -40px;
-      left: 0;
-      background: var(--green);
+      top: -100px;
+      left: 1rem;
+      background: var(--teal);
       color: var(--bg);
       padding: 0.5rem 1rem;
       text-decoration: none;
       z-index: 100;
-      font-weight: bold;
-    }
-
-    .skip-link:focus {
-      top: 0;
-      outline: 2px solid var(--green);
-      outline-offset: 2px;
-    }
-
-    /* Main Container */
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 3rem 2rem;
-    }
-
-    /* Header */
-    .header {
-      margin-bottom: 3rem;
-    }
-
-    .header-name {
-      font-family: var(--font-display);
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--text);
-      letter-spacing: 0.1em;
-      margin-bottom: 0.5rem;
-      text-transform: uppercase;
-    }
-
-    .header-tagline {
+      font-weight: 600;
       font-family: var(--font-mono);
-      font-size: 0.85rem;
-      color: var(--green);
-      margin-bottom: 0.75rem;
-      letter-spacing: 0.02em;
+      font-size: 0.8rem;
+    }
+    .skip-link:focus { top: 1rem; }
+
+    /* Layout */
+    .wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2rem;
     }
 
-    .header-status {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.875rem;
-      color: var(--green);
+    /* ========== HERO ========== */
+    .hero { padding: 7rem 0 5rem; }
+
+    .hero-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--teal);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
       margin-bottom: 1.5rem;
     }
 
-    .status-dot {
-      width: 6px;
-      height: 6px;
-      background: var(--green);
-      border-radius: 50%;
-    }
-
-    .header-links {
-      display: flex;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-    }
-
-    .header-link {
-      font-size: 0.875rem;
-      color: var(--text-dim);
-      text-decoration: none;
-      transition: color 0.2s ease;
-    }
-
-    .header-link:hover,
-    .header-link:focus {
-      color: var(--green);
-      outline: none;
-    }
-
-    .header-link:focus-visible {
-      outline: 2px solid var(--green);
-      outline-offset: 2px;
-    }
-
-    /* About Section */
-    .about {
-      margin-bottom: 4rem;
-      font-size: 0.95rem;
-      line-height: 1.7;
-      color: var(--text);
-    }
-
-    /* Section */
-    .section {
-      margin-bottom: 4rem;
-    }
-
-    .section-title {
+    .hero-name {
       font-family: var(--font-display);
-      font-size: 0.875rem;
-      font-weight: 700;
-      color: var(--green);
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 900;
+      color: var(--text);
+      letter-spacing: 0.01em;
+      line-height: 0.95;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-tagline {
+      font-size: clamp(1.25rem, 2.2vw, 1.6rem);
+      font-weight: 400;
+      color: var(--text);
+      max-width: 46ch;
+      line-height: 1.4;
       margin-bottom: 2rem;
     }
 
-    /* Work Cards */
-    .work-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
+    .hero-tagline strong {
+      color: var(--teal);
+      font-weight: 500;
     }
 
-    .work-card {
-      background: var(--surface);
-      border: 1px solid var(--green-dim);
-      padding: 1.5rem;
-      transition: border-color 0.2s ease;
-    }
-
-    .work-card:hover,
-    .work-card:focus-within {
-      border-color: var(--green);
-    }
-
-    .work-header {
-      margin-bottom: 0.75rem;
-    }
-
-    .work-title {
-      font-family: var(--font-display);
-      font-size: 0.875rem;
-      font-weight: 700;
-      color: var(--green);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      margin-bottom: 0.25rem;
-    }
-
-    .work-meta {
-      font-size: 0.75rem;
-      color: var(--text-dim);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    .work-desc {
-      font-size: 0.875rem;
-      color: var(--text);
-      line-height: 1.7;
-      margin-bottom: 1rem;
-    }
-
-    .work-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-bottom: 1rem;
-    }
-
-    .tag {
-      font-size: 0.7rem;
-      color: var(--text-dim);
-    }
-
-    .tag:not(:last-child)::after {
-      content: ' ·';
-      margin-left: 0.5rem;
-    }
-
-    .work-link {
-      display: inline-block;
-      font-size: 0.75rem;
-      color: var(--green);
-      text-decoration: none;
-      border-bottom: 1px solid transparent;
-      transition: border-color 0.2s ease;
-    }
-
-    .work-link:hover,
-    .work-link:focus {
-      border-bottom-color: var(--green);
-      outline: none;
-    }
-
-    .work-link:focus-visible {
-      outline: 2px solid var(--green);
-      outline-offset: 2px;
-    }
-
-    .work-screenshots {
-      display: flex;
-      gap: 0.5rem;
-      margin-bottom: 1rem;
-      overflow-x: auto;
-      scrollbar-width: none;
-    }
-
-    .work-screenshots::-webkit-scrollbar { display: none; }
-
-    .work-screenshots img {
-      height: 140px;
-      border-radius: 8px;
-      border: 1px solid var(--green-dim);
-      object-fit: cover;
-      flex-shrink: 0;
-    }
-
-    /* Approach List */
-    .approach-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 1.25rem;
-    }
-
-    .approach-item {
-      font-size: 0.875rem;
-      color: var(--text-dim);
-      line-height: 1.7;
-    }
-
-    .approach-item strong {
-      color: var(--green);
-      font-weight: 400;
-    }
-
-    /* Tech Grid */
-    .tech-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 2rem;
-    }
-
-    .tech-category {
-      margin-bottom: 1.5rem;
-    }
-
-    .tech-category-title {
-      font-family: var(--font-display);
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: var(--green);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: 0.75rem;
-    }
-
-    .tech-items {
+    .hero-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: var(--font-mono);
       font-size: 0.8rem;
+      color: var(--teal);
+      margin-bottom: 2.5rem;
+      padding: 0.4rem 0.9rem;
+      border: 1px solid var(--teal-dim);
+      border-radius: 100px;
+    }
+
+    .hero-status .dot {
+      width: 6px;
+      height: 6px;
+      background: var(--teal);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--teal);
+      animation: pulse 2.4s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.35; }
+    }
+
+    .hero-nav {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+    }
+
+    .hero-nav a {
       color: var(--text-dim);
-      line-height: 1.8;
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .hero-nav a:hover,
+    .hero-nav a:focus-visible { color: var(--teal); }
+
+    /* ========== SECTION ========== */
+    section {
+      padding: 5rem 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .section-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--teal);
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-family: var(--font-body);
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 2.5rem;
+      max-width: 24ch;
+    }
+
+    .section-title em {
+      font-style: normal;
+      color: var(--teal);
+    }
+
+    /* ========== METRIC BAND ========== */
+    .metric-band {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
       list-style: none;
       padding: 0;
       margin: 0;
     }
 
-    .tech-items li {
-      display: inline;
+    .metric-cell {
+      background: var(--surface);
+      padding: 2rem 1.5rem;
     }
 
-    .tech-items li:not(:last-child)::after {
-      content: ' · ';
+    .metric-value {
+      font-family: var(--font-display);
+      font-size: 2.25rem;
+      font-weight: 900;
+      color: var(--teal);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.01em;
     }
 
-    /* Footer */
-    .footer {
-      margin-top: 6rem;
-      padding-top: 2rem;
-      border-top: 1px solid var(--green-dim);
+    .metric-label {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      line-height: 1.4;
+    }
+
+    /* ========== CASE STUDY ========== */
+    .case {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-top: none;
+      padding: 2.5rem;
+    }
+
+    .case-meta {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--teal);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .case-title {
+      font-family: var(--font-body);
+      font-size: clamp(1.35rem, 2.5vw, 1.75rem);
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.01em;
+      margin-bottom: 0.5rem;
+    }
+
+    .case-subtitle {
+      font-size: 1.05rem;
+      color: var(--text-dim);
+      margin-bottom: 2rem;
+      font-weight: 400;
+      max-width: 70ch;
+      line-height: 1.5;
+    }
+
+    .case-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 260px;
+      gap: 3rem;
+      margin-top: 2rem;
+    }
+
+    .case-body h4 {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: var(--teal);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-top: 1.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .case-body h4:first-child { margin-top: 0; }
+
+    .case-body p {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: var(--text);
+      margin-bottom: 1rem;
+    }
+
+    .case-body strong { color: var(--teal); font-weight: 500; }
+
+    .case-body a {
+      color: var(--teal);
+      text-decoration: none;
+      border-bottom: 1px solid var(--teal-dim);
+      transition: border-color 0.15s;
+    }
+    .case-body a:hover { border-bottom-color: var(--teal); }
+
+    .case-sidebar {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-dim);
+    }
+
+    .case-sidebar-block {
+      padding: 1rem 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .case-sidebar-block:first-child { border-top: none; padding-top: 0; }
+
+    .case-sidebar-label {
+      color: var(--text-dimmer);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      font-size: 0.65rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .case-sidebar-value { color: var(--text); line-height: 1.6; }
+
+    .case-sidebar-value a {
+      color: var(--teal);
+      text-decoration: none;
+      border-bottom: 1px solid var(--teal-dim);
+    }
+    .case-sidebar-value a:hover { border-bottom-color: var(--teal); }
+
+    /* ========== LAB 3-UP ========== */
+    .lab-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .lab-card {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      padding: 1.75rem;
+      transition: border-color 0.2s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .lab-card:hover,
+    .lab-card:focus-within { border-color: var(--teal-dim); }
+
+    .lab-status {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--text-dimmer);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+
+    .lab-title {
+      font-family: var(--font-body);
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+
+    .lab-desc {
+      font-size: 0.9rem;
+      color: var(--text-dim);
+      line-height: 1.65;
+      margin-bottom: 1.25rem;
+      flex-grow: 1;
+    }
+
+    .lab-link {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--teal);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      align-self: flex-start;
+    }
+
+    .lab-link:hover,
+    .lab-link:focus-visible { text-decoration: underline; }
+
+    /* ========== FOUNDATION ========== */
+    .foundation-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    .foundation-card {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      padding: 2rem;
+    }
+
+    .foundation-card-meta {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--teal);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .foundation-card-title {
+      font-family: var(--font-body);
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 1rem;
+    }
+
+    .foundation-card p {
+      font-size: 0.95rem;
+      color: var(--text);
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+
+    .foundation-card-tags {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-dimmer);
+      letter-spacing: 0.05em;
+      line-height: 1.6;
+    }
+
+    /* ========== HOW I WORK ========== */
+    .principles {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.75rem 2.5rem;
+      padding: 0;
+      margin: 0;
+    }
+
+    .principle {
+      padding-left: 1.25rem;
+      border-left: 1px solid var(--teal-dim);
+    }
+
+    .principle-title {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--teal);
+      margin-bottom: 0.4rem;
+      letter-spacing: -0.005em;
+    }
+
+    .principle-body {
+      font-size: 0.9rem;
+      color: var(--text-dim);
+      line-height: 1.65;
+    }
+
+    /* ========== FOOTER ========== */
+    footer {
+      padding: 3rem 0 5rem;
+      border-top: 1px solid var(--border);
     }
 
     .footer-links {
       display: flex;
       gap: 1.5rem;
       flex-wrap: wrap;
-      margin-bottom: 1rem;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      margin-bottom: 1.25rem;
     }
 
-    .footer-link {
-      font-size: 0.75rem;
+    .footer-links a {
       color: var(--text-dim);
       text-decoration: none;
-      transition: color 0.2s ease;
+      transition: color 0.15s;
     }
 
-    .footer-link:hover,
-    .footer-link:focus {
-      color: var(--green);
-      outline: none;
+    .footer-links a:hover,
+    .footer-links a:focus-visible { color: var(--teal); }
+
+    .footer-note {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-dimmer);
+      letter-spacing: 0.05em;
     }
 
-    .footer-link:focus-visible {
-      outline: 2px solid var(--green);
+    /* ========== ACCESSIBILITY & MOTION ========== */
+    *:focus-visible {
+      outline: 2px solid var(--teal);
       outline-offset: 2px;
     }
 
-    .footer-text {
-      font-size: 0.7rem;
-      color: var(--text-dim);
+    ::selection {
+      background: var(--teal);
+      color: var(--bg);
     }
 
-    /* Responsive */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+      }
+      html { scroll-behavior: auto; }
+    }
+
+    /* ========== MOBILE ========== */
     @media (max-width: 768px) {
-      .container {
-        padding: 2rem 1.5rem;
-      }
-
-      .header-name {
-        font-size: 1.25rem;
-      }
-
-      .tech-grid {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-      }
+      .wrap { padding: 0 1.25rem; }
+      .hero { padding: 4rem 0 3rem; }
+      section { padding: 3.5rem 0; }
+      .section-title { margin-bottom: 2rem; }
+      .case { padding: 1.75rem; }
+      .case-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .lab-grid { grid-template-columns: 1fr; }
+      .foundation-grid { grid-template-columns: 1fr; }
+      .principles { grid-template-columns: 1fr; }
+      .metric-cell { padding: 1.5rem 1.25rem; }
+      .metric-value { font-size: 1.75rem; }
+      .hero-nav { gap: 1.25rem; font-size: 0.75rem; }
     }
 
     @media (max-width: 480px) {
-      .container {
-        padding: 1.5rem 1rem;
-      }
-
-      .header-name {
-        font-size: 1rem;
-        letter-spacing: 0.05em;
-      }
-
-      .header-links {
-        gap: 1rem;
-      }
-    }
-
-    /* Reduced motion */
-    @media (prefers-reduced-motion: reduce) {
-      * {
-        animation: none !important;
-        transition: none !important;
-      }
-    }
-
-    /* Focus styles for accessibility */
-    *:focus-visible {
-      outline: 2px solid var(--green);
-      outline-offset: 2px;
-    }
-
-    /* Selection */
-    ::selection {
-      background: var(--green);
-      color: var(--bg);
+      .metric-band { grid-template-columns: repeat(2, 1fr); }
+      .hero { padding: 3rem 0 2.5rem; }
+      .case { padding: 1.25rem; }
     }
   </style>
 </head>
 <body>
-  <a href="#main-content" class="skip-link">Skip to main content</a>
-  
-  <div class="container">
-    
-    <!-- Header -->
-    <header class="header">
-      <h1 class="header-name">Kevin Bolander</h1>
-      <p class="header-tagline">Taste and throughput in one person.</p>
-      <div class="header-status">
-        <span class="status-dot" aria-hidden="true"></span>
-        <span>open to work</span>
-      </div>
-      <nav class="header-links" aria-label="External links">
-        <a href="https://github.com/kbo4sho" target="_blank" rel="noopener noreferrer" class="header-link">GitHub</a>
-        <span aria-hidden="true" style="color:var(--text-dim)">·</span>
-        <a href="https://linkedin.com/in/kevin-bolander-45659322" target="_blank" rel="noopener noreferrer" class="header-link">LinkedIn</a>
-        <span aria-hidden="true" style="color:var(--text-dim)">·</span>
-        <a href="mailto:kevinbolander@gmail.com" class="header-link">Email</a>
-        <span aria-hidden="true" style="color:var(--text-dim)">·</span>
-        <a href="https://www.epsilon.com/us/insights/blog?author=Kevin%20Bolander" target="_blank" rel="noopener noreferrer" class="header-link">Writing</a>
-        <span aria-hidden="true" style="color:var(--text-dim)">·</span>
-        <a href="kevin-bolander-resume.pdf" class="header-link">Resume</a>
-      </nav>
-    </header>
+  <a href="#main" class="skip-link">Skip to main content</a>
 
-    <main id="main-content">
-      
-      <!-- About -->
-      <section class="about">
-        <p>
-          12+ years building things people use — design systems, creative tools, and agentic AI systems. At Epsilon I founded the UX engineering discipline, built the team, and led AI-powered creative tooling from concept to production. I ship products independently and build autonomous systems that think, execute, and deliver.
-        </p>
-      </section>
+  <header class="hero wrap" role="banner">
+    <p class="hero-eyebrow">Staff Software Engineer — AI Systems &amp; Agentic Tooling</p>
+    <h1 class="hero-name">KEVIN BOLANDER</h1>
+    <p class="hero-tagline">I build AI systems that <strong>ship</strong> — and then <strong>run themselves</strong>. Twelve years of production depth, now pointed at agents.</p>
+    <p class="hero-status" aria-label="Availability">
+      <span class="dot" aria-hidden="true"></span>
+      <span>open to new opportunities</span>
+    </p>
+    <nav class="hero-nav" aria-label="Primary">
+      <a href="https://github.com/kbo4sho" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a href="https://linkedin.com/in/kevin-bolander-45659322" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a href="mailto:kevinbolander@gmail.com">Email</a>
+      <a href="https://www.epsilon.com/us/insights/blog?author=Kevin%20Bolander" target="_blank" rel="noopener noreferrer">Writing</a>
+      <a href="kevin-bolander-resume.pdf">Resume ↓</a>
+    </nav>
+  </header>
 
-      <!-- Selected Work -->
-      <section class="section">
-        <h2 class="section-title">Selected Work</h2>
-        <div class="work-grid">
-          
-          <!-- AI Creative Tools -->
-          <article class="work-card">
-            <div class="work-header">
-              <h3 class="work-title">AI Creative Tools</h3>
-              <p class="work-meta">Epsilon · 2021-Present</p>
-            </div>
-            <p class="work-desc">
-              Leading a team building no-code creative ad production tools. Architecting AI features: headless automated pipelines and user-facing AI that transforms images into layers and converts natural language into layout edits. Thousands of ad variations from flexible templates.
-            </p>
-            <div class="work-screenshots">
-              <img src="reptile_concept_sample.png" alt="Concept wireframe sketch of creative ad tool" loading="lazy">
-              <img src="reptile_sample.png" alt="Finished creative ad production tool" loading="lazy">
-            </div>
-            <div class="work-tags">
-              <span class="tag">AI/ML</span>
-              <span class="tag">Creative Tooling</span>
-              <span class="tag">Production Systems</span>
-              <span class="tag">TypeScript</span>
-            </div>
-          </article>
+  <main id="main">
 
-          <!-- MakeMeA -->
-          <article class="work-card">
-            <div class="work-header">
-              <h3 class="work-title">MakeMeA</h3>
-              <p class="work-meta">Side Project · 2026</p>
-            </div>
-            <p class="work-desc">
-              AI photo style transfer platform. 48 comedy styles, 460+ tests, 80+ SEO blog posts, automated trend pipeline. Built with Next.js, TypeScript, and OpenAI APIs. Live at makemea.ai
-            </p>
-            <div class="work-tags">
-              <span class="tag">React/Next.js</span>
-              <span class="tag">AI</span>
-              <span class="tag">Performance</span>
-              <span class="tag">Testing</span>
-              <span class="tag">Product Design</span>
-            </div>
-            <a href="https://makemea.ai" target="_blank" rel="noopener noreferrer" class="work-link">makemea.ai →</a>
-          </article>
+    <!-- ========== EPSILON ========== -->
+    <section id="work" aria-labelledby="epsilon-heading">
+      <div class="wrap">
+        <p class="section-eyebrow">Selected Work · 01</p>
+        <h2 class="section-title" id="epsilon-heading">Agentic creative tooling at <em>Epsilon</em></h2>
 
-          <!-- Design Systems -->
-          <article class="work-card">
-            <div class="work-header">
-              <h3 class="work-title">Design Systems</h3>
-              <p class="work-meta">Epsilon · 2017-2021</p>
-            </div>
-            <p class="work-desc">
-              Founded the UX engineering discipline at Epsilon — built the team, set standards, and grew a side project into the company's core design system adopted across products. Drove org-wide adoption, wrote the documentation, and championed WCAG 2.1 AA accessibility as a design constraint embedded into every component.
-            </p>
-            <div class="work-tags">
-              <span class="tag">Design Systems</span>
-              <span class="tag">Accessibility</span>
-              <span class="tag">WCAG 2.1 AA</span>
-              <span class="tag">Documentation</span>
-              <span class="tag">Cross-Team Influence</span>
-            </div>
-          </article>
-
-          <!-- OSS Contributor -->
-          <article class="work-card">
-            <div class="work-header">
-              <h3 class="work-title">OSS Contributor</h3>
-              <p class="work-meta">Open Source · 2026</p>
-            </div>
-            <p class="work-desc">
-              An agent skill that discovers and resolves open source GitHub issues autonomously. Finds issues, forks repos, implements fixes, and opens PRs with full AI disclosure. Built for the OpenClaw ecosystem — published on ClaWHub.
-            </p>
-            <div class="work-tags">
-              <span class="tag">Open Source</span>
-              <span class="tag">AI Agents</span>
-              <span class="tag">Developer Tools</span>
-              <span class="tag">GitHub API</span>
-            </div>
-            <a href="https://clawhub.com/skills/oss-contributor" target="_blank" rel="noopener noreferrer" class="work-link">clawhub.com →</a>
-          </article>
-
-          <!-- Sprawl -->
-          <article class="work-card">
-            <div class="work-header">
-              <h3 class="work-title">Sprawl</h3>
-              <p class="work-meta">Side Project · 2026</p>
-            </div>
-            <p class="work-desc">
-              Type a question, watch AI paint the answer in real time. Voronoi-stippled dots resolve into art through smooth transitions. Custom 2D/WebGL renderer, SDXL image generation, full end-to-end pipeline. Solo built.
-            </p>
-            <div class="work-tags">
-              <span class="tag">Generative Art</span>
-              <span class="tag">AI</span>
-              <span class="tag">Real-time</span>
-              <span class="tag">Canvas/WebGL</span>
-              <span class="tag">Image Generation</span>
-            </div>
-            <a href="https://sprawl.place" target="_blank" rel="noopener noreferrer" class="work-link">sprawl.place →</a>
-          </article>
-
-          <!-- Visual QA -->
-          <article class="work-card">
-            <div class="work-header">
-              <h3 class="work-title">Visual QA</h3>
-              <p class="work-meta">Agent Skill · 2026</p>
-            </div>
-            <p class="work-desc">
-              Visual regression testing pipeline for AI agents. Captures baseline screenshots with Playwright, pixel-diffs against new builds, and gates deployments on similarity thresholds. Published on ClawHub.
-            </p>
-            <div class="work-tags">
-              <span class="tag">Playwright</span>
-              <span class="tag">Testing</span>
-              <span class="tag">AI Agents</span>
-              <span class="tag">Developer Tools</span>
-            </div>
-            <a href="https://clawhub.com/kbo4sho/visual-qa" target="_blank" rel="noopener noreferrer" class="work-link">clawhub.com →</a>
-          </article>
-
-          <!-- Interactive Installations -->
-          <article class="work-card">
-            <div class="work-header">
-              <h3 class="work-title">Interactive Installations</h3>
-              <p class="work-meta">Civiq Smartscapes · 2013-2017</p>
-            </div>
-            <p class="work-desc">
-              Large-format digital experiences for major brands. Personalized animated photo experience for Coca-Cola (malls across US). Award-winning motion-activated Photo Booth for PepsiCo (Kinect gesture recognition). 3D interactive experience for Accenture at JFK Airport.
-            </p>
-            <div class="work-tags">
-              <span class="tag">Kinect</span>
-              <span class="tag">Unity3D</span>
-              <span class="tag">Canvas</span>
-              <span class="tag">Real-time Systems</span>
-              <span class="tag">Creative Technology</span>
-            </div>
-          </article>
-
-        </div>
-      </section>
-
-      <!-- Approach -->
-      <section class="section">
-        <h2 class="section-title">How I Work</h2>
-        <ul class="approach-list">
-          <li class="approach-item">
-            <strong>accessibility is a design constraint, not a checklist</strong>
+        <ul class="metric-band" aria-label="Epsilon impact metrics">
+          <li class="metric-cell">
+            <div class="metric-value">Hundreds</div>
+            <div class="metric-label">Creatives on the platform</div>
           </li>
-          <li class="approach-item">
-            <strong>production over prototypes</strong> — I write the code that ships
+          <li class="metric-cell">
+            <div class="metric-value">Thousands</div>
+            <div class="metric-label">AI variations per day</div>
           </li>
-          <li class="approach-item">
-            <strong>systems thinking</strong> — reusable components, design tokens, documentation
+          <li class="metric-cell">
+            <div class="metric-value">~5×</div>
+            <div class="metric-label">Faster than prior flow</div>
           </li>
-          <li class="approach-item">
-            <strong>bridge the gap</strong> — I speak design, engineering, and AI
-          </li>
-          <li class="approach-item">
-            <strong>AI as a multiplier</strong> — I build systems that build things
-          </li>
-          <li class="approach-item">
-            <strong>mentor engineers on craft</strong> — I raise the floor and set the standard
+          <li class="metric-cell">
+            <div class="metric-value">Full</div>
+            <div class="metric-label">Creative-org adoption</div>
           </li>
         </ul>
-      </section>
 
-      
+        <article class="case">
+          <p class="case-meta">Epsilon · 2021 → present · Staff Software Engineer · Tech lead</p>
+          <h3 class="case-title">AI Creative Production Platform</h3>
+          <p class="case-subtitle">An end-to-end web ad builder with AI threaded through concept, layout, and edit — and a self-optimizing eval skill every feature plugs into.</p>
 
-    </main>
+          <div class="case-grid">
+            <div class="case-body">
+              <h4>The problem</h4>
+              <p>Creative production didn't scale. Every ad variation was a human-in-the-loop craft act inside Illustrator and Photoshop. We needed a system where a small team could ship thousands of variations a day without sacrificing brand fidelity.</p>
 
-    <!-- Footer -->
-    <footer class="footer">
-      <nav class="footer-links" aria-label="Footer links">
-        <a href="https://github.com/kbo4sho" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub</a>
-        <span aria-hidden="true" style="color:var(--text-dim)">·</span>
-        <a href="https://linkedin.com/in/kevin-bolander-45659322" target="_blank" rel="noopener noreferrer" class="footer-link">LinkedIn</a>
-        <span aria-hidden="true" style="color:var(--text-dim)">·</span>
-        <a href="mailto:kevinbolander@gmail.com" class="footer-link">Email</a>
+              <h4>The approach</h4>
+              <p>I architected a <strong>homegrown agentic orchestration loop</strong> over tiered Gemini models, with humans in the loop at decision points. Production-data bridges — like real-time font-ID lookups — tie AI output to the actual brand system, so results aren't just plausible, they're production-valid.</p>
+
+              <h4>The leverage move</h4>
+              <p>I built a <strong>reusable eval skill</strong> every AI feature in the org plugs into. It scores outputs on layout accuracy, color fidelity, and pixel-diff against baselines — and a meta-optimizer reads those scores and tunes the prompts, model tier, pipeline steps, and schemas. Closer to DSPy-style automated pipeline tuning than critique-and-regenerate. Invest once; compound leverage across every AI surface downstream.</p>
+
+              <h4>What's next</h4>
+              <p>Leading an agent-first refactor — migrating deterministic orchestration into fully agentic workflows, with the eval harness as the safety rail.</p>
+            </div>
+
+            <aside class="case-sidebar" aria-label="Project metadata">
+              <div class="case-sidebar-block">
+                <div class="case-sidebar-label">Role</div>
+                <div class="case-sidebar-value">Staff Software Engineer · Tech lead</div>
+              </div>
+              <div class="case-sidebar-block">
+                <div class="case-sidebar-label">Stack</div>
+                <div class="case-sidebar-value">TypeScript · Gemini (tiered) · Custom eval harness · Node · Agent orchestration</div>
+              </div>
+              <div class="case-sidebar-block">
+                <div class="case-sidebar-label">Scope</div>
+                <div class="case-sidebar-value">Architecture · Team leadership · Exec reporting</div>
+              </div>
+              <div class="case-sidebar-block">
+                <div class="case-sidebar-label">Signals</div>
+                <div class="case-sidebar-value">Production · Fully adopted · Reusable infra · Agentic</div>
+              </div>
+            </aside>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ========== MAKEMEA ========== -->
+    <section aria-labelledby="makemea-heading">
+      <div class="wrap">
+        <p class="section-eyebrow">Selected Work · 02</p>
+        <h2 class="section-title" id="makemea-heading">Shipped solo, <em>runs itself</em></h2>
+
+        <ul class="metric-band" aria-label="MakeMeA build metrics">
+          <li class="metric-cell">
+            <div class="metric-value">2 days</div>
+            <div class="metric-label">Empty repo → live URL</div>
+          </li>
+          <li class="metric-cell">
+            <div class="metric-value">48</div>
+            <div class="metric-label">Curated comedy styles</div>
+          </li>
+          <li class="metric-cell">
+            <div class="metric-value">80+</div>
+            <div class="metric-label">Auto-generated SEO posts</div>
+          </li>
+          <li class="metric-cell">
+            <div class="metric-value">Auto</div>
+            <div class="metric-label">Trend-to-publish pipeline</div>
+          </li>
+        </ul>
+
+        <article class="case">
+          <p class="case-meta">Solo · 2026 → live · <a href="https://makemea.ai" target="_blank" rel="noopener noreferrer">makemea.ai</a></p>
+          <h3 class="case-title">MakeMeA — AI-native velocity as the case study</h3>
+          <p class="case-subtitle">An AI photo style-transfer app shipped in 2 days from empty repo to production, wrapped in an autonomous trend-to-publish content engine.</p>
+
+          <div class="case-grid">
+            <div class="case-body">
+              <h4>The build</h4>
+              <p>Pair-programmed with agents from empty repo to live URL in 48 hours. Next.js · TypeScript · OpenAI, deployed straight to production. Every design decision optimized for <strong>shipability</strong>: tailored prompts per style, watermark as a single overlay step, minimal server infra.</p>
+
+              <h4>The autonomous engine</h4>
+              <p>The longer-term bet: MakeMeA runs a <strong>trend-to-publish pipeline</strong> without human intervention. A trend finder spots emerging visual styles and spins up a new style (prompt + params), generates sample images, produces short-form videos, and auto-writes SEO/AEO blog posts — <strong>80+ posts, one per style</strong>, every style its own organic discovery surface.</p>
+
+              <h4>The honest result</h4>
+              <p>Live, functional, not profitable. The market is crowded; competitors give away what I charge for. But the exercise <strong>validated AI-native velocity as a repeatable baseline</strong>, and the auto-content infra is more valuable than the product it happens to wrap. <a href="https://makemea.ai" target="_blank" rel="noopener noreferrer">See it live →</a></p>
+
+              <h4>What I learned</h4>
+              <p>The system is the moat, not the UI. Taste differentiation only works at the speed you can keep leading it. Shipping in two days is a capability; product-market fit is a separate problem that velocity alone doesn't solve.</p>
+            </div>
+
+            <aside class="case-sidebar" aria-label="Project metadata">
+              <div class="case-sidebar-block">
+                <div class="case-sidebar-label">Role</div>
+                <div class="case-sidebar-value">Solo — design, code, prompts, ops</div>
+              </div>
+              <div class="case-sidebar-block">
+                <div class="case-sidebar-label">Stack</div>
+                <div class="case-sidebar-value">Next.js · TypeScript · OpenAI · Autonomous content pipeline</div>
+              </div>
+              <div class="case-sidebar-block">
+                <div class="case-sidebar-label">Scope</div>
+                <div class="case-sidebar-value">Product · Infra · Content engine · SEO/AEO</div>
+              </div>
+              <div class="case-sidebar-block">
+                <div class="case-sidebar-label">Signals</div>
+                <div class="case-sidebar-value">Live · Self-running · AI-native velocity · Learning lab</div>
+              </div>
+              <div class="case-sidebar-block">
+                <div class="case-sidebar-label">Link</div>
+                <div class="case-sidebar-value"><a href="https://makemea.ai" target="_blank" rel="noopener noreferrer">makemea.ai ↗</a></div>
+              </div>
+            </aside>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ========== LAB ========== -->
+    <section id="lab" aria-labelledby="lab-heading">
+      <div class="wrap">
+        <p class="section-eyebrow">Lab</p>
+        <h2 class="section-title" id="lab-heading">Early <em>explorations</em> in agent skills &amp; generative AI</h2>
+
+        <div class="lab-grid">
+          <article class="lab-card">
+            <p class="lab-status">● Early · Live</p>
+            <h3 class="lab-title">Sprawl</h3>
+            <p class="lab-desc">Real-time AI generative art. Type a question; Voronoi-stippled dots resolve into SDXL generations through a custom 2D/WebGL renderer.</p>
+            <a href="https://sprawl.place" target="_blank" rel="noopener noreferrer" class="lab-link">sprawl.place →</a>
+          </article>
+
+          <article class="lab-card">
+            <p class="lab-status">● Early · Published</p>
+            <h3 class="lab-title">OSS Contributor</h3>
+            <p class="lab-desc">Agent skill that discovers GitHub issues, forks, implements fixes, and opens PRs with full AI disclosure. Same skill-as-abstraction pattern as the Epsilon eval skill.</p>
+            <a href="https://clawhub.com/skills/oss-contributor" target="_blank" rel="noopener noreferrer" class="lab-link">clawhub.com →</a>
+          </article>
+
+          <article class="lab-card">
+            <p class="lab-status">● Early · Published</p>
+            <h3 class="lab-title">Visual QA</h3>
+            <p class="lab-desc">Visual regression for AI-agent pipelines. Playwright baselines, pixel-diff gates, deployment thresholds. Agents that write code need to see whether what they shipped actually looks right.</p>
+            <a href="https://clawhub.com/kbo4sho/visual-qa" target="_blank" rel="noopener noreferrer" class="lab-link">clawhub.com →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== FOUNDATION ========== -->
+    <section id="foundation" aria-labelledby="foundation-heading">
+      <div class="wrap">
+        <p class="section-eyebrow">Foundation</p>
+        <h2 class="section-title" id="foundation-heading">Twelve years of <em>depth</em> behind the work</h2>
+
+        <div class="foundation-grid">
+          <article class="foundation-card">
+            <p class="foundation-card-meta">Epsilon · 2017 – 2021</p>
+            <h3 class="foundation-card-title">Design Systems</h3>
+            <p>Founded the UX engineering discipline at Epsilon — grew a side project into the company's core design system, adopted across products. Set the standards, wrote the docs, and championed WCAG 2.1 AA accessibility as a design constraint embedded into every component rather than audited after the fact.</p>
+            <p class="foundation-card-tags">Design Systems · Accessibility · Cross-team adoption · Documentation</p>
+          </article>
+
+          <article class="foundation-card">
+            <p class="foundation-card-meta">Civiq Smartscapes · 2013 – 2017</p>
+            <h3 class="foundation-card-title">Creative Technology</h3>
+            <p>Large-format interactive installations for major brands. Personalized animated photo experience for Coca-Cola across malls nationwide. Award-winning Kinect-gesture Photo Booth for PepsiCo. 3D interactive experience for Accenture at JFK Airport. The throughline: real-time systems under public load, shipped for brands that measured them.</p>
+            <p class="foundation-card-tags">Kinect · Unity3D · Real-time systems · Creative technology</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== HOW I WORK ========== -->
+    <section id="how" aria-labelledby="how-heading">
+      <div class="wrap">
+        <p class="section-eyebrow">How I Work</p>
+        <h2 class="section-title" id="how-heading">The <em>operating</em> principles</h2>
+
+        <ul class="principles">
+          <li class="principle">
+            <p class="principle-title">Evals are the job</p>
+            <p class="principle-body">Generation is table stakes. Teams that win in AI measure output quality and tune for it — the eval layer compounds across every feature that plugs in.</p>
+          </li>
+          <li class="principle">
+            <p class="principle-title">Skills &gt; one-off features</p>
+            <p class="principle-body">Package cross-cutting AI work (evals, agents, tools) as composable skills. It's what turns a team into a platform.</p>
+          </li>
+          <li class="principle">
+            <p class="principle-title">Simple orchestration, smart meta-optimization</p>
+            <p class="principle-body">Homegrown in-memory loops beat heavy frameworks when the AI landscape moves weekly. Keep the substrate debuggable; let the optimizer do the adapting.</p>
+          </li>
+          <li class="principle">
+            <p class="principle-title">Humans in the loop today, agents tomorrow</p>
+            <p class="principle-body">Every AI moment I ship is a skill an agent can eventually orchestrate. Deterministic today, agentic as the safety rails mature.</p>
+          </li>
+          <li class="principle">
+            <p class="principle-title">Production over prototypes</p>
+            <p class="principle-body">I write the code that ships and operate the systems that run. Twelve years of making that trade honestly.</p>
+          </li>
+          <li class="principle">
+            <p class="principle-title">Accessibility is a design constraint</p>
+            <p class="principle-body">Not a checklist. WCAG 2.1 AA embedded into components, not bolted on at audit.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <footer role="contentinfo">
+    <div class="wrap">
+      <nav class="footer-links" aria-label="Contact">
+        <a href="https://github.com/kbo4sho" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://linkedin.com/in/kevin-bolander-45659322" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="mailto:kevinbolander@gmail.com">Email</a>
+        <a href="kevin-bolander-resume.pdf">Resume</a>
       </nav>
-      <p class="footer-text">built with html, css, and opinions.</p>
-    </footer>
+      <p class="footer-note">Built with HTML, CSS, and opinions · © 2026 Kevin Bolander</p>
+    </div>
+  </footer>
 
-  </div>
 </body>
 </html>
