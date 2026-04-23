@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Design Preview — Portfolio Rebuild</title>
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --surface: #111;
+      --surface-2: #161616;
+      --border: #222;
+      --teal: #00d4aa;
+      --teal-dim: #00d4aa40;
+      --teal-bg: #00d4aa0d;
+      --text: #e8e8e8;
+      --text-dim: #999;
+      --text-dimmer: #666;
+      --font-display: 'Orbitron', sans-serif;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', 'Share Tech Mono', monospace;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .spec-note {
+      background: var(--teal-bg);
+      border-left: 2px solid var(--teal);
+      padding: 1rem 1.25rem;
+      margin: 0 0 2rem 0;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-dim);
+    }
+
+    .spec-note strong { color: var(--teal); font-weight: 500; }
+
+    .section-wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+      border-bottom: 1px dashed var(--border);
+    }
+
+    .section-wrap:last-child { border-bottom: none; }
+
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--teal);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+    }
+
+    /* ========== TYPE SPECIMENS ========== */
+    .type-row {
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .type-row:last-child { border-bottom: none; }
+
+    .type-label {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-dimmer);
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+    }
+
+    .specimen-hero {
+      font-family: var(--font-display);
+      font-size: 3.5rem;
+      font-weight: 900;
+      color: var(--text);
+      letter-spacing: 0.02em;
+      line-height: 1;
+    }
+
+    .specimen-h2 {
+      font-family: var(--font-body);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.01em;
+    }
+
+    .specimen-body {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      color: var(--text);
+      max-width: 60ch;
+      line-height: 1.7;
+    }
+
+    .specimen-mono {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      letter-spacing: 0.03em;
+    }
+
+    /* ========== COLOR PALETTE ========== */
+    .palette {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1rem;
+    }
+
+    .swatch {
+      border: 1px solid var(--border);
+      padding: 1rem;
+      border-radius: 4px;
+    }
+
+    .swatch-chip {
+      width: 100%;
+      height: 60px;
+      border-radius: 2px;
+      margin-bottom: 0.75rem;
+      border: 1px solid var(--border);
+    }
+
+    .swatch-name {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text);
+      margin-bottom: 0.25rem;
+    }
+
+    .swatch-value {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-dim);
+    }
+
+    /* ========== HERO PREVIEW ========== */
+    .hero-preview {
+      padding: 5rem 2rem 4rem;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--teal);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-name {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 900;
+      color: var(--text);
+      letter-spacing: 0.01em;
+      line-height: 0.95;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-tagline {
+      font-family: var(--font-body);
+      font-size: clamp(1.25rem, 2.2vw, 1.6rem);
+      font-weight: 400;
+      color: var(--text);
+      max-width: 44ch;
+      line-height: 1.4;
+      margin-bottom: 2rem;
+    }
+
+    .hero-tagline strong {
+      color: var(--teal);
+      font-weight: 500;
+    }
+
+    .hero-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--teal);
+      margin-bottom: 2.5rem;
+      padding: 0.4rem 0.9rem;
+      border: 1px solid var(--teal-dim);
+      border-radius: 100px;
+    }
+
+    .hero-status .dot {
+      width: 6px;
+      height: 6px;
+      background: var(--teal);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--teal);
+    }
+
+    .hero-nav {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+    }
+
+    .hero-nav a {
+      color: var(--text-dim);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .hero-nav a:hover { color: var(--teal); }
+
+    /* ========== METRIC BAND ========== */
+    .metric-band {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .metric-cell {
+      background: var(--surface);
+      padding: 2rem 1.5rem;
+    }
+
+    .metric-value {
+      font-family: var(--font-display);
+      font-size: 2.25rem;
+      font-weight: 900;
+      color: var(--teal);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.01em;
+    }
+
+    .metric-label {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      line-height: 1.4;
+    }
+
+    /* ========== CASE STUDY PREVIEW ========== */
+    .case {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 2.5rem;
+      margin-top: 2rem;
+    }
+
+    .case-meta {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--teal);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .case-title {
+      font-family: var(--font-body);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.01em;
+      margin-bottom: 0.5rem;
+    }
+
+    .case-subtitle {
+      font-family: var(--font-body);
+      font-size: 1.05rem;
+      color: var(--text-dim);
+      margin-bottom: 2rem;
+      font-weight: 400;
+    }
+
+    .case-grid {
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      gap: 3rem;
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 768px) {
+      .case-grid { grid-template-columns: 1fr; gap: 2rem; }
+    }
+
+    .case-body h4 {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: var(--teal);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-top: 1.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .case-body h4:first-child { margin-top: 0; }
+
+    .case-body p {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: var(--text);
+      margin-bottom: 1rem;
+    }
+
+    .case-body strong { color: var(--teal); font-weight: 500; }
+
+    .case-sidebar {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-dim);
+    }
+
+    .case-sidebar-block {
+      padding: 1rem 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .case-sidebar-block:first-child { border-top: none; padding-top: 0; }
+
+    .case-sidebar-label {
+      color: var(--text-dimmer);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      font-size: 0.65rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .case-sidebar-value { color: var(--text); line-height: 1.6; }
+
+    /* ========== LAB 3-UP ========== */
+    .lab-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    @media (max-width: 768px) {
+      .lab-grid { grid-template-columns: 1fr; }
+    }
+
+    .lab-card {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      padding: 1.5rem;
+      transition: border-color 0.2s;
+    }
+
+    .lab-card:hover { border-color: var(--teal-dim); }
+
+    .lab-status {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--text-dimmer);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+
+    .lab-title {
+      font-family: var(--font-body);
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+
+    .lab-desc {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .lab-link {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--teal);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+    }
+
+    .lab-link:hover { text-decoration: underline; }
+
+    /* ========== HEADING TREATMENTS ========== */
+    .heading-specimen {
+      margin-bottom: 2rem;
+    }
+
+    .h-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--teal);
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+
+    .h-title {
+      font-family: var(--font-body);
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+
+    .h-title em {
+      font-style: normal;
+      color: var(--teal);
+    }
+
+    /* ========== PAGE SCAFFOLD ========== */
+    .page-header {
+      padding: 2rem;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .page-title {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--teal);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    .page-subtitle {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      margin-top: 0.25rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page-header">
+    <div class="page-title">Portfolio Design Preview</div>
+    <div class="page-subtitle">Review typography, palette, and block treatments before full build.</div>
+  </div>
+
+  <!-- TYPE SPECIMENS -->
+  <section class="section-wrap">
+    <div class="section-label">01 · Typography</div>
+
+    <div class="spec-note">
+      <strong>Decision:</strong> Orbitron for the hero name only (signature flourish). Inter for all body, prose, and section headers (clean, serious, readable). JetBrains Mono for tags, meta, labels (technical flavor).
+    </div>
+
+    <div class="type-row">
+      <div class="type-label">Orbitron 900 · hero name (used once)</div>
+      <div class="specimen-hero">KEVIN BOLANDER</div>
+    </div>
+
+    <div class="type-row">
+      <div class="type-label">Inter 700 · section headlines</div>
+      <div class="specimen-h2">The eval skill any AI feature plugs into</div>
+    </div>
+
+    <div class="type-row">
+      <div class="type-label">Inter 400 · body prose</div>
+      <p class="specimen-body">I built a homegrown agentic orchestration loop across tiered Gemini models with humans in the loop. It's now used by hundreds of creators at Epsilon to produce thousands of AI-generated ad variations per day — 5× faster than the prior workflow, and fully adopted across the creative teams.</p>
+    </div>
+
+    <div class="type-row">
+      <div class="type-label">JetBrains Mono 400 · meta + tags</div>
+      <div class="specimen-mono">EPSILON · 2023–PRESENT · TypeScript · Gemini · Agent orchestration · Evals</div>
+    </div>
+  </section>
+
+  <!-- COLOR PALETTE -->
+  <section class="section-wrap">
+    <div class="section-label">02 · Color</div>
+
+    <div class="spec-note">
+      Dark base, teal accent. Teal used for eyebrows, metric numbers, hover states, and emphasis in prose — never for large fills. Keeps it signal, not wallpaper.
+    </div>
+
+    <div class="palette">
+      <div class="swatch">
+        <div class="swatch-chip" style="background:#0a0a0a"></div>
+        <div class="swatch-name">bg</div>
+        <div class="swatch-value">#0a0a0a</div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-chip" style="background:#111"></div>
+        <div class="swatch-name">surface</div>
+        <div class="swatch-value">#111111</div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-chip" style="background:#161616"></div>
+        <div class="swatch-name">surface-2</div>
+        <div class="swatch-value">#161616</div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-chip" style="background:#00d4aa"></div>
+        <div class="swatch-name">teal</div>
+        <div class="swatch-value">#00d4aa</div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-chip" style="background:#e8e8e8"></div>
+        <div class="swatch-name">text</div>
+        <div class="swatch-value">#e8e8e8</div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-chip" style="background:#999"></div>
+        <div class="swatch-name">text-dim</div>
+        <div class="swatch-value">#999999</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HERO PREVIEW -->
+  <section class="section-wrap">
+    <div class="section-label">03 · Hero</div>
+    <div class="spec-note">
+      Name in Orbitron (one flourish). Tagline in Inter, teal emphasis on "ship" + "run themselves." Status pill replaces the loose dot. Nav is mono for technical flavor.
+    </div>
+
+    <div class="hero-preview">
+      <div class="hero-eyebrow">Staff Software Engineer — AI Systems & Agentic Tooling</div>
+      <h1 class="hero-name">KEVIN BOLANDER</h1>
+      <p class="hero-tagline">I build AI systems that <strong>ship</strong> — and then <strong>run themselves</strong>. Twelve years of production depth, now pointed at agents.</p>
+      <div class="hero-status">
+        <span class="dot"></span>
+        <span>open to new opportunities</span>
+      </div>
+      <nav class="hero-nav">
+        <a href="#">GitHub</a>
+        <a href="#">LinkedIn</a>
+        <a href="#">Email</a>
+        <a href="#">Writing</a>
+        <a href="#">Resume ↓</a>
+      </nav>
+    </div>
+  </section>
+
+  <!-- METRIC BAND -->
+  <section class="section-wrap">
+    <div class="section-label">04 · Metric Band (signature element)</div>
+    <div class="spec-note">
+      This is the move that makes the portfolio land for recruiters. Every case study opens with a metric band before the prose — scanners see the story in 3 seconds.
+    </div>
+
+    <div class="metric-band">
+      <div class="metric-cell">
+        <div class="metric-value">Hundreds</div>
+        <div class="metric-label">Creators using the platform</div>
+      </div>
+      <div class="metric-cell">
+        <div class="metric-value">Thousands</div>
+        <div class="metric-label">AI variations / day</div>
+      </div>
+      <div class="metric-cell">
+        <div class="metric-value">5×</div>
+        <div class="metric-label">Faster than prior workflow</div>
+      </div>
+      <div class="metric-cell">
+        <div class="metric-value">Full</div>
+        <div class="metric-label">Creative-team adoption</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CASE STUDY PREVIEW -->
+  <section class="section-wrap">
+    <div class="section-label">05 · Case Study block</div>
+    <div class="spec-note">
+      Case study = metric band (above) + this block. Left column is the narrative (problem → approach → the leverage move → what's next). Right column is the stack/meta sidebar.
+    </div>
+
+    <div class="heading-specimen">
+      <div class="h-eyebrow">Selected Work · 01</div>
+      <h2 class="h-title">Agentic creative tooling at <em>Epsilon</em></h2>
+    </div>
+
+    <article class="case">
+      <div class="case-meta">Epsilon · 2023–Present · Staff Software Engineer</div>
+      <h3 class="case-title">AI Creative Production Platform</h3>
+      <p class="case-subtitle">No-code creative ad tooling with a homegrown agentic orchestration loop across tiered models.</p>
+
+      <div class="case-grid">
+        <div class="case-body">
+          <h4>The problem</h4>
+          <p>Creative production didn't scale. Every ad variation was a human-in-the-loop craft act. We needed a system where a small team of creators could produce thousands of variations per day — without sacrificing brand fidelity.</p>
+
+          <h4>The approach</h4>
+          <p>I architected a <strong>homegrown agentic orchestration loop</strong> over tiered Gemini models, with humans in the loop at decision points. Production-data bridges (like real-time font-ID lookups) keep AI outputs tied to the actual brand system rather than generically "looking good."</p>
+
+          <h4>The leverage move</h4>
+          <p>I built a <strong>reusable eval skill</strong> that every AI feature in the org now plugs into. The skill grades its own outputs and self-improves on a recursive loop. Invest once in a narrow substrate; compound leverage across every AI feature downstream.</p>
+
+          <h4>What's next</h4>
+          <p>Leading an agent-first refactor of the platform — migrating deterministic orchestration into fully agentic workflows, with the eval harness as the safety rail.</p>
+        </div>
+
+        <aside class="case-sidebar">
+          <div class="case-sidebar-block">
+            <div class="case-sidebar-label">Role</div>
+            <div class="case-sidebar-value">Staff Software Engineer · Tech lead</div>
+          </div>
+          <div class="case-sidebar-block">
+            <div class="case-sidebar-label">Stack</div>
+            <div class="case-sidebar-value">TypeScript · Gemini (tiered) · Agent orchestration · Custom eval harness · Node</div>
+          </div>
+          <div class="case-sidebar-block">
+            <div class="case-sidebar-label">Scope</div>
+            <div class="case-sidebar-value">Architecture · Team leadership · Exec reporting</div>
+          </div>
+          <div class="case-sidebar-block">
+            <div class="case-sidebar-label">Signals</div>
+            <div class="case-sidebar-value">Fully adopted · Production · Agentic · Reusable infra</div>
+          </div>
+        </aside>
+      </div>
+    </article>
+  </section>
+
+  <!-- LAB 3-UP -->
+  <section class="section-wrap">
+    <div class="section-label">06 · Lab band (3-up)</div>
+    <div class="spec-note">
+      Sprawl, OSS Contributor, Visual QA grouped as "Early Explorations." Honest working-on-it framing. Specifically highlights <strong>OSS Contributor</strong> and <strong>Visual QA</strong> as agent skills — direct signal for Saris's agentic-layer category.
+    </div>
+
+    <div class="heading-specimen">
+      <div class="h-eyebrow">Lab</div>
+      <h2 class="h-title">Early <em>explorations</em> in agent skills & generative AI</h2>
+    </div>
+
+    <div class="lab-grid">
+      <article class="lab-card">
+        <div class="lab-status">● Early · Live</div>
+        <h3 class="lab-title">Sprawl</h3>
+        <p class="lab-desc">Real-time AI generative art. Type a question; Voronoi-stippled dots resolve into SDXL generations through a custom 2D/WebGL renderer.</p>
+        <a href="#" class="lab-link">sprawl.place →</a>
+      </article>
+
+      <article class="lab-card">
+        <div class="lab-status">● Early · Published</div>
+        <h3 class="lab-title">OSS Contributor</h3>
+        <p class="lab-desc">Agent skill that discovers GitHub issues, forks, implements fixes, and opens PRs with full AI disclosure. Published on ClawHub.</p>
+        <a href="#" class="lab-link">clawhub.com →</a>
+      </article>
+
+      <article class="lab-card">
+        <div class="lab-status">● Early · Published</div>
+        <h3 class="lab-title">Visual QA</h3>
+        <p class="lab-desc">Agent skill for visual regression testing of AI-agent pipelines. Playwright baselines, pixel-diff gates, deployment thresholds.</p>
+        <a href="#" class="lab-link">clawhub.com →</a>
+      </article>
+    </div>
+  </section>
+
+  <section class="section-wrap">
+    <div class="section-label">07 · Notes</div>
+    <div class="spec-note">
+      <strong>Open questions before I build the full page:</strong><br>
+      1. Font stack OK? Orbitron for the name feels bold — it's either signature or sci-fi depending on your taste.<br>
+      2. Metric band — do you like the split-cell treatment, or would you rather have the numbers laid out differently (e.g. inline in the prose)?<br>
+      3. Case study sidebar — keep as a right rail, or move meta below the title as a single row?<br>
+      4. Lab cards — current density feels right to me, but happy to go denser or airier.<br>
+      5. Anything that feels "off" in tone — too serious? Not serious enough?
+    </div>
+  </section>
+
+</body>
+</html>
