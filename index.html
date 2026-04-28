@@ -3,34 +3,34 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kevin Bolander — AI Systems &amp; Agentic Tooling</title>
-  <meta name="description" content="Staff software engineer building production AI systems and agentic tooling. Twelve years of depth, now pointed at agents. Built a self-optimizing eval skill used across Epsilon's creative org.">
+  <title>Kevin Bolander — Design Engineer · Systems &amp; AI-Assisted UI</title>
+  <meta name="description" content="Staff engineer at the bridge between design and engineering. Founded Epsilon's Core UI design system — almost a decade in production — and now build AI-assisted UI tooling, evals, and agent skills on top of that foundation.">
   <link rel="canonical" href="https://kbo4sho.github.io/">
   <meta name="theme-color" content="#0a0a0a">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
-  <meta property="og:title" content="Kevin Bolander — AI Systems &amp; Agentic Tooling">
-  <meta property="og:description" content="Staff software engineer building production AI systems and agentic tooling. Twelve years of production depth, now pointed at agents.">
+  <meta property="og:title" content="Kevin Bolander — Design Engineer · Systems &amp; AI-Assisted UI">
+  <meta property="og:description" content="Staff engineer at the bridge between design and engineering. Design systems in production, AI-assisted UI, and the tooling between them.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://kbo4sho.github.io/">
   <meta property="og:image" content="https://kbo4sho.github.io/me.jpg">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Kevin Bolander — AI Systems &amp; Agentic Tooling">
-  <meta name="twitter:description" content="Staff software engineer building production AI systems and agentic tooling. Twelve years of production depth, now pointed at agents.">
+  <meta name="twitter:title" content="Kevin Bolander — Design Engineer · Systems &amp; AI-Assisted UI">
+  <meta name="twitter:description" content="Staff engineer at the bridge between design and engineering. Design systems in production, AI-assisted UI, and the tooling between them.">
   <meta name="twitter:image" content="https://kbo4sho.github.io/me.jpg">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Kevin Bolander",
-    "jobTitle": "Staff Software Engineer",
+    "jobTitle": "Staff Design Engineer",
     "worksFor": { "@type": "Organization", "name": "Epsilon" },
     "url": "https://kbo4sho.github.io",
     "sameAs": [
       "https://github.com/kbo4sho",
       "https://linkedin.com/in/kevin-bolander-45659322"
     ],
-    "knowsAbout": ["AI Agent Systems", "AI Orchestration", "Agentic Tooling", "LLM Evaluation", "Creative AI", "TypeScript", "Python", "Gemini", "Design Systems", "Accessibility"],
-    "description": "Staff software engineer building production AI systems and agentic tooling. Twelve years of production depth, now pointed at agents."
+    "knowsAbout": ["Design Systems", "Design Engineering", "Accessibility", "WCAG", "Storybook", "Component Libraries", "Design Tokens", "AI-Assisted UI", "Claude Code", "MCP", "Agent Skills", "LLM Evaluation", "TypeScript", "React"],
+    "description": "Staff engineer at the bridge between design and engineering. Founded Epsilon's Core UI design system, now in production for almost a decade, and builds AI-assisted UI tooling on top of that foundation."
   }
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -348,13 +348,19 @@
       background: var(--surface-2);
       border: 1px solid var(--border);
       padding: 1.75rem;
-      transition: border-color 0.2s;
+      transition: border-color 220ms cubic-bezier(0.4, 0, 0.2, 1),
+                  transform 220ms cubic-bezier(0.4, 0, 0.2, 1),
+                  background 220ms cubic-bezier(0.4, 0, 0.2, 1);
       display: flex;
       flex-direction: column;
     }
 
     .lab-card:hover,
-    .lab-card:focus-within { border-color: var(--teal-dim); }
+    .lab-card:focus-within {
+      border-color: var(--teal-dim);
+      background: var(--teal-bg);
+      transform: translateY(-2px);
+    }
 
     .lab-status {
       font-family: var(--font-mono);
@@ -393,12 +399,76 @@
     .lab-link:hover,
     .lab-link:focus-visible { text-decoration: underline; }
 
+    /* ========== COMPONENT GRID (Core UI preview) ========== */
+    .component-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin: 2rem 0 0.5rem;
+    }
+
+    .component-tile {
+      background: var(--surface-2);
+      padding: 1.5rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      min-height: 100px;
+      transition: background 200ms cubic-bezier(0.4, 0, 0.2, 1),
+                  transform 200ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .component-tile:hover {
+      background: var(--teal-bg);
+      transform: translateY(-2px);
+    }
+
+    .component-tile-label {
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      color: var(--text);
+      text-transform: uppercase;
+    }
+
+    .component-tile-meta {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      letter-spacing: 0.04em;
+      line-height: 1.5;
+    }
+
+    .component-grid-caption {
+      grid-column: 1 / -1;
+      background: var(--surface);
+      padding: 0.75rem 1.25rem;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-dimmer);
+      letter-spacing: 0.05em;
+      line-height: 1.5;
+    }
+
+    .component-grid-caption a {
+      color: var(--teal);
+      text-decoration: none;
+      border-bottom: 1px solid var(--teal-dim);
+    }
+
+    .component-grid-caption a:hover { border-bottom-color: var(--teal); }
+
     /* ========== FOUNDATION ========== */
     .foundation-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 1rem;
     }
+
+    .foundation-grid--single { grid-template-columns: minmax(0, 1fr); }
 
     .foundation-card {
       background: var(--surface-2);
@@ -468,6 +538,15 @@
       line-height: 1.65;
     }
 
+    .principle-body a {
+      color: var(--teal);
+      text-decoration: none;
+      border-bottom: 1px solid var(--teal-dim);
+      transition: border-color 0.15s;
+    }
+
+    .principle-body a:hover { border-bottom-color: var(--teal); }
+
     /* ========== FOOTER ========== */
     footer {
       padding: 3rem 0 5rem;
@@ -530,6 +609,7 @@
       .lab-grid { grid-template-columns: 1fr; }
       .foundation-grid { grid-template-columns: 1fr; }
       .principles { grid-template-columns: 1fr; }
+      .component-grid { grid-template-columns: repeat(2, 1fr); }
       .metric-cell { padding: 1.5rem 1.25rem; }
       .metric-value { font-size: 1.75rem; }
       .hero-nav { gap: 1.25rem; font-size: 0.75rem; }
@@ -546,9 +626,9 @@
   <a href="#main" class="skip-link">Skip to main content</a>
 
   <header class="hero wrap" role="banner">
-    <p class="hero-eyebrow">Staff Software Engineer — AI Systems &amp; Agentic Tooling</p>
+    <p class="hero-eyebrow">Staff Engineer at the bridge between design &amp; engineering</p>
     <h1 class="hero-name">KEVIN BOLANDER</h1>
-    <p class="hero-tagline">I build AI systems that <strong>ship</strong> — and then <strong>run themselves</strong>. Twelve years of production depth, now pointed at agents.</p>
+    <p class="hero-tagline">Design systems in production, <strong>AI-assisted UI</strong>, and the <strong>tooling between them</strong>. Founded Epsilon's Core UI — almost a decade in production — now pointing that same skill-as-abstraction pattern at agents.</p>
     <p class="hero-status" aria-label="Availability">
       <span class="dot" aria-hidden="true"></span>
       <span>open to new opportunities</span>
@@ -564,10 +644,110 @@
 
   <main id="main">
 
-    <!-- ========== EPSILON ========== -->
-    <section id="work" aria-labelledby="epsilon-heading">
+    <!-- ========== CORE UI (DESIGN SYSTEM) ========== -->
+    <section id="work" aria-labelledby="core-ui-heading">
       <div class="wrap">
         <p class="section-eyebrow">Selected Work · 01</p>
+        <h2 class="section-title" id="core-ui-heading">Founded <em>Core UI</em>, Epsilon's design system</h2>
+
+        <ul class="metric-band" aria-label="Core UI impact metrics">
+          <li class="metric-cell">
+            <div class="metric-value">~10 yrs</div>
+            <div class="metric-label">In production</div>
+          </li>
+          <li class="metric-cell">
+            <div class="metric-value">Company-wide</div>
+            <div class="metric-label">Adoption across products</div>
+          </li>
+          <li class="metric-cell">
+            <div class="metric-value">WCAG 2.1 AA</div>
+            <div class="metric-label">Embedded, not audited</div>
+          </li>
+          <li class="metric-cell">
+            <div class="metric-value">Storybook + Figma</div>
+            <div class="metric-label">Surfaces in sync</div>
+          </li>
+        </ul>
+
+        <article class="case">
+          <p class="case-meta">Epsilon · 2017 → present · Founder &amp; UX engineering lead</p>
+          <h3 class="case-title">Core UI — the design system that turned a side project into shared infra</h3>
+          <p class="case-subtitle">A production design system bridging Figma and Storybook, accessibility embedded as a constraint, in production across Epsilon's products for almost a decade.</p>
+
+          <div class="case-grid">
+            <div class="case-body">
+              <h4>The problem</h4>
+              <p>Designers and engineers were on different sides of a wall. Designs shipped in Figma, components got rebuilt per product, accessibility was a checklist someone ran at the end, and every team rediscovered the same primitives. The gap between design intent and production reality was where quality leaked.</p>
+
+              <h4>The approach</h4>
+              <p>I founded the <strong>UX Engineering discipline</strong> at Epsilon and grew what started as a side project into the company's shared design system. I partnered with designers in Figma and engineers in Storybook so the same component had one canonical surface in both worlds. Tokens, patterns, and documentation lived alongside the code, not in a separate doc that drifted.</p>
+
+              <h4>The leverage move</h4>
+              <p>I treated <strong>WCAG 2.1 AA as a design constraint, embedded into every component</strong> — not a checklist run at audit. Color contrast, focus order, ARIA semantics, keyboard paths: all baked into the primitives. Same skill-as-abstraction pattern I'd later apply to AI evals: invest once at the substrate, every product team downstream gets the leverage for free. Ship a button, ship accessibility.</p>
+
+              <h4>What's next</h4>
+              <p>Core UI is the foundation everything else is built on — including the AI-assisted UI work that follows. The design system is where taste, accessibility, and system thinking compound; the AI tooling is where that compounding gets pointed at agents. Live at <a href="https://coreui.epsilon.com" target="_blank" rel="noopener noreferrer">coreui.epsilon.com</a>.</p>
+
+              <figure class="component-grid" aria-label="A sample of Core UI components">
+                <div class="component-tile">
+                  <span class="component-tile-label">Button</span>
+                  <span class="component-tile-meta">Primary · Secondary · Ghost · Destructive</span>
+                </div>
+                <div class="component-tile">
+                  <span class="component-tile-label">Input</span>
+                  <span class="component-tile-meta">Field · Label · Error · Help text</span>
+                </div>
+                <div class="component-tile">
+                  <span class="component-tile-label">Tag</span>
+                  <span class="component-tile-meta">Status · Filterable · Removable</span>
+                </div>
+                <div class="component-tile">
+                  <span class="component-tile-label">Card</span>
+                  <span class="component-tile-meta">Surface · Header · Action region</span>
+                </div>
+                <div class="component-tile">
+                  <span class="component-tile-label">Modal</span>
+                  <span class="component-tile-meta">Focus trap · Esc · A11y dialog</span>
+                </div>
+                <div class="component-tile">
+                  <span class="component-tile-label">Tokens</span>
+                  <span class="component-tile-meta">Color · Type · Spacing · Motion</span>
+                </div>
+                <figcaption class="component-grid-caption">A small slice of the system — full surface live at <a href="https://coreui.epsilon.com" target="_blank" rel="noopener noreferrer">coreui.epsilon.com ↗</a></figcaption>
+              </figure>
+            </div>
+
+            <aside class="case-sidebar" aria-label="Project metadata">
+              <div class="case-sidebar-block">
+                <div class="case-sidebar-label">Role</div>
+                <div class="case-sidebar-value">Founder · UX engineering lead</div>
+              </div>
+              <div class="case-sidebar-block">
+                <div class="case-sidebar-label">Stack</div>
+                <div class="case-sidebar-value">React · TypeScript · Storybook · Design tokens · Figma</div>
+              </div>
+              <div class="case-sidebar-block">
+                <div class="case-sidebar-label">Scope</div>
+                <div class="case-sidebar-value">Discipline founding · Architecture · A11y standards · Documentation · Cross-team adoption</div>
+              </div>
+              <div class="case-sidebar-block">
+                <div class="case-sidebar-label">Signals</div>
+                <div class="case-sidebar-value">~10 yrs in production · Company-wide adoption · WCAG 2.1 AA embedded · Figma ↔ Storybook parity</div>
+              </div>
+              <div class="case-sidebar-block">
+                <div class="case-sidebar-label">Link</div>
+                <div class="case-sidebar-value"><a href="https://coreui.epsilon.com" target="_blank" rel="noopener noreferrer">coreui.epsilon.com ↗</a></div>
+              </div>
+            </aside>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ========== EPSILON AI ========== -->
+    <section aria-labelledby="epsilon-heading">
+      <div class="wrap">
+        <p class="section-eyebrow">Selected Work · 02</p>
         <h2 class="section-title" id="epsilon-heading">Agentic creative tooling at <em>Epsilon</em></h2>
 
         <ul class="metric-band" aria-label="Epsilon impact metrics">
@@ -635,7 +815,7 @@
     <!-- ========== MAKEMEA ========== -->
     <section aria-labelledby="makemea-heading">
       <div class="wrap">
-        <p class="section-eyebrow">Selected Work · 02</p>
+        <p class="section-eyebrow">Selected Work · 03</p>
         <h2 class="section-title" id="makemea-heading">Shipped solo, <em>runs itself</em></h2>
 
         <ul class="metric-band" aria-label="MakeMeA build metrics">
@@ -726,9 +906,9 @@
           </article>
 
           <article class="lab-card">
-            <p class="lab-status">● Early · Published</p>
-            <h3 class="lab-title">Visual QA</h3>
-            <p class="lab-desc">Visual regression for AI-agent pipelines. Playwright baselines, pixel-diff gates, deployment thresholds. Agents that write code need to see whether what they shipped actually looks right.</p>
+            <p class="lab-status">● DX · Published</p>
+            <h3 class="lab-title">Visual QA — agent-pipeline DX</h3>
+            <p class="lab-desc">Internal tooling for the moment agents started shipping visual breakage faster than humans could catch it. Playwright baselines, pixel-diff gates, and deployment thresholds wired directly into agent runs — so a regression fails the build before it ships, not after a designer notices. Workflow automation that gives every team that plugs in a quality floor for free.</p>
             <a href="https://clawhub.com/kbo4sho/visual-qa" target="_blank" rel="noopener noreferrer" class="lab-link">clawhub.com →</a>
           </article>
         </div>
@@ -741,14 +921,7 @@
         <p class="section-eyebrow">Foundation</p>
         <h2 class="section-title" id="foundation-heading">Twelve years of <em>depth</em> behind the work</h2>
 
-        <div class="foundation-grid">
-          <article class="foundation-card">
-            <p class="foundation-card-meta">Epsilon · 2017 – 2021</p>
-            <h3 class="foundation-card-title">Design Systems</h3>
-            <p>Founded the UX engineering discipline at Epsilon — grew a side project into the company's core design system, adopted across products. Set the standards, wrote the docs, and championed WCAG 2.1 AA accessibility as a design constraint embedded into every component rather than audited after the fact.</p>
-            <p class="foundation-card-tags">Design Systems · Accessibility · Cross-team adoption · Documentation</p>
-          </article>
-
+        <div class="foundation-grid foundation-grid--single">
           <article class="foundation-card">
             <p class="foundation-card-meta">Civiq Smartscapes · 2013 – 2017</p>
             <h3 class="foundation-card-title">Creative Technology</h3>
@@ -789,6 +962,10 @@
           <li class="principle">
             <p class="principle-title">Accessibility is a design constraint</p>
             <p class="principle-body">Not a checklist. WCAG 2.1 AA embedded into components, not bolted on at audit.</p>
+          </li>
+          <li class="principle">
+            <p class="principle-title">AI-assisted dev is the substrate</p>
+            <p class="principle-body">Daily Claude Code, Cursor, and MCP — not as a buzzword, as the working surface. CLAUDE.md and AGENTS.md as committed primitives, agent skills published on <a href="https://clawhub.com/kbo4sho" target="_blank" rel="noopener noreferrer">ClawHub</a>, and a point of view on where this is headed: the loop between designer, engineer, and agent gets tighter every quarter, and the people who treat their tools as a system get the compounding.</p>
           </li>
         </ul>
       </div>
