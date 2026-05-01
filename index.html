@@ -461,6 +461,101 @@
 
     .component-grid-caption a:hover { border-bottom-color: var(--teal); }
 
+    .utility-feature {
+      display: grid;
+      grid-template-columns: minmax(0, 0.95fr) minmax(300px, 1.05fr);
+      gap: 2rem;
+      align-items: center;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      margin-top: 1rem;
+      padding: 2rem;
+      overflow: hidden;
+    }
+
+    .utility-title {
+      font-family: var(--font-body);
+      font-size: clamp(1.35rem, 2.5vw, 1.75rem);
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.75rem;
+    }
+
+    .utility-desc,
+    .utility-note {
+      font-size: 0.95rem;
+      color: var(--text);
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+
+    .utility-note { color: var(--text-dim); }
+
+    .utility-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      list-style: none;
+      padding: 0;
+      margin: 1.25rem 0 0;
+    }
+
+    .utility-tags li {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: var(--teal);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: 1px solid var(--teal-dim);
+      background: var(--teal-bg);
+      padding: 0.4rem 0.55rem;
+    }
+
+    .utility-link {
+      display: flex;
+      align-items: center;
+      align-self: flex-start;
+      width: fit-content;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--teal);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid var(--teal-dim);
+      margin-top: 1.25rem;
+    }
+
+    .utility-link:hover,
+    .utility-link:focus-visible { border-bottom-color: var(--teal); }
+
+    .utility-visual {
+      display: flex;
+      justify-content: center;
+    }
+
+    .utility-image-link {
+      display: block;
+      width: min(100%, 560px);
+      box-shadow: 0 22px 60px rgba(0, 0, 0, 0.34);
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid #2a2a2a;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .utility-image-link:hover,
+    .utility-image-link:focus-visible {
+      border-color: var(--teal-dim);
+      transform: translateY(-2px);
+    }
+
+    .utility-screenshot {
+      display: block;
+      width: 100%;
+      height: auto;
+      background: #030303;
+    }
+
     /* ========== FOUNDATION ========== */
     .foundation-grid {
       display: grid;
@@ -607,6 +702,8 @@
       .case { padding: 1.75rem; }
       .case-grid { grid-template-columns: 1fr; gap: 2rem; }
       .lab-grid { grid-template-columns: 1fr; }
+      .utility-feature { grid-template-columns: 1fr; padding: 1.5rem; }
+      .utility-visual { justify-content: flex-start; }
       .foundation-grid { grid-template-columns: 1fr; }
       .principles { grid-template-columns: 1fr; }
       .component-grid { grid-template-columns: repeat(2, 1fr); }
@@ -619,6 +716,7 @@
       .metric-band { grid-template-columns: repeat(2, 1fr); }
       .hero { padding: 3rem 0 2.5rem; }
       .case { padding: 1.25rem; }
+      .utility-feature { padding: 1.25rem; }
     }
   </style>
 </head>
@@ -888,7 +986,7 @@
     <section id="lab" aria-labelledby="lab-heading">
       <div class="wrap">
         <p class="section-eyebrow">Lab</p>
-        <h2 class="section-title" id="lab-heading">Early <em>explorations</em> in agent skills &amp; generative AI</h2>
+        <h2 class="section-title" id="lab-heading">AI tools, <em>agent skills</em> &amp; useful experiments</h2>
 
         <div class="lab-grid">
           <article class="lab-card">
@@ -912,6 +1010,28 @@
             <a href="https://clawhub.com/kbo4sho/visual-qa" target="_blank" rel="noopener noreferrer" class="lab-link">clawhub.com →</a>
           </article>
         </div>
+
+        <article class="utility-feature" aria-labelledby="social-stories-title">
+          <div class="utility-copy">
+            <p class="lab-status">● Practical AI Utility · Custom GPT</p>
+            <h3 class="utility-title" id="social-stories-title">Printable Social Stories</h3>
+            <p class="utility-desc">A custom GPT that helps parents and educators turn a plain-language topic into a child-friendly, printable social story. It starts from a real caregiving need: fast, supportive materials for transitions, routines, and unfamiliar situations.</p>
+            <p class="utility-note">The interesting part is the product judgment, not the complexity. It packages AI around a focused workflow with clear prompting, a gentle tone, optional customization, and offline-friendly output.</p>
+            <a href="https://chatgpt.com/g/g-694a0f3a49548191a2c2090ad7a548a2-printable-social-stories" target="_blank" rel="noopener noreferrer" class="utility-link">Open custom GPT →</a>
+            <ul class="utility-tags" aria-label="Printable Social Stories focus areas">
+              <li>Prompt design</li>
+              <li>Education</li>
+              <li>Accessibility</li>
+              <li>Human-centered AI</li>
+            </ul>
+          </div>
+
+          <div class="utility-visual">
+            <a href="https://chatgpt.com/g/g-694a0f3a49548191a2c2090ad7a548a2-printable-social-stories" target="_blank" rel="noopener noreferrer" class="utility-image-link" aria-label="Open Printable Social Stories custom GPT">
+              <img src="printable-social-stories.png" alt="Screenshot of the Printable Social Stories custom GPT interface" class="utility-screenshot">
+            </a>
+          </div>
+        </article>
       </div>
     </section>
 
