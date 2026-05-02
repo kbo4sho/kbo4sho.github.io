@@ -501,60 +501,6 @@
     .lab-link:hover,
     .lab-link:focus-visible { color: var(--clay); }
 
-    .component-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0.7rem;
-      margin: 2rem 0 0.5rem;
-    }
-
-    .component-tile {
-      background: var(--paper);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 1rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
-      min-height: 92px;
-    }
-
-    .component-tile-label {
-      font-family: var(--font-body);
-      font-size: 0.95rem;
-      font-weight: 700;
-      letter-spacing: 0;
-      color: var(--ink);
-      text-transform: uppercase;
-    }
-
-    .component-tile-meta {
-      font-family: var(--font-mono);
-      font-size: 0.74rem;
-      color: var(--muted);
-      letter-spacing: 0;
-      line-height: 1.5;
-    }
-
-    .component-grid-caption {
-      grid-column: 1 / -1;
-      padding: 0.3rem 0;
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
-      color: var(--muted);
-      letter-spacing: 0;
-      line-height: 1.5;
-    }
-
-    .component-grid-caption a {
-      color: var(--blue);
-      text-decoration: underline;
-      text-underline-offset: 0.22em;
-    }
-
-    .component-grid-caption a:hover,
-    .component-grid-caption a:focus-visible { color: var(--clay); }
-
     .utility-feature {
       display: grid;
       grid-template-columns: minmax(0, 0.95fr) minmax(300px, 1.05fr);
@@ -811,7 +757,6 @@
       .utility-feature { padding: 1.5rem; }
       .foundation-grid { grid-template-columns: 1fr; }
       .principles { grid-template-columns: 1fr; }
-      .component-grid { grid-template-columns: repeat(2, 1fr); }
       .hero-nav { gap: 1rem; }
     }
 
@@ -821,7 +766,6 @@
       .hero-name { font-size: clamp(3rem, 17vw, 4.25rem); }
       .case,
       .utility-feature { padding: 1.25rem; }
-      .component-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -965,33 +909,6 @@
               <h4>Why it still matters</h4>
               <p>Core UI is the foundation everything else is built on — including the AI-assisted UI work that follows. The design system is where taste, accessibility, and system thinking compound; the AI tooling is where that compounding gets pointed at agents. Live at <a href="https://coreui.epsilon.com" target="_blank" rel="noopener noreferrer">coreui.epsilon.com</a>.</p>
 
-              <figure class="component-grid" aria-label="A sample of Core UI components">
-                <div class="component-tile">
-                  <span class="component-tile-label">Button</span>
-                  <span class="component-tile-meta">Primary · Secondary · Ghost · Destructive</span>
-                </div>
-                <div class="component-tile">
-                  <span class="component-tile-label">Input</span>
-                  <span class="component-tile-meta">Field · Label · Error · Help text</span>
-                </div>
-                <div class="component-tile">
-                  <span class="component-tile-label">Tag</span>
-                  <span class="component-tile-meta">Status · Filterable · Removable</span>
-                </div>
-                <div class="component-tile">
-                  <span class="component-tile-label">Card</span>
-                  <span class="component-tile-meta">Surface · Header · Action region</span>
-                </div>
-                <div class="component-tile">
-                  <span class="component-tile-label">Modal</span>
-                  <span class="component-tile-meta">Focus trap · Esc · A11y dialog</span>
-                </div>
-                <div class="component-tile">
-                  <span class="component-tile-label">Tokens</span>
-                  <span class="component-tile-meta">Color · Type · Spacing · Motion</span>
-                </div>
-                <figcaption class="component-grid-caption">A small slice of the system — full surface live at <a href="https://coreui.epsilon.com" target="_blank" rel="noopener noreferrer">coreui.epsilon.com ↗</a></figcaption>
-              </figure>
             </div>
 
             <aside class="case-sidebar" aria-label="Project metadata">
@@ -1001,7 +918,7 @@
               </div>
               <div class="case-sidebar-block">
                 <div class="case-sidebar-label">Stack</div>
-                <div class="case-sidebar-value">React · TypeScript · Storybook · Design tokens · Figma</div>
+                <div class="case-sidebar-value">Angular · TypeScript · Storybook · Design tokens · Figma</div>
               </div>
               <div class="case-sidebar-block">
                 <div class="case-sidebar-label">Scope</div>
