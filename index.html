@@ -4,19 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kevin Bolander — AI Product Systems, Design Systems &amp; Agentic Tooling</title>
-  <meta name="description" content="Staff engineer building end-to-end AI product systems, design systems, and agentic tooling. Production product architecture, accessible UI foundations, and eval-driven AI workflows.">
+  <meta name="description" content="Staff engineer building useful AI product systems, design systems, and agentic tooling with production product architecture, accessible UI foundations, and eval-driven workflows.">
   <link rel="canonical" href="https://kbo4sho.github.io/">
-  <meta name="theme-color" content="#0a0a0a">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+  <meta name="theme-color" content="#f4f2ea">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.86em' font-size='82'>✦</text></svg>">
   <meta property="og:title" content="Kevin Bolander — AI Product Systems, Design Systems &amp; Agentic Tooling">
-  <meta property="og:description" content="Staff engineer building end-to-end AI product systems, design systems, and agentic tooling.">
+  <meta property="og:description" content="Staff engineer building useful AI product systems, design systems, and agentic tooling.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://kbo4sho.github.io/">
-  <meta property="og:image" content="https://kbo4sho.github.io/me.jpg">
+  <meta property="og:image" content="https://kbo4sho.github.io/pixel-me.jpeg">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Kevin Bolander — AI Product Systems, Design Systems &amp; Agentic Tooling">
-  <meta name="twitter:description" content="Staff engineer building end-to-end AI product systems, design systems, and agentic tooling.">
-  <meta name="twitter:image" content="https://kbo4sho.github.io/me.jpg">
+  <meta name="twitter:description" content="Staff engineer building useful AI product systems, design systems, and agentic tooling.">
+  <meta name="twitter:image" content="https://kbo4sho.github.io/pixel-me.jpeg">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -30,27 +30,31 @@
       "https://linkedin.com/in/kevin-bolander-45659322"
     ],
     "knowsAbout": ["AI Product Systems", "End-to-End Product Development", "Design Systems", "Accessibility", "AI Agent Systems", "AI Orchestration", "Agentic Tooling", "LLM Evaluation", "Creative AI", "TypeScript", "Python", "Gemini"],
-    "description": "Staff engineer building end-to-end AI product systems, design systems, and agentic tooling."
+    "description": "Staff engineer building useful AI product systems, design systems, and agentic tooling."
   }
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,650&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0a0a0a;
-      --surface: #111;
-      --surface-2: #161616;
-      --border: #222;
-      --teal: #00d4aa;
-      --teal-dim: #00d4aa40;
-      --teal-bg: #00d4aa0d;
-      --text: #e8e8e8;
-      --text-dim: #999;
-      --text-dimmer: #888;
-      --font-display: 'Orbitron', sans-serif;
+      --page: #f4f2ea;
+      --paper: #fbfaf6;
+      --surface: #ffffff;
+      --surface-soft: #ece8dc;
+      --line: #d6d1c4;
+      --line-strong: #b7ad99;
+      --ink: #1f2823;
+      --ink-soft: #4f5b55;
+      --muted: #6e746e;
+      --moss: #2f6f5e;
+      --blue: #3f5f82;
+      --clay: #9a5b44;
+      --gold: #a17a32;
+      --shadow: 0 16px 45px rgba(46, 38, 24, 0.08);
+      --font-display: 'Newsreader', Georgia, serif;
       --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      --font-mono: 'JetBrains Mono', 'Share Tech Mono', monospace;
+      --font-mono: 'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -58,215 +62,268 @@
 
     body {
       font-family: var(--font-body);
-      background: var(--bg);
-      color: var(--text);
+      background:
+        linear-gradient(90deg, rgba(31, 40, 35, 0.025) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(31, 40, 35, 0.025) 1px, transparent 1px),
+        repeating-linear-gradient(135deg, rgba(47, 111, 94, 0.035) 0 1px, transparent 1px 11px),
+        var(--page);
+      background-size: 34px 34px, 34px 34px, 100% 100%, auto;
+      color: var(--ink);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
     }
 
-    /* Skip link */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.64), rgba(244, 242, 234, 0.28));
+      z-index: -1;
+    }
+
     .skip-link {
       position: absolute;
       top: -100px;
       left: 1rem;
-      background: var(--teal);
-      color: var(--bg);
-      padding: 0.5rem 1rem;
+      background: var(--ink);
+      color: var(--paper);
+      padding: 0.65rem 0.9rem;
       text-decoration: none;
       z-index: 100;
       font-weight: 600;
       font-family: var(--font-mono);
-      font-size: 0.8rem;
+      font-size: 0.82rem;
+      border-radius: 6px;
     }
     .skip-link:focus { top: 1rem; }
 
-    /* Layout */
     .wrap {
       max-width: 1100px;
       margin: 0 auto;
       padding: 0 2rem;
     }
 
-    /* ========== HERO ========== */
-    .hero { padding: 7rem 2rem 5rem; }
+    .hero {
+      padding: 5.5rem 2rem 4rem;
+      background: linear-gradient(180deg, rgba(251, 250, 246, 0.86), rgba(251, 250, 246, 0));
+    }
+
+    .hero-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 160px;
+      gap: 3rem;
+      align-items: start;
+    }
 
     .hero-eyebrow {
       font-family: var(--font-mono);
-      font-size: 0.76rem;
-      color: var(--teal);
-      letter-spacing: 0.16em;
+      font-size: 0.8rem;
+      color: var(--moss);
+      letter-spacing: 0.04em;
       text-transform: uppercase;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.25rem;
       line-height: 1.5;
     }
 
     .hero-name {
       font-family: var(--font-display);
-      font-size: clamp(2.5rem, 6vw, 4.5rem);
-      font-weight: 900;
-      color: var(--text);
-      letter-spacing: 0.01em;
-      line-height: 0.95;
-      margin-bottom: 1.5rem;
+      font-size: clamp(3.3rem, 10vw, 7rem);
+      font-weight: 650;
+      color: var(--ink);
+      letter-spacing: 0;
+      line-height: 0.93;
+      margin-bottom: 1.25rem;
+      max-width: 9ch;
     }
 
     .hero-tagline {
-      font-size: clamp(1.25rem, 2.2vw, 1.6rem);
+      font-size: clamp(1.18rem, 2vw, 1.55rem);
       font-weight: 400;
-      color: var(--text);
-      max-width: 46ch;
-      line-height: 1.4;
-      margin-bottom: 2rem;
+      color: var(--ink-soft);
+      max-width: 54ch;
+      line-height: 1.55;
+      margin-bottom: 2.25rem;
     }
 
     .hero-tagline strong {
-      color: var(--teal);
-      font-weight: 500;
+      color: var(--ink);
+      font-weight: 650;
+    }
+
+    .portrait-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      padding: 0.75rem;
+      transform: rotate(1.3deg);
+    }
+
+    .portrait-card img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      border-radius: 6px;
+      filter: saturate(0.92) contrast(0.98);
+    }
+
+    .portrait-card figcaption {
+      margin-top: 0.75rem;
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      line-height: 1.45;
     }
 
     .hero-nav {
       display: flex;
-      gap: 1.5rem;
+      gap: 0.95rem 1.35rem;
       flex-wrap: wrap;
       font-family: var(--font-mono);
-      font-size: 0.8rem;
+      font-size: 0.88rem;
     }
 
     .hero-nav a {
-      color: var(--text-dim);
-      text-decoration: none;
-      transition: color 0.15s;
+      color: var(--blue);
+      text-decoration: underline;
+      text-underline-offset: 0.22em;
+      text-decoration-thickness: 1px;
+      transition: color 0.15s, text-decoration-thickness 0.15s;
     }
 
     .hero-nav a:hover,
-    .hero-nav a:focus-visible { color: var(--teal); }
+    .hero-nav a:focus-visible {
+      color: var(--clay);
+      text-decoration-thickness: 2px;
+    }
 
-    /* ========== SECTION ========== */
     section {
-      padding: 5rem 0;
-      border-top: 1px solid var(--border);
+      padding: 4.5rem 0;
+      border-top: 1px solid var(--line);
     }
 
     .section-eyebrow {
       font-family: var(--font-mono);
-      font-size: 0.7rem;
-      color: var(--teal);
-      letter-spacing: 0.25em;
+      font-size: 0.8rem;
+      color: var(--moss);
+      letter-spacing: 0.04em;
       text-transform: uppercase;
       margin-bottom: 0.75rem;
     }
 
     .section-title {
-      font-family: var(--font-body);
-      font-size: clamp(1.75rem, 4vw, 2.5rem);
-      font-weight: 700;
-      color: var(--text);
-      letter-spacing: -0.02em;
-      line-height: 1.1;
-      margin-bottom: 2.5rem;
-      max-width: 24ch;
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4.8vw, 3.5rem);
+      font-weight: 650;
+      color: var(--ink);
+      letter-spacing: 0;
+      line-height: 1;
+      margin-bottom: 2rem;
+      max-width: 20ch;
     }
 
     .section-title em {
       font-style: normal;
-      color: var(--teal);
+      color: var(--moss);
     }
 
-    /* ========== METRIC BAND ========== */
     .metric-band {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 0.8rem;
       list-style: none;
       padding: 0;
-      margin: 0;
+      margin: 0 0 1rem;
     }
 
     .metric-cell {
-      background: var(--surface);
-      padding: 2rem 1.5rem;
+      background: rgba(255, 255, 255, 0.68);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 1.25rem;
     }
 
     .metric-value {
       font-family: var(--font-display);
-      font-size: 2.25rem;
-      font-weight: 900;
-      color: var(--teal);
-      line-height: 1;
+      font-size: clamp(1.9rem, 4vw, 2.8rem);
+      font-weight: 650;
+      color: var(--moss);
+      line-height: 0.95;
       margin-bottom: 0.5rem;
-      letter-spacing: 0.01em;
+      letter-spacing: 0;
       overflow-wrap: anywhere;
     }
 
     .metric-label {
       font-family: var(--font-mono);
-      font-size: 0.7rem;
-      color: var(--text-dim);
-      letter-spacing: 0.1em;
+      font-size: 0.74rem;
+      color: var(--muted);
+      letter-spacing: 0.04em;
       text-transform: uppercase;
       line-height: 1.4;
     }
 
-    /* ========== CASE STUDY ========== */
     .case {
       background: var(--surface);
-      border: 1px solid var(--border);
-      border-top: none;
-      padding: 2.5rem;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      padding: clamp(1.5rem, 3vw, 2.75rem);
     }
 
     .case-meta {
       font-family: var(--font-mono);
-      font-size: 0.7rem;
-      color: var(--teal);
-      letter-spacing: 0.15em;
+      font-size: 0.78rem;
+      color: var(--moss);
+      letter-spacing: 0.04em;
       text-transform: uppercase;
       margin-bottom: 1rem;
     }
 
     .case-meta a {
-      color: var(--teal);
-      text-decoration: none;
-      border-bottom: 1px solid var(--teal-dim);
+      color: var(--blue);
+      text-decoration: underline;
+      text-underline-offset: 0.22em;
     }
 
     .case-meta a:hover,
-    .case-meta a:focus-visible { border-bottom-color: var(--teal); }
+    .case-meta a:focus-visible { color: var(--clay); }
 
     .case-title {
-      font-family: var(--font-body);
-      font-size: clamp(1.35rem, 2.5vw, 1.75rem);
-      font-weight: 700;
-      color: var(--text);
-      letter-spacing: -0.01em;
-      margin-bottom: 0.5rem;
+      font-family: var(--font-display);
+      font-size: clamp(1.7rem, 3.4vw, 2.5rem);
+      font-weight: 650;
+      color: var(--ink);
+      letter-spacing: 0;
+      line-height: 1.05;
+      margin-bottom: 0.75rem;
     }
 
     .case-subtitle {
       font-size: 1.05rem;
-      color: var(--text-dim);
+      color: var(--ink-soft);
       margin-bottom: 2rem;
       font-weight: 400;
-      max-width: 70ch;
-      line-height: 1.5;
+      max-width: 66ch;
+      line-height: 1.65;
     }
 
     .case-grid {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) 260px;
-      gap: 3rem;
+      grid-template-columns: minmax(0, 1fr) minmax(220px, 270px);
+      gap: 2.5rem;
       margin-top: 2rem;
     }
 
     .case-body h4 {
       font-family: var(--font-mono);
-      font-size: 0.7rem;
+      font-size: 0.78rem;
       font-weight: 500;
-      color: var(--teal);
-      letter-spacing: 0.15em;
+      color: var(--clay);
+      letter-spacing: 0.04em;
       text-transform: uppercase;
       margin-top: 1.5rem;
       margin-bottom: 0.75rem;
@@ -275,57 +332,58 @@
     .case-body h4:first-child { margin-top: 0; }
 
     .case-body p {
-      font-size: 0.95rem;
-      line-height: 1.7;
-      color: var(--text);
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--ink);
       margin-bottom: 1rem;
     }
 
-    .case-body strong { color: var(--teal); font-weight: 500; }
+    .case-body strong { color: var(--moss); font-weight: 650; }
 
     .case-body a {
-      color: var(--teal);
-      text-decoration: none;
-      border-bottom: 1px solid var(--teal-dim);
-      transition: border-color 0.15s;
+      color: var(--blue);
+      text-decoration: underline;
+      text-underline-offset: 0.22em;
+      transition: color 0.15s;
     }
-    .case-body a:hover { border-bottom-color: var(--teal); }
+    .case-body a:hover,
+    .case-body a:focus-visible { color: var(--clay); }
 
     .case-sidebar {
       font-family: var(--font-mono);
-      font-size: 0.75rem;
-      color: var(--text-dim);
+      font-size: 0.82rem;
+      color: var(--muted);
     }
 
     .case-sidebar-block {
       padding: 1rem 0;
-      border-top: 1px solid var(--border);
+      border-top: 1px solid var(--line);
     }
 
     .case-sidebar-block:first-child { border-top: none; padding-top: 0; }
 
     .case-sidebar-label {
-      color: var(--text-dimmer);
+      color: var(--muted);
       text-transform: uppercase;
-      letter-spacing: 0.12em;
-      font-size: 0.68rem;
+      letter-spacing: 0.04em;
+      font-size: 0.74rem;
       margin-bottom: 0.5rem;
     }
 
     .case-sidebar-value {
-      color: var(--text);
+      color: var(--ink);
       line-height: 1.6;
       overflow-wrap: anywhere;
     }
 
     .case-sidebar-value a {
-      color: var(--teal);
-      text-decoration: none;
-      border-bottom: 1px solid var(--teal-dim);
+      color: var(--blue);
+      text-decoration: underline;
+      text-underline-offset: 0.22em;
     }
-    .case-sidebar-value a:hover { border-bottom-color: var(--teal); }
+    .case-sidebar-value a:hover,
+    .case-sidebar-value a:focus-visible { color: var(--clay); }
 
-    /* ========== LAB 3-UP ========== */
     .lab-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -333,28 +391,27 @@
     }
 
     .lab-card {
-      background: var(--surface-2);
-      border: 1px solid var(--border);
-      padding: 1.75rem;
-      transition: border-color 220ms cubic-bezier(0.4, 0, 0.2, 1),
-                  transform 220ms cubic-bezier(0.4, 0, 0.2, 1),
-                  background 220ms cubic-bezier(0.4, 0, 0.2, 1);
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 1.5rem;
+      transition: border-color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
       display: flex;
       flex-direction: column;
     }
 
     .lab-card:hover,
     .lab-card:focus-within {
-      border-color: var(--teal-dim);
-      background: var(--teal-bg);
+      border-color: var(--line-strong);
+      box-shadow: var(--shadow);
       transform: translateY(-2px);
     }
 
     .lab-status {
       font-family: var(--font-mono);
-      font-size: 0.68rem;
-      color: var(--text-dimmer);
-      letter-spacing: 0.12em;
+      font-size: 0.74rem;
+      color: var(--muted);
+      letter-spacing: 0.04em;
       text-transform: uppercase;
       margin-bottom: 0.75rem;
       line-height: 1.45;
@@ -362,15 +419,15 @@
 
     .lab-title {
       font-family: var(--font-body);
-      font-size: 1.15rem;
-      font-weight: 600;
-      color: var(--text);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--ink);
       margin-bottom: 0.5rem;
     }
 
     .lab-desc {
-      font-size: 0.9rem;
-      color: var(--text-dim);
+      font-size: 0.95rem;
+      color: var(--ink-soft);
       line-height: 1.65;
       margin-bottom: 1.25rem;
       flex-grow: 1;
@@ -378,77 +435,70 @@
 
     .lab-link {
       font-family: var(--font-mono);
-      font-size: 0.72rem;
-      color: var(--teal);
-      text-decoration: none;
-      letter-spacing: 0.05em;
+      font-size: 0.8rem;
+      color: var(--blue);
+      text-decoration: underline;
+      text-underline-offset: 0.22em;
+      letter-spacing: 0;
       align-self: flex-start;
     }
 
     .lab-link:hover,
-    .lab-link:focus-visible { text-decoration: underline; }
+    .lab-link:focus-visible { color: var(--clay); }
 
-    /* ========== COMPONENT GRID (Core UI preview) ========== */
     .component-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
+      gap: 0.7rem;
       margin: 2rem 0 0.5rem;
     }
 
     .component-tile {
-      background: var(--surface-2);
-      padding: 1.5rem 1.25rem;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 1rem;
       display: flex;
       flex-direction: column;
       gap: 0.4rem;
-      min-height: 100px;
-      transition: background 200ms cubic-bezier(0.4, 0, 0.2, 1),
-                  transform 200ms cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .component-tile:hover {
-      background: var(--teal-bg);
-      transform: translateY(-2px);
+      min-height: 92px;
     }
 
     .component-tile-label {
-      font-family: var(--font-display);
+      font-family: var(--font-body);
       font-size: 0.95rem;
-      font-weight: 900;
-      letter-spacing: 0.04em;
-      color: var(--text);
+      font-weight: 700;
+      letter-spacing: 0;
+      color: var(--ink);
       text-transform: uppercase;
     }
 
     .component-tile-meta {
       font-family: var(--font-mono);
-      font-size: 0.7rem;
-      color: var(--text-dim);
-      letter-spacing: 0.04em;
+      font-size: 0.74rem;
+      color: var(--muted);
+      letter-spacing: 0;
       line-height: 1.5;
     }
 
     .component-grid-caption {
       grid-column: 1 / -1;
-      background: var(--surface);
-      padding: 0.75rem 1.25rem;
+      padding: 0.3rem 0;
       font-family: var(--font-mono);
-      font-size: 0.7rem;
-      color: var(--text-dimmer);
-      letter-spacing: 0.05em;
+      font-size: 0.78rem;
+      color: var(--muted);
+      letter-spacing: 0;
       line-height: 1.5;
     }
 
     .component-grid-caption a {
-      color: var(--teal);
-      text-decoration: none;
-      border-bottom: 1px solid var(--teal-dim);
+      color: var(--blue);
+      text-decoration: underline;
+      text-underline-offset: 0.22em;
     }
 
-    .component-grid-caption a:hover { border-bottom-color: var(--teal); }
+    .component-grid-caption a:hover,
+    .component-grid-caption a:focus-visible { color: var(--clay); }
 
     .utility-feature {
       display: grid;
@@ -456,29 +506,31 @@
       gap: 2rem;
       align-items: center;
       background: var(--surface);
-      border: 1px solid var(--border);
-      margin-top: 1rem;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      margin-top: 1.25rem;
       padding: 2rem;
       overflow: hidden;
     }
 
     .utility-title {
       font-family: var(--font-body);
-      font-size: clamp(1.35rem, 2.5vw, 1.75rem);
+      font-size: clamp(1.35rem, 2.5vw, 1.8rem);
       font-weight: 700;
-      color: var(--text);
+      color: var(--ink);
       margin-bottom: 0.75rem;
     }
 
     .utility-desc,
     .utility-note {
       font-size: 0.95rem;
-      color: var(--text);
+      color: var(--ink);
       line-height: 1.7;
       margin-bottom: 1rem;
     }
 
-    .utility-note { color: var(--text-dim); }
+    .utility-note { color: var(--ink-soft); }
 
     .utility-tags {
       display: flex;
@@ -491,12 +543,13 @@
 
     .utility-tags li {
       font-family: var(--font-mono);
-      font-size: 0.68rem;
-      color: var(--teal);
-      letter-spacing: 0.08em;
+      font-size: 0.74rem;
+      color: var(--moss);
+      letter-spacing: 0.02em;
       text-transform: uppercase;
-      border: 1px solid var(--teal-dim);
-      background: var(--teal-bg);
+      border: 1px solid rgba(47, 111, 94, 0.24);
+      background: rgba(47, 111, 94, 0.07);
+      border-radius: 999px;
       padding: 0.4rem 0.55rem;
     }
 
@@ -506,16 +559,16 @@
       align-self: flex-start;
       width: fit-content;
       font-family: var(--font-mono);
-      font-size: 0.72rem;
-      color: var(--teal);
-      text-decoration: none;
-      letter-spacing: 0.05em;
-      border-bottom: 1px solid var(--teal-dim);
+      font-size: 0.8rem;
+      color: var(--blue);
+      text-decoration: underline;
+      text-underline-offset: 0.22em;
+      letter-spacing: 0;
       margin-top: 1.25rem;
     }
 
     .utility-link:hover,
-    .utility-link:focus-visible { border-bottom-color: var(--teal); }
+    .utility-link:focus-visible { color: var(--clay); }
 
     .utility-visual {
       display: flex;
@@ -525,16 +578,16 @@
     .utility-image-link {
       display: block;
       width: min(100%, 560px);
-      box-shadow: 0 22px 60px rgba(0, 0, 0, 0.34);
+      box-shadow: var(--shadow);
       border-radius: 8px;
       overflow: hidden;
-      border: 1px solid #2a2a2a;
+      border: 1px solid var(--line);
       transition: border-color 0.2s, transform 0.2s;
     }
 
     .utility-image-link:hover,
     .utility-image-link:focus-visible {
-      border-color: var(--teal-dim);
+      border-color: var(--line-strong);
       transform: translateY(-2px);
     }
 
@@ -542,10 +595,9 @@
       display: block;
       width: 100%;
       height: auto;
-      background: #030303;
+      background: var(--ink);
     }
 
-    /* ========== FOUNDATION ========== */
     .foundation-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -555,16 +607,18 @@
     .foundation-grid--single { grid-template-columns: minmax(0, 1fr); }
 
     .foundation-card {
-      background: var(--surface-2);
-      border: 1px solid var(--border);
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
       padding: 2rem;
     }
 
     .foundation-card-meta {
       font-family: var(--font-mono);
-      font-size: 0.7rem;
-      color: var(--teal);
-      letter-spacing: 0.15em;
+      font-size: 0.78rem;
+      color: var(--moss);
+      letter-spacing: 0.04em;
       text-transform: uppercase;
       margin-bottom: 1rem;
     }
@@ -572,27 +626,26 @@
     .foundation-card-title {
       font-family: var(--font-body);
       font-size: 1.35rem;
-      font-weight: 600;
-      color: var(--text);
+      font-weight: 700;
+      color: var(--ink);
       margin-bottom: 1rem;
     }
 
     .foundation-card p {
       font-size: 0.95rem;
-      color: var(--text);
+      color: var(--ink);
       line-height: 1.7;
       margin-bottom: 1rem;
     }
 
     .foundation-card-tags {
       font-family: var(--font-mono);
-      font-size: 0.7rem;
-      color: var(--text-dimmer);
-      letter-spacing: 0.05em;
+      font-size: 0.78rem;
+      color: var(--muted);
+      letter-spacing: 0;
       line-height: 1.6;
     }
 
-    /* ========== HOW I WORK ========== */
     .principles {
       list-style: none;
       display: grid;
@@ -603,38 +656,38 @@
     }
 
     .principle {
-      padding-left: 1.25rem;
-      border-left: 1px solid var(--teal-dim);
+      padding-left: 1rem;
+      border-left: 2px solid rgba(47, 111, 94, 0.22);
     }
 
     .principle-title {
       font-family: var(--font-body);
       font-size: 1rem;
-      font-weight: 600;
-      color: var(--teal);
+      font-weight: 700;
+      color: var(--ink);
       margin-bottom: 0.4rem;
-      letter-spacing: -0.005em;
+      letter-spacing: 0;
     }
 
     .principle-body {
-      font-size: 0.9rem;
-      color: var(--text-dim);
+      font-size: 0.95rem;
+      color: var(--ink-soft);
       line-height: 1.65;
     }
 
     .principle-body a {
-      color: var(--teal);
-      text-decoration: none;
-      border-bottom: 1px solid var(--teal-dim);
-      transition: border-color 0.15s;
+      color: var(--blue);
+      text-decoration: underline;
+      text-underline-offset: 0.22em;
+      transition: color 0.15s;
     }
 
-    .principle-body a:hover { border-bottom-color: var(--teal); }
+    .principle-body a:hover,
+    .principle-body a:focus-visible { color: var(--clay); }
 
-    /* ========== FOOTER ========== */
     footer {
       padding: 3rem 0 5rem;
-      border-top: 1px solid var(--border);
+      border-top: 1px solid var(--line);
     }
 
     .footer-links {
@@ -642,35 +695,35 @@
       gap: 1.5rem;
       flex-wrap: wrap;
       font-family: var(--font-mono);
-      font-size: 0.8rem;
+      font-size: 0.86rem;
       margin-bottom: 1.25rem;
     }
 
     .footer-links a {
-      color: var(--text-dim);
-      text-decoration: none;
+      color: var(--blue);
+      text-decoration: underline;
+      text-underline-offset: 0.22em;
       transition: color 0.15s;
     }
 
     .footer-links a:hover,
-    .footer-links a:focus-visible { color: var(--teal); }
+    .footer-links a:focus-visible { color: var(--clay); }
 
     .footer-note {
       font-family: var(--font-mono);
-      font-size: 0.7rem;
-      color: var(--text-dimmer);
-      letter-spacing: 0.05em;
+      font-size: 0.78rem;
+      color: var(--muted);
+      letter-spacing: 0;
     }
 
-    /* ========== ACCESSIBILITY & MOTION ========== */
     *:focus-visible {
-      outline: 2px solid var(--teal);
-      outline-offset: 2px;
+      outline: 3px solid rgba(63, 95, 130, 0.55);
+      outline-offset: 3px;
     }
 
     ::selection {
-      background: var(--teal);
-      color: var(--bg);
+      background: rgba(47, 111, 94, 0.18);
+      color: var(--ink);
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -682,30 +735,34 @@
       html { scroll-behavior: auto; }
     }
 
-    /* ========== MOBILE ========== */
-    @media (max-width: 768px) {
-      .wrap { padding: 0 1.25rem; }
-      .hero { padding: 4rem 1.25rem 3rem; }
-      section { padding: 3.5rem 0; }
-      .section-title { margin-bottom: 2rem; }
-      .case { padding: 1.75rem; }
+    @media (max-width: 900px) {
       .case-grid { grid-template-columns: 1fr; gap: 2rem; }
       .lab-grid { grid-template-columns: 1fr; }
-      .utility-feature { grid-template-columns: 1fr; padding: 1.5rem; }
+      .utility-feature { grid-template-columns: 1fr; }
       .utility-visual { justify-content: flex-start; }
+    }
+
+    @media (max-width: 680px) {
+      .wrap { padding: 0 1.25rem; }
+      .hero { padding: 3.5rem 1.25rem 3rem; }
+      .hero-layout { grid-template-columns: 1fr; gap: 2rem; }
+      .portrait-card { width: 136px; transform: none; }
+      section { padding: 3.75rem 0; }
+      .section-title { margin-bottom: 1.75rem; }
+      .utility-feature { padding: 1.5rem; }
       .foundation-grid { grid-template-columns: 1fr; }
       .principles { grid-template-columns: 1fr; }
       .component-grid { grid-template-columns: repeat(2, 1fr); }
-      .metric-cell { padding: 1.5rem 1.25rem; }
-      .metric-value { font-size: 1.75rem; }
-      .hero-nav { gap: 1.25rem; font-size: 0.75rem; }
+      .hero-nav { gap: 1rem; }
     }
 
     @media (max-width: 480px) {
-      .metric-band { grid-template-columns: repeat(2, 1fr); }
+      .metric-band { grid-template-columns: 1fr; }
       .hero { padding: 3rem 1.25rem 2.5rem; }
-      .case { padding: 1.25rem; }
+      .hero-name { font-size: clamp(3rem, 17vw, 4.25rem); }
+      .case,
       .utility-feature { padding: 1.25rem; }
+      .component-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -713,15 +770,24 @@
   <a href="#main" class="skip-link">Skip to main content</a>
 
   <header class="hero wrap" role="banner">
-    <p class="hero-eyebrow">Staff Engineer — AI Product Systems · Design Systems · Agentic Tooling</p>
-    <h1 class="hero-name">KEVIN BOLANDER</h1>
-    <p class="hero-tagline">I build end-to-end product systems: <strong>AI tools that ship</strong>, <strong>design systems that scale</strong>, and agentic workflows that make teams faster.</p>
-    <nav class="hero-nav" aria-label="Primary">
-      <a href="https://github.com/kbo4sho" target="_blank" rel="noopener noreferrer">GitHub</a>
-      <a href="https://linkedin.com/in/kevin-bolander-45659322" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-      <a href="mailto:kevinbolander@gmail.com">Email</a>
-      <a href="kevin-bolander-resume.pdf">Resume ↓</a>
-    </nav>
+    <div class="hero-layout">
+      <div>
+        <p class="hero-eyebrow">Staff engineer · AI product systems · Design systems</p>
+        <h1 class="hero-name">Kevin Bolander</h1>
+        <p class="hero-tagline">I build useful product systems: <strong>AI tools that ship</strong>, <strong>design systems that hold up</strong>, and agentic workflows that make teams faster without making the work heavier.</p>
+        <nav class="hero-nav" aria-label="Primary">
+          <a href="https://github.com/kbo4sho" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="https://linkedin.com/in/kevin-bolander-45659322" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a href="mailto:kevinbolander@gmail.com">Email</a>
+          <a href="kevin-bolander-resume.pdf">Resume</a>
+        </nav>
+      </div>
+
+      <figure class="portrait-card">
+        <img src="pixel-me.jpeg" alt="Pixel art portrait of Kevin Bolander">
+        <figcaption>Building practical systems for real teams.</figcaption>
+      </figure>
+    </div>
   </header>
 
   <main id="main">
@@ -730,7 +796,7 @@
     <section id="work" aria-labelledby="epsilon-heading">
       <div class="wrap">
         <p class="section-eyebrow">Selected Work · 01</p>
-        <h2 class="section-title" id="epsilon-heading">End-to-end AI product systems at <em>Epsilon</em></h2>
+        <h2 class="section-title" id="epsilon-heading">AI product systems that make creative work <em>scale</em></h2>
 
         <ul class="metric-band" aria-label="Epsilon impact metrics">
           <li class="metric-cell">
@@ -747,14 +813,14 @@
           </li>
           <li class="metric-cell">
             <div class="metric-value">Full</div>
-            <div class="metric-label">Creative-org adoption</div>
+            <div class="metric-label">Adoption across creative org</div>
           </li>
         </ul>
 
         <article class="case">
           <p class="case-meta">Epsilon · 2021 → present · Staff Software Engineer · Tech lead</p>
           <h3 class="case-title">AI Creative Production Platform</h3>
-          <p class="case-subtitle">An end-to-end creative product with AI threaded through concept, layout, and edit — production UX tooling backed by an eval skill every feature plugs into.</p>
+          <p class="case-subtitle">A production creative tool with AI threaded through concept, layout, and edit — practical UX tooling backed by an eval skill every feature plugs into.</p>
 
           <div class="case-grid">
             <div class="case-body">
@@ -764,10 +830,10 @@
               <h4>The approach</h4>
               <p>I led the product architecture for a web-based builder that turns creative intent into production-ready variations. A <strong>homegrown agentic orchestration loop</strong> over tiered Gemini models handles concepting, layout, and edits, while production-data bridges — like real-time font-ID lookups — keep output tied to the actual brand system.</p>
 
-              <h4>The leverage move</h4>
+              <h4>The durable part</h4>
               <p>I built a <strong>reusable eval skill</strong> for any AI feature in our org to plug into. It scores outputs on layout accuracy, color fidelity, and pixel-diff against baselines — and a meta-optimizer reads those scores and tunes the prompts, model tier, pipeline steps, and schemas. Closer to DSPy-style automated pipeline tuning than critique-and-regenerate. Invest once; compound leverage across every AI surface downstream.</p>
 
-              <h4>What's next</h4>
+              <h4>Where it is headed</h4>
               <p>Leading an agent-first refactor — migrating deterministic orchestration into fully agentic workflows, with the eval harness as the safety rail.</p>
             </div>
 
@@ -821,7 +887,7 @@
 
         <article class="case">
           <p class="case-meta">Epsilon · 2017 → present · Founder &amp; UX engineering lead</p>
-          <h3 class="case-title">Core UI — the design system that turned a side project into shared infra</h3>
+          <h3 class="case-title">Core UI — a design system that became shared infrastructure</h3>
           <p class="case-subtitle">A production design system bridging Figma and Storybook, accessibility embedded as a constraint, in production across Epsilon's products for almost a decade.</p>
 
           <div class="case-grid">
@@ -832,10 +898,10 @@
               <h4>The approach</h4>
               <p>I founded the <strong>UX Engineering discipline</strong> at Epsilon and grew what started as a side project into the company's shared design system. I partnered with designers in Figma and engineers in Storybook so the same component had one canonical surface in both worlds. Tokens, patterns, and documentation lived alongside the code, not in a separate doc that drifted.</p>
 
-              <h4>The leverage move</h4>
+              <h4>The durable part</h4>
               <p>I treated <strong>WCAG 2.1 AA as a design constraint, embedded into every component</strong> — not a checklist run at audit. Color contrast, focus order, ARIA semantics, keyboard paths: all baked into the primitives. Same skill-as-abstraction pattern I'd later apply to AI evals: invest once at the substrate, every product team downstream gets the leverage for free. Ship a button, ship accessibility.</p>
 
-              <h4>What's next</h4>
+              <h4>Why it still matters</h4>
               <p>Core UI is the foundation everything else is built on — including the AI-assisted UI work that follows. The design system is where taste, accessibility, and system thinking compound; the AI tooling is where that compounding gets pointed at agents. Live at <a href="https://coreui.epsilon.com" target="_blank" rel="noopener noreferrer">coreui.epsilon.com</a>.</p>
 
               <figure class="component-grid" aria-label="A sample of Core UI components">
@@ -921,7 +987,7 @@
 
         <article class="case">
           <p class="case-meta">Solo · 2026 → live · <a href="https://makemea.ai" target="_blank" rel="noopener noreferrer">makemea.ai</a></p>
-          <h3 class="case-title">MakeMeA — AI-native velocity as the case study</h3>
+          <h3 class="case-title">MakeMeA — a small product shipped fast</h3>
           <p class="case-subtitle">An AI photo style-transfer app shipped in 2 days from empty repo to production, wrapped in an autonomous trend-to-publish content engine.</p>
 
           <div class="case-grid">
@@ -970,7 +1036,7 @@
     <section id="lab" aria-labelledby="lab-heading">
       <div class="wrap">
         <p class="section-eyebrow">Lab</p>
-        <h2 class="section-title" id="lab-heading">AI tools, <em>agent skills</em> &amp; useful experiments</h2>
+        <h2 class="section-title" id="lab-heading">Small tools, <em>agent skills</em> &amp; useful experiments</h2>
 
         <div class="lab-grid">
           <article class="lab-card">
@@ -1040,15 +1106,15 @@
     <section id="how" aria-labelledby="how-heading">
       <div class="wrap">
         <p class="section-eyebrow">How I Work</p>
-        <h2 class="section-title" id="how-heading">The <em>operating</em> principles</h2>
+        <h2 class="section-title" id="how-heading">How I like to <em>work</em></h2>
 
         <ul class="principles">
           <li class="principle">
-            <p class="principle-title">Evals are the job</p>
+            <p class="principle-title">Measure the work</p>
             <p class="principle-body">Generation is table stakes. Teams that win in AI measure output quality and tune for it — the eval layer compounds across every feature that plugs in.</p>
           </li>
           <li class="principle">
-            <p class="principle-title">Skills &gt; one-off features</p>
+            <p class="principle-title">Package the useful parts</p>
             <p class="principle-body">Package cross-cutting AI work (evals, agents, tools) as composable skills. It's what turns a team into a platform.</p>
           </li>
           <li class="principle">
