@@ -1,0 +1,1211 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Light Theme Ad Builder Tool Screenshot</title>
+  <style>
+    :root {
+      --ink: #24312c;
+      --ink-soft: #52615b;
+      --muted: #7b837e;
+      --surface: #fbfaf6;
+      --surface-2: #f3f0e8;
+      --surface-3: #e8e3d7;
+      --line: #d8d2c5;
+      --line-strong: #bfb7aa;
+      --moss: #2f6f5e;
+      --blue: #2f6fa8;
+      --clay: #a65f3c;
+      --pink: #e93393;
+      --purple: #a44c86;
+      --shadow: 0 18px 55px rgba(45, 38, 26, 0.12);
+      --shadow-soft: 0 10px 28px rgba(45, 38, 26, 0.08);
+      --radius: 10px;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      background: #ddd5c8;
+      color: var(--ink);
+    }
+
+    body {
+      overflow: hidden;
+    }
+
+    .app {
+      width: 1600px;
+      height: 960px;
+      display: grid;
+      grid-template-rows: 64px 82px 1fr;
+      overflow: hidden;
+      background:
+        linear-gradient(90deg, rgba(36, 49, 44, 0.035) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(36, 49, 44, 0.035) 1px, transparent 1px),
+        var(--surface-2);
+      background-size: 40px 40px, 40px 40px, auto;
+    }
+
+    .topbar {
+      display: grid;
+      grid-template-columns: 260px 1fr auto;
+      align-items: center;
+      gap: 16px;
+      padding: 0 22px;
+      background: rgba(251, 250, 246, 0.92);
+      border-bottom: 1px solid var(--line);
+      box-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 750;
+      font-size: 18px;
+    }
+
+    .brand-mark {
+      width: 32px;
+      height: 32px;
+      display: grid;
+      place-items: center;
+      border-radius: 9px;
+      color: #fff;
+      background: linear-gradient(145deg, var(--moss), #214f43);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25);
+      font-weight: 800;
+    }
+
+    .crumb {
+      justify-self: center;
+      display: flex;
+      align-items: center;
+      min-width: 440px;
+      max-width: 620px;
+      height: 34px;
+      padding: 0 18px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.72);
+      font-size: 13px;
+      font-weight: 650;
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ink-soft);
+    }
+
+    .pill {
+      padding: 8px 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #fff;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .theme-toggle {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .switch {
+      position: relative;
+      width: 42px;
+      height: 24px;
+      border-radius: 999px;
+      background: rgba(47, 111, 94, 0.16);
+      border: 1px solid rgba(47, 111, 94, 0.22);
+    }
+
+    .switch::after {
+      content: "";
+      position: absolute;
+      top: 3px;
+      right: 3px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--moss);
+      box-shadow: 0 2px 6px rgba(47, 111, 94, 0.24);
+    }
+
+    .menu {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      background: #fff;
+    }
+
+    .menu::before {
+      content: "";
+      width: 16px;
+      height: 2px;
+      border-radius: 2px;
+      background: var(--ink-soft);
+      box-shadow: 0 -6px 0 var(--ink-soft), 0 6px 0 var(--ink-soft);
+    }
+
+    .formatbar {
+      display: grid;
+      grid-template-columns: 240px 1fr 170px;
+      align-items: center;
+      gap: 22px;
+      padding: 14px 22px;
+      background: rgba(248, 246, 239, 0.84);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .mode-tabs,
+    .size-tabs {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .tab {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      min-height: 48px;
+      padding: 10px 15px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: var(--ink-soft);
+      background: rgba(255, 255, 255, 0.7);
+      font-weight: 750;
+      font-size: 13px;
+    }
+
+    .tab.active {
+      border-color: rgba(47, 111, 94, 0.32);
+      color: var(--moss);
+      background: #fff;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .tab-icon {
+      width: 22px;
+      height: 18px;
+      border-radius: 3px;
+      background: currentColor;
+      opacity: 0.9;
+    }
+
+    .tab-icon.image {
+      clip-path: polygon(0 100%, 0 0, 100% 0, 100% 100%, 70% 62%, 54% 78%, 37% 49%, 16% 100%);
+    }
+
+    .tab-icon.vertical {
+      width: 9px;
+      height: 24px;
+    }
+
+    .tab-icon.horizontal {
+      width: 30px;
+      height: 9px;
+    }
+
+    .size-tabs {
+      overflow: hidden;
+      justify-content: center;
+    }
+
+    .size {
+      width: 104px;
+      height: 54px;
+      display: grid;
+      align-content: center;
+      justify-items: center;
+      gap: 4px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: var(--ink-soft);
+      background: rgba(255, 255, 255, 0.62);
+      font-size: 13px;
+      font-weight: 750;
+      flex: 0 0 auto;
+    }
+
+    .size.active {
+      color: #fff;
+      border-color: var(--blue);
+      background: var(--blue);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .size-shape {
+      width: 32px;
+      height: 18px;
+      border-radius: 2px;
+      background: currentColor;
+      opacity: 0.2;
+    }
+
+    .size.active .size-shape {
+      opacity: 0.95;
+    }
+
+    .size.tall .size-shape {
+      width: 14px;
+      height: 24px;
+    }
+
+    .preview-button {
+      justify-self: end;
+      width: 54px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      background: #fff;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .preview-button::before {
+      content: "";
+      border-top: 10px solid transparent;
+      border-bottom: 10px solid transparent;
+      border-left: 16px solid var(--moss);
+      margin-left: 4px;
+    }
+
+    .workbench {
+      display: grid;
+      grid-template-columns: 250px minmax(0, 1fr) 58px 338px;
+      grid-template-rows: minmax(0, 1fr) 238px;
+      min-height: 0;
+    }
+
+    .variants {
+      grid-column: 1;
+      grid-row: 1 / 3;
+      padding: 18px 16px;
+      background: rgba(251, 250, 246, 0.78);
+      border-right: 1px solid var(--line);
+      overflow: hidden;
+    }
+
+    .panel-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .variant-card {
+      margin-bottom: 16px;
+    }
+
+    .variant-size {
+      display: inline-flex;
+      align-items: center;
+      height: 25px;
+      padding: 0 9px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      color: var(--ink-soft);
+      background: #fff;
+      font-size: 12px;
+      font-weight: 800;
+      box-shadow: 0 3px 10px rgba(45, 38, 26, 0.05);
+      margin-bottom: 7px;
+    }
+
+    .thumb {
+      width: 170px;
+      height: 142px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: var(--shadow-soft);
+      transform-origin: left top;
+    }
+
+    .thumb .ad-creative {
+      width: 170px;
+      height: 142px;
+      transform: none;
+    }
+
+    .layer-list {
+      margin-top: 20px;
+      border-top: 1px solid var(--line);
+      padding-top: 18px;
+    }
+
+    .layer-row {
+      display: grid;
+      grid-template-columns: 16px 1fr;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 2px;
+      color: var(--ink-soft);
+      font-size: 13px;
+      font-weight: 650;
+    }
+
+    .layer-swatch {
+      width: 6px;
+      height: 26px;
+      border-radius: 4px;
+      background: var(--blue);
+      justify-self: center;
+    }
+
+    .layer-row:nth-child(3) .layer-swatch,
+    .layer-row:nth-child(4) .layer-swatch {
+      background: var(--pink);
+    }
+
+    .canvas-area {
+      position: relative;
+      grid-column: 2;
+      grid-row: 1;
+      display: grid;
+      place-items: center;
+      min-width: 0;
+      background:
+        linear-gradient(90deg, rgba(36, 49, 44, 0.04) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(36, 49, 44, 0.04) 1px, transparent 1px),
+        #f8f7f1;
+      background-size: 32px 32px, 32px 32px, auto;
+      overflow: hidden;
+    }
+
+    .canvas-stage {
+      position: relative;
+      width: 540px;
+      height: 450px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.68);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .canvas-badge {
+      position: absolute;
+      left: 50%;
+      top: -16px;
+      transform: translateX(-50%);
+      height: 30px;
+      display: flex;
+      align-items: center;
+      padding: 0 14px;
+      border-radius: 999px;
+      color: var(--ink-soft);
+      background: #fff;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-soft);
+      font-size: 13px;
+      font-weight: 800;
+      z-index: 4;
+    }
+
+    .ad-creative {
+      position: relative;
+      width: 336px;
+      height: 280px;
+      overflow: hidden;
+      background: #fff;
+      border: 1px solid rgba(36, 49, 44, 0.16);
+    }
+
+    .ad-large {
+      transform: scale(1.28);
+      box-shadow: 0 18px 42px rgba(45, 38, 26, 0.16);
+    }
+
+    .ad-photo {
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 45%;
+      background:
+        radial-gradient(circle at 52% 30%, #27342e 0 10%, transparent 10.5%),
+        radial-gradient(circle at 52% 42%, #f0b57f 0 15%, transparent 15.5%),
+        linear-gradient(135deg, #eec3b0 0 50%, #c6d5c6 50% 100%);
+    }
+
+    .ad-photo::before {
+      content: "";
+      position: absolute;
+      left: 38px;
+      top: 38px;
+      width: 72px;
+      height: 90px;
+      border-radius: 44% 44% 42% 42%;
+      background: linear-gradient(180deg, #d09163, #b8734d);
+      box-shadow: 0 62px 0 22px #506d54;
+    }
+
+    .ad-photo::after {
+      content: "";
+      position: absolute;
+      left: 24px;
+      top: 22px;
+      width: 104px;
+      height: 48px;
+      border-radius: 44px 44px 20px 20px;
+      background:
+        radial-gradient(circle at 10px 28px, #20251f 0 11px, transparent 12px),
+        radial-gradient(circle at 34px 12px, #20251f 0 17px, transparent 18px),
+        radial-gradient(circle at 70px 12px, #20251f 0 18px, transparent 19px),
+        radial-gradient(circle at 96px 30px, #20251f 0 12px, transparent 13px);
+    }
+
+    .ad-copy {
+      position: absolute;
+      inset: 0 0 0 45%;
+      background:
+        radial-gradient(circle at 16px 16px, rgba(255,255,255,0.18) 0 2px, transparent 2.4px),
+        linear-gradient(145deg, #a24f86, #924679);
+      background-size: 24px 24px, auto;
+      color: #fff;
+      display: grid;
+      grid-template-rows: 84px 64px 42px 1fr;
+      justify-items: center;
+      padding-top: 20px;
+    }
+
+    .brand-glyph {
+      width: 78px;
+      height: 50px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      display: grid;
+      place-items: center;
+    }
+
+    .brand-glyph::before,
+    .brand-glyph::after {
+      content: "";
+      display: block;
+      width: 46px;
+      height: 5px;
+      border-radius: 5px;
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: 0 16px 0 rgba(255, 255, 255, 0.82);
+    }
+
+    .brand-glyph::after {
+      position: absolute;
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      background: var(--pink);
+      box-shadow: 0 18px 0 var(--pink);
+    }
+
+    .headline {
+      position: relative;
+      align-self: center;
+      width: 150px;
+      text-align: center;
+      font-family: Georgia, serif;
+      font-size: 26px;
+      line-height: 1;
+      letter-spacing: 0;
+    }
+
+    .subhead {
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 15px;
+      font-weight: 650;
+      align-self: center;
+    }
+
+    .cta {
+      align-self: center;
+      min-width: 112px;
+      padding: 10px 18px;
+      border-radius: 3px;
+      color: #9d4a82;
+      background: rgba(255, 255, 255, 0.86);
+      font-size: 13px;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    .selection {
+      position: absolute;
+      left: 184px;
+      top: 117px;
+      width: 144px;
+      height: 54px;
+      border: 3px solid var(--pink);
+      z-index: 3;
+    }
+
+    .selection span {
+      position: absolute;
+      width: 15px;
+      height: 15px;
+      border: 3px solid #fff;
+      border-radius: 50%;
+      background: var(--pink);
+      box-shadow: 0 2px 6px rgba(36, 49, 44, 0.18);
+    }
+
+    .selection span:nth-child(1) { left: -10px; top: -10px; }
+    .selection span:nth-child(2) { right: -10px; top: -10px; }
+    .selection span:nth-child(3) { left: -10px; bottom: -10px; }
+    .selection span:nth-child(4) { right: -10px; bottom: -10px; }
+    .selection span:nth-child(5) { left: 50%; top: -10px; transform: translateX(-50%); }
+    .selection span:nth-child(6) { left: 50%; bottom: -10px; transform: translateX(-50%); }
+
+    .tool-float {
+      position: absolute;
+      left: 34px;
+      top: 32px;
+      display: grid;
+      gap: 8px;
+      padding: 9px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.86);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .tool-button {
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      border-radius: 8px;
+      color: var(--ink-soft);
+      background: var(--surface);
+      border: 1px solid transparent;
+      font-size: 16px;
+      font-weight: 800;
+    }
+
+    .tool-button.active {
+      color: #fff;
+      background: var(--blue);
+    }
+
+    .rail {
+      grid-column: 3;
+      grid-row: 1;
+      display: grid;
+      align-content: start;
+      justify-items: center;
+      gap: 10px;
+      padding: 18px 8px;
+      background: rgba(251, 250, 246, 0.72);
+      border-left: 1px solid var(--line);
+      border-right: 1px solid var(--line);
+    }
+
+    .rail-button {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      background: #fff;
+      color: var(--ink-soft);
+      font-size: 22px;
+      font-weight: 700;
+      box-shadow: 0 4px 12px rgba(45, 38, 26, 0.06);
+    }
+
+    .zoom {
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--muted);
+      margin: -4px 0 2px;
+    }
+
+    .properties {
+      grid-column: 4;
+      grid-row: 1 / 3;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      min-height: 0;
+      background: rgba(251, 250, 246, 0.9);
+      overflow: hidden;
+    }
+
+    .prop-tabs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3px;
+      padding: 14px 14px 10px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .prop-tab {
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 7px;
+      color: var(--ink-soft);
+      background: var(--surface-3);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .prop-tab.active {
+      color: #fff;
+      background: var(--blue);
+    }
+
+    .prop-content {
+      padding: 14px;
+      overflow: hidden;
+    }
+
+    .control-section {
+      border-bottom: 1px solid var(--line);
+      padding: 0 0 16px;
+      margin-bottom: 16px;
+    }
+
+    .control-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      font-weight: 850;
+      color: var(--ink);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .input,
+    .textarea,
+    .select {
+      width: 100%;
+      min-height: 34px;
+      padding: 8px 10px;
+      border: 1px solid var(--line-strong);
+      border-radius: 7px;
+      color: var(--ink);
+      background: #fff;
+      font-size: 13px;
+      font-weight: 650;
+      margin-bottom: 10px;
+    }
+
+    .textarea {
+      height: 76px;
+      line-height: 1.35;
+    }
+
+    .field-label {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 800;
+      margin: 10px 0 6px;
+    }
+
+    .two-col,
+    .four-col {
+      display: grid;
+      gap: 8px;
+    }
+
+    .two-col { grid-template-columns: 1fr 1fr; }
+    .four-col { grid-template-columns: repeat(4, 1fr); }
+
+    .tiny-input {
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--ink-soft);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .align-row {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .align-button {
+      width: 34px;
+      height: 34px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      display: grid;
+      place-items: center;
+    }
+
+    .align-button.active {
+      color: #fff;
+      background: var(--blue);
+      border-color: var(--blue);
+    }
+
+    .align-button::before {
+      content: "";
+      width: 16px;
+      height: 2px;
+      border-radius: 1px;
+      background: currentColor;
+      box-shadow: 0 -5px 0 currentColor, 0 5px 0 currentColor;
+    }
+
+    .save {
+      height: 54px;
+      border-top: 1px solid var(--line);
+      padding: 10px 14px;
+      background: rgba(248, 246, 239, 0.96);
+    }
+
+    .save button {
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      background: linear-gradient(135deg, var(--moss), #24584b);
+      font-size: 15px;
+      font-weight: 850;
+      box-shadow: 0 8px 18px rgba(47, 111, 94, 0.18);
+    }
+
+    .timeline {
+      grid-column: 2 / 4;
+      grid-row: 2;
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      background: rgba(251, 250, 246, 0.86);
+      border-top: 1px solid var(--line);
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    .timeline-head {
+      border-right: 1px solid var(--line);
+      padding: 16px 14px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 850;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .timeline-main {
+      position: relative;
+      padding: 16px 18px;
+      overflow: hidden;
+    }
+
+    .playback {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .add-button,
+    .play-button {
+      height: 34px;
+      min-width: 42px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--ink-soft);
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      box-shadow: 0 3px 10px rgba(45, 38, 26, 0.05);
+    }
+
+    .timecode {
+      height: 34px;
+      display: flex;
+      align-items: center;
+      padding: 0 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--ink);
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .ruler {
+      position: relative;
+      height: 24px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 750;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .ruler::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(90deg, transparent 0 29px, rgba(36, 49, 44, 0.22) 29px 30px);
+    }
+
+    .ruler span {
+      position: absolute;
+      top: 7px;
+      transform: translateX(-50%);
+    }
+
+    .playhead {
+      position: absolute;
+      top: 50px;
+      left: 180px;
+      width: 2px;
+      height: 168px;
+      background: var(--pink);
+      z-index: 3;
+    }
+
+    .playhead::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: -10px;
+      transform: translateX(-50%);
+      border-left: 11px solid transparent;
+      border-right: 11px solid transparent;
+      border-top: 15px solid var(--pink);
+    }
+
+    .track {
+      display: grid;
+      grid-template-columns: 130px 1fr;
+      align-items: center;
+      height: 42px;
+      border-bottom: 1px solid rgba(216, 210, 197, 0.7);
+      color: var(--ink-soft);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .track-line {
+      position: relative;
+      height: 12px;
+      border-radius: 999px;
+      background: rgba(36, 49, 44, 0.08);
+    }
+
+    .track-line::before {
+      content: "";
+      position: absolute;
+      left: 58px;
+      top: 3px;
+      width: 220px;
+      height: 6px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #7f55cc, #3f78d1);
+    }
+
+    .track-line::after {
+      content: "";
+      position: absolute;
+      left: 92px;
+      top: -3px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #7f55cc;
+      box-shadow: 128px 0 0 #3f78d1;
+    }
+
+    .status-strip {
+      position: absolute;
+      left: 28px;
+      right: 28px;
+      bottom: 18px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    .status {
+      min-height: 54px;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      background: rgba(255, 255, 255, 0.76);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .status strong {
+      display: block;
+      color: var(--moss);
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .status span {
+      color: var(--ink-soft);
+      font-size: 13px;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+  <main class="app" aria-label="Clean light theme recreation of an ad builder tool screenshot">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">A</div>
+        <span>Ad Studio</span>
+      </div>
+      <div class="crumb">Creative Builder / Spring Campaign / Version 175</div>
+      <div class="top-actions">
+        <span class="pill">Version 1.0</span>
+        <span class="theme-toggle">Light Theme <span class="switch"></span></span>
+        <span class="menu"></span>
+      </div>
+    </header>
+
+    <section class="formatbar" aria-label="Format controls">
+      <div class="mode-tabs">
+        <div class="tab active"><span class="tab-icon"></span> Layout</div>
+        <div class="tab"><span class="tab-icon image"></span> Assets</div>
+      </div>
+      <div class="size-tabs">
+        <div class="size"><span class="size-shape"></span>336 × 280</div>
+        <div class="size"><span class="size-shape"></span>300 × 250</div>
+        <div class="size"><span class="size-shape"></span>180 × 150</div>
+        <div class="size tall"><span class="size-shape"></span>300 × 600</div>
+        <div class="size tall"><span class="size-shape"></span>160 × 600</div>
+        <div class="size active"><span class="size-shape"></span>728 × 90</div>
+        <div class="size"><span class="size-shape"></span>970 × 250</div>
+        <div class="size"><span class="size-shape"></span>320 × 100</div>
+      </div>
+      <div class="preview-button" aria-label="Preview"></div>
+    </section>
+
+    <section class="workbench">
+      <aside class="variants" aria-label="Ad variants and layers">
+        <div class="panel-title"><span>Variants</span><span>12 sizes</span></div>
+        <div class="variant-card">
+          <div class="variant-size">336 × 280</div>
+          <div class="thumb">
+            <div class="ad-creative">
+              <div class="ad-photo"></div>
+              <div class="ad-copy">
+                <div class="brand-glyph"></div>
+                <div class="headline">HEADLINE</div>
+                <div class="subhead">Subhead text</div>
+                <div class="cta">SHOP NOW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="variant-card">
+          <div class="variant-size">300 × 250</div>
+          <div class="thumb">
+            <div class="ad-creative">
+              <div class="ad-photo"></div>
+              <div class="ad-copy">
+                <div class="brand-glyph"></div>
+                <div class="headline">HEADLINE</div>
+                <div class="subhead">Subhead text</div>
+                <div class="cta">SHOP NOW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="variant-card">
+          <div class="variant-size">180 × 150</div>
+          <div class="thumb">
+            <div class="ad-creative">
+              <div class="ad-photo"></div>
+              <div class="ad-copy">
+                <div class="brand-glyph"></div>
+                <div class="headline">HEADLINE</div>
+                <div class="subhead">Subhead text</div>
+                <div class="cta">SHOP NOW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="layer-list">
+          <div class="panel-title"><span>Layers</span><span>Live</span></div>
+          <div class="layer-row"><span class="layer-swatch"></span><span>divider_line</span></div>
+          <div class="layer-row"><span class="layer-swatch"></span><span>headline_text</span></div>
+          <div class="layer-row"><span class="layer-swatch"></span><span>subhead_text</span></div>
+          <div class="layer-row"><span class="layer-swatch"></span><span>cta_button</span></div>
+        </div>
+      </aside>
+
+      <section class="canvas-area" aria-label="Ad canvas">
+        <div class="tool-float" aria-hidden="true">
+          <div class="tool-button active">↖</div>
+          <div class="tool-button">□</div>
+          <div class="tool-button">T</div>
+          <div class="tool-button">▧</div>
+          <div class="tool-button">⌗</div>
+        </div>
+        <div class="canvas-stage">
+          <div class="canvas-badge">336 × 280</div>
+          <div class="ad-creative ad-large">
+            <div class="ad-photo"></div>
+            <div class="ad-copy">
+              <div class="brand-glyph"></div>
+              <div class="headline">HEADLINE</div>
+              <div class="subhead">Subhead text here</div>
+              <div class="cta">SHOP NOW</div>
+            </div>
+            <div class="selection" aria-hidden="true">
+              <span></span><span></span><span></span><span></span><span></span><span></span>
+            </div>
+          </div>
+        </div>
+        <div class="status-strip">
+          <div class="status"><strong>Brand Kit</strong><span>Palette and type locked</span></div>
+          <div class="status"><strong>AI Assist</strong><span>Headline layer selected</span></div>
+          <div class="status"><strong>Output</strong><span>12 responsive sizes</span></div>
+          <div class="status"><strong>Review</strong><span>Layout checks passing</span></div>
+        </div>
+      </section>
+
+      <aside class="rail" aria-label="Canvas controls">
+        <div class="rail-button">+</div>
+        <div class="zoom">110%</div>
+        <div class="rail-button">−</div>
+        <div class="rail-button">↤</div>
+        <div class="rail-button">⇅</div>
+        <div class="rail-button">↦</div>
+        <div class="rail-button">↥</div>
+        <div class="rail-button">☷</div>
+      </aside>
+
+      <aside class="properties" aria-label="Design controls">
+        <div class="prop-tabs">
+          <div class="prop-tab active">Design</div>
+          <div class="prop-tab">Animate</div>
+          <div class="prop-tab">Publish</div>
+        </div>
+        <div class="prop-content">
+          <section class="control-section">
+            <div class="control-title">Text Box <span>⌃</span></div>
+            <div class="input">headline_text</div>
+            <div class="field-label">Content</div>
+            <div class="textarea">HEADLINE</div>
+          </section>
+
+          <section class="control-section">
+            <div class="control-title">Text Styling <span>⌃</span></div>
+            <div class="select">Georgia</div>
+            <div class="two-col">
+              <div class="select">Regular</div>
+              <div class="select">24 px</div>
+            </div>
+            <div class="two-col">
+              <div class="tiny-input">T↕ 28</div>
+              <div class="tiny-input">VA 1.5</div>
+            </div>
+            <div class="align-row">
+              <div class="align-button"></div>
+              <div class="align-button active"></div>
+              <div class="align-button"></div>
+              <div class="align-button active"></div>
+              <div class="align-button"></div>
+            </div>
+          </section>
+
+          <section class="control-section">
+            <div class="control-title">Padding <span>⌃</span></div>
+            <div class="four-col">
+              <div class="tiny-input">0</div>
+              <div class="tiny-input">0</div>
+              <div class="tiny-input">0</div>
+              <div class="tiny-input">0</div>
+            </div>
+          </section>
+
+          <section class="control-section">
+            <div class="control-title">Transform <span>⌃</span></div>
+            <div class="two-col">
+              <div class="tiny-input">X 168</div>
+              <div class="tiny-input">Y 104</div>
+              <div class="tiny-input">W 159</div>
+              <div class="tiny-input">H 58</div>
+            </div>
+          </section>
+        </div>
+        <div class="save">
+          <button>Save Variation</button>
+        </div>
+      </aside>
+
+      <section class="timeline" aria-label="Animation timeline">
+        <div class="timeline-head">Timeline</div>
+        <div class="timeline-main">
+          <div class="playback">
+            <div class="add-button">+</div>
+            <div class="timecode">0:00:02:51</div>
+            <div class="play-button">◀</div>
+            <div class="play-button">▶</div>
+            <div class="play-button">▶▶</div>
+          </div>
+          <div class="ruler">
+            <span style="left: 0%">0</span>
+            <span style="left: 10%">1</span>
+            <span style="left: 20%">2</span>
+            <span style="left: 30%">3</span>
+            <span style="left: 40%">4</span>
+            <span style="left: 50%">5</span>
+            <span style="left: 60%">6</span>
+            <span style="left: 70%">7</span>
+            <span style="left: 80%">8</span>
+            <span style="left: 90%">9</span>
+            <span style="left: 100%">10</span>
+          </div>
+          <div class="playhead"></div>
+          <div class="track">
+            <span>divider_line</span>
+            <span class="track-line"></span>
+          </div>
+          <div class="track">
+            <span>headline_text</span>
+            <span class="track-line"></span>
+          </div>
+          <div class="track">
+            <span>subhead_text</span>
+            <span class="track-line"></span>
+          </div>
+        </div>
+      </section>
+    </section>
+  </main>
+</body>
+</html>

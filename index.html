@@ -3,34 +3,45 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kevin Bolander — AI Product Systems, Design Systems &amp; Agentic Tooling</title>
-  <meta name="description" content="Staff engineer building useful AI product systems, design systems, and agentic tooling with production product architecture, accessible UI foundations, and eval-driven workflows.">
+  <title>Kevin Bolander — Staff Engineer for AI Tools &amp; Design Systems</title>
+  <meta name="description" content="Staff engineer and design partner building AI product systems, creative tools, accessible UI foundations, and eval-driven workflows for real teams.">
+  <meta name="author" content="Kevin Bolander">
+  <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://kbo4sho.github.io/">
   <meta name="theme-color" content="#f4f2ea">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.86em' font-size='82'>✦</text></svg>">
-  <meta property="og:title" content="Kevin Bolander — AI Product Systems, Design Systems &amp; Agentic Tooling">
-  <meta property="og:description" content="Staff engineer building useful AI product systems, design systems, and agentic tooling.">
+  <meta property="og:site_name" content="Kevin Bolander">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="Kevin Bolander — Staff Engineer for AI Tools &amp; Design Systems">
+  <meta property="og:description" content="Staff engineer and design partner building AI product systems, creative tools, accessible UI foundations, and eval-driven workflows for real teams.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://kbo4sho.github.io/">
   <meta property="og:image" content="https://kbo4sho.github.io/pixel-me.jpeg">
+  <meta property="og:image:width" content="800">
+  <meta property="og:image:height" content="800">
+  <meta property="og:image:alt" content="Pixel art portrait of Kevin Bolander">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Kevin Bolander — AI Product Systems, Design Systems &amp; Agentic Tooling">
-  <meta name="twitter:description" content="Staff engineer building useful AI product systems, design systems, and agentic tooling.">
+  <meta name="twitter:title" content="Kevin Bolander — Staff Engineer for AI Tools &amp; Design Systems">
+  <meta name="twitter:description" content="Staff engineer and design partner building AI product systems, creative tools, accessible UI foundations, and eval-driven workflows for real teams.">
   <meta name="twitter:image" content="https://kbo4sho.github.io/pixel-me.jpeg">
+  <meta name="twitter:image:alt" content="Pixel art portrait of Kevin Bolander">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Person",
+    "@id": "https://kbo4sho.github.io/#person",
     "name": "Kevin Bolander",
     "jobTitle": "Staff Software Engineer",
     "worksFor": { "@type": "Organization", "name": "Epsilon" },
     "url": "https://kbo4sho.github.io",
+    "image": "https://kbo4sho.github.io/pixel-me.jpeg",
+    "mainEntityOfPage": "https://kbo4sho.github.io/",
     "sameAs": [
       "https://github.com/kbo4sho",
       "https://linkedin.com/in/kevin-bolander-45659322"
     ],
     "knowsAbout": ["AI Product Systems", "End-to-End Product Development", "Design Systems", "Accessibility", "AI Agent Systems", "AI Orchestration", "Agentic Tooling", "LLM Evaluation", "Creative AI", "TypeScript", "Python", "Gemini"],
-    "description": "Staff engineer building useful AI product systems, design systems, and agentic tooling."
+    "description": "Staff engineer and design partner building AI product systems, creative tools, accessible UI foundations, and eval-driven workflows for real teams."
   }
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -46,7 +57,7 @@
       --line-strong: #b7ad99;
       --ink: #1f2823;
       --ink-soft: #4f5b55;
-      --muted: #6e746e;
+      --muted: #676f68;
       --moss: #2f6f5e;
       --blue: #3f5f82;
       --clay: #9a5b44;
@@ -98,6 +109,19 @@
       border-radius: 6px;
     }
     .skip-link:focus { top: 1rem; }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      clip-path: inset(50%);
+      white-space: nowrap;
+      border: 0;
+    }
 
     .wrap {
       max-width: 1100px;
@@ -153,6 +177,7 @@
     }
 
     .portrait-card {
+      display: block;
       position: relative;
       background: var(--surface);
       border: 1px solid var(--line);
@@ -160,6 +185,14 @@
       box-shadow: var(--shadow);
       padding: 0.75rem;
       transform: rotate(1.3deg);
+      z-index: 2;
+      width: 100%;
+      color: inherit;
+      font: inherit;
+      text-align: left;
+      cursor: pointer;
+      appearance: none;
+      -webkit-appearance: none;
     }
 
     .portrait-image-wrap {
@@ -169,6 +202,14 @@
       border-radius: 6px;
       background: #173d45;
       isolation: isolate;
+      border: 0;
+      width: 100%;
+      padding: 0;
+      font: inherit;
+      color: inherit;
+      cursor: pointer;
+      appearance: none;
+      -webkit-appearance: none;
     }
 
     .portrait-image-wrap::before,
@@ -207,7 +248,7 @@
     }
 
     .portrait-card:hover .portrait-image-wrap::after,
-    .portrait-card:focus-within .portrait-image-wrap::after {
+    .portrait-card:focus-visible .portrait-image-wrap::after {
       opacity: 0.72;
       animation: portrait-scan 1250ms ease-out;
     }
@@ -220,12 +261,41 @@
     .portrait-card img {
       display: block;
       width: 100%;
+      height: auto;
       aspect-ratio: 1;
       object-fit: cover;
       filter: saturate(0.95) contrast(1.04);
     }
 
-    .portrait-card figcaption {
+    .spider-game {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+    }
+
+    body.spider-game-active .spider-game {
+      z-index: 4;
+    }
+
+    body.spider-game-active .portrait-card {
+      z-index: 5;
+    }
+
+    .spider-status {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+
+    .portrait-caption {
+      display: block;
       margin-top: 0.75rem;
       color: var(--muted);
       font-family: var(--font-mono);
@@ -364,6 +434,34 @@
       font-weight: 400;
       max-width: 66ch;
       line-height: 1.65;
+    }
+
+    .case-example {
+      margin: 1.35rem 0 2rem;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      background: #f8f8f5;
+    }
+
+    .case-example img {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    .case-example figcaption {
+      padding: 0.65rem 0.8rem;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.04em;
+      line-height: 1.45;
+      text-transform: uppercase;
     }
 
     .case-grid {
@@ -734,7 +832,7 @@
         transition-duration: 0.001ms !important;
       }
       .portrait-card:hover .portrait-image-wrap::after,
-      .portrait-card:focus-within .portrait-image-wrap::after {
+      .portrait-card:focus-visible .portrait-image-wrap::after {
         opacity: 0;
       }
       html { scroll-behavior: auto; }
@@ -751,6 +849,8 @@
       .wrap { padding: 0 1.25rem; }
       .hero { padding: 3.5rem 1.25rem 3rem; }
       .hero-layout { grid-template-columns: 1fr; gap: 2rem; }
+      .hero-eyebrow { overflow-wrap: anywhere; }
+      .hero-tagline { font-size: 1.08rem; overflow-wrap: anywhere; }
       .portrait-card { width: 136px; transform: none; }
       section { padding: 3.75rem 0; }
       .section-title { margin-bottom: 1.75rem; }
@@ -775,33 +875,36 @@
   <header class="hero wrap" role="banner">
     <div class="hero-layout">
       <div>
-        <p class="hero-eyebrow">Staff engineer · AI product systems · Design systems</p>
+        <p class="hero-eyebrow">Staff engineer · Design partner · Creative Tools · Design Systems</p>
         <h1 class="hero-name">Kevin Bolander</h1>
-        <p class="hero-tagline">I build useful product systems: <strong>AI tools that ship</strong>, <strong>design systems that hold up</strong>, and agentic workflows that make teams faster without making the work heavier.</p>
+        <p class="hero-tagline">I work shoulder-to-shoulder with design to turn fuzzy product ideas into shippable systems: <strong>AI tools with taste</strong>, <strong>design systems with staying power</strong>, and creative workflows that help teams move faster without flattening the work.</p>
         <nav class="hero-nav" aria-label="Primary">
-          <a href="https://github.com/kbo4sho" target="_blank" rel="noopener noreferrer">GitHub</a>
-          <a href="https://linkedin.com/in/kevin-bolander-45659322" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a href="https://github.com/kbo4sho" target="_blank" rel="noopener noreferrer">GitHub<span class="sr-only"> (opens in a new tab)</span></a>
+          <a href="https://linkedin.com/in/kevin-bolander-45659322" target="_blank" rel="noopener noreferrer">LinkedIn<span class="sr-only"> (opens in a new tab)</span></a>
           <a href="mailto:kevinbolander@gmail.com">Email</a>
-          <a href="kevin-bolander-resume.pdf">Resume</a>
+          <a href="kevin-bolander-resume.pdf" type="application/pdf">Resume<span class="sr-only"> PDF</span></a>
         </nav>
       </div>
 
-      <figure class="portrait-card">
+      <button class="portrait-card spider-trigger" type="button" aria-label="Try the portrait">
         <span class="portrait-image-wrap">
-          <img src="pixel-me.jpeg" alt="Pixel art portrait of Kevin Bolander">
+          <img src="pixel-me.jpeg" alt="Pixel art portrait of Kevin Bolander" width="800" height="800" decoding="async" fetchpriority="high">
         </span>
-        <figcaption>Building practical systems for real teams.</figcaption>
-      </figure>
+        <span class="portrait-caption">Try the portrait.</span>
+      </button>
     </div>
   </header>
 
-  <main id="main">
+  <canvas class="spider-game" id="spider-game" aria-hidden="true"></canvas>
+  <div class="spider-status" id="spider-status" role="status" aria-live="polite" aria-atomic="true"></div>
+
+  <main id="main" tabindex="-1">
 
     <!-- ========== EPSILON AI ========== -->
     <section id="work" aria-labelledby="epsilon-heading">
       <div class="wrap">
         <p class="section-eyebrow">Selected Work · 01</p>
-        <h2 class="section-title" id="epsilon-heading">AI product systems that make creative work <em>scale</em></h2>
+        <h2 class="section-title" id="epsilon-heading">AI product systems for <em>creative teams</em></h2>
 
         <ul class="metric-band" aria-label="Epsilon impact metrics">
           <li class="metric-cell">
@@ -825,24 +928,29 @@
         <article class="case">
           <p class="case-meta">Epsilon · 2021 → present · Staff Software Engineer · Tech lead</p>
           <h3 class="case-title">AI Creative Production Platform</h3>
-          <p class="case-subtitle">A production creative tool with AI threaded through concept, layout, and edit — practical UX tooling backed by an eval skill every feature plugs into.</p>
+          <p class="case-subtitle">A production creative tool for people making real ads, with AI woven into concepting, layout, and edits, plus an eval layer that protects brand quality as volume goes up.</p>
 
           <div class="case-grid">
             <div class="case-body">
               <h4>The problem</h4>
-              <p>Creative production didn't scale. Every ad variation was a human-in-the-loop craft act inside Illustrator and Photoshop. We needed a real product workflow where a small team could ship thousands of variations a day without sacrificing brand fidelity, usability, or creative control.</p>
+              <p>Creative production had outgrown the tools around it. Every new ad variation still asked a designer to do careful, repetitive production work inside Illustrator and Photoshop. The goal was not to replace that judgment; it was to give creative teams a product workflow where brand fidelity, usability, and control could survive at much higher volume.</p>
 
               <h4>The approach</h4>
-              <p>I led the product architecture for a web-based builder that turns creative intent into production-ready variations. A <strong>homegrown agentic orchestration loop</strong> over tiered Gemini models handles concepting, layout, and edits, while production-data bridges — like real-time font-ID lookups — keep output tied to the actual brand system.</p>
+              <p>I led the product architecture for a web-based builder that turns creative intent into production-ready variations. The work lived in the space between design and engineering: preserving what designers meant, making the workflow feel usable, and giving AI enough structure to be helpful. A <strong>homegrown agentic orchestration loop</strong> over tiered Gemini models handles concepting, layout, and edits, while production-data bridges — like real-time font-ID lookups — keep output tied to the actual brand system.</p>
+
+              <figure class="case-example">
+                <img src="ad-builder.png" alt="Ad Builder interface showing a Solara skincare display ad and timeline controls for creative production." width="1672" height="941" loading="lazy" decoding="async">
+                <figcaption>Example creative production workspace</figcaption>
+              </figure>
 
               <h4>The durable part</h4>
-              <p>I built a <strong>reusable eval skill</strong> for any AI feature in our org to plug into. It scores outputs on layout accuracy, color fidelity, and pixel-diff against baselines — and a meta-optimizer reads those scores and tunes the prompts, model tier, pipeline steps, and schemas. Closer to DSPy-style automated pipeline tuning than critique-and-regenerate. Invest once; compound leverage across every AI surface downstream.</p>
+              <p>I built a <strong>reusable eval skill</strong> so AI features could be judged against the same things creative teams care about: layout accuracy, color fidelity, and visual drift against baselines. A meta-optimizer reads those scores and tunes the prompts, model tier, pipeline steps, and schemas. It turns taste into something the system can keep checking, not something everyone has to rediscover by eye.</p>
 
               <h4>Where it is headed</h4>
-              <p>Leading an agent-first refactor — migrating deterministic orchestration into fully agentic workflows, with the eval harness as the safety rail.</p>
+              <p>I am leading the agent-first refactor now: moving deterministic orchestration into more flexible agentic workflows, with the eval harness acting as the trust layer between speed and quality.</p>
             </div>
 
-            <aside class="case-sidebar" aria-label="Project metadata">
+            <aside class="case-sidebar" aria-label="AI Creative Production Platform project metadata">
               <div class="case-sidebar-block">
                 <div class="case-sidebar-label">Role</div>
                 <div class="case-sidebar-value">Staff Software Engineer · Tech lead</div>
@@ -869,7 +977,7 @@
     <section aria-labelledby="core-ui-heading">
       <div class="wrap">
         <p class="section-eyebrow">Selected Work · 02</p>
-        <h2 class="section-title" id="core-ui-heading">Founded <em>Core UI</em>, Epsilon's design system</h2>
+        <h2 class="section-title" id="core-ui-heading">Core UI, the design system that brought <em>design and engineering closer</em></h2>
 
         <ul class="metric-band" aria-label="Core UI impact metrics">
           <li class="metric-cell">
@@ -892,26 +1000,31 @@
 
         <article class="case">
           <p class="case-meta">Epsilon · 2017 → present · Founder &amp; UX engineering lead</p>
-          <h3 class="case-title">Core UI — a design system that became shared infrastructure</h3>
-          <p class="case-subtitle">A production design system bridging Figma and Storybook, accessibility embedded as a constraint, in production across Epsilon's products for almost a decade.</p>
+          <h3 class="case-title">Core UI — shared infrastructure for product quality</h3>
+          <p class="case-subtitle">A production design system that kept Figma, Storybook, accessibility, and product code pointed at the same reality for almost a decade.</p>
 
           <div class="case-grid">
             <div class="case-body">
               <h4>The problem</h4>
-              <p>Designers and engineers were on different sides of a wall. Designs shipped in Figma, components got rebuilt per product, accessibility was a checklist someone ran at the end, and every team rediscovered the same primitives. The gap between design intent and production reality was where quality leaked.</p>
+              <p>Designers and engineers were doing good work in places that did not stay connected. Designs lived in Figma, components were rebuilt per product, accessibility arrived too late, and every team solved the same basic interface problems again. The gap between design intent and production reality was where quality quietly leaked out.</p>
 
               <h4>The approach</h4>
-              <p>I founded the <strong>UX Engineering discipline</strong> at Epsilon and grew what started as a side project into the company's shared design system. I partnered with designers in Figma and engineers in Storybook so the same component had one canonical surface in both worlds. Tokens, patterns, and documentation lived alongside the code, not in a separate doc that drifted.</p>
+              <p>I founded the <strong>UX Engineering discipline</strong> at Epsilon and grew what started as a side project into the company's shared design system. The job was part systems architecture, part design translation, and part patient relationship-building: sit with designers, understand the intent, then make the component real enough that engineers could ship it consistently. Tokens, patterns, and documentation lived alongside the code, where they could keep earning trust.</p>
+
+              <figure class="case-example">
+                <img src="core-ui.png" alt="Core UI design system landing page showing version 21.0.0, navigation for foundations, components, patterns, and system support, and an Explore the system call to action." width="1686" height="933" loading="lazy" decoding="async">
+                <figcaption>Core UI public design-system landing page</figcaption>
+              </figure>
 
               <h4>The durable part</h4>
-              <p>I treated <strong>WCAG 2.1 AA as a design constraint, embedded into every component</strong> — not a checklist run at audit. Color contrast, focus order, ARIA semantics, keyboard paths: all baked into the primitives. Same skill-as-abstraction pattern I'd later apply to AI evals: invest once at the substrate, every product team downstream gets the leverage for free. Ship a button, ship accessibility.</p>
+              <p>I treated <strong>WCAG 2.1 AA as a design constraint, embedded into every component</strong> — not a checklist run at audit. Color contrast, focus order, ARIA semantics, keyboard paths: all part of the material. The same pattern shows up in my AI work now: invest in the substrate once, and every team downstream gets a better starting point.</p>
 
               <h4>Why it still matters</h4>
-              <p>Core UI is the foundation everything else is built on — including the AI-assisted UI work that follows. The design system is where taste, accessibility, and system thinking compound; the AI tooling is where that compounding gets pointed at agents. Live at <a href="https://coreui.epsilon.com" target="_blank" rel="noopener noreferrer">coreui.epsilon.com</a>.</p>
+              <p>Core UI is still the foundation under a lot of the work I care about. It is where taste, accessibility, and system thinking became shared infrastructure; the AI tooling is where that same way of thinking now gets pointed at agents. Live at <a href="https://coreui.epsilon.com" target="_blank" rel="noopener noreferrer">coreui.epsilon.com<span class="sr-only"> (opens in a new tab)</span></a>.</p>
 
             </div>
 
-            <aside class="case-sidebar" aria-label="Project metadata">
+            <aside class="case-sidebar" aria-label="Core UI project metadata">
               <div class="case-sidebar-block">
                 <div class="case-sidebar-label">Role</div>
                 <div class="case-sidebar-value">Founder · UX engineering lead</div>
@@ -930,7 +1043,7 @@
               </div>
               <div class="case-sidebar-block">
                 <div class="case-sidebar-label">Link</div>
-                <div class="case-sidebar-value"><a href="https://coreui.epsilon.com" target="_blank" rel="noopener noreferrer">coreui.epsilon.com ↗</a></div>
+                <div class="case-sidebar-value"><a href="https://coreui.epsilon.com" target="_blank" rel="noopener noreferrer">coreui.epsilon.com<span aria-hidden="true"> ↗</span><span class="sr-only"> (opens in a new tab)</span></a></div>
               </div>
             </aside>
           </div>
@@ -942,7 +1055,7 @@
     <section aria-labelledby="makemea-heading">
       <div class="wrap">
         <p class="section-eyebrow">Selected Work · 03</p>
-        <h2 class="section-title" id="makemea-heading">Shipped solo, <em>runs itself</em></h2>
+        <h2 class="section-title" id="makemea-heading">A small AI product, <em>shipped end to end</em></h2>
 
         <ul class="metric-band" aria-label="MakeMeA build metrics">
           <li class="metric-cell">
@@ -964,26 +1077,26 @@
         </ul>
 
         <article class="case">
-          <p class="case-meta">Solo · 2026 → live · <a href="https://makemea.ai" target="_blank" rel="noopener noreferrer">makemea.ai</a></p>
-          <h3 class="case-title">MakeMeA — a small product shipped fast</h3>
-          <p class="case-subtitle">An AI photo style-transfer app shipped in 2 days from empty repo to production, wrapped in an autonomous trend-to-publish content engine.</p>
+          <p class="case-meta">Solo · 2026 → live · <a href="https://makemea.ai" target="_blank" rel="noopener noreferrer">makemea.ai<span class="sr-only"> (opens in a new tab)</span></a></p>
+          <h3 class="case-title">MakeMeA — a fast product bet with useful lessons</h3>
+          <p class="case-subtitle">An AI photo-style app built in 48 hours, useful as a proof of how quickly I can move from idea to product to autonomous content loop.</p>
 
           <div class="case-grid">
             <div class="case-body">
               <h4>The build</h4>
-              <p>Pair-programmed with agents from empty repo to live URL in 48 hours. Next.js · TypeScript · OpenAI, deployed straight to production. Every design decision optimized for <strong>shipability</strong>: tailored prompts per style, watermark as a single overlay step, minimal server infra.</p>
+              <p>I pair-programmed with agents from empty repo to live URL in 48 hours. Next.js, TypeScript, OpenAI, and a deliberately small product surface. Every design decision was about <strong>shipability</strong>: keep the flow obvious, tune each style with its own prompt, make the watermark a single overlay step, and avoid infrastructure that would slow the idea down.</p>
 
               <h4>The autonomous engine</h4>
-              <p>The longer-term bet: MakeMeA runs a <strong>trend-to-publish pipeline</strong> without human intervention. A trend finder spots emerging visual styles and spins up a new style (prompt + params), generates sample images, produces short-form videos, and auto-writes SEO/AEO blog posts — <strong>80+ posts, one per style</strong>, every style its own organic discovery surface.</p>
+              <p>The longer-term bet was the engine around the app. MakeMeA runs a <strong>trend-to-publish pipeline</strong> without human intervention: find an emerging visual style, spin up the prompt and parameters, generate samples, produce short-form videos, and write SEO/AEO posts. The product became a wrapper around a system that can keep making its own discovery surfaces.</p>
 
               <h4>The honest result</h4>
-              <p>Live, functional, not profitable. The market is crowded; competitors give away what I charge for. But the exercise <strong>validated AI-native velocity as a repeatable baseline</strong>, and the auto-content infra is more valuable than the product it happens to wrap. <a href="https://makemea.ai" target="_blank" rel="noopener noreferrer">See it live →</a></p>
+              <p>Live, functional, not profitable. The market is crowded, and competitors give away plenty of what I charge for. Still, it <strong>validated AI-native velocity as a repeatable baseline</strong>, and the auto-content infrastructure is more interesting than the product it happens to wrap. <a href="https://makemea.ai" target="_blank" rel="noopener noreferrer" aria-label="See MakeMeA live (opens in a new tab)">See it live <span aria-hidden="true">→</span></a></p>
 
               <h4>What I learned</h4>
-              <p>The system is the moat, not the UI. Taste differentiation only works at the speed you can keep leading it. Shipping in two days is a capability; product-market fit is a separate problem that velocity alone doesn't solve.</p>
+              <p>The lesson was useful and humbling: shipping fast is a capability, not a guarantee. Taste only stays differentiated if the system can keep up with culture, and product-market fit still has to be earned the slow human way.</p>
             </div>
 
-            <aside class="case-sidebar" aria-label="Project metadata">
+            <aside class="case-sidebar" aria-label="MakeMeA project metadata">
               <div class="case-sidebar-block">
                 <div class="case-sidebar-label">Role</div>
                 <div class="case-sidebar-value">Solo — design, code, prompts, ops</div>
@@ -1002,7 +1115,7 @@
               </div>
               <div class="case-sidebar-block">
                 <div class="case-sidebar-label">Link</div>
-                <div class="case-sidebar-value"><a href="https://makemea.ai" target="_blank" rel="noopener noreferrer">makemea.ai ↗</a></div>
+                <div class="case-sidebar-value"><a href="https://makemea.ai" target="_blank" rel="noopener noreferrer">makemea.ai<span aria-hidden="true"> ↗</span><span class="sr-only"> (opens in a new tab)</span></a></div>
               </div>
             </aside>
           </div>
@@ -1014,28 +1127,28 @@
     <section id="lab" aria-labelledby="lab-heading">
       <div class="wrap">
         <p class="section-eyebrow">Lab</p>
-        <h2 class="section-title" id="lab-heading">Small tools, <em>agent skills</em> &amp; useful experiments</h2>
+        <h2 class="section-title" id="lab-heading">Small tools, <em>agent skills</em> &amp; experiments with a point of view</h2>
 
         <div class="lab-grid">
           <article class="lab-card">
             <p class="lab-status">● Early · Live</p>
             <h3 class="lab-title">Sprawl</h3>
-            <p class="lab-desc">Real-time AI generative art. Type a question; Voronoi-stippled dots resolve into SDXL generations through a custom 2D/WebGL renderer.</p>
-            <a href="https://sprawl.place" target="_blank" rel="noopener noreferrer" class="lab-link">sprawl.place →</a>
+            <p class="lab-desc">A generative-art playground where a typed question turns into motion, texture, and SDXL imagery through a custom 2D/WebGL renderer. Part toy, part interface sketch.</p>
+            <a href="https://sprawl.place" target="_blank" rel="noopener noreferrer" class="lab-link" aria-label="Open Sprawl at sprawl.place (opens in a new tab)">sprawl.place <span aria-hidden="true">→</span></a>
           </article>
 
           <article class="lab-card">
             <p class="lab-status">● Early · Published</p>
             <h3 class="lab-title">OSS Contributor</h3>
-            <p class="lab-desc">Agent skill that discovers GitHub issues, forks, implements fixes, and opens PRs with full AI disclosure. Same skill-as-abstraction pattern as the Epsilon eval skill.</p>
-            <a href="https://clawhub.com/skills/oss-contributor" target="_blank" rel="noopener noreferrer" class="lab-link">clawhub.com →</a>
+            <p class="lab-desc">An agent skill for the unglamorous open-source loop: find an issue, fork the repo, make the fix, open the PR, and disclose the AI help clearly. Small on purpose, reusable by design.</p>
+            <a href="https://clawhub.com/skills/oss-contributor" target="_blank" rel="noopener noreferrer" class="lab-link" aria-label="Open the OSS Contributor skill on clawhub.com (opens in a new tab)">clawhub.com <span aria-hidden="true">→</span></a>
           </article>
 
           <article class="lab-card">
             <p class="lab-status">● DX · Published</p>
             <h3 class="lab-title">Visual QA — agent-pipeline DX</h3>
-            <p class="lab-desc">Internal tooling for the moment agents started shipping visual breakage faster than humans could catch it. Playwright baselines, pixel-diff gates, and deployment thresholds wired directly into agent runs — so a regression fails the build before it ships, not after a designer notices. Workflow automation that gives every team that plugs in a quality floor for free.</p>
-            <a href="https://clawhub.com/kbo4sho/visual-qa" target="_blank" rel="noopener noreferrer" class="lab-link">clawhub.com →</a>
+            <p class="lab-desc">A quality gate for the moment agents start changing UI faster than humans can review it. Playwright baselines, pixel diffs, and deploy thresholds run inside agent workflows, so visual breakage gets caught before a designer has to spot it by hand.</p>
+            <a href="https://clawhub.com/kbo4sho/visual-qa" target="_blank" rel="noopener noreferrer" class="lab-link" aria-label="Open the Visual QA skill on clawhub.com (opens in a new tab)">clawhub.com <span aria-hidden="true">→</span></a>
           </article>
         </div>
 
@@ -1043,9 +1156,9 @@
           <div class="utility-copy">
             <p class="lab-status">● Practical AI Utility · Custom GPT</p>
             <h3 class="utility-title" id="social-stories-title">Printable Social Stories</h3>
-            <p class="utility-desc">A custom GPT that helps parents and educators turn a plain-language topic into a child-friendly, printable social story. It starts from a real caregiving need: fast, supportive materials for transitions, routines, and unfamiliar situations.</p>
-            <p class="utility-note">The interesting part is the product judgment, not the complexity. It packages AI around a focused workflow with clear prompting, a gentle tone, optional customization, and offline-friendly output.</p>
-            <a href="https://chatgpt.com/g/g-694a0f3a49548191a2c2090ad7a548a2-printable-social-stories" target="_blank" rel="noopener noreferrer" class="utility-link">Open custom GPT →</a>
+            <p class="utility-desc">An AI utility for parents and educators who need a kind, printable social story quickly. It turns plain-language context into child-friendly support for transitions, routines, and unfamiliar moments.</p>
+            <p class="utility-note">The care is in the product judgment: calm prompts, optional customization, accessible output, and a workflow that respects the caregiver on the other side of the screen.</p>
+            <a href="https://chatgpt.com/g/g-694a0f3a49548191a2c2090ad7a548a2-printable-social-stories" target="_blank" rel="noopener noreferrer" class="utility-link" aria-label="Open Printable Social Stories custom GPT (opens in a new tab)">Open custom GPT <span aria-hidden="true">→</span></a>
             <ul class="utility-tags" aria-label="Printable Social Stories focus areas">
               <li>Prompt design</li>
               <li>Education</li>
@@ -1055,8 +1168,8 @@
           </div>
 
           <div class="utility-visual">
-            <a href="https://chatgpt.com/g/g-694a0f3a49548191a2c2090ad7a548a2-printable-social-stories" target="_blank" rel="noopener noreferrer" class="utility-image-link" aria-label="Open Printable Social Stories custom GPT">
-              <img src="printable-social-stories.png" alt="Screenshot of the Printable Social Stories custom GPT interface" class="utility-screenshot">
+            <a href="https://chatgpt.com/g/g-694a0f3a49548191a2c2090ad7a548a2-printable-social-stories" target="_blank" rel="noopener noreferrer" class="utility-image-link" aria-label="Open Printable Social Stories custom GPT (opens in a new tab)">
+              <img src="printable-social-stories.png" alt="Screenshot of the Printable Social Stories custom GPT interface" class="utility-screenshot" width="1584" height="993" loading="lazy" decoding="async">
             </a>
           </div>
         </article>
@@ -1067,13 +1180,13 @@
     <section id="foundation" aria-labelledby="foundation-heading">
       <div class="wrap">
         <p class="section-eyebrow">Foundation</p>
-        <h2 class="section-title" id="foundation-heading">Twelve years of <em>depth</em> behind the work</h2>
+        <h2 class="section-title" id="foundation-heading">The creative-tech years <em>underneath all of this</em></h2>
 
         <div class="foundation-grid foundation-grid--single">
           <article class="foundation-card">
             <p class="foundation-card-meta">Civiq Smartscapes · 2013 – 2017</p>
             <h3 class="foundation-card-title">Creative Technology</h3>
-            <p>Large-format interactive installations for major brands. Personalized animated photo experience for Coca-Cola across malls nationwide. Award-winning Kinect-gesture Photo Booth for PepsiCo. 3D interactive experience for Accenture at JFK Airport. The throughline: real-time systems under public load, shipped for brands that measured them.</p>
+            <p>Before the design systems and AI platforms, I was building software people touched in public: mall-scale Coca-Cola photo experiences, an award-winning Kinect installation for PepsiCo, and a 3D interactive experience for Accenture at JFK. That work taught me to care about the whole experience — the code, the motion, the brand, the hardware, the crowd, and the moment where a person actually uses the thing.</p>
             <p class="foundation-card-tags">Kinect · Unity3D · Real-time systems · Creative technology</p>
           </article>
         </div>
@@ -1084,36 +1197,36 @@
     <section id="how" aria-labelledby="how-heading">
       <div class="wrap">
         <p class="section-eyebrow">How I Work</p>
-        <h2 class="section-title" id="how-heading">How I like to <em>work</em></h2>
+        <h2 class="section-title" id="how-heading">How I like to work with <em>design, product, and AI</em></h2>
 
         <ul class="principles">
           <li class="principle">
             <p class="principle-title">Measure the work</p>
-            <p class="principle-body">Generation is table stakes. Teams that win in AI measure output quality and tune for it — the eval layer compounds across every feature that plugs in.</p>
+            <p class="principle-body">I like beautiful guesses, but I trust measured improvement. The best AI teams know what good looks like and keep tuning toward it.</p>
           </li>
           <li class="principle">
             <p class="principle-title">Package the useful parts</p>
-            <p class="principle-body">Package cross-cutting AI work (evals, agents, tools) as composable skills. It's what turns a team into a platform.</p>
+            <p class="principle-body">When something works, I turn it into a reusable skill, component, or pattern so the next team starts further ahead.</p>
           </li>
           <li class="principle">
-            <p class="principle-title">Simple orchestration, smart meta-optimization</p>
-            <p class="principle-body">Homegrown in-memory loops beat heavy frameworks when the AI landscape moves weekly. Keep the substrate debuggable; let the optimizer do the adapting.</p>
+            <p class="principle-title">Keep the loop understandable</p>
+            <p class="principle-body">I prefer systems people can trace, debug, and explain. Smart optimization is easier to trust when the underlying loop is still legible.</p>
           </li>
           <li class="principle">
-            <p class="principle-title">Humans in the loop today, agents tomorrow</p>
-            <p class="principle-body">Every AI moment I ship is a skill an agent can eventually orchestrate. Deterministic today, agentic as the safety rails mature.</p>
+            <p class="principle-title">Earn trust before autonomy</p>
+            <p class="principle-body">I ship the human-in-the-loop version first, learn where judgment matters, then give agents more room as the safety rails prove themselves.</p>
           </li>
           <li class="principle">
             <p class="principle-title">Production over prototypes</p>
-            <p class="principle-body">I write the code that ships and operate the systems that run. Twelve years of making that trade honestly.</p>
+            <p class="principle-body">I care about the idea, but I also care about the last mile: the code, the edge cases, the handoff, and the system that has to keep running.</p>
           </li>
           <li class="principle">
-            <p class="principle-title">Accessibility is a design constraint</p>
-            <p class="principle-body">Not a checklist. WCAG 2.1 AA embedded into components, not bolted on at audit.</p>
+            <p class="principle-title">Accessibility belongs in the design material</p>
+            <p class="principle-body">Contrast, focus, semantics, and keyboard paths belong in the component from the beginning. They shape the design; they do not arrive after it.</p>
           </li>
           <li class="principle">
-            <p class="principle-title">AI-assisted dev is the substrate</p>
-            <p class="principle-body">Daily Claude Code, Cursor, and MCP — not as a buzzword, as the working surface. CLAUDE.md and AGENTS.md as committed primitives, agent skills published on <a href="https://clawhub.com/kbo4sho" target="_blank" rel="noopener noreferrer">ClawHub</a>, and a point of view on where this is headed: the loop between designer, engineer, and agent gets tighter every quarter, and the people who treat their tools as a system get the compounding.</p>
+            <p class="principle-title">AI-assisted dev is my working surface</p>
+            <p class="principle-body">I use Claude Code, Cursor, MCP, committed agent docs, and published skills as part of the way I build. The interesting shift is not the novelty; it is the tighter loop between designer, engineer, and agent. The people who shape that loop thoughtfully will move differently.</p>
           </li>
         </ul>
       </div>
@@ -1124,14 +1237,15 @@
   <footer role="contentinfo">
     <div class="wrap">
       <nav class="footer-links" aria-label="Contact">
-        <a href="https://github.com/kbo4sho" target="_blank" rel="noopener noreferrer">GitHub</a>
-        <a href="https://linkedin.com/in/kevin-bolander-45659322" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="https://github.com/kbo4sho" target="_blank" rel="noopener noreferrer">GitHub<span class="sr-only"> (opens in a new tab)</span></a>
+        <a href="https://linkedin.com/in/kevin-bolander-45659322" target="_blank" rel="noopener noreferrer">LinkedIn<span class="sr-only"> (opens in a new tab)</span></a>
         <a href="mailto:kevinbolander@gmail.com">Email</a>
-        <a href="kevin-bolander-resume.pdf">Resume</a>
+        <a href="kevin-bolander-resume.pdf" type="application/pdf">Resume<span class="sr-only"> PDF</span></a>
       </nav>
       <p class="footer-note">Built with HTML, CSS, and opinions · © 2026 Kevin Bolander</p>
     </div>
   </footer>
 
+  <script src="spider-game.js"></script>
 </body>
 </html>
