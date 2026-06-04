@@ -154,7 +154,7 @@ async function runScenario(browser, baseUrl, name) {
   });
 
   await page.goto(`${baseUrl}/?motion-audit=${name}`, { waitUntil: "load" });
-  await page.getByRole("button", { name: "Try the portrait" }).click();
+  await page.locator(".spider-trigger").click();
   await waitForGameReady(page);
 
   if (name === "intro") {

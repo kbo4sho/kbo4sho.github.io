@@ -1399,13 +1399,17 @@
     if (fade <= 0.02) return;
 
     ctx.save();
-    ctx.globalAlpha = fade * 0.72;
+    multiplyGlobalAlpha(fade * 0.72);
     drawSpider(state.spider);
     ctx.restore();
   }
 
   function drawPixelBlock(x, y, size = 2) {
     ctx.fillRect(Math.round(x - size / 2), Math.round(y - size / 2), size, size);
+  }
+
+  function multiplyGlobalAlpha(alpha) {
+    ctx.globalAlpha *= clamp(alpha, 0, 1);
   }
 
   function drawPixelLine(x1, y1, x2, y2, options = {}) {
@@ -1419,7 +1423,7 @@
 
     ctx.save();
     ctx.fillStyle = color;
-    ctx.globalAlpha = alpha;
+    multiplyGlobalAlpha(alpha);
     for (let index = 0; index <= count; index += 1) {
       if (options.skipEvery && (index + phase) % options.skipEvery === 0) continue;
       const t = index / count;
@@ -1439,7 +1443,7 @@
 
     ctx.save();
     ctx.fillStyle = color;
-    ctx.globalAlpha = alpha;
+    multiplyGlobalAlpha(alpha);
     for (let index = 0; index <= limit; index += 1) {
       if (options.skipEvery && (index + phase) % options.skipEvery === 0) continue;
       const t = clamp(index / count, 0, progress);
@@ -1469,7 +1473,7 @@
 
     ctx.save();
     ctx.fillStyle = color;
-    ctx.globalAlpha = alpha;
+    multiplyGlobalAlpha(alpha);
     for (let index = 0; index < points; index += 1) {
       const angle = phase + (index / points) * TAU;
       drawPixelBlock(x + Math.cos(angle) * radius, y + Math.sin(angle) * radius, size);
@@ -1487,7 +1491,7 @@
 
     ctx.save();
     ctx.fillStyle = color;
-    ctx.globalAlpha = alpha;
+    multiplyGlobalAlpha(alpha);
     for (let index = 0; index <= count; index += 1) {
       const t = index / count;
       const angle = startAngle + (endAngle - startAngle) * t;
@@ -1701,7 +1705,7 @@
       const toeAngle = endAngle;
       ctx.save();
       ctx.fillStyle = colors.ink;
-      ctx.globalAlpha = sweep.alpha * intensity * 0.75;
+      multiplyGlobalAlpha(sweep.alpha * intensity * 0.75);
       drawPixelBlock(
         state.anchor.x + Math.cos(toeAngle) * radius,
         state.anchor.y + Math.sin(toeAngle) * radius,
@@ -1793,7 +1797,7 @@
     const frameOffset = getSpriteFrameOffset(frameIndex, size);
 
     ctx.save();
-    ctx.globalAlpha = alpha;
+    multiplyGlobalAlpha(alpha);
     ctx.translate(spider.x, spider.y + offsetY + breathe);
     ctx.rotate(tilt);
     ctx.scale(facing * (1 + speedStretch), 1 - speedStretch * 0.35);
