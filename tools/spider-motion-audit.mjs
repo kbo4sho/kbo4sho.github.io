@@ -154,16 +154,16 @@ async function runScenario(browser, baseUrl, name) {
   });
 
   await page.goto(`${baseUrl}/?motion-audit=${name}`, { waitUntil: "load" });
-  await page.locator(".spider-trigger").click();
-  await waitForGameReady(page);
-
   if (name === "intro") {
+    await waitForGameReady(page);
     await collectFrames(page, name, 1650);
   } else if (name === "hook-loss") {
+    await startGameplayFromPassiveHang(page);
     await page.waitForTimeout(1280);
     await page.evaluate(() => window.__spiderGameTest.detachSpider());
     await collectFrames(page, name, 1050);
   } else if (name === "fall-frame") {
+    await startGameplayFromPassiveHang(page);
     await page.waitForTimeout(1280);
     await page.evaluate(() => {
       window.__spiderGameTest.detachSpider();
@@ -175,6 +175,7 @@ async function runScenario(browser, baseUrl, name) {
     });
     await collectFrames(page, name, 950);
   } else if (name === "impact") {
+    await startGameplayFromPassiveHang(page);
     await page.waitForTimeout(1280);
     await page.evaluate(() => {
       window.__spiderGameTest.detachSpider();
@@ -210,9 +211,10 @@ async function runScenario(browser, baseUrl, name) {
 }
 
 async function instrumentGameScript(page) {
-  await page.route("**/spider-game.js", async (route) => {
+  await page.route("**/spider-game.js*", async (route) => {
     const file = await fs.readFile(path.join(repoRoot, "spider-game.js"), "utf8");
-    const instrumented = file.replace(
+    const fastPassive = file.replace("const passiveArrivalDelay = 3.5;", "const passiveArrivalDelay = 0.08;");
+    const instrumented = fastPassive.replace(
       /\}\)\(\);\s*$/,
       "window.__spiderGameTest = { state, draw, detachSpider, getSpiderFrame, getSpiderRenderFrames, drawSpriteFrame, updateSpiderRenderPose, spiderSprite };\n})();"
     );
@@ -224,6 +226,17 @@ async function waitForGameReady(page) {
   await page.waitForFunction(() => Boolean(window.__spiderGameTest?.state?.active));
   await page.waitForFunction(() => Boolean(window.__spiderGameTest?.state?.spider?.renderPose));
   await page.waitForFunction(() => Boolean(window.__spiderGameTest?.spiderSprite?.loaded));
+}
+
+async function startGameplayFromPassiveHang(page) {
+  await waitForGameReady(page);
+  await page.waitForFunction(() => window.__spiderGameTest.state.mode === "previewHang");
+  await page.locator(".spider-trigger").click();
+  await page.waitForFunction(() =>
+    window.__spiderGameTest.state.mode === "attached" &&
+    window.__spiderGameTest.state.story.phase === "weaving" &&
+    window.__spiderGameTest.state.hooks.length > 0
+  );
 }
 
 async function collectFrames(page, scenario, duration) {

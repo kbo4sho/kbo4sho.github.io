@@ -78,11 +78,13 @@
   const storyFadeHold = 0.55;
   const introStartDrop = 26;
   const introThreadOffset = 10;
+  const passiveArrivalDelay = 3.5;
 
   const state = {
     active: false,
     running: false,
     rafId: null,
+    passiveTimerId: null,
     mode: "idle",
     dpr: 1,
     width: 0,
@@ -220,21 +222,30 @@
     if (status) status.textContent = message;
   }
 
-  function startGame() {
-    resizeCanvas();
-    document.body.classList.add("spider-game-active");
-    if (state.rafId) {
-      cancelAnimationFrame(state.rafId);
-      state.rafId = null;
-    }
+  function clearPassiveArrivalTimer() {
+    if (!state.passiveTimerId) return;
 
-    const launch = getPortraitLaunch();
+    clearTimeout(state.passiveTimerId);
+    state.passiveTimerId = null;
+  }
+
+  function schedulePassiveArrival() {
+    if (reducedMotion.matches) return;
+
+    clearPassiveArrivalTimer();
+    state.passiveTimerId = window.setTimeout(() => {
+      state.passiveTimerId = null;
+      startPassiveArrival();
+    }, passiveArrivalDelay * 1000);
+  }
+
+  function prepareLaunchState(launch, mode, settled) {
     setPlayBand(launch);
     state.active = true;
     state.running = true;
-    state.mode = reducedMotion.matches ? "quiet" : "intro";
+    state.mode = mode;
     state.lastTime = performance.now();
-    state.intro = 0;
+    state.intro = settled ? 1.08 : 0;
     state.speed = 58;
     state.difficulty = 1;
     state.hookTimer = 0.15;
@@ -248,16 +259,44 @@
     };
     state.spider = makeSpider();
     state.spider.x = launch.x;
-    state.spider.y = launch.y + introStartDrop;
-    resetSpiderRenderPose(state.spider, state.mode === "intro" ? "descend" : "swingSlow");
+    state.spider.y = settled ? launch.y + state.ropeLength : launch.y + introStartDrop;
+    resetSpiderRenderPose(state.spider, settled ? "swingSlow" : "descend");
     state.hooks = [];
     state.bursts = [];
     state.bumps = [];
     state.story = makeStory();
     state.rotation = 0;
     state.lastAngle = Math.PI / 2;
+  }
 
-    if (state.mode === "quiet") {
+  function startPassiveArrival() {
+    if (reducedMotion.matches || state.active) return;
+
+    resizeCanvas();
+    document.body.classList.add("spider-game-active");
+    if (state.rafId) {
+      cancelAnimationFrame(state.rafId);
+      state.rafId = null;
+    }
+
+    const launch = getPortraitLaunch();
+    prepareLaunchState(launch, "previewIntro", false);
+    state.rafId = requestAnimationFrame(tick);
+  }
+
+  function startGame() {
+    clearPassiveArrivalTimer();
+    resizeCanvas();
+    document.body.classList.add("spider-game-active");
+    if (state.rafId) {
+      cancelAnimationFrame(state.rafId);
+      state.rafId = null;
+    }
+
+    const launch = getPortraitLaunch();
+
+    if (reducedMotion.matches) {
+      prepareLaunchState(launch, "quiet", true);
       state.spider.y = launch.y + state.ropeLength;
       state.running = false;
       draw();
@@ -265,7 +304,43 @@
       return;
     }
 
-    seedHooks(launch.x);
+    if (state.active && (state.mode === "previewIntro" || state.mode === "previewHang")) {
+      setPlayBand(launch);
+      if (state.mode === "previewIntro") {
+        settleSpiderToPreviewHang();
+      }
+      state.hooks = [];
+      state.bursts = [];
+      state.bumps = [];
+      state.story = makeStory();
+      state.speed = 58;
+      state.difficulty = 1;
+      state.hookTimer = 0.15;
+      state.hookIndex = 0;
+    } else {
+      prepareLaunchState(launch, "previewHang", true);
+    }
+
+    beginGameplayFromHang();
+  }
+
+  function beginGameplayFromHang() {
+    state.mode = "attached";
+    state.running = true;
+    state.active = true;
+    state.lastTime = performance.now();
+    state.ropeLength = clamp(
+      Math.hypot(state.spider.x - state.anchor.x, state.spider.y - state.anchor.y),
+      78,
+      Math.min(230, state.height * 0.42)
+    );
+    state.anchor.vx = -state.speed;
+    state.spider.vx = state.anchor.vx - 40;
+    state.spider.vy = 0;
+    updateSpiderFacing(state.spider);
+    state.lastAngle = Math.atan2(state.spider.y - state.anchor.y, state.spider.x - state.anchor.x);
+    state.rotation = 0;
+    seedHooks(state.anchor.x);
     state.story.phase = "weaving";
     announce("Spider game started.");
     state.rafId = requestAnimationFrame(tick);
@@ -321,9 +396,22 @@
       return;
     }
 
-    updateHooks(dt);
     updateBursts(dt);
     updateBumps(dt);
+
+    if (state.mode === "previewIntro") {
+      updatePreviewIntro(dt);
+      updateSpiderRenderPose(state.spider, dt);
+      return;
+    }
+
+    if (state.mode === "previewHang") {
+      updatePreviewHang(dt);
+      updateSpiderRenderPose(state.spider, dt);
+      return;
+    }
+
+    updateHooks(dt);
 
     if (state.mode === "intro") {
       updateIntro(dt);
@@ -579,11 +667,7 @@
   }
 
   function updateIntro(dt) {
-    state.intro += dt * 0.92;
-    const eased = 1 - Math.pow(1 - clamp(state.intro, 0, 1), 3);
-    state.spider.x = state.anchor.x + Math.sin(state.intro * 8) * 1.5;
-    state.spider.y = state.anchor.y + introStartDrop * (1 - eased) + state.ropeLength * eased;
-    state.spider.blink += dt;
+    updateDescent(dt);
 
     if (state.intro >= 1.08) {
       state.mode = "attached";
@@ -594,6 +678,46 @@
       state.lastAngle = Math.atan2(state.spider.y - state.anchor.y, state.spider.x - state.anchor.x);
       state.rotation = 0;
     }
+  }
+
+  function updatePreviewIntro(dt) {
+    updateDescent(dt);
+
+    if (state.intro >= 1.08) {
+      settleSpiderToPreviewHang();
+    }
+  }
+
+  function updateDescent(dt) {
+    state.intro += dt * 0.92;
+    const eased = 1 - Math.pow(1 - clamp(state.intro, 0, 1), 3);
+    state.spider.x = state.anchor.x + Math.sin(state.intro * 8) * 1.5;
+    state.spider.y = state.anchor.y + introStartDrop * (1 - eased) + state.ropeLength * eased;
+    state.spider.blink += dt;
+  }
+
+  function settleSpiderToPreviewHang() {
+    state.mode = "previewHang";
+    state.intro = 1.08;
+    state.anchor.vx = 0;
+    state.spider.x = state.anchor.x;
+    state.spider.y = state.anchor.y + state.ropeLength;
+    state.spider.vx = 0;
+    state.spider.vy = 0;
+    updateSpiderFacing(state.spider);
+  }
+
+  function updatePreviewHang(dt) {
+    if (!state.anchor) return;
+
+    state.spider.blink += dt;
+    const sway = Math.sin(state.spider.blink * 1.35) * 4;
+    const bob = Math.sin(state.spider.blink * 1.9) * 1.4;
+    state.spider.x = state.anchor.x + sway;
+    state.spider.y = state.anchor.y + state.ropeLength + bob;
+    state.spider.vx = Math.cos(state.spider.blink * 1.35) * 5.4;
+    state.spider.vy = Math.cos(state.spider.blink * 1.9) * 2.7;
+    updateSpiderFacing(state.spider);
   }
 
   function updateHooks(dt) {
@@ -817,7 +941,8 @@
   }
 
   function getSpiderTargetAnimation(spider, visualSpeed, currentAnimation) {
-    if (state.mode === "intro") return "descend";
+    if (state.mode === "intro" || state.mode === "previewIntro") return "descend";
+    if (state.mode === "previewHang") return "swingSlow";
 
     if (state.mode === "falling") {
       const hit = spider.squish > 0.28 || (spider.pain > 0.35 && Math.abs(spider.vy) < 28);
@@ -2023,4 +2148,6 @@
     resizeCanvas();
     if (state.active) draw();
   });
+
+  schedulePassiveArrival();
 })();
