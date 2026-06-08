@@ -41,12 +41,14 @@
       catch: [6, 7],
       fallSlow: [8],
       fallFast: [8, 9],
-      impact: [8]
+      impact: [10],
+      fallenRest: [10, 11]
     },
     frameDuration: {
       descend: 210,
       catch: 140,
-      impact: 155
+      impact: 155,
+      fallenRest: 680
     },
     framePlacement: {
       0: { cx: 63.7, cy: 67.3 },
@@ -73,12 +75,17 @@
   const threadDamping = 0.9996;
   const catchMomentumBase = 320;
   const storyDuration = 45;
-  const storyCompletionCatches = 5;
+  const storyCompletionCatches = 3;
   const storyFadeDuration = 3.2;
   const storyFadeHold = 0.55;
   const introStartDrop = 26;
   const introThreadOffset = 10;
   const passiveArrivalDelay = 3.5;
+  const passiveSeedDuration = 0.28;
+  const gameplayLaunchEaseDuration = 0.9;
+  const freeDrawHoldDuration = 0.22;
+  const freeDrawFadeDuration = 1.2;
+  const freeDrawMoveTolerance = 18;
 
   const state = {
     active: false,
@@ -91,12 +98,19 @@
     height: 0,
     lastTime: 0,
     intro: 0,
+    previewSeed: 0,
     speed: 58,
     difficulty: 1,
     hookTimer: 0,
     hookIndex: 0,
+    launchEase: {
+      active: false,
+      elapsed: 0,
+      duration: gameplayLaunchEaseDuration
+    },
     anchor: null,
     ropeLength: 132,
+    hangVector: { x: 0, y: 132 },
     playBand: {
       top: 70,
       bottom: 420,
@@ -106,7 +120,9 @@
     hooks: [],
     bursts: [],
     bumps: [],
+    missHints: [],
     story: makeStory(),
+    freeDraw: makeFreeDraw(),
     lastAngle: 0,
     rotation: 0
   };
@@ -120,6 +136,9 @@
       radius: 10,
       pain: 0,
       squish: 0,
+      floorBounces: 0,
+      restingOnFloor: false,
+      impactHold: 0,
       blink: 0,
       catchPose: 0,
       facing: -1,
@@ -149,11 +168,27 @@
       threads: [],
       activations: [],
       loopEchoes: [],
+      webRemnants: [],
       endingThreads: [],
       branches: [],
       glintPath: [],
       completedAt: 0,
       pendingComplete: false
+    };
+  }
+
+  function makeFreeDraw() {
+    return {
+      unlocked: false,
+      pending: false,
+      active: false,
+      pointerId: null,
+      holdTimerId: null,
+      holdStartedAt: 0,
+      suppressClick: false,
+      start: { x: 0, y: 0 },
+      current: { x: 0, y: 0 },
+      trails: []
     };
   }
 
@@ -177,14 +212,48 @@
   function getPortraitLaunch() {
     const imageWrap = trigger.querySelector(".portrait-image-wrap");
     const rect = (imageWrap || trigger).getBoundingClientRect();
+    const cardRect = trigger.getBoundingClientRect();
+    const seedXMax = Math.max(28, state.width - 28);
+    const seedYMax = Math.max(36, state.height - 82);
+    const seedX = clamp(cardRect.right + 12, 28, seedXMax);
+    const seedY = clamp(cardRect.bottom + 10, 36, seedYMax);
+    const preferredDrop = state.width <= 680 ? 76 : 122;
+    const visibleDrop = Math.max(32, state.height - seedY - 42);
+    const dropLength = clamp(Math.min(preferredDrop, visibleDrop), 32, preferredDrop);
+
     return {
-      x: rect.left + rect.width * 0.52,
-      y: rect.top + rect.height * 0.22,
-      dropY: rect.bottom + 76,
+      x: seedX,
+      y: seedY,
+      dropY: seedY + dropLength,
+      hangX: seedX,
+      hangY: seedY + dropLength,
+      minRopeLength: 32,
+      maxRopeLength: Math.max(40, preferredDrop),
       top: rect.top,
       bottom: rect.bottom,
       width: rect.width,
-      height: rect.height
+      height: rect.height,
+      mobile: state.width <= 680
+    };
+  }
+
+  function getLaunchHangVector(launch) {
+    const targetX = typeof launch.hangX === "number" ? launch.hangX : launch.x;
+    const targetY = typeof launch.hangY === "number"
+      ? launch.hangY
+      : launch.dropY + introThreadOffset;
+    const dx = targetX - launch.x;
+    const dy = targetY - launch.y;
+    const desiredLength = Math.hypot(dx, dy) || 1;
+    const minRopeLength = typeof launch.minRopeLength === "number" ? launch.minRopeLength : 112;
+    const maxRopeLength = typeof launch.maxRopeLength === "number" ? launch.maxRopeLength : 184;
+    const ropeLength = clamp(desiredLength, minRopeLength, maxRopeLength);
+    const scale = ropeLength / desiredLength;
+
+    return {
+      x: dx * scale,
+      y: dy * scale,
+      length: ropeLength
     };
   }
 
@@ -246,11 +315,18 @@
     state.mode = mode;
     state.lastTime = performance.now();
     state.intro = settled ? 1.08 : 0;
+    state.previewSeed = 0;
     state.speed = 58;
     state.difficulty = 1;
     state.hookTimer = 0.15;
     state.hookIndex = 0;
-    state.ropeLength = clamp(launch.dropY - launch.y + introThreadOffset, 112, 184);
+    resetGameplayLaunchEase();
+    const hangVector = getLaunchHangVector(launch);
+    state.ropeLength = hangVector.length;
+    state.hangVector = {
+      x: hangVector.x,
+      y: hangVector.y
+    };
     state.anchor = {
       x: launch.x,
       y: launch.y,
@@ -258,12 +334,15 @@
       id: "portrait"
     };
     state.spider = makeSpider();
-    state.spider.x = launch.x;
-    state.spider.y = settled ? launch.y + state.ropeLength : launch.y + introStartDrop;
+    state.spider.x = launch.x + (settled ? state.hangVector.x : 0);
+    state.spider.y = settled
+      ? launch.y + state.hangVector.y
+      : launch.y + introStartDrop;
     resetSpiderRenderPose(state.spider, settled ? "swingSlow" : "descend");
     state.hooks = [];
     state.bursts = [];
     state.bumps = [];
+    state.missHints = [];
     state.story = makeStory();
     state.rotation = 0;
     state.lastAngle = Math.PI / 2;
@@ -280,12 +359,13 @@
     }
 
     const launch = getPortraitLaunch();
-    prepareLaunchState(launch, "previewIntro", false);
+    prepareLaunchState(launch, "previewSeed", false);
     state.rafId = requestAnimationFrame(tick);
   }
 
   function startGame() {
     clearPassiveArrivalTimer();
+    lockFreeDraw();
     resizeCanvas();
     document.body.classList.add("spider-game-active");
     if (state.rafId) {
@@ -297,16 +377,15 @@
 
     if (reducedMotion.matches) {
       prepareLaunchState(launch, "quiet", true);
-      state.spider.y = launch.y + state.ropeLength;
       state.running = false;
       draw();
       announce("A small line-drawn spider is hanging from the portrait.");
       return;
     }
 
-    if (state.active && (state.mode === "previewIntro" || state.mode === "previewHang")) {
+    if (state.active && (state.mode === "previewSeed" || state.mode === "previewIntro" || state.mode === "previewHang")) {
       setPlayBand(launch);
-      if (state.mode === "previewIntro") {
+      if (state.mode === "previewSeed" || state.mode === "previewIntro") {
         settleSpiderToPreviewHang();
       }
       state.hooks = [];
@@ -331,12 +410,13 @@
     state.lastTime = performance.now();
     state.ropeLength = clamp(
       Math.hypot(state.spider.x - state.anchor.x, state.spider.y - state.anchor.y),
-      78,
+      state.anchor.id === "portrait" ? Math.min(78, Math.max(32, state.ropeLength)) : 78,
       Math.min(230, state.height * 0.42)
     );
-    state.anchor.vx = -state.speed;
-    state.spider.vx = state.anchor.vx - 40;
-    state.spider.vy = 0;
+    startGameplayLaunchEase();
+    state.anchor.vx = 0;
+    state.spider.vx = clamp(state.spider.vx, -18, 18);
+    state.spider.vy = clamp(state.spider.vy, -18, 18);
     updateSpiderFacing(state.spider);
     state.lastAngle = Math.atan2(state.spider.y - state.anchor.y, state.spider.x - state.anchor.x);
     state.rotation = 0;
@@ -346,17 +426,59 @@
     state.rafId = requestAnimationFrame(tick);
   }
 
+  function resetGameplayLaunchEase() {
+    state.launchEase.active = false;
+    state.launchEase.elapsed = gameplayLaunchEaseDuration;
+    state.launchEase.duration = gameplayLaunchEaseDuration;
+  }
+
+  function startGameplayLaunchEase() {
+    state.launchEase.active = true;
+    state.launchEase.elapsed = 0;
+    state.launchEase.duration = gameplayLaunchEaseDuration;
+  }
+
+  function updateGameplayLaunchEase(dt) {
+    if (!state.launchEase.active) return;
+
+    state.launchEase.elapsed = Math.min(state.launchEase.elapsed + dt, state.launchEase.duration);
+    if (state.launchEase.elapsed >= state.launchEase.duration) {
+      state.launchEase.active = false;
+    }
+  }
+
+  function getGameplayLaunchFactor() {
+    if (!state.launchEase.active) return 1;
+
+    const progress = clamp(state.launchEase.elapsed / state.launchEase.duration, 0, 1);
+    return progress * progress * (3 - 2 * progress);
+  }
+
+  function getGameplayPlaySpeed() {
+    return state.speed * getGameplayLaunchFactor() * getEarlyCatchSpeedScale();
+  }
+
+  function getEarlyCatchSpeedScale() {
+    if (state.story.phase !== "weaving" || state.story.catches >= storyCompletionCatches) return 1;
+
+    return [0.68, 0.8, 0.9][state.story.catches] || 1;
+  }
+
   function seedHooks(originX) {
-    const start = Math.max(originX + 150, state.width * 0.62);
+    const start = clamp(originX + 105, state.width * 0.58, state.width - 42);
     const firstLane = state.playBand.firstLane;
     const lanes = [firstLane, firstLane - 46, firstLane + 38];
 
     for (let index = 0; index < 3; index += 1) {
-      spawnHook(start + index * randomBetween(115, 165), true, lanes[index]);
+      spawnHook(start + index * randomBetween(105, 145), true, lanes[index], {
+        kind: "starter",
+        hitBonus: 10,
+        visualBoost: 1
+      });
     }
   }
 
-  function spawnHook(forcedX, seeded, forcedY) {
+  function spawnHook(forcedX, seeded, forcedY, options = {}) {
     state.hookIndex += 1;
     const bandTop = state.playBand.top;
     const bandBottom = state.playBand.bottom;
@@ -367,9 +489,12 @@
       id: `hook-${state.hookIndex}`,
       x: forcedX || state.width + randomBetween(52, 180),
       y: typeof forcedY === "number" ? forcedY : bandTop + (bandBottom - bandTop) * normalized,
-      radius: seeded ? 12 : randomBetween(9, 13),
+      radius: options.radius || (seeded ? 12 : randomBetween(9, 13)),
       phase: randomBetween(0, TAU),
-      age: 0
+      age: 0,
+      kind: options.kind || (seeded ? "seeded" : "normal"),
+      hitBonus: options.hitBonus || 0,
+      visualBoost: options.visualBoost || 0
     });
   }
 
@@ -385,10 +510,15 @@
     update(dt);
     draw();
 
-    state.rafId = requestAnimationFrame(tick);
+    if (state.running) {
+      state.rafId = requestAnimationFrame(tick);
+    } else {
+      state.rafId = null;
+    }
   }
 
   function update(dt) {
+    updateFreeDraw(dt);
     updateStory(dt);
 
     if (!state.active || state.story.phase === "complete") {
@@ -398,6 +528,12 @@
 
     updateBursts(dt);
     updateBumps(dt);
+    updateMissHints(dt);
+
+    if (state.mode === "previewSeed") {
+      updatePreviewSeed(dt);
+      return;
+    }
 
     if (state.mode === "previewIntro") {
       updatePreviewIntro(dt);
@@ -411,6 +547,7 @@
       return;
     }
 
+    updateGameplayLaunchEase(dt);
     updateHooks(dt);
 
     if (state.mode === "intro") {
@@ -445,6 +582,10 @@
       echo.age += dt;
     }
 
+    for (const remnant of story.webRemnants) {
+      remnant.age += dt;
+    }
+
     for (const activation of story.activations) {
       activation.age += dt;
       activation.life -= dt;
@@ -469,6 +610,60 @@
       } else {
         completeStoryArc();
       }
+    }
+  }
+
+  function clearFreeDrawHoldTimer() {
+    if (!state.freeDraw.holdTimerId) return;
+
+    clearTimeout(state.freeDraw.holdTimerId);
+    state.freeDraw.holdTimerId = null;
+  }
+
+  function lockFreeDraw() {
+    clearFreeDrawHoldTimer();
+    state.freeDraw = makeFreeDraw();
+    document.body.classList.remove("spider-web-draw-active");
+  }
+
+  function unlockFreeDraw() {
+    clearFreeDrawHoldTimer();
+    state.freeDraw = makeFreeDraw();
+    state.freeDraw.unlocked = !reducedMotion.matches;
+    updateFreeDrawBodyClass();
+  }
+
+  function hasFreeDrawVisual() {
+    return state.freeDraw.active || state.freeDraw.trails.length > 0;
+  }
+
+  function updateFreeDrawBodyClass() {
+    document.body.classList.toggle("spider-web-draw-active", hasFreeDrawVisual());
+  }
+
+  function ensureFreeDrawLoop() {
+    resizeCanvas();
+    if (state.running) return;
+
+    state.running = true;
+    state.lastTime = performance.now();
+    if (!state.rafId) {
+      state.rafId = requestAnimationFrame(tick);
+    }
+  }
+
+  function updateFreeDraw(dt) {
+    if (state.freeDraw.trails.length > 0) {
+      for (const trail of state.freeDraw.trails) {
+        trail.age += dt;
+      }
+      state.freeDraw.trails = state.freeDraw.trails.filter((trail) => trail.age < trail.life);
+    }
+
+    updateFreeDrawBodyClass();
+
+    if (!state.active && state.mode === "idle" && !hasFreeDrawVisual()) {
+      state.running = false;
     }
   }
 
@@ -500,6 +695,7 @@
     state.story.phase = "done";
     document.body.classList.remove("spider-game-active");
     ctx.clearRect(0, 0, state.width, state.height);
+    unlockFreeDraw();
   }
 
   function prepareStoryEndingWeb(story) {
@@ -671,8 +867,9 @@
 
     if (state.intro >= 1.08) {
       state.mode = "attached";
-      state.anchor.vx = -state.speed;
-      state.spider.vx = state.anchor.vx - 40;
+      startGameplayLaunchEase();
+      state.anchor.vx = 0;
+      state.spider.vx = clamp(state.spider.vx, -18, 18);
       state.spider.vy = 0;
       updateSpiderFacing(state.spider);
       state.lastAngle = Math.atan2(state.spider.y - state.anchor.y, state.spider.x - state.anchor.x);
@@ -688,11 +885,27 @@
     }
   }
 
+  function updatePreviewSeed(dt) {
+    state.previewSeed += dt;
+    state.spider.blink += dt;
+
+    if (state.previewSeed >= passiveSeedDuration) {
+      state.mode = "previewIntro";
+      state.previewSeed = passiveSeedDuration;
+      state.intro = 0;
+      state.spider.x = state.anchor.x;
+      state.spider.y = state.anchor.y + introStartDrop;
+      state.spider.vx = 0;
+      state.spider.vy = 0;
+      resetSpiderRenderPose(state.spider, "descend");
+    }
+  }
+
   function updateDescent(dt) {
     state.intro += dt * 0.92;
     const eased = 1 - Math.pow(1 - clamp(state.intro, 0, 1), 3);
-    state.spider.x = state.anchor.x + Math.sin(state.intro * 8) * 1.5;
-    state.spider.y = state.anchor.y + introStartDrop * (1 - eased) + state.ropeLength * eased;
+    state.spider.x = state.anchor.x + state.hangVector.x * eased + Math.sin(state.intro * 8) * 1.5;
+    state.spider.y = state.anchor.y + introStartDrop * (1 - eased) + state.hangVector.y * eased;
     state.spider.blink += dt;
   }
 
@@ -700,8 +913,8 @@
     state.mode = "previewHang";
     state.intro = 1.08;
     state.anchor.vx = 0;
-    state.spider.x = state.anchor.x;
-    state.spider.y = state.anchor.y + state.ropeLength;
+    state.spider.x = state.anchor.x + state.hangVector.x;
+    state.spider.y = state.anchor.y + state.hangVector.y;
     state.spider.vx = 0;
     state.spider.vy = 0;
     updateSpiderFacing(state.spider);
@@ -713,16 +926,28 @@
     state.spider.blink += dt;
     const sway = Math.sin(state.spider.blink * 1.35) * 4;
     const bob = Math.sin(state.spider.blink * 1.9) * 1.4;
-    state.spider.x = state.anchor.x + sway;
-    state.spider.y = state.anchor.y + state.ropeLength + bob;
-    state.spider.vx = Math.cos(state.spider.blink * 1.35) * 5.4;
-    state.spider.vy = Math.cos(state.spider.blink * 1.9) * 2.7;
+    const length = Math.hypot(state.hangVector.x, state.hangVector.y) || state.ropeLength;
+    const ux = state.hangVector.x / length;
+    const uy = state.hangVector.y / length;
+    const px = -uy;
+    const py = ux;
+
+    state.spider.x = state.anchor.x + state.hangVector.x + px * sway + ux * bob;
+    state.spider.y = state.anchor.y + state.hangVector.y + py * sway + uy * bob;
+    state.spider.vx =
+      px * Math.cos(state.spider.blink * 1.35) * 5.4 +
+      ux * Math.cos(state.spider.blink * 1.9) * 2.7;
+    state.spider.vy =
+      py * Math.cos(state.spider.blink * 1.35) * 5.4 +
+      uy * Math.cos(state.spider.blink * 1.9) * 2.7;
     updateSpiderFacing(state.spider);
   }
 
   function updateHooks(dt) {
     const targetHooks = clamp(2 + Math.floor(state.difficulty / 3), 2, 5);
-    const spacing = clamp(1.15 - state.difficulty * 0.045, 0.54, 1.15);
+    const earlyEase = getEarlyCatchSpeedScale();
+    const spacing = clamp(1.22 - state.difficulty * 0.035, 0.62, 1.22);
+    const playSpeed = getGameplayPlaySpeed();
 
     state.hookTimer -= dt;
     if (state.hooks.length < targetHooks && state.hookTimer <= 0) {
@@ -732,8 +957,8 @@
 
     for (const hook of state.hooks) {
       hook.age += dt;
-      hook.x -= state.speed * dt;
-      hook.y += Math.sin(hook.age * 1.4 + hook.phase) * dt * (7 + state.difficulty * 0.5);
+      hook.x -= playSpeed * dt;
+      hook.y += Math.sin(hook.age * 1.4 + hook.phase) * dt * (6 + state.difficulty * 0.38) * earlyEase;
     }
 
     state.hooks = state.hooks.filter((hook) => hook.x > -70);
@@ -742,8 +967,9 @@
   function updateAttached(dt) {
     const spider = state.spider;
     const anchor = state.anchor;
+    const playSpeed = getGameplayPlaySpeed();
 
-    anchor.vx = -state.speed;
+    anchor.vx = -playSpeed;
     anchor.x += anchor.vx * dt;
     spider.vy += attachedGravity * dt;
     spider.x += spider.vx * dt;
@@ -806,11 +1032,16 @@
 
   function detachSpider() {
     if (state.mode === "falling") return;
+    const spider = state.spider;
     state.mode = "falling";
     state.anchor = null;
-    state.spider.vx -= randomBetween(16, 34);
-    state.spider.vy = Math.max(state.spider.vy, 40);
-    state.spider.pain = 1;
+    spider.vx -= randomBetween(16, 34);
+    spider.vy = Math.max(spider.vy, 40);
+    spider.pain = 1;
+    spider.squish = 0;
+    spider.floorBounces = 0;
+    spider.restingOnFloor = false;
+    spider.impactHold = 0;
     state.hookTimer = Math.min(state.hookTimer, 0.18);
     seedRecoveryHooks();
     announce("The spider slipped. Click a hook point to catch it again.");
@@ -821,30 +1052,24 @@
     const floor = state.height - 22;
     const side = spider.radius + 8;
 
+    spider.catchPose = Math.max(0, spider.catchPose - dt);
+    updateSpiderFacing(spider);
+    spider.blink += dt;
+    spider.impactHold = Math.max(0, spider.impactHold - dt);
+
+    if (spider.restingOnFloor) {
+      updateFallenRest(spider, floor, side, dt);
+      return;
+    }
+
     spider.vy += 710 * dt;
     spider.x += spider.vx * dt;
     spider.y += spider.vy * dt;
     spider.vx *= 0.996;
     spider.pain = Math.max(0, spider.pain - dt * 0.7);
-    spider.catchPose = Math.max(0, spider.catchPose - dt);
-    updateSpiderFacing(spider);
-    spider.blink += dt;
 
     if (spider.y + spider.radius >= floor) {
-      spider.y = floor - spider.radius;
-      spider.squish = 1;
-      spider.pain = 1;
-
-      if (Math.abs(spider.vy) > 45) {
-        addBump(spider.x, floor);
-      }
-
-      spider.vy = -Math.abs(spider.vy) * 0.42;
-      spider.vx *= 0.82;
-
-      if (Math.abs(spider.vy) < 45) {
-        spider.vy = 0;
-      }
+      handleFloorImpact(spider, floor);
     }
 
     if (spider.x < side) {
@@ -866,6 +1091,53 @@
     spider.squish = Math.max(0, spider.squish - dt * 4.5);
   }
 
+  function handleFloorImpact(spider, floor) {
+    const impactSpeed = Math.abs(spider.vy);
+    const bounceVelocity = impactSpeed * 0.42;
+
+    spider.y = floor - spider.radius;
+    spider.floorBounces += 1;
+    spider.impactHold = Math.max(spider.impactHold, 0.24);
+    spider.squish = 1;
+    spider.pain = 1;
+
+    if (impactSpeed > 45) {
+      addBump(spider.x, floor);
+    }
+
+    if (spider.floorBounces >= 2 || bounceVelocity < 60) {
+      settleSpiderOnFloor(spider, floor);
+      return;
+    }
+
+    spider.vy = -bounceVelocity;
+    spider.vx *= 0.82;
+  }
+
+  function settleSpiderOnFloor(spider, floor) {
+    spider.y = floor - spider.radius;
+    spider.vy = 0;
+    spider.vx *= 0.62;
+    spider.restingOnFloor = true;
+    spider.squish = 0;
+    spider.pain = 1;
+  }
+
+  function updateFallenRest(spider, floor, side, dt) {
+    spider.y = floor - spider.radius;
+    spider.vy = 0;
+    spider.vx *= Math.pow(0.08, dt);
+    if (Math.abs(spider.vx) < 3) spider.vx = 0;
+    spider.x += spider.vx * dt;
+    spider.x = clamp(spider.x, side, state.width - side);
+    spider.pain = Math.max(0.65, spider.pain - dt * 0.12);
+    spider.squish = 0;
+
+    if (state.hooks.length === 0) {
+      state.hookTimer = Math.min(state.hookTimer, 0.2);
+    }
+  }
+
   function seedRecoveryHooks() {
     const visibleHooks = state.hooks.filter((hook) => hook.x > state.width * 0.35 && hook.x < state.width + 220).length;
     const firstLane = state.playBand.firstLane;
@@ -874,7 +1146,13 @@
       spawnHook(
         state.width * (0.68 + index * 0.16) + randomBetween(-24, 24),
         true,
-        firstLane + (index === 0 ? -36 : 34)
+        firstLane + (index === 0 ? -36 : 34),
+        {
+          kind: "recovery",
+          radius: 14,
+          hitBonus: 28,
+          visualBoost: 1.45
+        }
       );
     }
   }
@@ -945,6 +1223,11 @@
     if (state.mode === "previewHang") return "swingSlow";
 
     if (state.mode === "falling") {
+      if (spider.restingOnFloor) {
+        if (spider.impactHold > 0) return "impact";
+        return "fallenRest";
+      }
+      if (spider.impactHold > 0) return "impact";
       const hit = spider.squish > 0.28 || (spider.pain > 0.35 && Math.abs(spider.vy) < 28);
       if (hit) return "impact";
       if (currentAnimation === "fallFast" && visualSpeed > 125) return "fallFast";
@@ -971,12 +1254,14 @@
     if (animation === "descend") return "descend";
     if (animation === "catch") return "catch";
     if (animation === "impact") return "impact";
+    if (animation === "fallenRest") return "rest";
     if (animation === "fallSlow" || animation === "fallFast") return "fall";
     return "swing";
   }
 
   function getAnimationHold(animation) {
     if (animation === "impact") return spriteImpactMinHold;
+    if (animation === "fallenRest") return spriteAnimationMinHold;
     if (animation === "fallSlow" || animation === "fallFast" || animation === "swingMedium" || animation === "swingFast") {
       return spriteAnimationMinHold;
     }
@@ -984,7 +1269,7 @@
   }
 
   function shouldBlendFrameChange(animation) {
-    return animation === "descend" || animation === "fallFast" || animation === "fallSlow" || animation === "impact" || animation === "catch";
+    return animation === "descend" || animation === "fallFast" || animation === "fallSlow" || animation === "impact" || animation === "fallenRest" || animation === "catch";
   }
 
   function beginSpriteTransition(pose, animation, frameIndex, duration) {
@@ -1028,6 +1313,13 @@
       return {
         sequence: spiderSprite.frames.impact,
         duration: spiderSprite.frameDuration.impact
+      };
+    }
+
+    if (animation === "fallenRest") {
+      return {
+        sequence: spiderSprite.frames.fallenRest,
+        duration: spiderSprite.frameDuration.fallenRest
       };
     }
 
@@ -1090,7 +1382,7 @@
   }
 
   function getSpiderTilt(spider, animation) {
-    if (animation === "impact") return 0;
+    if (animation === "impact" || animation === "fallenRest") return 0;
 
     const swing = getSwingKinematics(spider);
     if (swing) {
@@ -1137,6 +1429,7 @@
     if (story.phase !== "weaving") return;
 
     story.catches += 1;
+    addStoryWebRemnant(fromAnchor, story.catches);
 
     if (fromAnchor && toAnchor) {
       story.threads.push({
@@ -1160,6 +1453,20 @@
     if (story.pendingComplete || story.catches >= storyCompletionCatches) {
       completeStoryArc();
     }
+  }
+
+  function addStoryWebRemnant(anchor, index) {
+    if (!anchor) return;
+
+    state.story.webRemnants.push({
+      x: anchor.x,
+      y: anchor.y,
+      age: 0,
+      radius: 8 + (index % 3) * 2,
+      phase: index * 0.82,
+      side: index % 2 === 0 ? -1 : 1
+    });
+    state.story.webRemnants = state.story.webRemnants.slice(-7);
   }
 
   function recordStoryLoop(anchor) {
@@ -1201,6 +1508,14 @@
     state.bumps = state.bumps.filter((bump) => bump.life > 0);
   }
 
+  function updateMissHints(dt) {
+    for (const hint of state.missHints) {
+      hint.life -= dt;
+      hint.age += dt;
+    }
+    state.missHints = state.missHints.filter((hint) => hint.life > 0);
+  }
+
   function attachToHook(hook) {
     const spider = state.spider;
     const previousAnchor = state.anchor
@@ -1217,11 +1532,16 @@
     state.anchor = nextAnchor;
     state.ropeLength = clamp(Math.hypot(spider.x - hook.x, spider.y - hook.y), 78, Math.min(230, state.height * 0.42));
     state.mode = "attached";
-    state.difficulty += 0.5;
-    state.speed = clamp(state.speed + 5, 58, 154);
+    resetGameplayLaunchEase();
+    const earlyCatch = state.story.phase === "weaving" && state.story.catches < storyCompletionCatches;
+    state.difficulty += earlyCatch ? 0.28 : 0.5;
+    state.speed = clamp(state.speed + (earlyCatch ? 3 : 5), 58, 154);
     boostCatchMomentum(spider);
     spider.pain = 0;
     spider.squish = 0;
+    spider.floorBounces = 0;
+    spider.restingOnFloor = false;
+    spider.impactHold = 0;
     spider.catchPose = 0.36;
     state.lastAngle = Math.atan2(spider.y - hook.y, spider.x - hook.x);
     state.rotation = 0;
@@ -1245,7 +1565,7 @@
 
     for (const hook of state.hooks) {
       const distance = Math.hypot(hook.x - x, hook.y - y);
-      const hitRadius = hook.radius + 30;
+      const hitRadius = getHookHitRadius(hook);
       if (distance <= hitRadius && distance < bestDistance) {
         best = hook;
         bestDistance = distance;
@@ -1253,6 +1573,55 @@
     }
 
     return best;
+  }
+
+  function getPrimaryHook() {
+    if (!isGameplayMode() || state.story.phase !== "weaving") return null;
+
+    return state.hooks
+      .filter((hook) => hook.x > 12 && hook.x < state.width + 36)
+      .sort((a, b) => a.x - b.x)[0] || null;
+  }
+
+  function getNearestVisibleHook(x, y) {
+    let best = null;
+    let bestDistance = Infinity;
+
+    for (const hook of state.hooks) {
+      if (hook.x < -24 || hook.x > state.width + 48) continue;
+      const distance = Math.hypot(hook.x - x, hook.y - y);
+      if (distance < bestDistance) {
+        best = hook;
+        bestDistance = distance;
+      }
+    }
+
+    return best;
+  }
+
+  function getHookHitRadius(hook) {
+    const earlyBonus = state.story.phase === "weaving" && state.story.catches < storyCompletionCatches ? 22 : 0;
+    const recoveryBonus = hook.kind === "recovery" ? 28 : 0;
+    const fallingBonus = state.mode === "falling" ? 8 : 0;
+
+    return hook.radius + 48 + hook.hitBonus + earlyBonus + recoveryBonus + fallingBonus;
+  }
+
+  function isGameplayMode() {
+    return state.mode === "attached" || state.mode === "falling";
+  }
+
+  function addMissHint(x, y) {
+    const target = getNearestVisibleHook(x, y);
+
+    state.missHints.push({
+      x,
+      y,
+      target: target ? { x: target.x, y: target.y, radius: target.radius } : null,
+      age: 0,
+      life: 0.72
+    });
+    state.missHints = state.missHints.slice(-3);
   }
 
   function addLoopBurst(x, y) {
@@ -1287,7 +1656,10 @@
   function draw() {
     ctx.clearRect(0, 0, state.width, state.height);
 
-    if (!state.active) return;
+    if (!state.active) {
+      drawFreeDraw();
+      return;
+    }
 
     if (state.mode === "falling") {
       drawFloor();
@@ -1300,18 +1672,29 @@
       return;
     }
 
+    const primaryHook = getPrimaryHook();
+    drawCatchGuide(primaryHook);
+
     for (const hook of state.hooks) {
-      drawHook(hook);
+      drawHook(hook, hook === primaryHook);
     }
 
     if (state.anchor) {
-      drawThread(state.anchor, state.spider);
-      drawAnchor(state.anchor);
+      if (state.mode === "previewSeed") {
+        drawPassiveSeed();
+      } else {
+        drawThread(state.anchor, state.spider);
+        drawAnchor(state.anchor);
+      }
     }
 
     drawBursts();
     drawBumps();
+    drawMissHints();
+    drawPassiveStartHint();
+    if (state.mode === "previewSeed") return;
     drawSpider(state.spider);
+    drawFreeDraw();
   }
 
   function getStoryFade() {
@@ -1331,6 +1714,7 @@
     }
 
     drawStoryThreads(fade);
+    drawStoryRemnants(fade);
     drawStoryLoopEchoes(fade);
     drawStoryActivations(fade);
   }
@@ -1338,7 +1722,7 @@
   function drawStoryThreads(fade) {
     for (const thread of state.story.threads) {
       const reveal = clamp(thread.age / 0.5, 0, 1);
-      const alpha = fade * reveal * 0.22;
+      const alpha = fade * reveal * 0.28;
       drawPixelLine(thread.x1, thread.y1, thread.x2, thread.y2, {
         color: colors.soft,
         alpha,
@@ -1349,11 +1733,19 @@
       });
       drawPixelLine(thread.x1, thread.y1, thread.x2, thread.y2, {
         color: colors.moss,
-        alpha: alpha * 0.34,
+        alpha: alpha * 0.4,
         size: 2,
         step: 17,
         skipEvery: 3
       });
+    }
+  }
+
+  function drawStoryRemnants(fade) {
+    for (const remnant of state.story.webRemnants) {
+      const reveal = clamp(remnant.age / 0.48, 0, 1);
+      const alpha = fade * reveal;
+      drawTinyWebRemnant(remnant.x, remnant.y, remnant.radius, remnant.phase, remnant.side, alpha);
     }
   }
 
@@ -1502,6 +1894,89 @@
     });
   }
 
+  function drawFreeDraw() {
+    const draw = state.freeDraw;
+    if (!hasFreeDrawVisual()) return;
+
+    for (const trail of draw.trails) {
+      const fade = 1 - clamp(trail.age / trail.life, 0, 1);
+      drawFreeDrawStrand(trail, fade * fade, false);
+    }
+
+    if (draw.active) {
+      const strand = makeFreeDrawStrand(draw.start, draw.current, draw.trails.length + 1);
+      if (!strand) return;
+
+      drawFreeDrawStrand(strand, 0.88, true);
+      drawPixelRing(draw.current.x, draw.current.y, 6, {
+        color: colors.gold,
+        alpha: 0.18,
+        size: 2,
+        points: 10,
+        phase: state.lastTime * 0.001
+      });
+    }
+  }
+
+  function makeFreeDrawStrand(start, current, index) {
+    const length = Math.hypot(current.x - start.x, current.y - start.y);
+    if (length < 10) return null;
+
+    const direction = Math.atan2(current.y - start.y, current.x - start.x);
+    const phase = index * 0.67 + length * 0.003;
+    return {
+      x1: start.x,
+      y1: start.y,
+      x2: current.x,
+      y2: current.y,
+      length,
+      sag: clamp(length * 0.055, 4, 30),
+      sway: clamp((current.x - start.x) * 0.035, -14, 14),
+      phase,
+      direction,
+      branches: [
+        { t: 0.28, side: 1, length: clamp(length * 0.09, 7, 16) },
+        { t: 0.52, side: -1, length: clamp(length * 0.075, 6, 14) },
+        { t: 0.72, side: 1, length: clamp(length * 0.06, 5, 12) }
+      ]
+    };
+  }
+
+  function drawFreeDrawStrand(strand, alpha, live) {
+    drawSaggingPixelLine(strand, 1, {
+      color: colors.soft,
+      alpha: alpha * (live ? 0.52 : 0.36),
+      size: 2,
+      step: 7,
+      skipEvery: 5,
+      phase: Math.floor(strand.phase * 10)
+    });
+    drawSaggingPixelLine(strand, 1, {
+      color: colors.gold,
+      alpha: alpha * (live ? 0.11 : 0.07),
+      size: 2,
+      step: 18,
+      skipEvery: 4,
+      phase: Math.floor(strand.phase * 7) + 1
+    });
+
+    for (let index = 0; index < strand.branches.length; index += 1) {
+      const branch = strand.branches[index];
+      const start = getSaggingPoint(strand, branch.t);
+      const angle = strand.direction + branch.side * (Math.PI * 0.52 + index * 0.08);
+      const endX = start.x + Math.cos(angle) * branch.length;
+      const endY = start.y + Math.sin(angle) * branch.length + 4 + index;
+      drawPixelLine(start.x, start.y, endX, endY, {
+        color: index === 1 ? colors.gold : colors.line,
+        alpha: alpha * (index === 1 ? 0.12 : 0.18),
+        size: 2,
+        step: 5,
+        skipEvery: 3,
+        phase: index
+      });
+    }
+  }
+
   function getPointAlongGlintPath(path, progress) {
     const totalLength = path.reduce((sum, segment) => sum + segment.length, 0);
     let remaining = totalLength * progress;
@@ -1646,6 +2121,69 @@
     }
   }
 
+  function drawTinyWebRemnant(x, y, radius, phase, side, alpha) {
+    if (alpha <= 0.01) return;
+
+    const spokeAngles = [
+      phase + side * 0.16,
+      phase + side * 0.92,
+      phase - side * 0.68
+    ];
+
+    for (let index = 0; index < spokeAngles.length; index += 1) {
+      const angle = spokeAngles[index];
+      const inner = radius * 0.28;
+      const outer = radius + index * 2;
+      drawPixelLine(
+        x + Math.cos(angle) * inner,
+        y + Math.sin(angle) * inner,
+        x + Math.cos(angle) * outer,
+        y + Math.sin(angle) * outer,
+        {
+          color: index === 1 ? colors.gold : colors.line,
+          alpha: alpha * (index === 1 ? 0.16 : 0.24),
+          size: 2,
+          step: 5,
+          skipEvery: index === 2 ? 3 : 0,
+          phase: index
+        }
+      );
+    }
+
+    drawPixelArc(x, y, radius, phase - side * 0.12, phase + side * 1.18, {
+      color: colors.soft,
+      alpha: alpha * 0.28,
+      size: 2,
+      step: 5
+    });
+    drawPixelArc(x, y, radius + 6, phase + side * 0.35, phase + side * 1.05, {
+      color: colors.line,
+      alpha: alpha * 0.18,
+      size: 2,
+      step: 6
+    });
+
+    const tailStart = phase + side * 0.7;
+    const tail = {
+      x1: x + Math.cos(tailStart) * (radius * 0.58),
+      y1: y + Math.sin(tailStart) * (radius * 0.58),
+      x2: x + Math.cos(tailStart + side * 0.25) * (radius + 14),
+      y2: y + Math.sin(tailStart + side * 0.25) * (radius + 14) + 7,
+      length: radius + 14,
+      sag: 6,
+      sway: side * 2,
+      phase: Math.floor(phase * 10)
+    };
+    drawSaggingPixelLine(tail, 1, {
+      color: colors.soft,
+      alpha: alpha * 0.18,
+      size: 2,
+      step: 5,
+      skipEvery: 3,
+      phase: tail.phase
+    });
+  }
+
   function drawWebKnot(x, y, radius, options = {}) {
     const pulse = options.pulse || 0;
     const phase = options.phase || 0;
@@ -1743,19 +2281,112 @@
     ctx.restore();
   }
 
-  function drawHook(hook) {
+  function drawCatchGuide(hook) {
+    if (!hook || !state.spider) return;
+
+    const pulse = Math.sin(state.lastTime * 0.004 + hook.phase) * 0.5 + 0.5;
+    const alpha = (state.mode === "falling" ? 0.18 : 0.12) + pulse * 0.05;
+
+    drawPixelLine(state.spider.x, state.spider.y - 9, hook.x, hook.y, {
+      color: colors.gold,
+      alpha,
+      size: 2,
+      step: 18,
+      skipEvery: 2,
+      phase: Math.floor(state.lastTime / 160)
+    });
+
+    drawPixelRing(hook.x, hook.y, hook.radius + 32 + pulse * 5, {
+      color: colors.gold,
+      alpha: alpha * 0.55,
+      size: 2,
+      points: 24,
+      phase: pulse * TAU * 0.08
+    });
+  }
+
+  function drawHook(hook, primary) {
     const pulse = Math.sin((hook.age + hook.phase) * 3) * 0.5 + 0.5;
     const phase = hook.phase * 0.18 + Math.sin(hook.age * 0.9 + hook.phase) * 0.08;
+    const earlyCatch = state.story.phase === "weaving" && state.story.catches < storyCompletionCatches;
+    const emphasis = 1 + hook.visualBoost * 0.32 + (earlyCatch ? 0.16 : 0) + (primary ? 0.24 : 0);
 
     drawWebKnot(hook.x, hook.y, hook.radius, {
       pulse,
       phase,
-      alpha: 0.98,
+      alpha: Math.min(1, 0.98 * emphasis),
       hanging: true,
       looseThread: true,
       outerOffset: 8,
       spokes: 8
     });
+
+    drawPixelRing(hook.x, hook.y, hook.radius + 13 + pulse * (2.5 + hook.visualBoost), {
+      color: colors.gold,
+      alpha: (0.18 + pulse * 0.1) * emphasis,
+      size: 2,
+      points: hook.kind === "recovery" ? 18 : 16,
+      phase: phase * 1.4
+    });
+
+    drawPixelRing(hook.x, hook.y, hook.radius + 22 + pulse * 3, {
+      color: colors.line,
+      alpha: (0.06 + pulse * 0.035) * emphasis,
+      size: 2,
+      points: 20,
+      phase: -phase
+    });
+
+    if (primary) {
+      drawPixelRing(hook.x, hook.y, hook.radius + 35 + pulse * 4, {
+        color: colors.moss,
+        alpha: 0.08 + pulse * 0.04,
+        size: 2,
+        points: 22,
+        phase: phase * -1.2
+      });
+    }
+
+    ctx.save();
+    ctx.fillStyle = colors.gold;
+    ctx.globalAlpha = clamp((0.36 + pulse * 0.18) * emphasis, 0, 1);
+    drawPixelBlock(hook.x + 3, hook.y - 3, 2);
+    drawPixelBlock(hook.x - 4, hook.y + 3, 2);
+    ctx.restore();
+  }
+
+  function drawMissHints() {
+    for (const hint of state.missHints) {
+      const progress = clamp(hint.age / 0.72, 0, 1);
+      const fade = 1 - progress;
+
+      drawPixelRing(hint.x, hint.y, 8 + progress * 18, {
+        color: colors.clay,
+        alpha: fade * 0.24,
+        size: 2,
+        points: 14,
+        phase: progress * TAU * 0.18
+      });
+
+      if (!hint.target) continue;
+
+      drawPixelLine(hint.x, hint.y, hint.target.x, hint.target.y, {
+        color: colors.gold,
+        alpha: fade * 0.12,
+        size: 2,
+        step: 15,
+        skipEvery: 2,
+        phase: Math.floor(progress * 5)
+      });
+
+      drawPixelRing(hint.target.x, hint.target.y, hint.target.radius + 28 + progress * 8, {
+        color: colors.gold,
+        alpha: fade * 0.13,
+        size: 2,
+        points: 20,
+        phase: -progress * TAU * 0.16
+      });
+    }
   }
 
   function drawAnchor(anchor) {
@@ -1765,6 +2396,38 @@
       alpha: 0.58,
       outerOffset: 5,
       spokes: 6
+    });
+  }
+
+  function drawPassiveSeed() {
+    if (!state.anchor) return;
+
+    const progress = clamp(state.previewSeed / passiveSeedDuration, 0, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    drawWebKnot(state.anchor.x, state.anchor.y, 4 + eased * 2, {
+      pulse: 0.16 + eased * 0.16,
+      phase: state.lastTime * 0.0005,
+      alpha: 0.28 + eased * 0.3,
+      outerOffset: 4,
+      spokes: 6
+    });
+  }
+
+  function drawPassiveStartHint() {
+    if (!state.anchor || !isPassivePreviewMode()) return;
+
+    const t = (state.lastTime * 0.001) % 1.4;
+    const progress = t / 1.4;
+    const alpha = (1 - progress) * 0.22;
+    const target = state.mode === "previewSeed" ? state.anchor : state.spider;
+    const radius = state.mode === "previewSeed" ? 10 + progress * 8 : 22 + progress * 14;
+
+    drawPixelRing(target.x, target.y, radius, {
+      color: colors.gold,
+      alpha,
+      size: 2,
+      points: 18,
+      phase: progress * TAU * 0.15
     });
   }
 
@@ -1865,13 +2528,13 @@
   function getSpiderDrawSize(animation) {
     if (animation === "descend") return spiderSprite.drawSize * 0.78;
     if (animation === "fallSlow" || animation === "fallFast") return spiderSprite.drawSize * 0.78;
-    if (animation === "impact") return spiderSprite.drawSize * 0.78;
+    if (animation === "impact" || animation === "fallenRest") return spiderSprite.drawSize * 0.78;
     return spiderSprite.drawSize;
   }
 
   function getSpiderDrawOffsetY(animation) {
     if (animation === "fallSlow" || animation === "fallFast") return 2;
-    if (animation === "impact") return 2;
+    if (animation === "impact" || animation === "fallenRest") return 2;
     return 0;
   }
 
@@ -1952,6 +2615,7 @@
   }
 
   function drawSpritePain(spider, animation, visualSpeed) {
+    if (animation === "impact" || animation === "fallenRest") return;
     if (spider.pain <= 0.05) return;
 
     const tilt = getSpiderTilt(spider, animation);
@@ -2126,11 +2790,182 @@
     ctx.restore();
   }
 
+  function isPassivePreviewMode() {
+    return state.mode === "previewSeed" || state.mode === "previewIntro" || state.mode === "previewHang";
+  }
+
+  function nearestPassiveStartTarget(x, y) {
+    if (!isPassivePreviewMode()) return null;
+
+    if (state.mode === "previewSeed" && state.anchor) {
+      return Math.hypot(x - state.anchor.x, y - state.anchor.y) <= 38 ? state.anchor : null;
+    }
+
+    const spiderHit = Math.hypot(x - state.spider.x, y - state.spider.y) <= 58;
+    if (spiderHit) return state.spider;
+
+    if (state.anchor && Math.hypot(x - state.anchor.x, y - state.anchor.y) <= 34) {
+      return state.anchor;
+    }
+
+    return null;
+  }
+
+  function getPointerPoint(event) {
+    return {
+      x: event.clientX,
+      y: event.clientY
+    };
+  }
+
+  function isInteractiveTarget(target) {
+    return Boolean(
+      target &&
+        target.closest(
+          "a, button, input, textarea, select, summary, label, [contenteditable], [role='button'], [role='link']"
+        )
+    );
+  }
+
+  function canStartFreeDraw(event) {
+    if (!state.freeDraw.unlocked || state.active || state.mode !== "idle" || reducedMotion.matches) return false;
+    if (event.pointerType === "mouse" && event.button !== 0) return false;
+    if (event.isPrimary === false) return false;
+    const target = event.target instanceof Element ? event.target : null;
+    return !isInteractiveTarget(target);
+  }
+
+  function cancelPendingFreeDraw() {
+    clearFreeDrawHoldTimer();
+    if (!state.freeDraw.pending) return;
+
+    state.freeDraw.pending = false;
+    state.freeDraw.pointerId = null;
+  }
+
+  function startFreeDrawFromPending() {
+    const draw = state.freeDraw;
+    if (!draw.unlocked || !draw.pending || state.active || state.mode !== "idle") {
+      cancelPendingFreeDraw();
+      return;
+    }
+
+    clearFreeDrawHoldTimer();
+    draw.pending = false;
+    draw.active = true;
+    draw.suppressClick = true;
+    updateFreeDrawBodyClass();
+    ensureFreeDrawLoop();
+  }
+
+  function finishFreeDraw(event) {
+    const draw = state.freeDraw;
+    if (!draw.active && !draw.pending) return;
+
+    if (event && draw.pointerId === event.pointerId) {
+      draw.current = getPointerPoint(event);
+    }
+
+    clearFreeDrawHoldTimer();
+
+    if (draw.active) {
+      const strand = makeFreeDrawStrand(draw.start, draw.current, draw.trails.length + 1);
+      if (strand) {
+        draw.trails.push({
+          ...strand,
+          age: 0,
+          life: freeDrawFadeDuration
+        });
+        draw.trails = draw.trails.slice(-4);
+        ensureFreeDrawLoop();
+      }
+      draw.suppressClick = true;
+    }
+
+    draw.pending = false;
+    draw.active = false;
+    draw.pointerId = null;
+    updateFreeDrawBodyClass();
+  }
+
+  function onDocumentPointerDown(event) {
+    if (!canStartFreeDraw(event)) return;
+
+    const point = getPointerPoint(event);
+    const draw = state.freeDraw;
+    clearFreeDrawHoldTimer();
+    draw.pending = true;
+    draw.active = false;
+    draw.pointerId = event.pointerId;
+    draw.holdStartedAt = performance.now();
+    draw.start = point;
+    draw.current = point;
+    draw.holdTimerId = window.setTimeout(startFreeDrawFromPending, freeDrawHoldDuration * 1000);
+  }
+
+  function onDocumentPointerMove(event) {
+    const draw = state.freeDraw;
+    if (draw.pointerId !== event.pointerId) return;
+
+    draw.current = getPointerPoint(event);
+
+    if (draw.pending) {
+      const distance = Math.hypot(draw.current.x - draw.start.x, draw.current.y - draw.start.y);
+      if (distance > freeDrawMoveTolerance) {
+        cancelPendingFreeDraw();
+      }
+      return;
+    }
+
+    if (!draw.active) return;
+
+    event.preventDefault();
+    event.stopPropagation();
+    ensureFreeDrawLoop();
+  }
+
+  function onDocumentPointerUp(event) {
+    if (state.freeDraw.pointerId !== event.pointerId) return;
+
+    const wasActive = state.freeDraw.active;
+    finishFreeDraw(event);
+
+    if (wasActive) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+  }
+
+  function onDocumentPointerCancel(event) {
+    if (state.freeDraw.pointerId !== event.pointerId) return;
+    finishFreeDraw(event);
+  }
+
   function onDocumentClick(event) {
+    if (state.freeDraw.suppressClick) {
+      state.freeDraw.suppressClick = false;
+      event.preventDefault();
+      event.stopPropagation();
+      return;
+    }
+
     if (!state.active || state.mode === "quiet") return;
 
+    if (nearestPassiveStartTarget(event.clientX, event.clientY)) {
+      event.preventDefault();
+      event.stopPropagation();
+      startGame();
+      return;
+    }
+
     const hook = nearestHook(event.clientX, event.clientY);
-    if (!hook) return;
+    if (!hook) {
+      const target = event.target instanceof Element ? event.target : null;
+      if (isGameplayMode() && !isInteractiveTarget(target)) {
+        addMissHint(event.clientX, event.clientY);
+      }
+      return;
+    }
 
     event.preventDefault();
     event.stopPropagation();
@@ -2142,6 +2977,10 @@
     startGame();
   });
 
+  document.addEventListener("pointerdown", onDocumentPointerDown, true);
+  document.addEventListener("pointermove", onDocumentPointerMove, { capture: true, passive: false });
+  document.addEventListener("pointerup", onDocumentPointerUp, true);
+  document.addEventListener("pointercancel", onDocumentPointerCancel, true);
   document.addEventListener("click", onDocumentClick, true);
 
   window.addEventListener("resize", () => {

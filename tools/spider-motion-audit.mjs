@@ -23,7 +23,7 @@ const thresholds = {
 
 const scenarioArg = getArg("--scenarios") || "all";
 const requestedScenarios = scenarioArg === "all"
-  ? ["intro", "hook-loss", "fall-frame", "impact"]
+  ? ["intro", "hook-loss", "fall-frame", "impact", "fallen-rest"]
   : scenarioArg.split(",").map((scenario) => scenario.trim()).filter(Boolean);
 
 const { chromium } = await loadPlaywright();
@@ -173,6 +173,7 @@ async function runScenario(browser, baseUrl, name) {
       spider.blink = 0;
       window.__spiderGameTest.updateSpiderRenderPose(spider, 0.001);
     });
+    await page.waitForTimeout(170);
     await collectFrames(page, name, 950);
   } else if (name === "impact") {
     await startGameplayFromPassiveHang(page);
@@ -187,12 +188,31 @@ async function runScenario(browser, baseUrl, name) {
       window.__spiderGameTest.updateSpiderRenderPose(spider, 0.001);
     });
     await collectFrames(page, name, 900);
+  } else if (name === "fallen-rest") {
+    await startGameplayFromPassiveHang(page);
+    await page.waitForTimeout(1280);
+    await page.evaluate(() => {
+      window.__spiderGameTest.detachSpider();
+      const spider = window.__spiderGameTest.state.spider;
+      spider.y = window.innerHeight - 96;
+      spider.vx = 92;
+      spider.vy = 640;
+      spider.blink = 0;
+      spider.floorBounces = 0;
+      spider.restingOnFloor = false;
+      spider.impactHold = 0;
+      window.__spiderGameTest.updateSpiderRenderPose(spider, 0.001);
+    });
+    await collectFrames(page, name, 1700);
   } else {
     throw new Error(`Unknown scenario "${name}"`);
   }
 
   const frames = await page.evaluate(() => window.__motionAuditFrames);
   const failures = evaluateFrames(frames);
+  if (name === "fallen-rest") {
+    failures.push(...evaluateFallenRest(frames));
+  }
   if (errors.length) {
     failures.push(...errors.map((error) => ({ type: "console-error", message: error })));
   }
@@ -256,9 +276,11 @@ async function collectFrames(page, scenario, duration) {
       const spider = game.state.spider;
       const frame = game.getSpiderFrame(spider);
       const render = game.getSpiderRenderFrames(spider);
+      const seedOnly = game.state.mode === "previewSeed";
+      const focus = seedOnly && game.state.anchor ? game.state.anchor : spider;
       const region = {
-        x: Math.max(0, Math.min(window.innerWidth - frameClip.width, spider.x - frameClip.width / 2)),
-        y: Math.max(0, Math.min(window.innerHeight - frameClip.height, spider.y - frameClip.height * 0.58)),
+        x: Math.max(0, Math.min(window.innerWidth - frameClip.width, focus.x - frameClip.width / 2)),
+        y: Math.max(0, Math.min(window.innerHeight - frameClip.height, focus.y - frameClip.height * 0.58)),
         width: frameClip.width,
         height: frameClip.height
       };
@@ -267,10 +289,14 @@ async function collectFrames(page, scenario, duration) {
       const sw = Math.min(canvas.width - sx, Math.round(region.width * dpr));
       const sh = Math.min(canvas.height - sy, Math.round(region.height * dpr));
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      if (render.previous) {
+      if (seedOnly) {
+        game.draw();
+      } else if (render.previous) {
         game.drawSpriteFrame(spider, render.previous, render.visualSpeed, 1 - render.blend);
       }
-      game.drawSpriteFrame(spider, render.current, render.visualSpeed, render.previous ? render.blend : 1);
+      if (!seedOnly) {
+        game.drawSpriteFrame(spider, render.current, render.visualSpeed, render.previous ? render.blend : 1);
+      }
 
       const data = ctx.getImageData(sx, sy, sw, sh).data;
       let minX = Infinity;
@@ -312,13 +338,17 @@ async function collectFrames(page, scenario, duration) {
         frameIndex: frame.frameIndex,
         previousAnimation: frame.previousAnimation,
         previousFrameIndex: frame.previousFrameIndex,
+        seedOnly,
         blend: Number(frame.blend.toFixed(3)),
         visualSpeed: Math.round(frame.visualSpeed),
         spider: {
           x: Number(spider.x.toFixed(2)),
           y: Number(spider.y.toFixed(2)),
           vx: Number(spider.vx.toFixed(2)),
-          vy: Number(spider.vy.toFixed(2))
+          vy: Number(spider.vy.toFixed(2)),
+          floorBounces: spider.floorBounces || 0,
+          restingOnFloor: Boolean(spider.restingOnFloor),
+          impactHold: Number((spider.impactHold || 0).toFixed(3))
         },
         bbox,
         region
@@ -346,6 +376,8 @@ function evaluateFrames(frames) {
   const animationEvents = [];
 
   for (const frame of frames) {
+    if (frame.seedOnly) continue;
+
     if (!frame.bbox || frame.bbox.pixels < thresholds.minPixels) {
       failures.push({
         type: "blank-frame",
@@ -360,6 +392,7 @@ function evaluateFrames(frames) {
   for (let index = 1; index < frames.length; index += 1) {
     const previous = frames[index - 1];
     const current = frames[index];
+    if (previous.seedOnly || current.seedOnly) continue;
     if (!previous.bbox || !current.bbox) continue;
 
     const previousCenter = bboxCenter(previous.bbox);
@@ -370,7 +403,15 @@ function evaluateFrames(frames) {
     const animationChanged = previous.animation !== current.animation || previous.frameIndex !== current.frameIndex;
     const sizeDelta = Math.abs(current.bbox.width - previous.bbox.width) + Math.abs(current.bbox.height - previous.bbox.height);
     const pixelRatio = current.bbox.pixels / Math.max(1, previous.bbox.pixels);
-    const involvesImpact = previous.animation === "impact" || current.animation === "impact";
+    const involvesImpact = previous.animation === "impact" ||
+      current.animation === "impact" ||
+      previous.previousAnimation === "impact" ||
+      current.previousAnimation === "impact";
+    const floorTransition = previous.animation !== current.animation &&
+      (previous.animation === "impact" || current.animation === "impact" || previous.animation === "fallenRest" || current.animation === "fallenRest");
+    const floorCrossfade = Boolean(previous.previousAnimation || current.previousAnimation) &&
+      (previous.previousAnimation === "impact" || current.previousAnimation === "impact" || floorTransition);
+    const skipFloorImpactDelta = involvesImpact || floorTransition || floorCrossfade;
 
     if (apparentDelta > thresholds.apparentDelta) {
       failures.push({
@@ -382,7 +423,7 @@ function evaluateFrames(frames) {
       });
     }
 
-    if (animationChanged && sizeDelta > thresholds.sizeDelta) {
+    if (animationChanged && !skipFloorImpactDelta && sizeDelta > thresholds.sizeDelta) {
       failures.push({
         type: "size-delta",
         index,
@@ -392,7 +433,7 @@ function evaluateFrames(frames) {
       });
     }
 
-    if (!involvesImpact && (pixelRatio < thresholds.minPixelRatio || pixelRatio > thresholds.maxPixelRatio)) {
+    if (!skipFloorImpactDelta && (pixelRatio < thresholds.minPixelRatio || pixelRatio > thresholds.maxPixelRatio)) {
       failures.push({
         type: "pixel-ratio",
         index,
@@ -422,6 +463,54 @@ function evaluateFrames(frames) {
         sequence: `${first.from}->${first.to}->${current.to}`,
         elapsed: Number((current.t - first.t).toFixed(1))
       });
+    }
+  }
+
+  return failures;
+}
+
+function evaluateFallenRest(frames) {
+  const failures = [];
+  const finalFrame = frames[frames.length - 1];
+  const firstRestIndex = frames.findIndex((frame) => frame.animation === "fallenRest");
+
+  if (!finalFrame) {
+    return [{ type: "missing-frames", message: "fallen-rest scenario produced no frames" }];
+  }
+
+  if (firstRestIndex === -1) {
+    failures.push({
+      type: "missing-fallen-rest",
+      message: "Spider never entered fallenRest"
+    });
+  }
+
+  if (finalFrame.animation !== "fallenRest") {
+    failures.push({
+      type: "final-animation",
+      expected: "fallenRest",
+      actual: frameLabel(finalFrame)
+    });
+  }
+
+  if (!finalFrame.spider.restingOnFloor || Math.abs(finalFrame.spider.vy) > 0.01) {
+    failures.push({
+      type: "not-resting-on-floor",
+      restingOnFloor: finalFrame.spider.restingOnFloor,
+      vy: finalFrame.spider.vy
+    });
+  }
+
+  if (firstRestIndex !== -1) {
+    for (const frame of frames.slice(firstRestIndex + 1)) {
+      if (frame.animation !== "fallenRest") {
+        failures.push({
+          type: "left-fallen-rest",
+          index: frame.index,
+          animation: frameLabel(frame)
+        });
+        break;
+      }
     }
   }
 

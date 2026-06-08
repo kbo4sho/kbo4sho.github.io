@@ -1,438 +1,120 @@
 %PDF-1.4
-%âãÏÓ
+%“Œ‹ž ReportLab Generated PDF document (opensource)
 1 0 obj
 <<
-/Producer (ReportLab PDF Library \055 \050opensource\051)
-/Author (Kevin Bolander)
-/CreationDate (D\07220260528131027\05300\04700\047)
-/Creator (\050unspecified\051)
-/Keywords ()
-/ModDate (D\07220260604115444\05300\04700\047)
-/Subject (Design partner resume update)
-/Title (Kevin Bolander Resume)
-/Trapped (\057False)
+/F1 2 0 R /F2 3 0 R /F3 7 0 R
 >>
 endobj
 2 0 obj
 <<
-/Type /Pages
-/Count 1
-/Kids [ 4 0 R ]
+/BaseFont /Helvetica /Encoding /WinAnsiEncoding /Name /F1 /Subtype /Type1 /Type /Font
 >>
 endobj
 3 0 obj
 <<
-/Type /Catalog
-/Pages 2 0 R
+/BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
 >>
 endobj
 4 0 obj
 <<
-/Annots [ 5 0 R 6 0 R ]
-/Contents 7 0 R
-/MediaBox [ 0 0 612 792 ]
-/Resources <<
-/Font 8 0 R
-/ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
->>
-/Rotate 0
-/Trans <<
->>
-/Type /Page
-/Parent 2 0 R
+/A <<
+/S /URI /Type /Action /URI (https://kbo4sho.github.io/)
+>> /Border [ 0 0 0 ] /Rect [ 45.6 690 119.2772 701 ] /Subtype /Link /Type /Annot
 >>
 endobj
 5 0 obj
 <<
 /A <<
-/S /URI
-/Type /Action
-/URI (https\072\057\057makemea\056ai)
->>
-/Border [ 0 0 0 ]
-/Rect [ 90.98325 233.04 135.9127 242.94 ]
-/Subtype /Link
-/Type /Annot
+/S /URI /Type /Action /URI (https://github.com/kbo4sho)
+>> /Border [ 0 0 0 ] /Rect [ 127.1168 690 211.2374 701 ] /Subtype /Link /Type /Annot
 >>
 endobj
 6 0 obj
 <<
 /A <<
-/S /URI
-/Type /Action
-/URI (https\072\057\057wonder\055together\056vercel\056app)
->>
-/Border [ 0 0 0 ]
-/Rect [ 121.2278 159.49 221.6468 169.39 ]
-/Subtype /Link
-/Type /Annot
+/S /URI /Type /Action /URI (https://makemea.ai)
+>> /Border [ 0 0 0 ] /Rect [ 219.077 690 270.2694 701 ] /Subtype /Link /Type /Annot
 >>
 endobj
 7 0 obj
 <<
-/Length 10498
+/BaseFont /Helvetica-Oblique /Encoding /WinAnsiEncoding /Name /F3 /Subtype /Type1 /Type /Font
 >>
-stream
-1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
-q
-1 0 0 1 45.6 728.44 cm
-q
-.12549 .12549 .12549 rg
-BT 1 0 0 1 0 2.2 Tm /F2 20.8 Tf 23 TL (Kevin Bolander) Tj T* ET
-Q
-Q
-q
-1 0 0 1 45.6 713.44 cm
-q
-BT 1 0 0 1 0 1.8 Tm 13 TL /F1 11.2 Tf .294118 .294118 .294118 rg (Staff Software Engineer \267 AI Creative Tooling and Design Systems \267 Design Partner) Tj T* ET
-Q
-Q
-q
-1 0 0 1 45.6 699.14 cm
-q
-BT 1 0 0 1 0 1.9 Tm 11.3 TL /F1 9.4 Tf .294118 .294118 .294118 rg (Orland Park, IL \267 \(989\) 225-2755 \267 kevinbolander@gmail.com) Tj T* ET
-Q
-Q
-q
-1 0 0 1 45.6 687.84 cm
-q
-BT 1 0 0 1 0 1.9 Tm 11.3 TL /F1 9.4 Tf .294118 .294118 .294118 rg (kbo4sho.github.io \267 github.com/kbo4sho \267 makemea.ai) Tj T* ET
-Q
-Q
-q
-1 0 0 1 45.6 678.74 cm
-q
-1.1 w
-1 J
-.12549 .12549 .12549 RG
-n 0 0 m 520.8 0 l S
-Q
-Q
-q
-1 0 0 1 45.6 670.24 cm
-Q
-q
-1 0 0 1 45.6 654.24 cm
-q
-.12549 .12549 .12549 rg
-BT 1 0 0 1 0 1.1 Tm /F2 10.9 Tf 12 TL (S U M M A R Y) Tj T* ET
-Q
-Q
-q
-1 0 0 1 45.6 651.79 cm
-q
-.45 w
-1 J
-.737255 .737255 .737255 RG
-n 0 0 m 520.8 0 l S
-Q
-Q
-q
-1 0 0 1 45.6 581.94 cm
-q
-BT 1 0 0 1 0 58.3 Tm 9.55 TL /F1 8.55 Tf .12549 .12549 .12549 rg (Staff engineer with 12+ years of production depth, focused on AI-native tooling, design systems, and product work built with design. I) Tj T* (work shoulder-to-shoulder with design: shaping ambiguous workflows into clear interfaces, tuning details that make software feel fast) Tj T* (and trustworthy, then shipping the production systems behind them. At Epsilon, architect an agentic creative-production platform used by) Tj T* (hundreds of creators to generate thousands of AI-powered ad variations per day - 5x faster than the prior human workflow and fully) Tj T* (adopted across creative teams. Built a reusable eval skill any AI feature in the org could utilize - it grades its own outputs and) Tj T* (self-improves on a recursive loop. Independently shipped MakeMeA from empty repo to live product in 2 days: an autonomous pipeline) Tj T* (\(trend scraping -) Tj (> style generation -) Tj (> SEO content -) Tj (> deploy\) with real users today.) Tj T* ET
-Q
-Q
-q
-1 0 0 1 45.6 578.04 cm
-Q
-q
-1 0 0 1 45.6 562.04 cm
-q
-.12549 .12549 .12549 rg
-BT 1 0 0 1 0 1.1 Tm /F2 10.9 Tf 12 TL (S K I L L S) Tj T* ET
-Q
-Q
-q
-1 0 0 1 45.6 559.59 cm
-q
-.45 w
-1 J
-.737255 .737255 .737255 RG
-n 0 0 m 520.8 0 l S
-Q
-Q
-q
-1 0 0 1 45.6 538.39 cm
-q
-BT 1 0 0 1 0 9.95 Tm 9.1 TL /F2 8.25 Tf .12549 .12549 .12549 rg (Design Engineering & UX Partnership:) Tj /F1 8.25 Tf ( Design systems & design tokens, component architecture, accessibility \(WCAG 2.1 AA\), interaction) Tj T* (design, visual QA, high-fidelity prototyping, UX engineering) Tj T* ET
-Q
-Q
-q
-1 0 0 1 45.6 519.94 cm
-q
-BT 1 0 0 1 0 9.95 Tm -0.003542 Tw 9.1 TL /F2 8.25 Tf .12549 .12549 .12549 rg (AI & Agents:) Tj /F1 8.25 Tf ( Multi-tier LLM orchestration loops, human-in-the-loop design, tool use & function calling, structured JSON output, eval harnesses) Tj T* 0 Tw (& recursive self-improvement, retrieval & context engineering, prompt design, OpenAI / Gemini APIs, local model evaluation \(Ollama, Qwen\)) Tj T* ET
-Q
-Q
-q
-1 0 0 1 45.6 510.59 cm
-q
-BT 1 0 0 1 0 .85 Tm 9.1 TL /F2 8.25 Tf .12549 .12549 .12549 rg (Languages & Web:) Tj /F1 8.25 Tf ( TypeScript, JavaScript, C#, HTML, CSS, Node.js; working Python) Tj T* ET
-Q
-Q
-q
-1 0 0 1 45.6 501.24 cm
-q
-BT 1 0 0 1 0 .85 Tm 9.1 TL /F2 8.25 Tf .12549 .12549 .12549 rg (Frameworks & Infra:) Tj /F1 8.25 Tf ( Angular, RxJS, Next.js, React; Vercel, REST & GraphQL API design, Playwright, Git, CI/CD; Docker \(working\)) Tj T* ET
-Q
-Q
-q
-1 0 0 1 45.6 491.89 cm
-q
-BT 1 0 0 1 0 .85 Tm 9.1 TL /F2 8.25 Tf .12549 .12549 .12549 rg (Visual / Interactive:) Tj /F1 8.25 Tf ( Canvas API, WebGL, Pixi.js, Unity3D) Tj T* ET
-Q
-Q
-q
-1 0 0 1 45.6 489.14 cm
-Q
-q
-1 0 0 1 45.6 473.14 cm
-q
-.12549 .12549 .12549 rg
-BT 1 0 0 1 0 1.1 Tm /F2 10.9 Tf 12 TL (E X P E R I E N C E) Tj T* ET
-Q
-Q
-q
-1 0 0 1 45.6 470.69 cm
-q
-.45 w
-1 J
-.737255 .737255 .737255 RG
-n 0 0 m 520.8 0 l S
-Q
-Q
-q
-1 0 0 1 45.6 457.99 cm
-q
-0 0 0 rg
-BT /F1 10 Tf 12 TL ET
-q
-1 0 0 1 0 0 cm
-q
-.12549 .12549 .12549 rg
-BT 1 0 0 1 0 .8 Tm /F2 8.9 Tf 9.7 TL (Epsilon) Tj T* ET
-Q
-Q
-q
-1 0 0 1 383.616 0 cm
-q
-.294118 .294118 .294118 rg
-BT 1 0 0 1 0 1 Tm /F3 8.7 Tf 9.7 TL 92.1207 0 Td (2017 - Present) Tj T* -92.1207 0 Td ET
-Q
-Q
-q
-Q
-Q
-Q
-q
-1 0 0 1 45.6 448.29 cm
-q
-BT 1 0 0 1 0 1.05 Tm 9.7 TL /F2 8.65 Tf .12549 .12549 .12549 rg (Staff Software Engineer) Tj /F1 8.65 Tf ( ) Tj /F3 8.65 Tf (\(2024 - Present, company re-level\)) Tj /F1 8.65 Tf ( \267 ) Tj /F2 8.65 Tf (Principal Software Engineer) Tj /F1 8.65 Tf ( ) Tj /F3 8.65 Tf (\(2023 - 2024\)) Tj T* ET
-Q
-Q
-q
-1 0 0 1 45.6 428.49 cm
-q
-BT 1 0 0 1 11 10.35 Tm -8 0 Td -0.074122 Tw 9.4 TL /F1 8.45 Tf .12549 .12549 .12549 rg (\177 Architect and own the product experience for an agentic creative-production platform used by hundreds of creators, generating thousands) Tj T* 0 Tw 8 0 Td (of AI-powered ad variations per day - 5x faster than the prior human workflow and fully adopted across creative teams \(not a pilot\).) Tj T* ET
-Q
-Q
-q
-1 0 0 1 45.6 408.49 cm
-q
-BT 1 0 0 1 11 10.35 Tm -8 0 Td 9.4 TL /F1 8.45 Tf .12549 .12549 .12549 rg (\177 Built a homegrown multi-tier Gemini orchestration loop with humans in the loop, plus production-data bridges \(real-time font-ID lookups\)) Tj T* 8 0 Td (so AI output matches live brand systems instead of generic generated assets.) Tj T* ET
-Q
-Q
-q
-1 0 0 1 45.6 388.49 cm
-q
-BT 1 0 0 1 11 10.35 Tm -8 0 Td 9.4 TL /F1 8.45 Tf .12549 .12549 .12549 rg (\177 Built a reusable eval skill any AI feature in the org could utilize - grades its own outputs and self-improves on a recursive loop, serving as) Tj T* 8 0 Td (the product-quality safety rail for the ongoing agent-first refactor.) Tj T* ET
-Q
-Q
-q
-1 0 0 1 45.6 368.49 cm
-q
-BT 1 0 0 1 11 10.35 Tm -8 0 Td 9.4 TL /F1 8.45 Tf .12549 .12549 .12549 rg (\177 Work shoulder-to-shoulder with design and product on technical, UX, and design-system decisions; present architecture and) Tj T* 8 0 Td (tradeoffs to product, design, and executive leadership.) Tj T* ET
-Q
-Q
-q
-1 0 0 1 45.6 357.59 cm
-q
-BT 1 0 0 1 0 1.05 Tm 9.7 TL /F2 8.65 Tf .12549 .12549 .12549 rg (Lead Software Engineer) Tj /F1 8.65 Tf ( ) Tj /F3 8.65 Tf (\(2021 - 2023\)) Tj /F1 8.65 Tf ( \267 ) Tj /F2 8.65 Tf (Senior UX Engineer) Tj /F1 8.65 Tf ( ) Tj /F3 8.65 Tf (\(2017 - 2021\)) Tj T* ET
-Q
-Q
-q
-1 0 0 1 45.6 337.79 cm
-q
-BT 1 0 0 1 11 10.35 Tm -8 0 Td 9.4 TL /F1 8.45 Tf .12549 .12549 .12549 rg (\177 Founded the UX Engineering discipline at Epsilon and grew a side-project design system into the company-wide core component library) Tj T* 8 0 Td (adopted across all products, with WCAG 2.1 AA embedded into every component as a constraint rather than a checklist.) Tj T* ET
-Q
-Q
-q
-1 0 0 1 45.6 317.79 cm
-q
-BT 1 0 0 1 11 10.35 Tm -8 0 Td 9.4 TL /F1 8.45 Tf .12549 .12549 .12549 rg (\177 Established component APIs, design-token patterns, accessibility standards, and review practices that helped designers and engineers) Tj T* 8 0 Td (ship more consistent, polished UI without bottlenecks.) Tj T* ET
-Q
-Q
-q
-1 0 0 1 45.6 307.19 cm
-q
-BT 1 0 0 1 11 .95 Tm -8 0 Td 9.4 TL /F1 8.45 Tf .12549 .12549 .12549 rg (\177 Authored published writing on UX engineering practice; presented internally and at public meetups.) Tj T* 8 0 Td ET
-Q
-Q
-q
-1 0 0 1 45.6 296.29 cm
-q
-0 0 0 rg
-BT /F1 10 Tf 12 TL ET
-q
-1 0 0 1 0 0 cm
-q
-.12549 .12549 .12549 rg
-BT 1 0 0 1 0 .8 Tm /F2 8.9 Tf 9.7 TL (Civiq Smartscapes \(Elevate Digital\) - Senior UI Engineer) Tj T* ET
-Q
-Q
-q
-1 0 0 1 383.616 0 cm
-q
-.294118 .294118 .294118 rg
-BT 1 0 0 1 0 1 Tm /F3 8.7 Tf 9.7 TL 102.7521 0 Td (2013 - 2017) Tj T* -102.7521 0 Td ET
-Q
-Q
-q
-Q
-Q
-Q
-q
-1 0 0 1 45.6 268.09 cm
-q
-BT 1 0 0 1 11 19.75 Tm -8 0 Td 9.4 TL /F1 8.45 Tf .12549 .12549 .12549 rg (\177 Designed and built interactive, large-format digital experiences for major brands, balancing motion, performance, and production) Tj T* 8 0 Td -0.044172 Tw (constraints: animated photo experience for Coca-Cola deployed to U.S. malls; award-winning Kinect-based Photo Booth for PepsiCo; 3D) Tj T* 0 Tw (interactive experience for Accenture at JFK; CMS and API for Simon Malls.) Tj T* ET
-Q
-Q
-q
-1 0 0 1 45.6 264.39 cm
-Q
-q
-1 0 0 1 45.6 248.39 cm
-q
-.12549 .12549 .12549 rg
-BT 1 0 0 1 0 1.1 Tm /F2 10.9 Tf 12 TL (I N D E P E N D E N T W O R K) Tj T* ET
-Q
-Q
-q
-1 0 0 1 45.6 245.94 cm
-q
-.45 w
-1 J
-.737255 .737255 .737255 RG
-n 0 0 m 520.8 0 l S
-Q
-Q
-q
-1 0 0 1 45.6 206.54 cm
-q
-BT 1 0 0 1 0 28.15 Tm 9.1 TL /F2 8.25 Tf .12549 .12549 .12549 rg (MakeMeA) Tj /F1 8.25 Tf ( - ) Tj 0 0 1 rg (makemea.ai) Tj .12549 .12549 .12549 rg ( ) Tj /F3 8.25 Tf (\(live product\)) Tj /F1 8.25 Tf  T* (Empty repo to live product in 2 days. Built the full product experience and autonomous pipeline - trend scraping -) Tj (> style generation -) Tj (> SEO) Tj T* (content -) Tj (> deploy. 48 styles, 460+ tests, 80+ AI-generated blog posts live, Lighthouse 95+. Next.js, TypeScript, OpenAI, Vercel. Real users) Tj T* (today.) Tj T* ET
-Q
-Q
-q
-1 0 0 1 45.6 188.09 cm
-q
-BT 1 0 0 1 0 9.95 Tm 9.1 TL /F2 8.25 Tf .12549 .12549 .12549 rg (OSS Contributor) Tj /F1 8.25 Tf ( - agent skill \(published on ClawHub\) that discovers open GitHub issues, forks, implements fixes, and opens PRs with an AI) Tj T* (disclosure - an agent doing real, end-to-end work in the open.) Tj T* ET
-Q
-Q
-q
-1 0 0 1 45.6 169.64 cm
-q
-BT 1 0 0 1 0 9.95 Tm 9.1 TL /F2 8.25 Tf .12549 .12549 .12549 rg (Visual QA) Tj /F1 8.25 Tf ( - agent skill \(published on ClawHub\) for visual regression testing of AI-agent pipelines. Playwright + pixel-diff gates wired into agent) Tj T* (runs so visual breakage fails the build.) Tj T* ET
-Q
-Q
-q
-1 0 0 1 45.6 151.19 cm
-q
-BT 1 0 0 1 0 9.95 Tm 9.1 TL /F2 8.25 Tf .12549 .12549 .12549 rg (Wonder Together) Tj /F1 8.25 Tf ( - ) Tj 0 0 1 rg (wonder-together.vercel.app) Tj .12549 .12549 .12549 rg ( ) Tj /F3 8.25 Tf (\(free parent toolkit\)) Tj /F1 8.25 Tf  T* (Parent-first AI toolkit that turns kids' questions into stories, simple explanations, playful activities, parent notes, and follow-ups.) Tj T* ET
-Q
-Q
-q
-1 0 0 1 45.6 148.44 cm
-Q
-q
-1 0 0 1 45.6 132.44 cm
-q
-.12549 .12549 .12549 rg
-BT 1 0 0 1 0 1.1 Tm /F2 10.9 Tf 12 TL (E D U C A T I O N) Tj T* ET
-Q
-Q
-q
-1 0 0 1 45.6 129.99 cm
-q
-.45 w
-1 J
-.737255 .737255 .737255 RG
-n 0 0 m 520.8 0 l S
-Q
-Q
-q
-1 0 0 1 45.6 108.39 cm
-q
-BT 1 0 0 1 0 10.2 Tm 9.3 TL /F2 8.4 Tf .12549 .12549 .12549 rg (Columbia College Chicago) Tj /F1 8.4 Tf ( - Interactive Arts & Media, 2007-2012. Senior project recognized by Disney and published on the Windows) Tj T* (Store.) Tj T* ET
-Q
-Q
- 
-
-endstream
 endobj
 8 0 obj
 <<
-/F1 9 0 R
-/F2 10 0 R
-/F3 11 0 R
+/A <<
+/S /URI /Type /Action /URI (https://makemea.ai)
+>> /Border [ 0 0 0 ] /Rect [ 90.98325 162.55 135.9127 172.8 ] /Subtype /Link /Type /Annot
 >>
 endobj
 9 0 obj
 <<
-/BaseFont /Helvetica
-/Encoding /WinAnsiEncoding
-/Name /F1
-/Subtype /Type1
-/Type /Font
+/A <<
+/S /URI /Type /Action /URI (https://wonder-together.vercel.app)
+>> /Border [ 0 0 0 ] /Rect [ 121.2277 83.75 221.6467 94 ] /Subtype /Link /Type /Annot
 >>
 endobj
 10 0 obj
 <<
-/BaseFont /Helvetica-Bold
-/Encoding /WinAnsiEncoding
-/Name /F2
-/Subtype /Type1
-/Type /Font
+/Annots [ 4 0 R 5 0 R 6 0 R 8 0 R 9 0 R ] /Contents 14 0 R /MediaBox [ 0 0 612 792 ] /Parent 13 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 
+  /Trans <<
+
+>> /Type /Page
 >>
 endobj
 11 0 obj
 <<
-/BaseFont /Helvetica-Oblique
-/Encoding /WinAnsiEncoding
-/Name /F3
-/Subtype /Type1
-/Type /Font
+/PageMode /UseNone /Pages 13 0 R /Type /Catalog
 >>
 endobj
+12 0 obj
+<<
+/Author (Kevin Bolander) /CreationDate (D:20260604225230-05'00') /Creator (anonymous) /Keywords () /ModDate (D:20260604225230-05'00') /Producer (ReportLab PDF Library - \(opensource\)) 
+  /Subject (Design partner resume update) /Title (Kevin Bolander Resume) /Trapped /False
+>>
+endobj
+13 0 obj
+<<
+/Count 1 /Kids [ 10 0 R ] /Type /Pages
+>>
+endobj
+14 0 obj
+<<
+/Filter [ /ASCII85Decode /FlateDecode ] /Length 4222
+>>
+stream
+Gau0FD/\/g')p`p0u*h'p1gXo/D9S031QJ6?+3CpXjcYYO>!t7gY>>o<g&YkJ,MMt9"'n-p[Y%$J0W_[3H'<-R3>l$iQjBR;*spSN8B#&an=k66*B\OFEU>JB.qL'*dKmrjBk%,)%EU<*7kSr&`*AO0DQ?l)Vkpo!=eoYSL*pnZb06d^"9M[k;%N]B>;pK^UA2kDV)/"pDq#?hXO(Ll\9NYs1W4&JXL+RMT(/WAYGD=*MlDo8ssm:4J=R5j+:Ug^J-XU.?ibo+=#Hd@H7_:+\0j7EdZ,7;*#Hf7>E51FRBTmFT-"hNm;!qk65.0(^0Qe$b"9\1<b66M,:Gjl(i1<"s`GiMja9sQ$/In>chY!dT27j()+HbT!7*"i^+ti3'oJ*g?\ZT+()O<933dpC;S>oKS%#?@e4_9dlO/WShmC:h$Y;A:kQQmSu1suK"j$gU]35`)to%.CjZ%D`,kjL+^WOMM21E!GV4[[SnIS>Nq^nF+7t>J5b-S:P>raR's*@*p4bJ'j9=cOA\"D9UJg=j%qk"(6OOp:$TTS^1S/\e;6!8\-)+J;b>(30@DfQA*+dY;FJ\R:R]TRpRYgH%d$#18L29**c-"tk`6O0@=iZ?SDQ18@[FNbjp_051)5JXBbg^[8f7eKi&aQKL<*F$o@b?;dA\J_<KO3b$jYu>-`-Ni1>`$nI+r,E$?AVq86HZfL(#:%R,rAk_U,8`!o6!nsfQ+BN9IgFmY>f+u_-PN:Pt,L7=,L?iai'lm8OlpW@\(A7H*gJGN-J_C9:;(qU*uAJ_;3+%=Y.^LcM&HsPEbBe:>booK\($-X*$JLjkReJ&O[iji=3jTF&=.Hi6;=80M`f.1OUS>!f8pCMHgH'\"F/tSr4&#.C^_5*:Ddh['GeA3G(m&?TXf1gTGS5.-))]Sm08*"p4(kA3ltq(WFtJ<(`8e%_Xf:6r5M0hCOs<01ARRKo0B][c)>5^`.&WRBgSkHq=p*2Q]UeX$7o;<@'5<JJcEB/9I/??C0=`fBql?NZ?A+YE8:KWtN@o-"]WVYStnM03GtklO<(lR3\!k85%UP">"A/K%4oda0`p168H[*%:7784$;YLCD;?>*rE;=aTUn?e>Z2fc"8Gh!$U%$C;Z0D+nPV3R6t^=U>3USpYSr7)n;dQ87!;2DL1pi^&V30-/V&@=Ds:%%HP=R0d4>,,XVt&[^8iR5!a]=(K:_)1D'$mJ($o`T>2Q>5]m:2DAtSk1_*k8l]3):A)FJ$]L@M+W%[E4Dp1jHR$9tu-edb08'L@\ppG(eoJJJ>XKu!-04YEO#M[=Ab'r,t,M!j-1-uI!e-mi:;0r6,a2.NqGp!p`nbML2bnIsEAP9=5]6StVCM('d?)h@nGku",Tp8fa\dLB^7OB[P;O<lsjCB*,mOW`Ei1;'SlT$1?&hrPrNB(hiXgr7)FS[4-KuPqslaTpM;?=[rO&(:Qd7P0c[J1SFi&65M?'TSaN*ZFCC3q[0iRJ01([KSJZUi$#\mUo5EU]J^9tu.Vd'@/s[oGZdqG(_3=c#70,Y=$0*D/451k@qSpoVc*8HLOsZs8qlQZh$=5g6@%?NI?LaBSKh'9t$cT2&d\=@6.^1h+BO[2*V7W'BjD@8NZZf/OP&kg1ta1-L-CB%ZpQk7$]6a!+fl_,f3?5NJn/[.(;k"*`CflYMd,Bp>Y,*r.'67=BURNt2,9G&iPBl*Nfb?sr0ligo$A$u)UY&=#>#IZa_d4d4;:e;%9SP%S539[Z?^>-u,m)%9?c25V>1gp',dqX++ml\\5dY.0_s]Qa"KbTe"cp1SaVGs3ENY'rCnptNgNBe2/D3RA,!ql&.pPICdPn*!S<(Kf5NY:?ld*&9f^QNt9/d!Q4:<B,CU>I59Rp;lPY-Tht)V'st%*KJO.#aA81Xc2)MVh"+4@Cn)+pI7$,4sFN93^OE>_<2UqTVG#]!?\;=^LIArm0ts-WX.26_869/CLM'3En_FZ$pUhJIphjokeRo1_6>qXf>Fo^dV1<AJEsol)q8]/s'TDagM(JX4fuoDRcEa5DU3_)da#h%_2u(Z9m[BK4Fa9$AMIFIj@G$r;T>B(VKL=Uk$Ala,<m/*`Ag:mMH#=Qp8f&!O\7ijq]-(:@0&:)>nl7OmFTgtrW=1r&%>3tg`6l/)a(Vfppa1\cV<r\W96`YUSq0JN?k21^Mgq`Iof`r[T1OWMYKTA:dJ+Jm26:T\jp=kjH=7[Zu,cMfeESVQ05@>'Qm31\O!F%=Ip\uG(\C`LQtWq1?Y#tG&4d"P'75AX_Wn`MRjhEhh.05>a96fYWEYtTNSG[9\7QsE@HjO'9;%YlqS&d[>T0.[('_MMF"FXV1n'oM.QCFLm"%.m=e]g5ua2&.`Hm*-,S._$`pG@l\*ml@kWbKSa?*B&Qj4/\'nRXlc'S9hZaWA/X]t7Id<U(N@1^Yn*Q3KMjE0`5khc:0#U(s=%T@C^nss]?"tSkj!X-T]I4rk!j#5]D0spiil!WtGW5DYq_Z!)2!3aBUmb;`:`j_i^p`XtK3c)7E#5L*iV=L#1X+iJ;l&\J,:`=p_7ct:eT83JX\.g&[\2QHjY]BK!.Bf;CHG%5>&-p-G5^857?/6(Sse7@SA9nI)m^Ghj'#d<DkFu@TO\npcuU[8::B&0HPRX80Q]W'3o&02Y]EjQD=6P?_sKRg0>PTc+#NbX1j^cJgR8!a<Ibg*Q^Yj9n&7]a17-oR<2d@dDSJ"#]<Rc9GG9?+MU6RNn18Htfk=@)$Ag=k[&i#$]/Oeh?O:8&C-dG;)LQ6U6V/U\3G28-fhm.XRq>S6mrLRKkl`%-0LNI0lJ[M`N%SR>PV'd,<_],1SfnGaK-(gSnuF6@:k,CLmDN#OCAQ/=M%U5`qoq(sb'6.AMgSjuU?;#E+[e*7Z+tF(cZ(7@hE8%FnudR1_^aYL:9Rt8eiAKTPnG$^B`TTL8i+q]^>C:b(-i7@VTU_!Fc%g*Ak\d<4s)@o$pIub'<Y6=Fm[MU>]H=QM=Y>#II!JAQF+I=rsD\r^cV%S)(D:JaqB)GDk_Q"5K2rD2%Ue,9D&Na'9SVM,Vm9KO(&[7;UV7BW`!dlTM%/f:];-m+5;Be;?$(dMhYU>H!?rRmCCIkmtK'nn[lX)c4T(Z*,:NkW*M?e6a=_!ZHGZq]KNa$DH-"WiLbu%*M94u^`&i%=JQPL:nkL*l>Rb[7_fBj%T<3ne,BZ2\_Fj9%Z\g5W_,t(PH?\%pW]kYJW<.m5f]VQioH&rl+8`oTNN7e-joI=3RUlAc:WIRA:]`d"Eu"ac%thr7`OB&:*jr>JUU+5H_F6bXgd[]1d#kaQSFR\[61mn:EMd8UP"c0YrT:rq2)(CYhDlTZ'P-#h/H$C-hN*&l,[s_mF<"6,GH:PQ+kZ/7s&Y)iID0:41EaW/,QjETO5lJn(i3VeOI#XgtM%G!Q.*mClGt"CtFl>oDQHB\_aPN#p?Ku]O3teI'e_3^YT)Q]#TY^qW%mF4Dng!lh?eUEqdo_9RlN[$*@t+#7]n,H02pd5I<0GhY]\.%B@X(H")TQnYEe_W6A_1e>_u5YtTq5H%1X>Kp"pA)eZY+eD,\_]:>F,e&gQ3W9S1fWuC[:p">YG3jJ4._7cM=).0:?5\aKbC'OFpmHmHTJMZA@[@>;q40"muq5YO<6%g5rip,_"%(*gs9<M@g-1a_<A+P-iIO%o-C\I"E[iIQ+Ot8L1eOXK@>#p$9?RY.1>@G\V_8c^`ontoa*f#91Yq?m-]A$pWbtV]']8Rb,ZoN=sG_)5<JTY`91:HMpSmQ-"?gG$9Xa)ZA3<Q`$#1An#?EWAe<?2gr,mqnK)`_Lb)A6ghnTLQD:&m_pI9LrLn#p<XSZB_]Q<:EYe%@=!baWHqFqiHh,P!]YW6hsA1H=t-e'XmNF=@[nR^_S!E-m8sLZTi-FJbDQ'W-r;DQ`.`Si7WI#/;pG,:Ms;cD:\!O_$,4d_hRWDQiEh7"d+3M8UWZFuGtI\POlU]O=VYQT-k/<'Ae%Un5j5$b-sWH_KT@5O"4d8"rbZ_mT`q:GI_@#$<k\JJm4U+l600)rsID4:Y@.5?R06lEUVdKoTYke_OS;4_\\[:_SU/n?_S*5[uLT$2E2?8+!?9adKiSER<IDB^^T8oL?6Y@-HoeV?E&T*(qiSK9_>4;Bq\N#9[]=)Ne@SM4?*D!Gh*4]-tufV_/JFSl@<e]hHtKFslfV'reQOm1&F@V>3KTF+(I2#OuK8H?Cj3,"cCp\b+m2A*u7j~>endstream
+endobj
 xref
-0 12
+0 15
 0000000000 65535 f 
-0000000015 00000 n 
-0000000354 00000 n 
-0000000413 00000 n 
-0000000462 00000 n 
-0000000675 00000 n 
-0000000853 00000 n 
-0000001053 00000 n 
-0000011604 00000 n 
-0000011657 00000 n 
-0000011764 00000 n 
-0000011877 00000 n 
+0000000061 00000 n 
+0000000112 00000 n 
+0000000219 00000 n 
+0000000331 00000 n 
+0000000495 00000 n 
+0000000663 00000 n 
+0000000822 00000 n 
+0000000937 00000 n 
+0000001102 00000 n 
+0000001279 00000 n 
+0000001517 00000 n 
+0000001587 00000 n 
+0000001884 00000 n 
+0000001945 00000 n 
 trailer
 <<
-/Size 12
-/Root 3 0 R
-/Info 1 0 R
+/ID 
+[<5ef1a567a07e968ba3e146658c0d7af8><5ef1a567a07e968ba3e146658c0d7af8>]
+% ReportLab generated PDF document -- digest (opensource)
+
+/Info 12 0 R
+/Root 11 0 R
+/Size 15
 >>
 startxref
-11993
+6259
 %%EOF

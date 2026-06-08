@@ -1,0 +1,4 @@
+interface:
+  display_name: "Spider Game Grader"
+  short_description: "Grade the portfolio spider game against its purpose."
+  default_prompt: "Grade the spider game against spider-game-purpose.md and report concise findings."
