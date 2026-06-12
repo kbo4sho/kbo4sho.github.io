@@ -193,8 +193,7 @@
       grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
       gap: clamp(1.5rem, 3vw, 2.5rem);
       align-items: stretch;
-      padding: clamp(1.35rem, 3vw, 2.4rem) 0 2rem;
-      min-height: calc(100svh - 56px);
+      padding: clamp(1.35rem, 3vw, 2.4rem) 0 clamp(2rem, 4vw, 3rem);
     }
 
     .intro-panel {
@@ -202,7 +201,7 @@
       flex-direction: column;
       justify-content: space-between;
       gap: 2rem;
-      min-height: 560px;
+      min-height: clamp(500px, 58vh, 590px);
       padding: 0.35rem 0 0;
     }
 
@@ -291,37 +290,13 @@
       text-transform: uppercase;
     }
 
-    .carousel-controls {
-      display: flex;
-      gap: 0.45rem;
-    }
-
-    .carousel-button {
-      display: inline-grid;
-      place-items: center;
-      width: 2rem;
-      height: 2rem;
-      border: 1px solid var(--line-strong);
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.64);
-      color: var(--ink);
-      font-family: var(--font-mono);
-      font-size: 0.9rem;
-      cursor: pointer;
-      transition: background 0.15s, border-color 0.15s, transform 0.15s;
-    }
-
-    .carousel-button:hover,
-    .carousel-button:focus-visible {
-      border-color: var(--ink);
-      background: var(--surface);
-      transform: translateY(-1px);
+    .carousel-hint {
+      color: var(--muted);
     }
 
     .work-carousel {
-      display: grid;
-      grid-auto-flow: column;
-      grid-auto-columns: minmax(330px, 78%);
+      display: flex;
+      align-items: stretch;
       gap: 1rem;
       overflow-x: auto;
       overscroll-behavior-inline: contain;
@@ -333,7 +308,10 @@
     .work-card {
       display: grid;
       grid-template-rows: minmax(0, 1fr) auto;
-      min-height: 560px;
+      flex: 0 0 82%;
+      min-width: 360px;
+      max-width: 620px;
+      height: clamp(470px, calc(100svh - 170px), 590px);
       overflow: hidden;
       scroll-snap-align: start;
       border: 1px solid var(--line);
@@ -476,11 +454,14 @@
       }
 
       .work-carousel {
-        grid-auto-columns: minmax(280px, 86%);
+        gap: 0.85rem;
       }
 
       .work-card {
-        min-height: 470px;
+        flex-basis: 86%;
+        min-width: 300px;
+        max-width: 720px;
+        height: 460px;
       }
 
       .contact-block {
@@ -493,14 +474,11 @@
         width: min(100vw - 24px, 1180px);
       }
 
-      .site-header-inner {
-        align-items: flex-start;
-        flex-direction: column;
-        gap: 0.65rem;
-      }
+      .site-header-inner { gap: 0.75rem; }
 
       .site-nav {
         justify-content: flex-start;
+        gap: 0.7rem;
       }
 
       .hero {
@@ -517,11 +495,14 @@
       }
 
       .work-carousel {
-        grid-auto-columns: minmax(260px, 92%);
+        gap: 0.75rem;
       }
 
       .work-card {
-        min-height: 430px;
+        flex-basis: 90%;
+        min-width: 260px;
+        max-width: none;
+        height: 390px;
       }
 
       .work-info {
@@ -587,13 +568,10 @@
       <section class="work-area" id="work" aria-labelledby="work-heading">
         <div class="carousel-bar">
           <h2 class="eyebrow" id="work-heading">Selected work</h2>
-          <div class="carousel-controls" aria-label="Carousel controls">
-            <button class="carousel-button" type="button" data-carousel-prev aria-label="Previous work">←</button>
-            <button class="carousel-button" type="button" data-carousel-next aria-label="Next work">→</button>
-          </div>
+          <span class="carousel-hint">Scroll / drag</span>
         </div>
 
-        <div class="work-carousel" data-carousel aria-label="Selected work carousel">
+        <div class="work-carousel" data-carousel tabindex="0" aria-label="Selected work carousel">
           <article class="work-card">
             <img src="ad-builder.png" alt="AI Creative Production Platform interface showing a display ad and timeline controls.">
             <div class="work-info">
@@ -662,21 +640,5 @@
       </aside>
     </section>
   </main>
-
-  <script>
-    const carousel = document.querySelector('[data-carousel]');
-    const previousButton = document.querySelector('[data-carousel-prev]');
-    const nextButton = document.querySelector('[data-carousel-next]');
-
-    function scrollCarousel(direction) {
-      if (!carousel) return;
-      const card = carousel.querySelector('.work-card');
-      const distance = card ? card.getBoundingClientRect().width + 16 : carousel.clientWidth * 0.8;
-      carousel.scrollBy({ left: direction * distance, behavior: 'smooth' });
-    }
-
-    previousButton?.addEventListener('click', () => scrollCarousel(-1));
-    nextButton?.addEventListener('click', () => scrollCarousel(1));
-  </script>
 </body>
 </html>
