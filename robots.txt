@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kbo4sho.github.io/sitemap.xml

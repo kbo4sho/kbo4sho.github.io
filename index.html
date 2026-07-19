@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kevin Bolander | Design Engineer &amp; AI Product Builder</title>
+  <meta name="description" content="Kevin Bolander is a design engineer and staff software engineer building useful AI products, creative tools, and design systems from interaction model to production.">
+  <meta name="author" content="Kevin Bolander">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://kbo4sho.github.io/">
+  <meta name="theme-color" content="#f2f6f4">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.86em' font-size='82'>✦</text></svg>">
+  <meta property="og:site_name" content="Kevin Bolander">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="Kevin Bolander | Design Engineer &amp; AI Product Builder">
+  <meta property="og:description" content="Design engineering across AI products, creative tools, and design systems from interaction model to production.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://kbo4sho.github.io/">
+  <meta property="og:image" content="https://kbo4sho.github.io/pixel-me.jpeg">
+  <meta property="og:image:width" content="800">
+  <meta property="og:image:height" content="800">
+  <meta property="og:image:alt" content="Pixel art portrait of Kevin Bolander">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Kevin Bolander | Design Engineer &amp; AI Product Builder">
+  <meta name="twitter:description" content="Design engineering across AI products, creative tools, and design systems from interaction model to production.">
+  <meta name="twitter:image" content="https://kbo4sho.github.io/pixel-me.jpeg">
+  <meta name="twitter:image:alt" content="Pixel art portrait of Kevin Bolander">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://kbo4sho.github.io/#person",
+        "name": "Kevin Bolander",
+        "jobTitle": "Staff Software Engineer",
+        "worksFor": { "@type": "Organization", "name": "Epsilon" },
+        "url": "https://kbo4sho.github.io/",
+        "email": "mailto:kevinbolander@gmail.com",
+        "image": {
+          "@type": "ImageObject",
+          "url": "https://kbo4sho.github.io/pixel-me.jpeg",
+          "width": 800,
+          "height": 800
+        },
+        "sameAs": [
+          "https://github.com/kbo4sho",
+          "https://linkedin.com/in/kevin-bolander-45659322"
+        ],
+        "knowsAbout": ["AI Product Engineering", "Design Engineering", "Design Systems", "UX Engineering", "Full-Stack Engineering", "Internal Tools", "AI Workflows", "Creative AI", "TypeScript", "JavaScript", "CSS", "HTML", "Automation"],
+        "description": "Design engineer and staff software engineer building useful AI products, creative tools, and design systems from interaction model to production."
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://kbo4sho.github.io/#website",
+        "url": "https://kbo4sho.github.io/",
+        "name": "Kevin Bolander",
+        "publisher": { "@id": "https://kbo4sho.github.io/#person" },
+        "inLanguage": "en-US"
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://kbo4sho.github.io/#webpage",
+        "url": "https://kbo4sho.github.io/",
+        "name": "Kevin Bolander | Design Engineer & AI Product Builder",
+        "description": "Kevin Bolander is a design engineer and staff software engineer building useful AI products, creative tools, and design systems from interaction model to production.",
+        "headline": "I build useful products.",
+        "isPartOf": { "@id": "https://kbo4sho.github.io/#website" },
+        "about": { "@id": "https://kbo4sho.github.io/#person" },
+        "mainEntity": { "@id": "https://kbo4sho.github.io/#person" },
+        "primaryImageOfPage": {
+          "@type": "ImageObject",
+          "url": "https://kbo4sho.github.io/pixel-me.jpeg",
+          "width": 800,
+          "height": 800
+        },
+        "inLanguage": "en-US"
+      }
+    ]
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --page: #f2f6f4;
+      --paper: #fffdf8;
+      --paper-soft: #eef1f2;
+      --ink: #171918;
+      --ink-soft: #464d4a;
+      --muted: #717b76;
+      --line: #c7d2ce;
+      --line-strong: #8fa19b;
+      --blue: #1e63d6;
+      --blue-soft: #d9e6ff;
+      --sage: #587b57;
+      --olive: #86836b;
+      --copper: #e2694d;
+      --yellow: #edbe4a;
+      --shadow: 0 24px 70px rgba(23, 25, 24, 0.14);
+      --soft-shadow: 0 14px 34px rgba(23, 25, 24, 0.09);
+      --wrap: min(1180px, calc(100vw - 40px));
+      --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 5rem;
+      overflow-x: clip;
+    }
+
+    body {
+      margin: 0;
+      background:
+        linear-gradient(90deg, rgba(23, 25, 24, 0.045) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(23, 25, 24, 0.035) 1px, transparent 1px),
+        var(--page);
+      background-size: 36px 36px;
+      color: var(--ink);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      overflow-x: clip;
+    }
+
+    @supports not (overflow-x: clip) {
+      html,
+      body {
+        overflow-x: hidden;
+      }
+    }
+
+    a {
+      color: inherit;
+      text-decoration-color: currentColor;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 0.22em;
+      transition: color 0.16s ease, border-color 0.16s ease, background 0.16s ease, transform 0.16s ease;
+    }
+
+    a:hover,
+    a:focus-visible {
+      color: var(--blue);
+      text-decoration-thickness: 2px;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    .skip-link {
+      position: absolute;
+      top: -100px;
+      left: 1rem;
+      z-index: 100;
+      padding: 0.65rem 0.9rem;
+      background: var(--ink);
+      color: var(--paper);
+      font-size: 0.83rem;
+      font-weight: 700;
+    }
+
+    .skip-link:focus {
+      top: 1rem;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      clip-path: inset(50%);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .wrap {
+      width: var(--wrap);
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      border-bottom: 1px solid rgba(23, 25, 24, 0.13);
+      background: rgba(242, 246, 244, 0.86);
+      backdrop-filter: blur(18px);
+    }
+
+    .site-header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      min-height: 4rem;
+      color: var(--ink-soft);
+      font-size: 0.9rem;
+    }
+
+    .site-name {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      color: var(--ink);
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .site-mark {
+      display: inline-grid;
+      width: 1.85rem;
+      aspect-ratio: 1;
+      place-items: center;
+      border: 1px solid var(--line-strong);
+      border-radius: 50%;
+      background: var(--paper);
+      color: var(--copper);
+      box-shadow: 0 1px 0 rgba(255, 255, 255, 0.9) inset;
+    }
+
+    .site-nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: clamp(0.75rem, 2vw, 1.35rem);
+    }
+
+    .site-nav a {
+      text-decoration: none;
+    }
+
+    .hero {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(400px, 0.78fr) minmax(650px, 1.22fr);
+      gap: clamp(2rem, 5vw, 4.5rem);
+      align-items: center;
+      width: min(1450px, calc(100vw - 64px));
+      min-height: calc(100vh - 4rem);
+      padding: clamp(2rem, 6vw, 4.5rem) 0 clamp(3rem, 7vw, 5.5rem);
+    }
+
+    .hero-copy {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-copy .eyebrow {
+      margin-bottom: 1rem;
+    }
+
+    .eyebrow,
+    .section-kicker,
+    .meta {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.74rem;
+      font-weight: 850;
+      letter-spacing: 0.08em;
+      line-height: 1.4;
+      text-transform: uppercase;
+    }
+
+    .hero-title {
+      max-width: 12ch;
+      margin: 0;
+      font-size: clamp(3rem, 7.5vw, 6.6rem);
+      font-weight: 880;
+      letter-spacing: 0;
+      line-height: 0.96;
+    }
+
+    .hero-title span {
+      color: var(--blue);
+    }
+
+    .lead {
+      max-width: 57ch;
+      margin: 1.35rem 0 0;
+      color: var(--ink-soft);
+      font-size: clamp(1.05rem, 1.45vw, 1.25rem);
+      line-height: 1.75;
+    }
+
+    .hero-proof {
+      max-width: 58ch;
+      margin: 0.9rem 0 0;
+      color: var(--muted);
+      font-size: 0.86rem;
+      font-weight: 700;
+      line-height: 1.55;
+    }
+
+    .hero-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1.45rem;
+      font-weight: 800;
+    }
+
+    .text-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 2.55rem;
+      padding: 0.44rem 0.18rem;
+      color: var(--ink);
+    }
+
+    .button-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 2.55rem;
+      padding: 0.56rem 0.88rem;
+      border: 1px solid var(--ink);
+      border-radius: 8px;
+      background: var(--ink);
+      color: var(--paper);
+      text-decoration: none;
+      box-shadow: var(--soft-shadow);
+    }
+
+    .button-link:hover,
+    .button-link:focus-visible {
+      background: var(--blue);
+      color: var(--paper);
+      border-color: var(--blue);
+    }
+
+    .hero-demo {
+      position: relative;
+      isolation: isolate;
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr);
+      gap: 0.45rem;
+      overflow: hidden;
+      width: 100%;
+      height: clamp(590px, calc(100vh - 15rem), 680px);
+    }
+
+    .hero-demo-ownership {
+      position: relative;
+      z-index: 1;
+      max-width: calc(100% - 0.5rem);
+      margin: 0 0 0 0.25rem;
+      color: var(--muted);
+      font-size: 0.72rem;
+      font-weight: 700;
+      line-height: 1.4;
+      text-wrap: pretty;
+    }
+
+    .hero-demo-frame {
+      display: block;
+      width: 100%;
+      height: 100%;
+      min-height: 0;
+      border: 0;
+      background: transparent;
+    }
+
+    .section {
+      padding: clamp(3.5rem, 7vw, 6rem) 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .section-heading {
+      display: grid;
+      grid-template-columns: minmax(0, 0.25fr) minmax(0, 0.75fr);
+      gap: clamp(1.4rem, 5vw, 4rem);
+      margin-bottom: clamp(1.8rem, 4vw, 3rem);
+    }
+
+    .section-title {
+      max-width: 14ch;
+      margin: -0.15rem 0 0;
+      font-size: clamp(2rem, 4.2vw, 4rem);
+      font-weight: 860;
+      letter-spacing: 0;
+      line-height: 1.02;
+    }
+
+    .section-copy {
+      max-width: 62ch;
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: clamp(1rem, 1.35vw, 1.18rem);
+      line-height: 1.75;
+    }
+
+    #work {
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    #work .section-kicker {
+      color: rgba(255, 253, 248, 0.62);
+    }
+
+    #work .section-title,
+    #work .flagship-title {
+      color: var(--paper);
+    }
+
+    #work .section-copy,
+    #work .flagship-text,
+    #work .metric-grid dd {
+      color: rgba(255, 253, 248, 0.76);
+    }
+
+    .flagship {
+      display: grid;
+      grid-template-columns: minmax(0, 0.92fr) minmax(320px, 0.5fr);
+      gap: clamp(1.5rem, 4vw, 3rem);
+      align-items: center;
+    }
+
+    .flagship-visual {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 253, 248, 0.24);
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.34);
+    }
+
+    .flagship-visual::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0));
+    }
+
+    .flagship-visual img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      object-position: left top;
+      filter: saturate(0.95) contrast(1.02);
+    }
+
+    .flagship-visual figcaption {
+      position: relative;
+      z-index: 1;
+      padding: 0.72rem 0.9rem;
+      background: #fbfbfa;
+      color: #505454;
+      font-size: 0.76rem;
+      font-weight: 650;
+      line-height: 1.5;
+    }
+
+    .flagship-copy {
+      display: grid;
+      gap: 1.2rem;
+    }
+
+    .flagship-title {
+      margin: 0.25rem 0 0;
+      font-size: clamp(2.1rem, 4vw, 3.75rem);
+      font-weight: 870;
+      letter-spacing: 0;
+      line-height: 0.98;
+    }
+
+    .flagship-text {
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: clamp(1rem, 1.25vw, 1.12rem);
+      line-height: 1.75;
+    }
+
+    .flagship-collaboration {
+      margin: -0.4rem 0 0;
+      color: rgba(255, 253, 248, 0.62);
+      font-size: 0.78rem;
+      font-weight: 720;
+      line-height: 1.5;
+    }
+
+    .flagship-link {
+      display: inline-flex;
+      width: fit-content;
+      align-items: center;
+      gap: 0.45rem;
+      color: var(--paper);
+      font-weight: 820;
+    }
+
+    .flagship-link::after {
+      content: "→";
+      color: var(--yellow);
+      font-size: 0.9em;
+      text-decoration: none;
+    }
+
+    .flagship-link:hover,
+    .flagship-link:focus-visible {
+      color: var(--yellow);
+    }
+
+    .metric-grid {
+      display: grid;
+      gap: 0.75rem;
+      margin: 0;
+    }
+
+    .metric-grid div {
+      display: grid;
+      grid-template-columns: minmax(4.2rem, auto) 1fr;
+      gap: 0.8rem;
+      align-items: baseline;
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .metric-grid dt,
+    .metric-grid dd {
+      margin: 0;
+    }
+
+    .metric-grid dt {
+      color: var(--ink);
+      font-size: clamp(1.55rem, 2.4vw, 2.2rem);
+      font-weight: 880;
+      line-height: 1;
+    }
+
+    #work .metric-grid div {
+      border-top-color: rgba(255, 253, 248, 0.2);
+    }
+
+    #work .metric-grid dt {
+      color: var(--yellow);
+    }
+
+    .metric-grid dd {
+      color: var(--ink-soft);
+      font-size: 0.88rem;
+      line-height: 1.5;
+    }
+
+    .design-proof {
+      display: grid;
+      margin: 0;
+      padding: 0;
+      border-top: 1px solid rgba(255, 253, 248, 0.2);
+      list-style: none;
+    }
+
+    .design-proof li {
+      display: grid;
+      grid-template-columns: minmax(7.2rem, 0.32fr) minmax(0, 0.68fr);
+      gap: 0.8rem;
+      padding: 0.72rem 0;
+      border-bottom: 1px solid rgba(255, 253, 248, 0.2);
+    }
+
+    .design-proof strong {
+      color: var(--yellow);
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .design-proof span {
+      color: rgba(255, 253, 248, 0.76);
+      font-size: 0.86rem;
+      line-height: 1.55;
+    }
+
+    .supporting-project {
+      border-top: 0;
+      padding: clamp(2.6rem, 5vw, 4.3rem) 0;
+    }
+
+    .supporting-project-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(220px, 0.28fr);
+      gap: clamp(1.5rem, 5vw, 4rem);
+      align-items: center;
+      padding: clamp(1.7rem, 3.5vw, 2.6rem) 0;
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .supporting-project-row:hover,
+    .supporting-project-row:focus-visible {
+      color: inherit;
+    }
+
+    .supporting-project-row:hover .supporting-project-thumb img,
+    .supporting-project-row:focus-visible .supporting-project-thumb img {
+      transform: scale(1.035);
+      filter: saturate(1.02) contrast(1.03);
+    }
+
+    .supporting-project-copy {
+      max-width: 72ch;
+    }
+
+    .supporting-project-title {
+      display: inline;
+      margin: 0;
+      color: var(--ink);
+      font-size: clamp(2.1rem, 4vw, 3.35rem);
+      font-weight: 700;
+      letter-spacing: 0;
+      line-height: 1.16;
+    }
+
+    .supporting-project-text {
+      display: inline;
+      margin: 0 0 0 0.45rem;
+      color: var(--ink-soft);
+      font-size: clamp(1.55rem, 2.8vw, 2.25rem);
+      line-height: 1.55;
+    }
+
+    .supporting-project-proof {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .supporting-project-proof span {
+      padding: 0.42rem 0.58rem;
+      border: 1px solid var(--line-strong);
+      border-radius: 999px;
+      color: var(--ink-soft);
+      font-size: 0.72rem;
+      font-weight: 750;
+      letter-spacing: 0.03em;
+    }
+
+    .supporting-project-thumb {
+      display: block;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 253, 248, 0.82);
+      aspect-ratio: 4 / 3;
+      box-shadow: var(--soft-shadow);
+    }
+
+    .supporting-project-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: left top;
+      transition: transform 0.25s ease, filter 0.25s ease;
+    }
+
+    .lab-section {
+      border-top: 0;
+      background: linear-gradient(180deg, rgba(255, 253, 248, 0.44), rgba(242, 246, 244, 0));
+    }
+
+    .lab-board {
+      display: grid;
+      grid-template-columns: minmax(0, 0.45fr) minmax(0, 0.55fr);
+      gap: clamp(1.5rem, 5vw, 4rem);
+      align-items: start;
+    }
+
+    .lab-intro {
+      position: sticky;
+      top: 6rem;
+      display: grid;
+      gap: 1rem;
+      max-width: 34rem;
+    }
+
+    .lab-intro .section-title {
+      max-width: 12ch;
+    }
+
+    .lab-list {
+      display: grid;
+      gap: clamp(2.4rem, 4.5vw, 3.75rem);
+    }
+
+    .lab-item {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(128px, 0.34fr);
+      gap: clamp(1rem, 3vw, 2rem);
+      align-items: center;
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .lab-item:hover,
+    .lab-item:focus-visible {
+      color: inherit;
+    }
+
+    .lab-item:hover .lab-thumb img,
+    .lab-item:focus-visible .lab-thumb img {
+      transform: scale(1.04);
+      filter: saturate(1.02) contrast(1.03);
+    }
+
+    .lab-meta {
+      display: block;
+      color: var(--muted);
+      font-size: 0.73rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .lab-title {
+      display: block;
+      margin: 0.28rem 0 0;
+      font-size: clamp(1.16rem, 1.8vw, 1.55rem);
+      font-weight: 700;
+      letter-spacing: 0;
+      line-height: 1.22;
+    }
+
+    .lab-copy {
+      display: block;
+      margin: 0.5rem 0 0;
+      color: var(--ink-soft);
+      font-size: 0.94rem;
+      line-height: 1.62;
+    }
+
+    .lab-thumb {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 253, 248, 0.82);
+      aspect-ratio: 4 / 3;
+      box-shadow: var(--soft-shadow);
+    }
+
+    .lab-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: left top;
+      transition: transform 0.25s ease, filter 0.25s ease;
+    }
+
+    .experience-section {
+      background: var(--paper);
+    }
+
+    .experience-list {
+      display: grid;
+      max-width: 920px;
+      margin-left: auto;
+    }
+
+    .experience-item {
+      display: grid;
+      grid-template-columns: minmax(150px, 0.24fr) minmax(0, 0.76fr);
+      gap: clamp(1.2rem, 4vw, 3rem);
+      padding: clamp(1.3rem, 2.8vw, 2rem) 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .experience-item:last-child {
+      border-bottom: 1px solid var(--line);
+    }
+
+    .experience-date {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.76rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .experience-role {
+      margin: 0;
+      font-size: clamp(1.1rem, 2vw, 1.45rem);
+      line-height: 1.25;
+    }
+
+    .experience-copy {
+      max-width: 66ch;
+      margin: 0.55rem 0 0;
+      color: var(--ink-soft);
+      font-size: 0.96rem;
+      line-height: 1.7;
+    }
+
+    .craft-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: clamp(1rem, 4vw, 3rem);
+      counter-reset: craft-principle;
+    }
+
+    .craft-item {
+      position: relative;
+      padding-top: 0;
+      border: 0;
+      counter-increment: craft-principle;
+    }
+
+    .craft-item::before {
+      content: "0" counter(craft-principle);
+      position: static;
+      display: block;
+      width: auto;
+      height: auto;
+      margin-bottom: 0.7rem;
+      background: none;
+      color: var(--blue);
+      font-size: 0.7rem;
+      font-weight: 850;
+      letter-spacing: 0.09em;
+      line-height: 1;
+    }
+
+    .craft-item h3 {
+      margin: 0;
+      font-size: 1.03rem;
+      line-height: 1.35;
+    }
+
+    .craft-item p {
+      margin: 0.6rem 0 0;
+      color: var(--ink-soft);
+      font-size: 0.96rem;
+      line-height: 1.72;
+    }
+
+    .about {
+      display: grid;
+      grid-template-columns: minmax(0, 0.72fr) minmax(230px, 0.28fr);
+      gap: clamp(1.5rem, 5vw, 4rem);
+      align-items: end;
+      border-top: 0;
+      padding-bottom: clamp(3.5rem, 8vw, 6rem);
+    }
+
+    #craft {
+      border-top: 0;
+    }
+
+    .about-copy {
+      max-width: 72ch;
+    }
+
+    .about-copy p {
+      margin: 1rem 0 0;
+      color: var(--ink-soft);
+      font-size: 1rem;
+      line-height: 1.78;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 0.55rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      font-weight: 700;
+    }
+
+    .footer {
+      padding: 1.3rem 0;
+      background: var(--ink);
+      color: rgba(255, 253, 248, 0.72);
+      font-size: 0.88rem;
+    }
+
+    *:focus-visible {
+      outline: 3px solid rgba(21, 95, 232, 0.34);
+      outline-offset: 3px;
+    }
+
+    ::selection {
+      background: rgba(21, 95, 232, 0.16);
+      color: var(--ink);
+    }
+
+    @media (max-width: 1180px) {
+      .hero {
+        grid-template-columns: 1fr;
+        width: min(980px, calc(100vw - 40px));
+        min-height: 0;
+      }
+
+      .hero-copy {
+        max-width: 780px;
+        padding-top: 2rem;
+      }
+
+      .hero-demo {
+        height: 680px;
+      }
+
+    }
+
+    @media (max-width: 980px) {
+      .section-heading,
+      .flagship,
+      .supporting-project-row,
+      .lab-board,
+      .about {
+        grid-template-columns: 1fr;
+      }
+
+      .lab-intro {
+        position: static;
+        max-width: 720px;
+      }
+
+      .craft-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .experience-list {
+        margin-left: 0;
+      }
+    }
+
+    @media (max-width: 680px) {
+      :root {
+        --wrap: min(100vw - 24px, 1160px);
+      }
+
+      .site-header-inner {
+        align-items: flex-start;
+        flex-direction: column;
+        justify-content: center;
+        padding: 0.85rem 0;
+      }
+
+      .site-nav {
+        justify-content: flex-start;
+        gap: 0.8rem;
+      }
+
+      .hero {
+        padding-top: 2.6rem;
+      }
+
+      .hero-title {
+        font-size: clamp(2.45rem, 11vw, 3.65rem);
+      }
+
+      .hero-demo {
+        height: 620px;
+      }
+
+      .section-title {
+        max-width: none;
+      }
+
+      .metric-grid div,
+      .lab-item,
+      .experience-item {
+        grid-template-columns: 1fr;
+      }
+
+      .design-proof li {
+        grid-template-columns: 1fr;
+        gap: 0.3rem;
+      }
+
+      .supporting-project-title,
+      .supporting-project-text {
+        display: block;
+      }
+
+      .supporting-project-text {
+        margin: 0.25rem 0 0;
+      }
+
+      .supporting-project-thumb {
+        max-width: 360px;
+      }
+
+      .lab-thumb {
+        max-width: 360px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.001ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="wrap site-header-inner">
+      <a class="site-name" href="#top" aria-label="Kevin Bolander home">
+        <span class="site-mark" aria-hidden="true">+</span>
+        Kevin Bolander
+      </a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="#work">Work</a>
+        <a href="#experience">Experience</a>
+        <a href="#craft">Contribution</a>
+        <a href="mailto:kevinbolander@gmail.com">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <section class="wrap hero" id="top" aria-labelledby="page-title">
+      <div class="hero-copy">
+        <p class="eyebrow">Design engineer / Staff software engineer / AI product builder</p>
+        <h1 class="hero-title" id="page-title">I build <span>useful</span> products.</h1>
+        <p class="lead">I turn fuzzy workflows into production tools that help people create, decide, and ship with confidence.</p>
+        <p class="hero-proof">13+ years building creative tools, design systems, and production software.</p>
+        <div class="hero-links" aria-label="Primary links">
+          <a class="button-link" href="#work">Recent work</a>
+          <a class="text-link" href="#lab">Independent work</a>
+          <a class="text-link" href="mailto:kevinbolander@gmail.com">Email</a>
+        </div>
+      </div>
+
+      <div class="hero-demo" id="product-demo">
+        <p class="hero-demo-ownership">I designed this interactive demo to show editable AI-assisted work from first direction through human review.</p>
+        <iframe
+          class="hero-demo-frame"
+          src="mockups/creative-workbench-prototype.html?embed=1"
+          title="Interactive demo of an editable creative workflow with synchronized formats, motion controls and human review"
+          loading="eager"
+        ></iframe>
+      </div>
+    </section>
+
+    <section class="section" id="work" aria-labelledby="work-heading">
+      <div class="wrap section-heading">
+        <p class="section-kicker">Recent work</p>
+        <div>
+          <h2 class="section-title" id="work-heading">I build AI-assisted creative tools that stay reviewable.</h2>
+          <p class="section-copy">At Epsilon, I help turn complex creative workflows into web-based tools that keep generated work understandable, editable and ready for human review.</p>
+        </div>
+      </div>
+
+      <div class="wrap flagship" aria-labelledby="creative-tools-heading">
+        <figure class="flagship-visual">
+          <img src="ad-builder-moodboard.png" alt="Concept interface showing AI assistance, layer tools, design controls and a motion timeline.">
+          <figcaption>An editable workspace for creating, adapting and reviewing visual work across formats.</figcaption>
+        </figure>
+        <div class="flagship-copy">
+          <div>
+            <p class="section-kicker">Epsilon / AI-assisted creative tools</p>
+            <h3 class="flagship-title" id="creative-tools-heading">Creative production tools</h3>
+          </div>
+          <p class="flagship-text">I lead technical architecture and hands-on engineering across various AI interaction models, canvas and state architecture, synchronized static and motion formats, human review and evaluation loops.</p>
+          <p class="flagship-collaboration">Built with product, creative, design, ML and engineering partners.</p>
+          <ul class="design-proof" aria-label="Design engineering contributions">
+            <li>
+              <strong>Designed</strong>
+              <span>AI-assisted interaction patterns that keep people close to important decisions.</span>
+            </li>
+            <li>
+              <strong>Built</strong>
+              <span>Complex visual editing and state foundations for static and motion work.</span>
+            </li>
+            <li>
+              <strong>Made visible</strong>
+              <span>Human review and evaluation states that help people understand changes and catch problems.</span>
+            </li>
+          </ul>
+          <a class="flagship-link" href="ai-creative-production.html">Read the case study</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section supporting-project" id="core-ui" aria-labelledby="core-ui-heading">
+      <a class="wrap supporting-project-row" href="core-ui.html">
+        <div class="supporting-project-copy">
+          <span class="section-kicker">Design system / Founding UX Engineering</span>
+          <div>
+            <h2 class="supporting-project-title" id="core-ui-heading">Core UI</h2>
+            <span class="supporting-project-text">As one of Epsilon's founding UX engineers, I helped establish the discipline and grow a side-project library into a company-wide system for more consistent, accessible interfaces.</span>
+          </div>
+          <span class="supporting-project-proof" aria-label="Core UI design engineering evidence">
+            <span>Component APIs</span>
+            <span>Design tokens</span>
+            <span>Accessible defaults</span>
+            <span>Shared contribution</span>
+          </span>
+        </div>
+        <span class="supporting-project-thumb">
+          <img src="core-ui.png" alt="Core UI design-system documentation.">
+        </span>
+      </a>
+    </section>
+
+    <section class="section lab-section" id="lab" aria-labelledby="lab-heading">
+      <div class="wrap lab-board">
+        <div class="lab-intro">
+          <p class="section-kicker">Independent work</p>
+          <h2 class="section-title" id="lab-heading">I turn ideas into working products.</h2>
+        </div>
+
+        <div class="lab-list" aria-label="Selected other projects">
+          <a class="lab-item" href="https://kbo4sho.github.io/super-agent-design/" target="_blank" rel="noopener noreferrer">
+            <span>
+              <span class="lab-meta">AI workflow / Shared control</span>
+              <span class="lab-title">Delegating Work to AI</span>
+              <span class="lab-copy">A practical review loop that lets people delegate execution while keeping evidence, judgment, and responsibility visible.</span>
+            </span>
+            <span class="lab-thumb">
+              <img src="ai-delegation-workflow.jpg" alt="AI delegation workflow case study with evidence, confidence, and human review checkpoints.">
+            </span>
+            <span class="sr-only">(opens in a new tab)</span>
+          </a>
+
+          <a class="lab-item" href="https://kbo4sho.github.io/wonder-together-skill/" target="_blank" rel="noopener noreferrer">
+            <span>
+              <span class="lab-meta">Family learning / Shared curiosity</span>
+              <span class="lab-title">Wonder Together</span>
+              <span class="lab-copy">A parent-led explainer that helps families approach big questions with curiosity, confidence, and room to keep talking.</span>
+            </span>
+            <span class="lab-thumb">
+              <img src="wonder-together.png" alt="Wonder Together page showing a moon-following visual explainer example.">
+            </span>
+            <span class="sr-only">(opens in a new tab)</span>
+          </a>
+
+          <a class="lab-item" href="https://makemea.ai" target="_blank" rel="noopener noreferrer">
+            <span>
+              <span class="lab-meta">Solo product / Ship and learn</span>
+              <span class="lab-title">MakeMeA</span>
+              <span class="lab-copy">A weekend product built to turn a playful idea into something real, put it in people’s hands, and learn from actual use.</span>
+            </span>
+            <span class="lab-thumb">
+              <img src="make-me-a.png" alt="MakeMeA home page with a grid of AI photo style examples.">
+            </span>
+            <span class="sr-only">(opens in a new tab)</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section experience-section" id="experience" aria-labelledby="experience-heading">
+      <div class="wrap section-heading">
+        <p class="section-kicker">Experience</p>
+        <div>
+          <h2 class="section-title" id="experience-heading">13+ years across design and engineering.</h2>
+          <p class="section-copy">I’ve built AI products, design systems, creative tools and interactive software—all focused on making complicated work easier to use.</p>
+        </div>
+      </div>
+
+      <div class="wrap experience-list">
+        <article class="experience-item">
+          <p class="experience-date">2023 - present</p>
+          <div>
+            <h3 class="experience-role">Staff Software Engineer, Epsilon</h3>
+            <p class="experience-copy">Lead technical architecture and hands-on engineering for AI-assisted creative tools, including interaction workflows, visual editing systems, human review and quality evaluation. Mentor engineers and partner across product, creative, design, ML and engineering leadership.</p>
+          </div>
+        </article>
+        <article class="experience-item">
+          <p class="experience-date">2017 - 2023</p>
+          <div>
+            <h3 class="experience-role">Lead Software Engineer / Senior UX Engineer, Epsilon</h3>
+            <p class="experience-copy">Helped build web-based creative tools and shared front-end foundations. As one of Epsilon's founding UX engineers, I helped establish the discipline and grow Core UI from a side project into a company-wide design system.</p>
+          </div>
+        </article>
+        <article class="experience-item">
+          <p class="experience-date">2012 - 2017</p>
+          <div>
+            <h3 class="experience-role">Software and UI engineering</h3>
+            <p class="experience-copy">Built production web software across four companies, including large-format interactive experiences created at both CIVIQ Smartscapes and elevate DIGITAL.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="craft" aria-labelledby="craft-heading">
+      <div class="wrap section-heading">
+        <p class="section-kicker">How I contribute</p>
+        <div>
+          <h2 class="section-title" id="craft-heading">I make the work easier to carry forward.</h2>
+          <p class="section-copy">I contribute by shaping the product, building the shared foundation, and helping other people extend the work without losing its intent.</p>
+        </div>
+      </div>
+
+      <div class="wrap craft-grid">
+        <div class="craft-item">
+          <h3>Shape the product</h3>
+          <p>Lead architecture and design AI-assisted interaction patterns, then carry that thinking through hands-on implementation.</p>
+        </div>
+        <div class="craft-item">
+          <h3>Build shared foundations</h3>
+          <p>As one of Epsilon's founding UX engineers, I helped establish the discipline and grow Core UI into a company-wide design system with accessible defaults and shared contribution practices.</p>
+        </div>
+        <div class="craft-item">
+          <h3>Help others extend it</h3>
+          <p>Mentor engineers and align product, creative, design, ML, and engineering partners around decisions the team can build on.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section about wrap" aria-label="Contact links">
+      <ul class="contact-list" aria-label="Contact links">
+        <li><a href="mailto:kevinbolander@gmail.com">kevinbolander@gmail.com</a></li>
+        <li><a href="https://linkedin.com/in/kevin-bolander-45659322" target="_blank" rel="noopener noreferrer">LinkedIn<span class="sr-only"> (opens in a new tab)</span></a></li>
+        <li><a href="https://github.com/kbo4sho" target="_blank" rel="noopener noreferrer">GitHub<span class="sr-only"> (opens in a new tab)</span></a></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">Kevin Bolander — useful software, shipped with care.</div>
+  </footer>
+</body>
+</html>
