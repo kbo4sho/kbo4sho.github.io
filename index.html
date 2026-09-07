@@ -590,22 +590,17 @@
     }
 
     .supporting-project-row {
+      position: relative;
       display: grid;
       grid-template-columns: minmax(0, 1fr) minmax(220px, 0.28fr);
       gap: clamp(1.5rem, 5vw, 4rem);
       align-items: center;
       padding: clamp(1.7rem, 3.5vw, 2.6rem) 0;
       color: inherit;
-      text-decoration: none;
-    }
-
-    .supporting-project-row:hover,
-    .supporting-project-row:focus-visible {
-      color: inherit;
     }
 
     .supporting-project-row:hover .supporting-project-thumb img,
-    .supporting-project-row:focus-visible .supporting-project-thumb img {
+    .supporting-project-row:focus-within .supporting-project-thumb img {
       transform: scale(1.035);
       filter: saturate(1.02) contrast(1.03);
     }
@@ -667,6 +662,37 @@
       transition: transform 0.25s ease, filter 0.25s ease;
     }
 
+    .supporting-project-link {
+      display: inline-flex;
+      width: fit-content;
+      align-items: center;
+      gap: 0.45rem;
+      margin-top: 1.15rem;
+      color: var(--ink);
+      font-weight: 820;
+    }
+
+    .supporting-project-link::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+    }
+
+    .supporting-project-link::after {
+      content: "→";
+      color: var(--blue);
+      font-size: 0.9em;
+      text-decoration: none;
+    }
+
+    .supporting-project-row:hover .supporting-project-link,
+    .supporting-project-row:focus-within .supporting-project-link,
+    .supporting-project-link:hover,
+    .supporting-project-link:focus-visible {
+      color: var(--blue);
+    }
+
     .lab-section {
       border-top: 0;
       background: linear-gradient(180deg, rgba(255, 253, 248, 0.44), rgba(242, 246, 244, 0));
@@ -705,15 +731,19 @@
       text-decoration: none;
     }
 
-    .lab-item:hover,
-    .lab-item:focus-visible {
+    a.lab-item:hover,
+    a.lab-item:focus-visible {
       color: inherit;
     }
 
-    .lab-item:hover .lab-thumb img,
-    .lab-item:focus-visible .lab-thumb img {
+    a.lab-item:hover .lab-thumb img,
+    a.lab-item:focus-visible .lab-thumb img {
       transform: scale(1.04);
       filter: saturate(1.02) contrast(1.03);
+    }
+
+    .lab-item:not(a) {
+      cursor: default;
     }
 
     .lab-meta {
@@ -1095,9 +1125,9 @@
     </section>
 
     <section class="section supporting-project" id="core-ui" aria-labelledby="core-ui-heading">
-      <a class="wrap supporting-project-row" href="core-ui.html">
+      <div class="wrap supporting-project-row">
         <div class="supporting-project-copy">
-          <span class="section-kicker">Design system / Founding UX Engineering</span>
+          <p class="section-kicker">Design system / Founding UX Engineering</p>
           <div>
             <h2 class="supporting-project-title" id="core-ui-heading">Core UI</h2>
             <span class="supporting-project-text">As one of Epsilon's founding UX engineers, I helped establish the discipline and grow a side-project library into a company-wide system for more consistent, accessible interfaces.</span>
@@ -1108,11 +1138,12 @@
             <span>Accessible defaults</span>
             <span>Shared contribution</span>
           </span>
+          <a class="supporting-project-link" href="core-ui.html">Read Core UI</a>
         </div>
         <span class="supporting-project-thumb">
           <img src="core-ui.png" alt="Core UI design-system documentation.">
         </span>
-      </a>
+      </div>
     </section>
 
     <section class="section lab-section" id="lab" aria-labelledby="lab-heading">
@@ -1123,18 +1154,6 @@
         </div>
 
         <div class="lab-list" aria-label="Selected other projects">
-          <a class="lab-item" href="https://kbo4sho.github.io/super-agent-design/" target="_blank" rel="noopener noreferrer">
-            <span>
-              <span class="lab-meta">AI workflow / Shared control</span>
-              <span class="lab-title">Delegating Work to AI</span>
-              <span class="lab-copy">A practical review loop that lets people delegate execution while keeping evidence, judgment, and responsibility visible.</span>
-            </span>
-            <span class="lab-thumb">
-              <img src="ai-delegation-workflow.jpg" alt="AI delegation workflow case study with evidence, confidence, and human review checkpoints.">
-            </span>
-            <span class="sr-only">(opens in a new tab)</span>
-          </a>
-
           <a class="lab-item" href="https://kbo4sho.github.io/wonder-together-skill/" target="_blank" rel="noopener noreferrer">
             <span>
               <span class="lab-meta">Family learning / Shared curiosity</span>
@@ -1147,14 +1166,37 @@
             <span class="sr-only">(opens in a new tab)</span>
           </a>
 
-          <a class="lab-item" href="https://makemea.ai" target="_blank" rel="noopener noreferrer">
+          <a class="lab-item" href="https://kbo4sho.github.io/garden-through-time/" target="_blank" rel="noopener noreferrer">
             <span>
-              <span class="lab-meta">Solo product / Ship and learn</span>
-              <span class="lab-title">MakeMeA</span>
-              <span class="lab-copy">A weekend product built to turn a playful idea into something real, put it in people’s hands, and learn from actual use.</span>
+              <span class="lab-meta">Seasonal garden / Sell-first walkthrough</span>
+              <span class="lab-title">Year Round Interest</span>
+              <span class="lab-copy">A sell-first walkthrough of one garden bed through the year, so landscape designers can share seasonal interest before anyone opens CAD.</span>
+            </span>
+            <span class="lab-thumb">
+              <img src="https://kbo4sho.github.io/garden-through-time/og.jpg" alt="One living bed across the year: winter structure, spring bloom, summer mass, and fall color.">
+            </span>
+            <span class="sr-only">(opens in a new tab)</span>
+          </a>
+
+          <article class="lab-item" aria-labelledby="makemea-heading">
+            <span>
+              <span class="lab-meta">Solo product / Shipped and learned (retired)</span>
+              <span class="lab-title" id="makemea-heading">MakeMeA</span>
+              <span class="lab-copy">A weekend product I shipped to real users, then retired. Putting it in people’s hands taught more than another week of polish.</span>
             </span>
             <span class="lab-thumb">
               <img src="make-me-a.png" alt="MakeMeA home page with a grid of AI photo style examples.">
+            </span>
+          </article>
+
+          <a class="lab-item" href="https://kbo4sho.github.io/super-agent-design/" target="_blank" rel="noopener noreferrer">
+            <span>
+              <span class="lab-meta">AI workflow / Shared control</span>
+              <span class="lab-title">Delegating Work to AI</span>
+              <span class="lab-copy">A practical review loop that lets people delegate execution while keeping evidence, judgment, and responsibility visible.</span>
+            </span>
+            <span class="lab-thumb">
+              <img src="ai-delegation-workflow.jpg" alt="AI delegation workflow case study with evidence, confidence, and human review checkpoints.">
             </span>
             <span class="sr-only">(opens in a new tab)</span>
           </a>
